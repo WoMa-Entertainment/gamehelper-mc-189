@@ -12,9 +12,11 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.wfoas.gh.GameHelperCoreModule;
 import net.wfoas.gh.gui.GuiHandler;
+import net.wfoas.gh.gui.guilist.GuiList;
 import net.wfoas.gh.gui.world.GuiSetPermScreen;
 import net.wfoas.gh.protected_blocks.tabs.ProtectedBlockTabChangePermission;
 import net.wfoas.gh.protected_blocks.tabs.ProtectedBlockTabManipulateBlock;
+import net.wfoas.gh.proxies.ClientProxy;
 import tconstruct.client.tabs.AbstractTab;
 
 public class GuiChangePermission extends GuiScreen {
@@ -47,6 +49,7 @@ public class GuiChangePermission extends GuiScreen {
 		at.xPosition = (this.guiLeft + (5 - 2) * 28);
 		at.yPosition = (this.guiTop - 28);
 		this.buttonList.add(at);
+		GuiList guiList = new GuiList(ClientProxy.onlinePlayers, 50, 150, 120, 270, 12, null, this, 15);
 	}
 
 	@Override
