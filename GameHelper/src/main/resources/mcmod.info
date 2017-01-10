@@ -1,0 +1,16 @@
+[
+{
+  "modid": "gamehelper",
+  "name": "GameHelper-Mod",
+  "description": "Das GameHelper-Plugin als Mod.",
+  "version": "1.1",
+  "mcversion": "1.8",
+  "url": "wfoas.net/mc/gh/mod",
+  "updateUrl": "wfoas.net/mc/gh/mod/update.php",
+  "authorList": ["Winston"],
+  "credits": "",
+  "logoFile": "assets/gamehelper/gh_mod.png",
+  "screenshots": [],
+  "dependencies": ["gamehelper-core"]
+}
+]

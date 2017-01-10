@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "normal": { "model": "gamehelper:protected_chest" },
+        "facing=east": { "model": "gamehelper:protected_chest" },
+        "facing=west": { "model": "gamehelper:protected_chest" },
+        "facing=north": { "model": "gamehelper:protected_chest" },
+        "facing=south": { "model": "gamehelper:protected_chest" }
+    }
+}

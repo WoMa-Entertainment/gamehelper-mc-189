@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "gamehelper:blocks/compressed_furnace_top",
+        "front": "gamehelper:blocks/compressed_furnace_front_on",
+        "side": "gamehelper:blocks/compressed_furnace_side"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "gamehelper:blocks/uncrafting_table_front",
+        "down": "gamehelper:blocks/uncrafting_table_bottom",
+        "up": "gamehelper:blocks/uncrafting_table_top",
+        "north": "gamehelper:blocks/uncrafting_table_front",
+        "east": "gamehelper:blocks/uncrafting_table_side",
+        "south": "gamehelper:blocks/uncrafting_table_side",
+        "west": "gamehelper:blocks/uncrafting_table_front"
+    }
+}

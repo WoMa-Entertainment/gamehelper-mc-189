@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "gamehelper:entity/chest/protected_chest_normal",
+        "particle": "gamehelper:entity/chest/protected_chest_normal"
+    }
+}

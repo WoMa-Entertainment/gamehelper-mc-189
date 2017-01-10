@@ -1,0 +1,8 @@
+{
+    "parent": "gamehelper:block/op_anvil",
+    "textures": {
+        "particle": "gamehelper:blocks/op_anvil_base",
+        "body": "gamehelper:blocks/op_anvil_base",
+        "top": "gamehelper:blocks/op_anvil_top_damaged_1"
+    }
+}

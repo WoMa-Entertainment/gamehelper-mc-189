@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "normal": { "model": "gamehelper:shit_chest" },
+        "facing=east": { "model": "gamehelper:shit_chest" },
+        "facing=west": { "model": "gamehelper:shit_chest" },
+        "facing=north": { "model": "gamehelper:shit_chest" },
+        "facing=south": { "model": "gamehelper:shit_chest" }
+    }
+}
