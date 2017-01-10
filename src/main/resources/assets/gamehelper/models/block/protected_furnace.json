@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "gamehelper:blocks/protected_furnace_top",
+        "front": "gamehelper:blocks/protected_furnace_front_off",
+        "side": "gamehelper:blocks/protected_furnace_side"
+    }
+}

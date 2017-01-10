@@ -1,0 +1,7 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "gamehelper:blocks/gh_lucky_block",
+        "particle": "gamehelper:blocks/gh_lucky_block"
+    }
+}

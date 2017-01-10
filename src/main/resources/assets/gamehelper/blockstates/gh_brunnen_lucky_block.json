@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "normal": { "model": "gamehelper:gh_brunnen_lucky_block" },
+        "inventory": { "model": "gamehelper:gh_brunnen_lucky_block" }
+    }
+}

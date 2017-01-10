@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "gamehelper:gh_lucky_block" }
+    }
+}

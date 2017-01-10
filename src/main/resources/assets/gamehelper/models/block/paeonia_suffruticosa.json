@@ -1,0 +1,6 @@
+{
+    "parent": "block/cross",
+    "textures": {
+        "cross": "gamehelper:blocks/paeonia_suffruticosa"
+    }
+}
