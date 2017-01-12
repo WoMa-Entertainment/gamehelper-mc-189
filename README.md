@@ -1,7 +1,7 @@
 # gamehelper-mc-189
 The repository for the minecraft mod GameHelper using Minecraft Forge 1.8.9.
 
-The gamehelper mod add multiple new features:
+The gamehelper mod adds multiple new features:
 
 - system for multiple worlds based on ForgeEssentials
   + with worldteleporter and /createworld command
