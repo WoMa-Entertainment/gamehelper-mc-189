@@ -128,9 +128,6 @@ public class ProtectedFurnaceBlock extends BlockContainer implements IGHModBlock
 			TileEntity tileentity = worldIn.getTileEntity(pos);
 
 			if (tileentity instanceof ProtectedFurnaceTileEntity) {
-				// playerIn.displayGUIChest((ProtectedFurnaceTileEntity)
-				// tileentity);// TODO
-				// // hook
 				if (((ProtectedFurnaceTileEntity) tileentity).isPlayerCapableOfOpeningBlock(playerIn)) {
 					playerIn.openGui(GameHelper.instance, GuiHandler.PROTECTED_FURNACE, worldIn, pos.getX(), pos.getY(),
 							pos.getZ());
@@ -147,7 +144,6 @@ public class ProtectedFurnaceBlock extends BlockContainer implements IGHModBlock
 		IBlockState iblockstate = worldIn.getBlockState(pos);
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 		keepInventory = true;
-
 		if (active) {
 			worldIn.setBlockState(pos, ((ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE_LIT).getDefaultState()
 					.withProperty(FACING, iblockstate.getValue(FACING)), 3);
@@ -159,9 +155,7 @@ public class ProtectedFurnaceBlock extends BlockContainer implements IGHModBlock
 			worldIn.setBlockState(pos, ((ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE).getDefaultState()
 					.withProperty(FACING, iblockstate.getValue(FACING)), 3);
 		}
-
 		keepInventory = false;
-
 		if (tileentity != null) {
 			tileentity.validate();
 			worldIn.setTileEntity(pos, tileentity);
@@ -195,13 +189,11 @@ public class ProtectedFurnaceBlock extends BlockContainer implements IGHModBlock
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 		if (!keepInventory) {
 			TileEntity tileentity = worldIn.getTileEntity(pos);
-
 			if (tileentity instanceof ProtectedFurnaceTileEntity) {
 				InventoryHelper.dropInventoryItems(worldIn, pos, (ProtectedFurnaceTileEntity) tileentity);
 				worldIn.updateComparatorOutputLevel(pos, this);
 			}
 		}
-
 		super.breakBlock(worldIn, pos, state);
 	}
 

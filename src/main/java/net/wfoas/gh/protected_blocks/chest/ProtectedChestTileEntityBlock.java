@@ -350,21 +350,15 @@ public class ProtectedChestTileEntityBlock extends BlockContainer implements IGH
 			return true;
 		} else {
 			ILockableContainer ilockablecontainer = this.getLockableContainer(worldIn, pos);
-
 			if (ilockablecontainer != null) {
 				TileEntity tileentity = worldIn.getTileEntity(pos);
 				if (tileentity instanceof ProtectedChestTileEntity) {
-					// if
-					// (tileentity.getTileData().hasKey("whitelisted_players"))
-					// {
 					if (((ProtectedChestTileEntity) tileentity).isPlayerCapableOfOpeningBlock(playerIn))
-						// playerIn.displayGUIChest(ilockablecontainer);
 						playerIn.openGui(GameHelper.instance, GuiHandler.PROTECTED_CHEST, worldIn, pos.getX(),
 								pos.getY(), pos.getZ());
 					else
-						NotifyTable.notifyPlayer((EntityPlayerMP)playerIn,
+						NotifyTable.notifyPlayer((EntityPlayerMP) playerIn,
 								new ChatComponentTranslation("gamehelper.error.protected_chest.noperm"));
-					// }
 				}
 			}
 			return true;

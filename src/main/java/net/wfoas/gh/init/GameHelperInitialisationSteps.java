@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.GameHelperCoreModule;
+import net.wfoas.gh.gui.GuiHandler;
 import net.wfoas.gh.network.NetworkHandler;
 import net.wfoas.gh.oredict.OredictEntries;
 import net.wfoas.gh.protected_blocks.ProtectedBlocksRegistry;
@@ -45,9 +46,12 @@ public class GameHelperInitialisationSteps {
 		proxy.load(init, GameHelper.instance);
 		GameHelperCoreModule.setupEnchLists();
 		OredictEntries.injectEntriesIntoOreDict();
-		ProtectedBlocksRegistry.addBlock((ProtectedChestTileEntityBlock) GameHelperCoreModule.SEC_CHEST);
-		ProtectedBlocksRegistry.addBlock((ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE);
-		ProtectedBlocksRegistry.addBlock((ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE_LIT);
+		ProtectedBlocksRegistry.addBlock((ProtectedChestTileEntityBlock) GameHelperCoreModule.SEC_CHEST,
+				GuiHandler.PROTECTED_CHEST);
+		ProtectedBlocksRegistry.addBlock((ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE_LIT,
+				GuiHandler.PROTECTED_FURNACE);
+		ProtectedBlocksRegistry.addBlock((ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE,
+				GuiHandler.PROTECTED_FURNACE);
 	}
 
 	public static void postInit(FMLPostInitializationEvent post, CommonProxy proxy) {

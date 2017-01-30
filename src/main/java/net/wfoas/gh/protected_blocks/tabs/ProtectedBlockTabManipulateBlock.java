@@ -16,8 +16,11 @@ public class ProtectedBlockTabManipulateBlock extends AbstractHintedSurvivalTab 
 
 	public ProtectedBlockTabManipulateBlock(int id, int posX, int posY, int phys_x, int phys_y, int phys_z, Item item,
 			int gui_prot_id) {
-		super(id, posX, posY, new ItemStack(item), I18n.format("gamehelper.protected_block.changepermissions"));
+		super(id, posX, posY, new ItemStack(item), I18n.format("gamehelper.protected_block"));
 		this.gui_prot_id = gui_prot_id;
+		this.phys_x = phys_x;
+		this.phys_y = phys_y;
+		this.phys_z = phys_z;
 	}
 
 	public ProtectedBlockTabManipulateBlock main() {

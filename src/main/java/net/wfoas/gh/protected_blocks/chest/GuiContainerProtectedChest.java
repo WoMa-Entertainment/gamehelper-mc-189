@@ -43,6 +43,21 @@ public class GuiContainerProtectedChest extends GuiContainer {
 			this.__phys_posx = p.getPos().getX();
 			this.__phys_posy = p.getPos().getY();
 			this.__phys_posz = p.getPos().getZ();
+//		} else if (upperInv instanceof ProtectedChestTileEntity) {
+//			ProtectedChestTileEntity p = (ProtectedChestTileEntity) upperInv;
+//			this.__phys_posx = p.getPos().getX();
+//			this.__phys_posy = p.getPos().getY();
+//			this.__phys_posz = p.getPos().getZ();
+		} else if (lowerInv instanceof InventoryLargeProtectedChest) {
+			InventoryLargeProtectedChest p = (InventoryLargeProtectedChest) lowerInv;
+			this.__phys_posx = ((ProtectedChestTileEntity) (p.getILockContainerProtected()[0])).getPos().getX();
+			this.__phys_posy = ((ProtectedChestTileEntity) (p.getILockContainerProtected()[0])).getPos().getY();
+			this.__phys_posz = ((ProtectedChestTileEntity) (p.getILockContainerProtected()[0])).getPos().getZ();
+//		} else if (upperInv instanceof InventoryLargeProtectedChest) {
+//			InventoryLargeProtectedChest p = (InventoryLargeProtectedChest) upperInv;
+//			this.__phys_posx = ((ProtectedChestTileEntity) (p.getILockContainerProtected()[0])).getPos().getX();
+//			this.__phys_posy = ((ProtectedChestTileEntity) (p.getILockContainerProtected()[0])).getPos().getY();
+//			this.__phys_posz = ((ProtectedChestTileEntity) (p.getILockContainerProtected()[0])).getPos().getZ();
 		}
 		this.allowUserInput = false;
 		int i = 222;
@@ -61,7 +76,6 @@ public class GuiContainerProtectedChest extends GuiContainer {
 		ab.xPosition = (this.guiLeft + (4 - 2) * 28);
 		ab.yPosition = (this.guiTop - 28);
 		this.buttonList.add(ab);
-		// ownership
 		AbstractTab at = new ProtectedBlockTabChangePermission(1, 20, 0, __phys_posx, __phys_posy, __phys_posz);
 		at.xPosition = (this.guiLeft + (5 - 2) * 28);
 		at.yPosition = (this.guiTop - 28);

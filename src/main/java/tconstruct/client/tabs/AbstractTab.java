@@ -26,6 +26,11 @@ public abstract class AbstractTab extends GuiButton {
 	@Override
 	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
 		if (this.visible) {
+			if (renderStack == null) {
+//				System.out.println("RenderStack == null" + this.getClass());
+				return;
+			}
+//			System.out.println(this.getClass().toString());
 			// RenderHelper.disableStandardItemLighting();
 			// GlStateManager.disableLighting();
 			// // glstatemanager

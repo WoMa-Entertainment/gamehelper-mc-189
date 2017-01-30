@@ -16,6 +16,8 @@ import net.minecraft.village.MerchantRecipeList;
 import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.gui.GuiHandler;
 import net.wfoas.gh.network.NetworkHandler;
+import net.wfoas.gh.network.packet.PacketPlayGHDynamicOpenGuiClientSide;
+import net.wfoas.gh.network.packet.PacketPlayGHDynamicOpenGuiWithID;
 import net.wfoas.gh.network.packet.PacketPlayOpenClientCreateWorldGui;
 import net.wfoas.gh.network.packet.PacketPlayOpenListPermDialog;
 import net.wfoas.gh.network.packet.PacketPlayOpenMinersInventory;
@@ -103,5 +105,10 @@ public class RemoteGuiOpener {
 
 	public static void openViewPermDialog(EntityPlayerMP epMP) {
 		NetworkHandler.sendToSpecificPlayer(new PacketPlayOpenListPermDialog(epMP), epMP);
+	}
+
+	public static void openRemoteClientGUI(EntityPlayerMP epMP, int __gui_id, int __gui_x, int __gui_y, int __gui_z) {
+		NetworkHandler.sendToSpecificPlayer(
+				new PacketPlayGHDynamicOpenGuiClientSide(__gui_id, __gui_x, __gui_y, __gui_z), epMP);
 	}
 }

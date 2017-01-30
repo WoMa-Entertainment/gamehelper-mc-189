@@ -36,7 +36,6 @@ import net.wfoas.gh.proxies.CommonProxy;
 import net.wfoas.gh.scheduler.GHScheduler;
 import net.wfoas.gh.titanmodule.TitanModule;
 
-// Test-Comment: may be removed
 @Mod(modid = GameHelper.MODID, name = GameHelper.MODNAME, version = GameHelper.MODVER)
 public class GameHelper {
 	public static final Charset UTF_8;

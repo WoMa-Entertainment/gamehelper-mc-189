@@ -21,6 +21,10 @@ public class InventoryLargeProtectedChest implements ILockableContainer, IProtec
 	private ILockableContainer upperChest;
 	private ILockableContainer lowerChest;
 
+	public ILockableContainer[] getILockContainerProtected() {
+		return new ILockableContainer[] { upperChest, lowerChest };
+	}
+
 	public InventoryLargeProtectedChest(String nameIn, ILockableContainer upperChestIn,
 			ILockableContainer lowerChestIn) {
 		this.name = nameIn;

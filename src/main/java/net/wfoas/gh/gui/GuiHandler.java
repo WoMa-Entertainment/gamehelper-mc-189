@@ -36,6 +36,7 @@ import net.wfoas.gh.minersinventory.layer.MinersInventoryHelper;
 import net.wfoas.gh.protected_blocks.GuiChangePermission;
 import net.wfoas.gh.protected_blocks.chest.ContainerProtectedChest;
 import net.wfoas.gh.protected_blocks.chest.GuiContainerProtectedChest;
+import net.wfoas.gh.protected_blocks.chest.InventoryLargeProtectedChest;
 import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntity;
 import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntityBlock;
 import net.wfoas.gh.protected_blocks.furnace.ContainerProtectedFurnace;
@@ -51,9 +52,9 @@ public class GuiHandler implements IGuiHandler {
 			PROTECTED_BREWING_STAND = 27, PROTECTED_HOPPER = 28, THERMAL_INVENTORY = 29, OWNWORLD_DIALOG = 30,
 			GH_LOGIN = 31, VANILLA_GH_ANVIL = 32, VANILLA_GH_ENCHANTMENT_TABLE = 33, VANILLA_GH_CRAFTING_TABLE = 34,
 			ENCHANTMENT_ALTAR_GUI = 35, BACKPACK_GUI = 36, BIG_BACKPACK_GUI = 37, ULTRA_BACKPACK_GUI = 38,
-			SECURED_CHEST_GUI = 39, CREATE_IMPORT_WORLD_DIALOG = 40, MINERS_INVENTORY = 41,
-			UNCRAFTING_TABLE_INVENTORY = 42, GH_PROGRESS_DIALOG = 43, SET_PERMISSION_DIALOG = 44,
-			LIST_PERMISSION_DIALOG = 45;
+			CREATE_IMPORT_WORLD_DIALOG = 40, MINERS_INVENTORY = 41, UNCRAFTING_TABLE_INVENTORY = 42,
+			GH_PROGRESS_DIALOG = 43, SET_PERMISSION_DIALOG = 44, LIST_PERMISSION_DIALOG = 45;
+	// free id: 39
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -95,12 +96,9 @@ public class GuiHandler implements IGuiHandler {
 		} else if (ID == OWNWORLD_DIALOG) {
 			return null;
 		} else if (ID == THERMAL_INVENTORY) {
-
+			// TODO implement
 		} else if (ID == PROTECTED_CHEST) {
 			ProtectedChestTileEntityBlock chest = (ProtectedChestTileEntityBlock) GameHelperCoreModule.SEC_CHEST;
-			// return new ContainerProtectedChest(player.inventory,
-			// (ProtectedChestTileEntity) world.getTileEntity(new BlockPos(x, y,
-			// z)), player);
 			return new ContainerProtectedChest(player.inventory,
 					chest.getLockableContainer(world, new BlockPos(x, y, z)), player);
 		} else if (ID == PROTECTED_FURNACE) {
@@ -166,9 +164,21 @@ public class GuiHandler implements IGuiHandler {
 		} else if (ID == OWNWORLD_DIALOG) {
 			return new GuiScreenOwnWorld();
 		} else if (ID == THERMAL_INVENTORY) {
-
+			// TODO implement
 		} else if (ID == PROTECTED_CHEST) {
 			ProtectedChestTileEntityBlock chest = (ProtectedChestTileEntityBlock) GameHelperCoreModule.SEC_CHEST;
+			if (chest.getLockableContainer(world, new BlockPos(x, y, z)) == null)
+				return null;
+			if (chest.getLockableContainer(world, new BlockPos(x, y, z)) instanceof InventoryLargeProtectedChest) {
+				InventoryLargeProtectedChest lpc = (InventoryLargeProtectedChest) chest.getLockableContainer(world,
+						new BlockPos(x, y, z));
+				if (lpc.getILockContainerProtected()[0] == null && lpc.getILockContainerProtected()[1] == null)
+					return null;
+			}
+			// else if(chest.getLockableContainer(world, new BlockPos(x, y, z))
+			// instanceof ProtectedChestTileEntity){
+			//
+			// }
 			return new GuiContainerProtectedChest(player.inventory,
 					chest.getLockableContainer(world, new BlockPos(x, y, z)));
 		} else if (ID == PROTECTED_FURNACE) {

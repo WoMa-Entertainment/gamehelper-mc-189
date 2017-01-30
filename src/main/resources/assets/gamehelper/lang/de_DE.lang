@@ -276,6 +276,7 @@ gamehelper.msg.noclipmode.off=§cNoclip-Modus §adeaktiviert
 gamehelper.command.accepted.rank.player=§aDer §aSpieler §a'%1$s%a' §aRang §aist §a'%2$s§a'§a.
 gamehelper.command.accepted.rank=§aDein §aneuer §aRang §aist §a'%1$s§a'§a.
 gamehelper.protected_block.changepermissions=Berechtigungen ändern...
+gamehelper.protected_block=Gesicherter Block
 gamehelper.container.protected_furnace=Gesicherter Ofen
 tile.gamehelper.protected_furnace.name=Gesicherter Ofen
 gamehelper.error.protected_chest.noperm=§cDu §ckannst §cdiese §cgesicherte §cTruhe §cnicht §cöffnen.
