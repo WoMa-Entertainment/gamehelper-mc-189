@@ -1,9 +1,10 @@
 package de.winston.utils;
 
+import java.io.Serializable;
 import java.util.Map;
 import java.util.Map.Entry;
 
-public class ListEntry<K, V> implements Entry<K, V> {
+public class ListEntry<K, V> implements Entry<K, V>, Serializable {
 	K key;
 	V value;
 

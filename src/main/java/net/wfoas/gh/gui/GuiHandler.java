@@ -33,6 +33,8 @@ import net.wfoas.gh.instench.TileEntityInstantEnchantmentTable;
 import net.wfoas.gh.minersinventory.MinersInventoryContainer;
 import net.wfoas.gh.minersinventory.MinersInventoryGui;
 import net.wfoas.gh.minersinventory.layer.MinersInventoryHelper;
+import net.wfoas.gh.op_anvil.ContainerOPAnvil;
+import net.wfoas.gh.op_anvil.GuiContainerOPAnvil;
 import net.wfoas.gh.protected_blocks.GuiChangePermission;
 import net.wfoas.gh.protected_blocks.chest.ContainerProtectedChest;
 import net.wfoas.gh.protected_blocks.chest.GuiContainerProtectedChest;
@@ -52,9 +54,8 @@ public class GuiHandler implements IGuiHandler {
 			PROTECTED_BREWING_STAND = 27, PROTECTED_HOPPER = 28, THERMAL_INVENTORY = 29, OWNWORLD_DIALOG = 30,
 			GH_LOGIN = 31, VANILLA_GH_ANVIL = 32, VANILLA_GH_ENCHANTMENT_TABLE = 33, VANILLA_GH_CRAFTING_TABLE = 34,
 			ENCHANTMENT_ALTAR_GUI = 35, BACKPACK_GUI = 36, BIG_BACKPACK_GUI = 37, ULTRA_BACKPACK_GUI = 38,
-			CREATE_IMPORT_WORLD_DIALOG = 40, MINERS_INVENTORY = 41, UNCRAFTING_TABLE_INVENTORY = 42,
+			OP_ANVIL_GUI = 39, CREATE_IMPORT_WORLD_DIALOG = 40, MINERS_INVENTORY = 41, UNCRAFTING_TABLE_INVENTORY = 42,
 			GH_PROGRESS_DIALOG = 43, SET_PERMISSION_DIALOG = 44, LIST_PERMISSION_DIALOG = 45;
-	// free id: 39
 
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
@@ -110,6 +111,8 @@ public class GuiHandler implements IGuiHandler {
 
 		} else if (ID == PROTECTED_GUI_CHANGE_PERMISSIONS) {
 			return null;
+		} else if (ID == OP_ANVIL_GUI) {
+			return new ContainerOPAnvil(player.inventory, world, new BlockPos(x, y, z), player);
 		}
 		return null;
 	}
@@ -190,6 +193,8 @@ public class GuiHandler implements IGuiHandler {
 
 		} else if (ID == PROTECTED_GUI_CHANGE_PERMISSIONS) {
 			return new GuiChangePermission(x, y, z);
+		} else if (ID == OP_ANVIL_GUI) {
+			return new GuiContainerOPAnvil(player.inventory, world);
 		}
 		return null;
 	}

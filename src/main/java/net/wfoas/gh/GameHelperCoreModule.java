@@ -14,7 +14,6 @@ import net.wfoas.gh.armor.GHModItemArmor;
 import net.wfoas.gh.bigsword.BigswordItem;
 import net.wfoas.gh.blocks.GameHelperModBlock;
 import net.wfoas.gh.blocks.IGHModBlock;
-import net.wfoas.gh.blocks.OPAnvil;
 import net.wfoas.gh.creativetab.GameHelperTab;
 import net.wfoas.gh.dropsapi.pdr.EnchantmentFinder;
 import net.wfoas.gh.enchaltar.EnchantmentAltar;
@@ -31,6 +30,7 @@ import net.wfoas.gh.items.tools.ItemGHHoeTool;
 import net.wfoas.gh.items.tools.ItemGHPickaxeTool;
 import net.wfoas.gh.items.tools.ItemGHShovelTool;
 import net.wfoas.gh.minersinventory.items.IronDagger;
+import net.wfoas.gh.op_anvil.OPAnvil;
 import net.wfoas.gh.unchant.UnchantmentTable;
 import net.wfoas.gh.worlddimensionsutils.DimensionBlock;
 

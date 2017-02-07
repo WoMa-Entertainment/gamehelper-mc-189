@@ -1,9 +1,9 @@
-package net.wfoas.gh.blocks;
+package net.wfoas.gh.op_anvil;
+
+import java.util.List;
 
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
-
-import java.util.List;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyInteger;
@@ -16,13 +16,9 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityFallingBlock;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ContainerRepair;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
-import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MovingObjectPosition;
@@ -36,6 +32,7 @@ import net.wfoas.gh.GHModItemUpdater;
 import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.IMetaBlockName;
 import net.wfoas.gh.ItemBlockMeta;
+import net.wfoas.gh.gui.GuiHandler;
 
 public class OPAnvil extends BlockFalling implements GHModItemUpdater, IMetaBlockName {
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
@@ -116,7 +113,8 @@ public class OPAnvil extends BlockFalling implements GHModItemUpdater, IMetaBloc
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			playerIn.displayGui(new OPAnvil.Anvil(worldIn, pos));
+			// playerIn.displayGui(new OPAnvil.Anvil(worldIn, pos));
+			playerIn.openGui(GameHelper.instance, GuiHandler.OP_ANVIL_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 
 		return true;
@@ -187,44 +185,46 @@ public class OPAnvil extends BlockFalling implements GHModItemUpdater, IMetaBloc
 		return new BlockState(this, new IProperty[] { FACING, DAMAGE });
 	}
 
-	public static class Anvil implements IInteractionObject {
-		private final World world;
-		private final BlockPos position;
-		private static final String __OBFID = "CL_00002144";
-
-		public Anvil(World worldIn, BlockPos pos) {
-			this.world = worldIn;
-			this.position = pos;
-		}
-
-		@Override
-		public String getName() {
-			return "op_anvil";
-		}
-
-		@Override
-		public boolean hasCustomName() {
-			return false;
-		}
-
-		@Override
-		public IChatComponent getDisplayName() {
-			// return new
-			// ChatComponentTranslation(OPAnvil.this.getUnlocalizedName() +
-			// ".name", new Object[0]);
-			return null;
-		}
-
-		@Override
-		public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
-			return new ContainerRepair(playerInventory, this.world, this.position, playerIn);
-		}
-
-		@Override
-		public String getGuiID() {
-			return "gamehelper:op_anvil";
-		}
-	}
+	// public static class Anvil implements IInteractionObject {
+	// private final World world;
+	// private final BlockPos position;
+	// private static final String __OBFID = "CL_00002144";
+	//
+	// public Anvil(World worldIn, BlockPos pos) {
+	// this.world = worldIn;
+	// this.position = pos;
+	// }
+	//
+	// @Override
+	// public String getName() {
+	// return "op_anvil";
+	// }
+	//
+	// @Override
+	// public boolean hasCustomName() {
+	// return false;
+	// }
+	//
+	// @Override
+	// public IChatComponent getDisplayName() {
+	// // return new
+	// // ChatComponentTranslation(OPAnvil.this.getUnlocalizedName() +
+	// // ".name", new Object[0]);
+	// return null;
+	// }
+	//
+	// @Override
+	// public Container createContainer(InventoryPlayer playerInventory,
+	// EntityPlayer playerIn) {
+	// return new ContainerRepair(playerInventory, this.world, this.position,
+	// playerIn);
+	// }
+	//
+	// @Override
+	// public String getGuiID() {
+	// return "gamehelper:op_anvil";
+	// }
+	// }
 
 	@Override
 	public String getSpecialName(ItemStack stack) {
