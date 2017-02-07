@@ -509,7 +509,7 @@ public class GameHelperUtils {
 		GameHelper.getUtils().sendPluginMessage(GameHelper.instance, "BungeeCord", bado.toByteArray(), p);
 	}
 
-	public static String replaceLast(String text, String regex, String replacement) {
+	public String replaceLast(String text, String regex, String replacement) {
 		return text.replaceFirst("(?s)(.*)" + regex, "$1" + replacement);
 	}
 
@@ -520,5 +520,11 @@ public class GameHelperUtils {
 			}
 		}
 		return -1;
+	}
+
+	public int randInt(int lower, int higher) {
+		int real = higher - lower;
+		int num = GameHelper.MOD_RANDOM.nextInt(real) + lower;
+		return num;
 	}
 }
