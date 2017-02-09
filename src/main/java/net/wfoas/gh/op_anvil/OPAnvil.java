@@ -2,6 +2,7 @@ package net.wfoas.gh.op_anvil;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
@@ -10,6 +11,7 @@ import net.minecraft.block.properties.PropertyInteger;
 import net.minecraft.block.state.BlockState;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -22,6 +24,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
@@ -42,13 +45,17 @@ public class OPAnvil extends BlockFalling implements GHModItemUpdater, IMetaBloc
 		super(Material.anvil);
 		this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(DAMAGE,
 				Integer.valueOf(0)));
+		this.setStepSound(Block.soundTypeAnvil);
 		this.setLightOpacity(0);
+		this.setHardness(5.2f);
 		this.name = "op_anvil";
+		this.name_sd = "op_anvil_slightly_damaged";
+		this.name_vd = "op_anvil_very_damaged";
 		this.setUnlocalizedName(GameHelper.MODID + "." + name);
 		GameRegistry.registerBlock(this, ItemBlockMeta.class, name);
 	}
 
-	String name;
+	String name, name_sd, name_vd;
 
 	public String getName() {
 		return name;
@@ -56,7 +63,8 @@ public class OPAnvil extends BlockFalling implements GHModItemUpdater, IMetaBloc
 
 	@Override
 	public ItemStack getPickBlock(MovingObjectPosition target, World world, BlockPos pos) {
-		return new ItemStack(Item.getItemFromBlock(this), 1, this.getMetaFromState(world.getBlockState(pos)));
+		return new ItemStack(Item.getItemFromBlock(this), 1, // this.getMetaFromState(world.getBlockState(pos)));
+				world.getBlockState(pos).getValue(DAMAGE).intValue());
 	}
 
 	public void updateCreativeTab(CreativeTabs tab) {
@@ -69,9 +77,14 @@ public class OPAnvil extends BlockFalling implements GHModItemUpdater, IMetaBloc
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(this), 0,
 				new ModelResourceLocation(GameHelper.MODID + ":" + getName(), "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(this), 1,
-				new ModelResourceLocation(GameHelper.MODID + ":" + getName(), "damage=1,inventory"));
+				new ModelResourceLocation(GameHelper.MODID + ":" + this.name_sd, "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(this), 2,
-				new ModelResourceLocation(GameHelper.MODID + ":" + getName(), "damage=2,inventory"));
+				new ModelResourceLocation(GameHelper.MODID + ":" + this.name_vd, "inventory"));
+		// ModelBakery.addVariantName(ProjectBench.plan,
+		// "projectbench:plan","projectbench:planused");
+		ModelBakery.registerItemVariants(Item.getItemFromBlock(this), new ResourceLocation(GameHelper.MODID, this.name),
+				new ResourceLocation(GameHelper.MODID, this.name_sd),
+				new ResourceLocation(GameHelper.MODID, this.name_vd));
 		// RenderItem ri = Minecraft.getMinecraft().getRenderItem();
 		// ri.getItemModelMesher().register(Item.getItemFromBlock(this), 0, new
 		// ModelResourceLocation(GameHelper.MODID + ":" + this.getName(),
@@ -106,7 +119,7 @@ public class OPAnvil extends BlockFalling implements GHModItemUpdater, IMetaBloc
 			int meta, EntityLivingBase placer) {
 		EnumFacing enumfacing1 = placer.getHorizontalFacing().rotateY();
 		return super.onBlockPlaced(worldIn, pos, facing, hitX, hitY, hitZ, meta, placer)
-				.withProperty(FACING, enumfacing1).withProperty(DAMAGE, Integer.valueOf(meta >> 2));
+				.withProperty(FACING, enumfacing1).withProperty(DAMAGE, Integer.valueOf(meta));
 	}
 
 	@Override
@@ -128,7 +141,6 @@ public class OPAnvil extends BlockFalling implements GHModItemUpdater, IMetaBloc
 	@Override
 	public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos) {
 		EnumFacing enumfacing = (EnumFacing) worldIn.getBlockState(pos).getValue(FACING);
-
 		if (enumfacing.getAxis() == EnumFacing.Axis.X) {
 			this.setBlockBounds(0.0F, 0.0F, 0.125F, 1.0F, 1.0F, 0.875F);
 		} else {
@@ -228,13 +240,16 @@ public class OPAnvil extends BlockFalling implements GHModItemUpdater, IMetaBloc
 
 	@Override
 	public String getSpecialName(ItemStack stack) {
-		if (stack.getItemDamage() == 1) {
+		int dmg = stack.getItemDamage();
+		if (dmg == 1) {
 			return "slightly_damaged";
-		} else if (stack.getItemDamage() == 2) {
+		} else if (dmg == 2) {
 			return "very_damaged";
-		} else if (stack.getItemDamage() == 0) {
+		} else if (dmg == 0) {
 			return "undamaged";
 		}
-		throw new IllegalArgumentException(stack.getItemDamage() + " is not allowed for type OPAnvil");
+		return String.valueOf(dmg) + "_unknown_";
+		// throw new IllegalArgumentException(stack.getItemDamage() + " is not
+		// allowed for type OPAnvil");
 	}
 }

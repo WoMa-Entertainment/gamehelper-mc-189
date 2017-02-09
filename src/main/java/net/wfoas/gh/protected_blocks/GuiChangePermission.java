@@ -63,16 +63,19 @@ public class GuiChangePermission extends GuiScreen {
 			ab.yPosition = (this.guiTop - 28);
 		if (ab != null)
 			this.buttonList.add(ab);
-//		System.out.println(Minecraft.getMinecraft().theWorld
-//				.getBlockState(new BlockPos(__phys_posx, __phys_posy, __phys_posz)).getBlock());
-//		System.out.println("X=" + __phys_posx + " Y=" + __phys_posy + " Z=" + __phys_posz);
+		// System.out.println(Minecraft.getMinecraft().theWorld
+		// .getBlockState(new BlockPos(__phys_posx, __phys_posy,
+		// __phys_posz)).getBlock());
+		// System.out.println("X=" + __phys_posx + " Y=" + __phys_posy + " Z=" +
+		// __phys_posz);
 		// ownership
 		AbstractTab at = new ProtectedBlockTabChangePermission(1, 20, 0, __phys_posx, __phys_posy, __phys_posz).main();
 		at.xPosition = (this.guiLeft + (5 - 2 + 1) * 28);
 		at.yPosition = (this.guiTop - 28);
 		if (at != null)
 			this.buttonList.add(at);
-		GuiList guiList = new GuiList(ClientProxy.onlinePlayers, 50, 150, 120, 270, 12, null, this, 15);
+		// GuiList guiList = new GuiList(ClientProxy.onlinePlayers, 50, 150,
+		// 120, 270, 12, null, this, 15);
 	}
 
 	@Override

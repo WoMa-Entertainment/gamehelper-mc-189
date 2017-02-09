@@ -112,7 +112,7 @@ public class GuiHandler implements IGuiHandler {
 		} else if (ID == PROTECTED_GUI_CHANGE_PERMISSIONS) {
 			return null;
 		} else if (ID == OP_ANVIL_GUI) {
-			return new ContainerOPAnvil(player.inventory, world, new BlockPos(x, y, z), player);
+			return new ContainerOPAnvil(player.inventory, world, player, new BlockPos(x, y, z));
 		}
 		return null;
 	}
