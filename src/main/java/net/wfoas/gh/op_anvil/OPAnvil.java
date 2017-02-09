@@ -73,34 +73,15 @@ public class OPAnvil extends BlockFalling implements GHModItemUpdater, IMetaBloc
 
 	@Override
 	public void updateInitEvent(CreativeTabs tab) {
-		// BlockAnvil
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(this), 0,
 				new ModelResourceLocation(GameHelper.MODID + ":" + getName(), "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(this), 1,
 				new ModelResourceLocation(GameHelper.MODID + ":" + this.name_sd, "inventory"));
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(this), 2,
 				new ModelResourceLocation(GameHelper.MODID + ":" + this.name_vd, "inventory"));
-		// ModelBakery.addVariantName(ProjectBench.plan,
-		// "projectbench:plan","projectbench:planused");
 		ModelBakery.registerItemVariants(Item.getItemFromBlock(this), new ResourceLocation(GameHelper.MODID, this.name),
 				new ResourceLocation(GameHelper.MODID, this.name_sd),
 				new ResourceLocation(GameHelper.MODID, this.name_vd));
-		// RenderItem ri = Minecraft.getMinecraft().getRenderItem();
-		// ri.getItemModelMesher().register(Item.getItemFromBlock(this), 0, new
-		// ModelResourceLocation(GameHelper.MODID + ":" + this.getName(),
-		// "inventory"));
-		// ri.getItemModelMesher().register(Item.getItemFromBlock(this), 0, new
-		// ModelResourceLocation(GameHelper.MODID + ":" + this.getName(),
-		// "facing=south"));
-		// ri.getItemModelMesher().register(Item.getItemFromBlock(this), 0, new
-		// ModelResourceLocation(GameHelper.MODID + ":" + this.getName(),
-		// "facing=north"));
-		// ri.getItemModelMesher().register(Item.getItemFromBlock(this), 0, new
-		// ModelResourceLocation(GameHelper.MODID + ":" + this.getName(),
-		// "facing=west"));
-		// ri.getItemModelMesher().register(Item.getItemFromBlock(this), 0, new
-		// ModelResourceLocation(GameHelper.MODID + ":" + this.getName(),
-		// "facing=east"));
 		updateCreativeTab(tab);
 	}
 
@@ -126,7 +107,6 @@ public class OPAnvil extends BlockFalling implements GHModItemUpdater, IMetaBloc
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumFacing side, float hitX, float hitY, float hitZ) {
 		if (!worldIn.isRemote) {
-			// playerIn.displayGui(new OPAnvil.Anvil(worldIn, pos));
 			playerIn.openGui(GameHelper.instance, GuiHandler.OP_ANVIL_GUI, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
 
@@ -197,47 +177,6 @@ public class OPAnvil extends BlockFalling implements GHModItemUpdater, IMetaBloc
 		return new BlockState(this, new IProperty[] { FACING, DAMAGE });
 	}
 
-	// public static class Anvil implements IInteractionObject {
-	// private final World world;
-	// private final BlockPos position;
-	// private static final String __OBFID = "CL_00002144";
-	//
-	// public Anvil(World worldIn, BlockPos pos) {
-	// this.world = worldIn;
-	// this.position = pos;
-	// }
-	//
-	// @Override
-	// public String getName() {
-	// return "op_anvil";
-	// }
-	//
-	// @Override
-	// public boolean hasCustomName() {
-	// return false;
-	// }
-	//
-	// @Override
-	// public IChatComponent getDisplayName() {
-	// // return new
-	// // ChatComponentTranslation(OPAnvil.this.getUnlocalizedName() +
-	// // ".name", new Object[0]);
-	// return null;
-	// }
-	//
-	// @Override
-	// public Container createContainer(InventoryPlayer playerInventory,
-	// EntityPlayer playerIn) {
-	// return new ContainerRepair(playerInventory, this.world, this.position,
-	// playerIn);
-	// }
-	//
-	// @Override
-	// public String getGuiID() {
-	// return "gamehelper:op_anvil";
-	// }
-	// }
-
 	@Override
 	public String getSpecialName(ItemStack stack) {
 		int dmg = stack.getItemDamage();
@@ -249,7 +188,5 @@ public class OPAnvil extends BlockFalling implements GHModItemUpdater, IMetaBloc
 			return "undamaged";
 		}
 		return String.valueOf(dmg) + "_unknown_";
-		// throw new IllegalArgumentException(stack.getItemDamage() + " is not
-		// allowed for type OPAnvil");
 	}
 }

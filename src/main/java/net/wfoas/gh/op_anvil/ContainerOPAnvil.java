@@ -41,12 +41,6 @@ public class ContainerOPAnvil extends Container {
 	private final EntityPlayer thePlayer;
 	final BlockPos pos;
 
-	// @SideOnly(Side.CLIENT)
-	// public ContainerAnvil(InventoryPlayer playerInventory, World worldIn,
-	// EntityPlayer player) {
-	// this(playerInventory, worldIn, BlockPos.ORIGIN, player);
-	// }
-
 	public ContainerOPAnvil(InventoryPlayer playerInventory, final World worldIn, EntityPlayer player,
 			final BlockPos pos) {
 		this.outputSlot = new InventoryCraftResult();
@@ -65,7 +59,6 @@ public class ContainerOPAnvil extends Container {
 		this.theWorld = worldIn;
 		this.thePlayer = player;
 		this.addSlotToContainer(new Slot(this.inputSlots, 0, 51, 47));
-		// this.addSlotToContainer(new Slot(this.inputSlots, 1, 76, 47));
 		this.addSlotToContainer(new Slot(this.outputSlot, 1, 109, 47) {
 			public boolean isItemValid(ItemStack stack) {
 				return false;
@@ -79,14 +72,7 @@ public class ContainerOPAnvil extends Container {
 
 			public void onPickupFromSlot(EntityPlayer playerIn, ItemStack stack) {
 				if (!playerIn.capabilities.isCreativeMode) {
-					// playerIn.addExperienceLevel(-ContainerOPAnvil.this.maximumCost);
 					playerIn.addExperienceLevel(-20);
-					// if (!playerIn.worldObj.isRemote) {
-					// // playerIn.worldObj.playAuxSFX(p_175718_1_, pos,
-					// // p_175718_3_);
-					// playerIn.worldObj.playSoundEffect(pos.getX(), pos.getY(),
-					// pos.getZ(), "random.anvil_use", 1, 1);
-					// }
 				}
 
 				float breakChance = net.minecraftforge.common.ForgeHooks.onAnvilRepair(playerIn, stack,
@@ -117,24 +103,6 @@ public class ContainerOPAnvil extends Container {
 				} else if (!worldIn.isRemote) {
 					worldIn.playAuxSFX(1021, ContainerOPAnvil.this.pos, 0);
 				}
-
-				// if (ContainerOPAnvil.this.materialCost > 0) {
-				// ItemStack itemstack1 =
-				// ContainerOPAnvil.this.inputSlots.getStackInSlot(1);
-				//
-				//// if (itemstack1 != null && itemstack1.stackSize >
-				// ContainerOPAnvil.this.materialCost) {
-				//// itemstack1.stackSize -= ContainerOPAnvil.this.materialCost;
-				////// ContainerOPAnvil.this.inputSlots.setInventorySlotContents(1,
-				// itemstack1);
-				//// } else {
-				////// ContainerOPAnvil.this.inputSlots.setInventorySlotContents(1,
-				// (ItemStack) null);
-				//// }
-				// } else {
-				//// ContainerOPAnvil.this.inputSlots.setInventorySlotContents(1,
-				// (ItemStack) null);
-				// }
 
 				ContainerOPAnvil.this.maximumCost = 20;
 			}
@@ -170,7 +138,6 @@ public class ContainerOPAnvil extends Container {
 
 		outputSlot.setInventorySlotContents(0, e.output);
 		container.maximumCost = 20;
-		// container.materialCost = e.materialCost;
 		return false;
 	}
 
@@ -194,7 +161,6 @@ public class ContainerOPAnvil extends Container {
 		} else {
 			ItemStack itemstack1 = itemstack.copy();
 			ItemStack itemstack2 = itemstack1.copy();
-			// Map map = EnchantmentHelper.getEnchantments(itemstack1);
 			boolean flag7 = false;
 			int i2 = b0 + itemstack.getRepairCost() + (itemstack2 == null ? 0 : itemstack2.getRepairCost());
 			this.materialCost = 0;
@@ -251,101 +217,8 @@ public class ContainerOPAnvil extends Container {
 							i += 2;
 						}
 					}
-
-					// Map map1 = EnchantmentHelper.getEnchantments(itemstack2);
-					// Iterator iterator1 = map1.keySet().iterator();
-
-					// while (iterator1.hasNext()) {
-					// l = ((Integer) iterator1.next()).intValue();
-					// Enchantment enchantment =
-					// Enchantment.getEnchantmentById(l);
-					//
-					// if (enchantment != null) {
-					// j1 = map.containsKey(Integer.valueOf(l))
-					// ? ((Integer) map.get(Integer.valueOf(l))).intValue() : 0;
-					// int k1 = ((Integer)
-					// map1.get(Integer.valueOf(l))).intValue();
-					// int k2;
-					//
-					// if (j1 == k1) {
-					// ++k1;
-					// k2 = k1;
-					// } else {
-					// k2 = Math.max(k1, j1);
-					// }
-					//
-					// k1 = k2;
-					// boolean flag8 = enchantment.canApply(itemstack);
-					//
-					// if (this.thePlayer.capabilities.isCreativeMode
-					// || itemstack.getItem() == Items.enchanted_book) {
-					// flag8 = true;
-					// }
-					//
-					// Iterator iterator = map.keySet().iterator();
-					//
-					// while (iterator.hasNext()) {
-					// int l1 = ((Integer) iterator.next()).intValue();
-					//
-					// Enchantment e2 = Enchantment.getEnchantmentById(l1);
-					// if (l1 != l && !(enchantment.canApplyTogether(e2) &&
-					// e2.canApplyTogether(enchantment))) // Forge
-					// // BugFix:
-					// // Let
-					// // Both
-					// // enchantments
-					// // veto
-					// // being
-					// // together
-					// {
-					// flag8 = false;
-					// ++i;
-					// }
-					// }
-					//
-					// if (flag8) {
-					// if (k1 > enchantment.getMaxLevel()) {
-					// k1 = enchantment.getMaxLevel();
-					// }
-					//
-					// map.put(Integer.valueOf(l), Integer.valueOf(k1));
-					// int j2 = 0;
-					//
-					// switch (enchantment.getWeight()) {
-					// case 1:
-					// j2 = 8;
-					// break;
-					// case 2:
-					// j2 = 4;
-					// case 3:
-					// case 4:
-					// case 6:
-					// case 7:
-					// case 8:
-					// case 9:
-					// default:
-					// break;
-					// case 5:
-					// j2 = 2;
-					// break;
-					// case 10:
-					// j2 = 1;
-					// }
-					//
-					// if (flag7) {
-					// j2 = Math.max(1, j2 / 2);
-					// }
-					//
-					// i += j2 * k1;
-					// }
-					// }
-					// }
 				}
 			}
-
-			// if (flag7 && !itemstack1.getItem().isBookEnchantable(itemstack1,
-			// itemstack2))
-			// itemstack1 = null;
 
 			if (StringUtils.isBlank(this.repairedItemName)) {
 				if (itemstack.hasDisplayName()) {
@@ -382,18 +255,12 @@ public class ContainerOPAnvil extends Container {
 
 				j = j * 2 + 1;
 				itemstack1.setRepairCost(j);
-				// EnchantmentHelper.setEnchantments(map, itemstack1);
 			}
 
 			this.outputSlot.setInventorySlotContents(0, itemstack1);
 			this.detectAndSendChanges();
 		}
 	}
-	//
-	// public void addCraftingToCrafters(ICrafting listener) {
-	// super.addCraftingToCrafters(listener);
-	// listener.sendProgressBarUpdate(this, 0, this.maximumCost);
-	// }
 
 	@SideOnly(Side.CLIENT)
 	public void updateProgressBar(int id, int data) {

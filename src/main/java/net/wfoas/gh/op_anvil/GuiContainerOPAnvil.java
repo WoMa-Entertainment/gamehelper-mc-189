@@ -20,9 +20,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.wfoas.gh.dropsapi.pdr.ChatColor;
-
 import org.lwjgl.input.Keyboard;
-
 import io.netty.buffer.Unpooled;
 
 @SideOnly(Side.CLIENT)
@@ -45,12 +43,6 @@ public class GuiContainerOPAnvil extends GuiContainer implements ICrafting {
 		Keyboard.enableRepeatEvents(true);
 		int i = (this.width - this.xSize) / 2;
 		int j = (this.height - this.ySize) / 2;
-		// this.nameField = new GuiTextField(0, this.fontRendererObj, i + 62, j
-		// + 24, 103, 12);
-		// this.nameField.setTextColor(-1);
-		// this.nameField.setDisabledTextColour(-1);
-		// this.nameField.setEnableBackgroundDrawing(false);
-		// this.nameField.setMaxStringLength(40);
 		this.inventorySlots.removeCraftingFromCrafters(this);
 		this.inventorySlots.onCraftGuiOpened(this);
 	}
@@ -68,17 +60,10 @@ public class GuiContainerOPAnvil extends GuiContainer implements ICrafting {
 				this.xSize / 2
 						- this.fontRendererObj.getStringWidth(I18n.format("gamehelper.gh_anvil.container.name")) / 2,
 				6, 4210752);
-
 		if (this.anvil.maximumCost > 0) {
 			int k = 8453920;
 			boolean flag = true;
-			String s =
-					// (playerInventory.player.experienceLevel >=
-					// this.anvil.maximumCost ? "" : ChatColor.RED)+
-					I18n.format("container.repair.cost", new Object[] { Integer.valueOf(this.anvil.maximumCost) });
-			// String s = I18n.format("container.repair.cost", new Object[] {
-			// Integer.valueOf(this.anvil.maximumCost) });
-
+			String s = I18n.format("container.repair.cost", new Object[] { Integer.valueOf(this.anvil.maximumCost) });
 			if (this.anvil.maximumCost >= 40 && !this.mc.thePlayer.capabilities.isCreativeMode) {
 				s = I18n.format("container.repair.expensive", new Object[0]);
 				k = 16736352;
@@ -117,39 +102,17 @@ public class GuiContainerOPAnvil extends GuiContainer implements ICrafting {
 	}
 
 	protected void keyTyped(char typedChar, int keyCode) throws IOException {
-		// if (this.nameField.textboxKeyTyped(typedChar, keyCode)) {
-		// this.renameItem();
-		// } else {
 		super.keyTyped(typedChar, keyCode);
-		// }
-	}
-
-	private void renameItem() {
-		// String s = this.nameField.getText();
-		// Slot slot = this.anvil.getSlot(0);
-		//
-		// if (slot != null && slot.getHasStack() &&
-		// !slot.getStack().hasDisplayName()
-		// && s.equals(slot.getStack().getDisplayName())) {
-		// s = "";
-		// }
-		//
-		// this.anvil.updateItemName(s);
-		// this.mc.thePlayer.sendQueue.addToSendQueue(
-		// new C17PacketCustomPayload("MC|ItemName", (new
-		// PacketBuffer(Unpooled.buffer())).writeString(s)));
 	}
 
 	protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
 		super.mouseClicked(mouseX, mouseY, mouseButton);
-		// this.nameField.mouseClicked(mouseX, mouseY, mouseButton);
 	}
 
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		super.drawScreen(mouseX, mouseY, partialTicks);
 		GlStateManager.disableLighting();
 		GlStateManager.disableBlend();
-		// this.nameField.drawTextBox();
 	}
 
 	protected void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY) {
@@ -158,10 +121,6 @@ public class GuiContainerOPAnvil extends GuiContainer implements ICrafting {
 		int k = (this.width - this.xSize) / 2;
 		int l = (this.height - this.ySize) / 2;
 		this.drawTexturedModalRect(k, l, 0, 0, this.xSize, this.ySize);
-		// this.drawTexturedModalRect(k + 59, l + 20, 0, this.ySize +
-		// (this.anvil.getSlot(0).getHasStack() ? 0 : 16), 110,
-		// 16);
-
 		if ((this.anvil.getSlot(0).getHasStack() || this.anvil.getSlot(1).getHasStack())
 				&& !this.anvil.getSlot(2).getHasStack()) {
 			this.drawTexturedModalRect(k + 99, l + 45, this.xSize, 0, 28, 21);
@@ -173,15 +132,6 @@ public class GuiContainerOPAnvil extends GuiContainer implements ICrafting {
 	}
 
 	public void sendSlotContents(Container containerToSend, int slotInd, ItemStack stack) {
-		if (slotInd == 0) {
-			// this.nameField.setText(stack == null ? "" :
-			// stack.getDisplayName());
-			// this.nameField.setEnabled(stack != null);
-			//
-			// if (stack != null) {
-			// this.renameItem();
-			// }
-		}
 	}
 
 	public void sendProgressBarUpdate(Container containerIn, int varToUpdate, int newValue) {
@@ -189,11 +139,9 @@ public class GuiContainerOPAnvil extends GuiContainer implements ICrafting {
 
 	@Override
 	public void updateCraftingInventory(Container containerToSend, List<ItemStack> itemsList) {
-
 	}
 
 	@Override
 	public void sendAllWindowProperties(Container p_175173_1_, IInventory p_175173_2_) {
-
 	}
 }

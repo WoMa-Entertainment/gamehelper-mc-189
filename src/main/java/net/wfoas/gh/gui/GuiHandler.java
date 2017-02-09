@@ -178,10 +178,6 @@ public class GuiHandler implements IGuiHandler {
 				if (lpc.getILockContainerProtected()[0] == null && lpc.getILockContainerProtected()[1] == null)
 					return null;
 			}
-			// else if(chest.getLockableContainer(world, new BlockPos(x, y, z))
-			// instanceof ProtectedChestTileEntity){
-			//
-			// }
 			return new GuiContainerProtectedChest(player.inventory,
 					chest.getLockableContainer(world, new BlockPos(x, y, z)));
 		} else if (ID == PROTECTED_FURNACE) {
