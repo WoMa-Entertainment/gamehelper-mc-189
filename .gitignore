@@ -3,8 +3,8 @@ bin
 *.launch
 .settings
 .metadata
-.classpath
-.project
+# .classpath
+# .project
 
 # idea
 out
