@@ -1,0 +1,45 @@
+TodoList#
+false:Temperaturen ect.
+false:Chunkloader
+false:Dolchlasche
+false:Werkzeuggürtel
+false:Minenrucksack
+false:Minenhelm
+false:Neue Villager Häuser(Einrichtung)
+true:Juwelier
+false:Hochofen
+false:Potion-Mixer
+false:Effecttable
+false:Change'chanter [Wechselzaubertisch]
+false:LuckPotion mit LuckyBlocks
+false:Schleifstein(+10)
+false:ChangeChanter
+false:Überarbeitetes Drop-System
+true:InstantEnchantment-Table
+true:Basalt und Marmor
+true:Potion-Bogen
+false:Raketenwerfer
+false:Hochkant-Slabs
+false:Trollingkiste (die Explodiert, kein Blockschaden)
+false:Granate + Bombe + Große Bombe + Rakete + Nuke
+false:Enchantment
+false:Un'chanting-Table
+false:Very Lucky Blocks | Unlucky Blocks
+false:([Sehr] Teure Rezepte für Lucky Blocks)
+false:Impl
+false:Potion-NBT
+false:Handel-GUI
+false:Maltes Kraut [+ | - | 0]
+false:Commands
+true:Rucksack
+true:Ender-Rucksack
+false:World Generator
+false:Diamond LuckyBlock
+false:Emerald LuckyBlock
+false:NYI Items implementieren
+false:Fernrohr (Funktion + Screen)
+true:Shematics Reader
+false:Shematics Exporter
+false:Omega LuckyBlock
+false:Rainbow LuckyBlock
+false:Spiral LuckyBlock

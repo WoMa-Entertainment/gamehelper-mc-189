@@ -1,0 +1,77 @@
+#author=Winston=author#
+de_DE:
+
+death.fell.accident.ladder=%1$s fiel von einer Leiter
+  ...verpasste die Chance zu Springen
+death.fell.accident.vines=%1$s fiel von Ranken  ...dachte es
+ wären Zuckerstangen
+death.fell.accident.water=%1$s fiel aus dem Wasser
+  ...war einfach nur dumm
+ 
+death.fell.accident.generic=%1$s fiel aus zu groÃŸer HÃ¶he
+  ..dachte er könne fliegen
+death.fell.killer=%1$s wurde zum Fallen verdammt
+  ... dachte nur Damn it
+death.fell.assist=%1$s wurde von %2$s zum Fallen verdammt
+  ...(Killer) dachte für ... Damn it
+death.fell.assist.item=%1$s wurde von %2$s mit %3$s zum Fallen verdammt
+  ...(Killer) und (Killer) dachten für ... Damn it
+death.fell.finish=%1$s fiel zu tief und wurde von %2$s erledigt ... flog in ...s Arme
+death.fell.finish.item=%1$s fiel zu tief und wurde von %2$s mit %3$s erledigt ... wollte ... und ... doch nur umarmen
+
+death.attack.inFire=%1$s ging in Flammen auf
+  ...machte den Feuertanz
+death.attack.inFire.player=%1$s lief ins Feuer, wÃ¤hrend er mit %2$s kÃ¤mpfte  ...spürte die Hitze durch ... nicht
+death.attack.onFire=%1$s verbrannte
+  ...lief auf glühenden Kohlen
+death.attack.onFire.player=%1$s wurde wÃ¤hrend des Kampfes mit %2$s gerÃ¶stet
+  ...wollte Räucherfisch für sich und ...
+death.attack.lava=%1$s versuchte in Lava zu schwimmen  ...badete zu heiß
+death.attack.lava.player=%1$s fiel beim Versuch %2$s zu entkommen in Lava  ...dachte durch ... die Sauna wäre ungefährlich
+death.attack.inWall=%1$s wurde lebendig begraben
+  ...wollte wissen wie es sich anfühlt
+death.attack.drown=%1$s ertrank
+  ...vergaß zu Atmen
+death.attack.drown.player=%1$s ertrank beim Versuch %2$s zu entkommen  ...wurde von ... getunkt
+death.attack.starve=%1$s verhungerte
+  ...hatte keine Power mehr
+death.attack.cactus=%1$s wurde zu Tode gestochen
+  Für ...spitzte sich die Lage zu
+death.attack.cactus.player=%1$s rannte beim Versuch %2$s zu entkommen in einen Kaktus
+  ...übersah die Zahnstocher auf der Flucht vor ...
+death.attack.generic=%1$s starb
+  ...sah das Ende des Tunels
+death.attack.explosion=%1$s wurde in die Luft gesprengt
+  ...wollte doch nur zum Mond
+death.attack.explosion.player=%1$s wurde durch %2$s in die Luft gesprengt  ...war mit ...(Killer) in einem Raumfahrtprogramm
+death.attack.magic=%1$s wurde durch Magie getÃ¶tet
+  ...spielte Zauberer
+death.attack.wither=%1$s verdorrte
+  ...schmorte für den guten Zweck
+death.attack.anvil=%1$s wurde von einem fallenden Amboss zerquetscht
+  ...versuchte sich zu reparieren
+death.attack.fallingBlock=%1$s wurde von einem fallenden Block zerquetscht
+  ...wollte ihn auf Händen tragen
+death.attack.mob=%1$s wurde von %2$s erschlagen  ...(Zomb)pflegte das Grab nicht richtig/...(Skel)
+suchte das Feeling/...(Enderman)starb vor Schreck/...(Creeper)mochte Katzen/...(Wolf)dachte Schafe hätten ein leichtes Leben/...(Stray)wurde zur Schnecke/...(Husk)störte die Ruhe der Pharaonen/...(Pobär)wurde zum Fisch/...(Enderdragon)wollte den Drachen reiten/...(Wither)schmorte für den guten Zweck/...(ZPig)hatte zu viel Adrenalin/...(Blaze)konnte nicht ausweichen/...(WSkel)wollte doch nur ein Steinschwert/...(Ghast)wurde als er am Portal war diskriminiert
+death.attack.player=%1$s wurde von %2$s erschlagen
+  ...prügelte sich mit ...
+death.attack.player.item=%1$s wurde von %2$s mit %3$s erschlagen
+  ...fing eine Massenschlägerei mit ... und ... an
+death.attack.arrow=%1$s wurde von %2$s erschossen
+  ...hatte einen Apfel auf dem Kopf und ... war der Schütze  
+death.attack.arrow.item=%1$s wurde von %2$s mit %3$s erschossen  ... wurde für ... und ... zur Zielscheibe
+death.attack.fireball=%1$s wurde von %2$s flambiert
+  ...spielte für ... Flammkuchen
+death.attack.fireball.item=%1$s wurde von %2$s mit %3$s flambiert  ...(Killer)und ...(Killer
+) mochten ... als Flammkuchen sehr
+death.attack.thrown=%1$s wurde von %2$s zu Tode geprÃ¼gelt  ...war für ... der Punching Ball
+death.attack.thrown.item=%1$s wurde von %2$s mit %3$s zu Tode geprÃ¼gelt ...war für ... und ... die Pinjata
+death.attack.indirectMagic=%1$s wurde von %2$s mit Magie getÃ¶tet ...sah ...(Killer) als Zauberer nicht an und staunte was dabei raus kam
+death.attack.indirectMagic.item=%1$s wurde von %2$s mit %3$s getÃ¶tet  ...sah den Fluchtweg vor ... und ... nicht
+death.attack.thorns=%1$s wurde beim Versuch %2$s zu verletzen getÃ¶tet ... wurde beim Abstechen von ... gekillt
+death.attack.fall=%1$s fiel der Schwerkraft zum Opfer
+  ...spielte Doodle Jump
+death.attack.outOfWorld=%1$s fiel aus der Welt
+  ...sah das Ende nicht
+death.attack.lightningBolt=%1$s wurde vom Blitz getroffen  ...wurde aufgeladen 
