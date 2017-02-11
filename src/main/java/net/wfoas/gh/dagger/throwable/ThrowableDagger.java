@@ -4,7 +4,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityThrowable;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
@@ -13,6 +15,9 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.MovingObjectPosition.MovingObjectType;
 import net.minecraft.world.World;
+import net.wfoas.gh.GameHelperCoreModule;
+import net.wfoas.gh.dropsapi.pdr.EntityType;
+import net.wfoas.gh.dropsapi.pdr.LocationA;
 import net.wfoas.gh.items.ItemDagger;
 import net.wfoas.gh.network.NetworkHandler;
 import net.wfoas.gh.network.packet.PacketPlaySyncDaggerRotationToClients;
@@ -45,7 +50,9 @@ public class ThrowableDagger extends EntityThrowable {
 	protected ItemStack thrownItem;
 
 	public void saveItemStackToEntityData(ItemStack i) {
-		this.thrownItem = i;
+		this.thrownItem = i.copy();
+		// this.thrownItem.stackSize = 1;
+		this.getEntityData().setTag("itm_pl_stc", i.serializeNBT());
 	}
 
 	public ThrowableDagger(World worldIn, EntityLivingBase p_i1774_2_) {
@@ -65,8 +72,8 @@ public class ThrowableDagger extends EntityThrowable {
 		for (int i = 0; i < 4; ++i) {
 			float f4 = 0.25F;
 			this.worldObj.spawnParticle(EnumParticleTypes.CRIT, this.posX - this.motionX * f4,
-					this.posY - this.motionY * f4, this.posZ - this.motionZ * f4, this.motionX,
-					this.motionY, this.motionZ, new int[0]);
+					this.posY - this.motionY * f4, this.posZ - this.motionZ * f4, this.motionX, this.motionY,
+					this.motionZ, new int[0]);
 		}
 	}
 
@@ -84,15 +91,53 @@ public class ThrowableDagger extends EntityThrowable {
 
 		if (!this.worldObj.isRemote) {
 			if (p_70184_1_.typeOfHit == MovingObjectType.BLOCK) {
-				// this.motionX = 0;
-				// this.motionY = 0;
-				// this.motionZ = 0;
-				// setThrowableHeading(0, 0, 0, 1, 0);
+				ItemStack i = ItemStack.loadItemStackFromNBT(this.getEntityData().getCompoundTag("itm_pl_stc"));
+				short dmg = 2;
+				if (GameHelperCoreModule.IRON_DAGGER.getMaxDamage() < i.getItemDamage() + dmg) {
+					i.damageItem(GameHelperCoreModule.IRON_DAGGER.getMaxDamage() - i.getItemDamage(),
+							this.getThrower());
+				} else {
+					i.damageItem(dmg, this.getThrower());
+				}
+				this.getEntityData().removeTag("itm_pl_stc");
+				this.getEntityData().setTag("itm_pl_stc", i.serializeNBT());
+				this.motionX = 0;
+				this.motionY = 0;
+				this.motionZ = 0;
+				setThrowableHeading(0, 0, 0, 1, 0);
 				inGround = true;
-				// setVelo(0, 0, 0);
-				// this.velocityChanged = true;
-			} else {
+				setVelo(0, 0, 0);
+				this.velocityChanged = true;
 				this.setDead();
+				if (this.getEntityData().hasKey("itm_pl_stc")) {
+					EntityType.dropItem(
+							ItemStack.loadItemStackFromNBT(this.getEntityData().getCompoundTag("itm_pl_stc")),
+							new LocationA(this.getPosition(), worldObj).getRelative(0, 1, 0));
+				}
+			} else if (p_70184_1_.typeOfHit == MovingObjectType.ENTITY) {
+				ItemStack i = ItemStack.loadItemStackFromNBT(this.getEntityData().getCompoundTag("itm_pl_stc"));
+				short dmg = 5;
+				if (GameHelperCoreModule.IRON_DAGGER.getMaxDamage() < i.getItemDamage() + dmg) {
+					i.damageItem(GameHelperCoreModule.IRON_DAGGER.getMaxDamage() - i.getItemDamage(),
+							this.getThrower());
+				} else {
+					i.damageItem(dmg, this.getThrower());
+				}
+				this.getEntityData().removeTag("itm_pl_stc");
+				this.getEntityData().setTag("itm_pl_stc", i.serializeNBT());
+				this.motionX = 0;
+				this.motionY = 0;
+				this.motionZ = 0;
+				setThrowableHeading(0, 0, 0, 1, 0);
+				inGround = true;
+				setVelo(0, 0, 0);
+				this.velocityChanged = true;
+				this.setDead();
+				if (this.getEntityData().hasKey("itm_pl_stc")) {
+					EntityType.dropItem(
+							ItemStack.loadItemStackFromNBT(this.getEntityData().getCompoundTag("itm_pl_stc")),
+							new LocationA(this.getPosition(), worldObj).getRelative(0, 1, 0));
+				}
 			}
 		}
 	}
@@ -105,41 +150,47 @@ public class ThrowableDagger extends EntityThrowable {
 				shootersyaw, shooterspitch, thrownItem), worldObj.provider.getDimensionId());
 	}
 
+	private void syncToClientsButShooter(EntityPlayerMP playp) {
+		NetworkHandler.sendToAllInDimensionButOnePlayer(new PacketPlaySyncDaggerRotationToClients(worldObj,
+				this.getEntityId(), shootersyaw, shooterspitch, thrownItem), worldObj.provider.getDimensionId(), playp);
+	}
+
 	boolean synccompleted = false;
 
-	public void syncToServer() {
+	private void syncToServer() {
 		if (!synccompleted) {
 			NetworkHandler.sendToServer(
 					new PacketPlaySyncDaggerRotationToServer(worldObj, this.getEntityId(), shootersyaw, shooterspitch));
+			System.out.println("Synced rotation to server");
 			synccompleted = true;
 		}
 	}
 
 	public void setPlayersYawPitch(float yaw, float pitch) {
-		System.out.println("set that mafucking rot");
 		if (!isSetFromPlayer) {
 			shootersyaw = yaw;
 			shooterspitch = pitch;
-			// syncToServer();
-			// this.setPositionAndRotation(posX, posY, posZ, rotationYaw + yaw,
-			// rotationPitch + pitch);
+			this.getEntityData().setFloat("rot_pl_yaw", yaw);
+			this.getEntityData().setFloat("rot_pl_pitch", pitch);
 			isSetFromPlayer = true;
 		}
 		return;
 	}
 
 	public float getShootersYaw() {
-		return shootersyaw;
+		// return shootersyaw;
+		return getEntityData().getFloat("rot_pl_yaw");
 	}
 
 	public float getShootersPitch() {
-		return shooterspitch;
+		// return shooterspitch;
+		return getEntityData().getFloat("rot_pl_pit");
 	}
 
 	@Override
 	public void onCollideWithPlayer(EntityPlayer entityIn) {
 		// if (!this.worldObj.isRemote && this.inGround) {
-		// // boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2
+		// boolean flag = this.canBePickedUp == 1 || this.canBePickedUp == 2
 		// // && entityIn.capabilities.isCreativeMode;
 		// boolean flag = true;
 		// if (flag && !entityIn.inventory.addItemStackToInventory(thrownItem))
@@ -175,5 +226,4 @@ public class ThrowableDagger extends EntityThrowable {
 			System.out.println("has Tag iron_dagger");
 		}
 	}
-
 }

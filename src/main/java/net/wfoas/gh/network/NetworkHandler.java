@@ -129,6 +129,10 @@ public class NetworkHandler {
 	public static void sendToAllInDimension(IMessage im, int dimID) {
 		SNW.sendToDimension(im, dimID);
 	}
+	
+	public static void sendToAllInDimensionButOnePlayer(IMessage im, int dimID, EntityPlayerMP one){
+		
+	}
 
 	public static void sendToSpecificPlayer(IMessage im, EntityPlayerMP ep) {
 		SNW.sendTo(im, ep);

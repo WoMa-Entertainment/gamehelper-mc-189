@@ -11,25 +11,35 @@ import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
+import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.GameHelperCoreModule;
 import net.wfoas.gh.gui.GuiHandler;
+import net.wfoas.gh.gui.button.OverlayDoubleTexToggleButton;
+import net.wfoas.gh.gui.button.OverlayTexToggleButton;
 import net.wfoas.gh.gui.guilist.GuiList;
+import net.wfoas.gh.gui.guilist.GuiList.ActionListener;
 import net.wfoas.gh.gui.world.GuiSetPermScreen;
+import net.wfoas.gh.items.TradeItems;
 import net.wfoas.gh.protected_blocks.tabs.ProtectedBlockTabChangePermission;
 import net.wfoas.gh.protected_blocks.tabs.ProtectedBlockTabManipulateBlock;
 import net.wfoas.gh.proxies.ClientProxy;
 import tconstruct.client.tabs.AbstractTab;
 
 public class GuiChangePermission extends GuiScreen {
+	final static public ItemStack OK = new ItemStack(TradeItems.OK_ITEM);
+	final static public ItemStack NOK = new ItemStack(TradeItems.NOT_OK_ITEM);
+	static public final String PLAYER_WITH_16_CHAR = "PlayerWith16Char";
 	private static final ResourceLocation BACKGROUND = new ResourceLocation("gamehelper", "gui/gui_background.png");
 	protected int xSize, ySize;
+	IProtectedBlock prot_blc;
 
 	int __phys_posx, __phys_posy, __phys_posz;
 	int guiLeft, guiTop;
 
-	public GuiChangePermission(int physx, int physy, int physz) {
+	public GuiChangePermission(int physx, int physy, int physz, IProtectedBlock prot_blc) {
 		this.xSize = 248;
 		this.ySize = 184;
 		// guiLeft = (this.width - this.xSize/4) / 2;
@@ -37,7 +47,11 @@ public class GuiChangePermission extends GuiScreen {
 		this.__phys_posx = physx;
 		this.__phys_posy = physy;
 		this.__phys_posz = physz;
+		this.prot_blc = prot_blc;
 	}
+
+	GuiList guiList, guiList22;
+	String notInListSel = null, inListSel = null;
 
 	@Override
 	public void initGui() {
@@ -74,8 +88,49 @@ public class GuiChangePermission extends GuiScreen {
 		at.yPosition = (this.guiTop - 28);
 		if (at != null)
 			this.buttonList.add(at);
-		// GuiList guiList = new GuiList(ClientProxy.onlinePlayers, 50, 150,
-		// 120, 270, 12, null, this, 15);
+		int k = this.width / 2 - 100;
+		int l = this.height / 2 - 20;
+		OverlayDoubleTexToggleButton guiButton = new OverlayDoubleTexToggleButton(0, k - 50, l - 50, "§aÖffentlich", OK,
+				NOK);
+		OverlayDoubleTexToggleButton guiButton2 = new OverlayDoubleTexToggleButton(1, k - 50 - 20, l - 50,
+				"§3Zugriff spezifizieren", OK, NOK);
+		OverlayDoubleTexToggleButton guiButton3 = new OverlayDoubleTexToggleButton(2, k - 50 - 20, l - 50 - 20,
+				"§cPrivat", OK, NOK);
+		OverlayTexToggleButton finish = new OverlayTexToggleButton(3, k + 50 + 100 + 50, l + 50, "Fertig", OK);
+		guiButton.width = 18;
+		guiButton.height = 18;
+		guiButton2.width = 18;
+		guiButton2.height = 18;
+		guiButton3.width = 18;
+		guiButton3.height = 18;
+		finish.height = 18;
+		finish.width = 18;
+		this.buttonList.add(guiButton);
+		this.buttonList.add(guiButton2);
+		this.buttonList.add(guiButton3);
+		this.buttonList.add(finish);
+		try {
+			GameHelper.getLogger().info("OnlinePlayers:" + ClientProxy.onlinePlayers.size());
+			guiList = new GuiList(ClientProxy.onlinePlayers, this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR),
+					150, l, l + this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR), 12, new ActionListener() {
+						@Override
+						public void actionPerformed(GuiList guiList, int slotIndex, boolean isDoubleClick, int mouseX,
+								int mouseY) {
+							// var
+						}
+					}, this, k);
+			guiList22 = new GuiList(ClientProxy.onlinePlayers, this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR),
+					150, l, l + this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR), 12, new ActionListener() {
+						@Override
+						public void actionPerformed(GuiList guiList, int slotIndex, boolean isDoubleClick, int mouseX,
+								int mouseY) {
+							// var
+						}
+					}, this, k + 20 + (int) (this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR)));
+
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
 	}
 
 	@Override
@@ -102,6 +157,7 @@ public class GuiChangePermission extends GuiScreen {
 		for (int j = 0; j < this.labelList.size(); ++j) {
 			((GuiLabel) this.labelList.get(j)).drawLabel(this.mc, mouseX, mouseY);
 		}
+		guiList.drawScreen(mouseX, mouseY, partialTicks);
 	}
 
 	@Override

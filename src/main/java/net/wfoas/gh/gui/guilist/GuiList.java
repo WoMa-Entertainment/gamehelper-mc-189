@@ -99,7 +99,7 @@ public class GuiList extends GuiSlot {
 	 * Return the height of the content being scrolled
 	 */
 	protected int getContentHeight() {
-		return this.getSize() * 18;
+		return (this.getSize() == 0 ? 1 : this.getSize()) * 18;
 	}
 
 	public int getListWidth() {
@@ -174,26 +174,34 @@ public class GuiList extends GuiSlot {
 			GlStateManager.disableAlpha();
 			GlStateManager.shadeModel(7425);
 			GlStateManager.disableTexture2D();
-//			worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-//			worldrenderer.pos((double) this.left, (double) (this.top + i1), 0.0D).tex(0.0D, 1.0D).color(0, 0, 0, 0)
-//					.endVertex();
-//			worldrenderer.pos((double) this.right, (double) (this.top + i1), 0.0D).tex(1.0D, 1.0D).color(0, 0, 0, 0)
-//					.endVertex();
-//			worldrenderer.pos((double) this.right, (double) this.top, 0.0D).tex(1.0D, 0.0D).color(0, 0, 0, 255)
-//					.endVertex();
-//			worldrenderer.pos((double) this.left, (double) this.top, 0.0D).tex(0.0D, 0.0D).color(0, 0, 0, 255)
-//					.endVertex();
-//			tessellator.draw();
-//			worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
-//			worldrenderer.pos((double) this.left, (double) this.bottom, 0.0D).tex(0.0D, 1.0D).color(0, 0, 0, 255)
-//					.endVertex();
-//			worldrenderer.pos((double) this.right, (double) this.bottom, 0.0D).tex(1.0D, 1.0D).color(0, 0, 0, 255)
-//					.endVertex();
-//			worldrenderer.pos((double) this.right, (double) (this.bottom - i1), 0.0D).tex(1.0D, 0.0D).color(0, 0, 0, 0)
-//					.endVertex();
-//			worldrenderer.pos((double) this.left, (double) (this.bottom - i1), 0.0D).tex(0.0D, 0.0D).color(0, 0, 0, 0)
-//					.endVertex();
-//			tessellator.draw();
+			// worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
+			// worldrenderer.pos((double) this.left, (double) (this.top + i1),
+			// 0.0D).tex(0.0D, 1.0D).color(0, 0, 0, 0)
+			// .endVertex();
+			// worldrenderer.pos((double) this.right, (double) (this.top + i1),
+			// 0.0D).tex(1.0D, 1.0D).color(0, 0, 0, 0)
+			// .endVertex();
+			// worldrenderer.pos((double) this.right, (double) this.top,
+			// 0.0D).tex(1.0D, 0.0D).color(0, 0, 0, 255)
+			// .endVertex();
+			// worldrenderer.pos((double) this.left, (double) this.top,
+			// 0.0D).tex(0.0D, 0.0D).color(0, 0, 0, 255)
+			// .endVertex();
+			// tessellator.draw();
+			// worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
+			// worldrenderer.pos((double) this.left, (double) this.bottom,
+			// 0.0D).tex(0.0D, 1.0D).color(0, 0, 0, 255)
+			// .endVertex();
+			// worldrenderer.pos((double) this.right, (double) this.bottom,
+			// 0.0D).tex(1.0D, 1.0D).color(0, 0, 0, 255)
+			// .endVertex();
+			// worldrenderer.pos((double) this.right, (double) (this.bottom -
+			// i1), 0.0D).tex(1.0D, 0.0D).color(0, 0, 0, 0)
+			// .endVertex();
+			// worldrenderer.pos((double) this.left, (double) (this.bottom -
+			// i1), 0.0D).tex(0.0D, 0.0D).color(0, 0, 0, 0)
+			// .endVertex();
+			// tessellator.draw();
 			int k1 = this.func_148135_f();
 
 			if (k1 > 0) {

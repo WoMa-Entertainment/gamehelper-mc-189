@@ -49,20 +49,10 @@ public class ThrowableDaggerRenderer extends Render {
 		GlStateManager.translate((float) x, (float) y, (float) z);
 		GlStateManager.enableRescaleNormal();
 		GlStateManager.scale(0.5F, 0.5F, 0.5F);
-		// GlStateManager.rotate(-this.renderManager.playerViewY, 0.0F, 1.0F,
-		// 0.0F);
-		// GlStateManager.rotate(this.renderManager.playerViewX, 1.0F, 0.0F,
-		// 0.0F);{
-		{
-			if (dagger.getThrower() instanceof EntityPlayer) {
-				if (dagger.getThrower().getName().equalsIgnoreCase(Minecraft.getMinecraft().thePlayer.getName())) {
-					dagger.setPlayersYawPitch(-this.renderManager.playerViewY, this.renderManager.playerViewX);
-					dagger.syncToServer();
-				}
-			}
+		if (dagger.getEntityData() != null) {
+			GlStateManager.rotate(dagger.getShootersYaw(), 0, 1, 0);
+			GlStateManager.rotate(dagger.getShootersPitch(), 1, 0, 0);
 		}
-		GlStateManager.rotate(dagger.getShootersYaw(), 0, 1, 0);
-		GlStateManager.rotate(dagger.getShootersPitch(), 1, 0, 0);
 		GlStateManager.rotate(90, 0, 1, 0);
 		GlStateManager.rotate(135, 0, 0, 1);// -45 + 180
 		this.bindTexture(TextureMap.locationBlocksTexture);

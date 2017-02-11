@@ -15,7 +15,8 @@ import net.wfoas.gh.network.packet.PacketPlaySyncDaggerRotationToClients;
 import net.wfoas.gh.network.packet.PacketPlaySyncDaggerRotationToServer;
 
 public class StaticDagger extends Entity {
-	public static final DamageSource DAGGER_DAMAGE_CAUSE = new DamageSource("daggerDamage");
+	public static final DamageSource DAGGER_DAMAGE_CAUSE = new DamageSource("daggerDamage");// TODO
+																							// remove
 	private static final String __OBFID = "CL_00001722";
 
 	public StaticDagger(World worldIn) {

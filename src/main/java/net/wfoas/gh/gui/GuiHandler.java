@@ -36,6 +36,7 @@ import net.wfoas.gh.minersinventory.layer.MinersInventoryHelper;
 import net.wfoas.gh.op_anvil.ContainerOPAnvil;
 import net.wfoas.gh.op_anvil.GuiContainerOPAnvil;
 import net.wfoas.gh.protected_blocks.GuiChangePermission;
+import net.wfoas.gh.protected_blocks.ProtectedBlockWrapper;
 import net.wfoas.gh.protected_blocks.chest.ContainerProtectedChest;
 import net.wfoas.gh.protected_blocks.chest.GuiContainerProtectedChest;
 import net.wfoas.gh.protected_blocks.chest.InventoryLargeProtectedChest;
@@ -188,7 +189,9 @@ public class GuiHandler implements IGuiHandler {
 		} else if (ID == PROTECTED_HOPPER) {
 
 		} else if (ID == PROTECTED_GUI_CHANGE_PERMISSIONS) {
-			return new GuiChangePermission(x, y, z);
+			ProtectedBlockWrapper wrap = new ProtectedBlockWrapper(
+					world.getTileEntity(new BlockPos(x, y, z)).getTileData(), new BlockPos(x, y, z), world);
+			return new GuiChangePermission(x, y, z, wrap);
 		} else if (ID == OP_ANVIL_GUI) {
 			return new GuiContainerOPAnvil(player.inventory, world);
 		}

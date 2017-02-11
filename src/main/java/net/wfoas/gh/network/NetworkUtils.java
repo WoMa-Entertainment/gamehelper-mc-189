@@ -7,8 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufInputStream;
+import io.netty.buffer.ByteBufOutputStream;
+import io.netty.handler.codec.EncoderException;
 import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTSizeTracker;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.BlockPos;
 import net.wfoas.gh.GameHelper;
 
 public class NetworkUtils {
@@ -59,5 +64,50 @@ public class NetworkUtils {
 		byte[] bytes = new byte[buffer.readInt()];
 		buffer.readBytes(bytes);
 		return new String(bytes, GameHelper.UTF_8);
+	}
+
+	public static void writeNBTTagCompoundToBuffer(NBTTagCompound nbt, ByteBuf buf) {
+		if (nbt == null) {
+			buf.writeByte(0);
+		} else {
+			try {
+				CompressedStreamTools.write(nbt, new ByteBufOutputStream(buf));
+			} catch (IOException ioexception) {
+				throw new EncoderException(ioexception);
+			}
+		}
+	}
+
+	public static NBTTagCompound readNBTTagCompoundFromBuffer0(ByteBuf buf) throws IOException {
+		int i = buf.readerIndex();
+		byte b0 = buf.readByte();
+
+		if (b0 == 0) {
+			return null;
+		} else {
+			buf.readerIndex(i);
+			return CompressedStreamTools.read(new ByteBufInputStream(buf), new NBTSizeTracker(2097152L));
+		}
+	}
+
+	public static NBTTagCompound readNBTTagCompoundFromBuffer(ByteBuf buf) {
+		try {
+			return readNBTTagCompoundFromBuffer0(buf);
+		} catch (IOException ioe) {
+			return null;// glsl: discard;
+		}
+	}
+
+	public static void writeBlockPos(BlockPos pos, ByteBuf buf) {
+		buf.writeInt(pos.getX());
+		buf.writeInt(pos.getY());
+		buf.writeInt(pos.getZ());
+	}
+
+	public static BlockPos readBlockPos(ByteBuf buf) {
+		int x = buf.readInt();
+		int y = buf.readInt();
+		int z = buf.readInt();
+		return new BlockPos(x, y, z);
 	}
 }

@@ -46,7 +46,7 @@ public class PacketPlaySyncDaggerRotationToServer implements IMessage {
 			implements IMessageHandler<PacketPlaySyncDaggerRotationToServer, IMessage> {
 
 		@Override
-		public IMessage onMessage(final PacketPlaySyncDaggerRotationToServer message, MessageContext ctx) {
+		public IMessage onMessage(final PacketPlaySyncDaggerRotationToServer message, final MessageContext ctx) {
 			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
 				@Override
 				public void run() {

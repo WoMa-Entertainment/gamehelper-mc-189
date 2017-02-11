@@ -65,7 +65,6 @@ public class PacketPlaySyncDaggerRotationToClients implements IMessage {
 			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
 				@Override
 				public void run() {
-					System.out.println("Ran on ClientboundSheduler");
 					Entity e = Minecraft.getMinecraft().theWorld.getEntityByID(message.entityID);
 					if (!(e instanceof ThrowableDagger) && !(e instanceof StaticDagger)) {
 						return;

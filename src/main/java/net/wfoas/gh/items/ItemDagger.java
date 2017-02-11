@@ -84,23 +84,29 @@ public class ItemDagger extends Item {
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn) {
-		ItemStack retis = itemStackIn;
+		ItemStack retis = itemStackIn.copy();
 		if (!playerIn.capabilities.isCreativeMode) {
 			--itemStackIn.stackSize;
 		}
 		worldIn.playSoundAtEntity(playerIn, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+		if (this.getMaxDamage() == itemStackIn.getItemDamage()) {
+			worldIn.playSoundAtEntity(playerIn, "random.break", 1, 1.5f);
+			return retis;
+		}
 
 		if (!worldIn.isRemote) {
 			ThrowableDagger d = new ThrowableDagger(worldIn, playerIn);
 			// d.setPositionAndRotation(d.posX, d.posY, d.posZ, d.rotationYaw +=
 			// 90, d.rotationPitch);
 			// GlStateManager.rotate(135, 0, 0, 1);// -45 + 180
-			d.saveItemStackToEntityData(itemStackIn);
+			System.out.println(playerIn.rotationYaw + "y:p" + playerIn.rotationPitch + "[]][");
+			d.setPlayersYawPitch(-playerIn.rotationYaw, -playerIn.rotationPitch);
+			d.saveItemStackToEntityData(ItemStack.copyItemStack(retis));
 			d.onUpdate();
 			worldIn.spawnEntityInWorld(d);
-//			d.syncToClients();
+			d.syncToClients();
 		}
-		return retis;
+		return itemStackIn;
 	}
 
 	@Override
