@@ -31,19 +31,12 @@ import net.wfoas.gh.bigsword.BigswordItem;
 import net.wfoas.gh.blocks.AmethystBlock;
 import net.wfoas.gh.blocks.AmethystOre;
 import net.wfoas.gh.blocks.GameHelperModBlock;
+import net.wfoas.gh.blocks.Pureblue;
+import net.wfoas.gh.blocks.Purebrown;
 import net.wfoas.gh.blocks.RubyBlock;
 import net.wfoas.gh.blocks.RubyOre;
 import net.wfoas.gh.blocks.SapphireBlock;
 import net.wfoas.gh.blocks.SapphireOre;
-import net.wfoas.gh.commands.CommandBuildFly;
-import net.wfoas.gh.commands.CommandCreateWorld;
-import net.wfoas.gh.commands.CommandGameHelper;
-import net.wfoas.gh.commands.CommandHackSec;
-import net.wfoas.gh.commands.CommandListWorld;
-import net.wfoas.gh.commands.CommandPing;
-import net.wfoas.gh.commands.CommandSaveData;
-import net.wfoas.gh.commands.CommandTpx;
-import net.wfoas.gh.commands.CommandTpxp;
 import net.wfoas.gh.config.DefaultConfig;
 import net.wfoas.gh.config.GHConfig;
 import net.wfoas.gh.dagger.throwable.ThrowableDagger;
@@ -252,6 +245,8 @@ public class CommonProxy {
 		GameHelperCoreModule.MOBILE_WORKDBENCH = new MobileWorkbenchItem();
 		GameHelperCoreModule.POTION_BOW = new PotionBow();
 		GameHelperCoreModule.SEL_1 = new SelectionTool();
+		GameHelperCoreModule.Pureblue = new Pureblue();
+		GameHelperCoreModule.Purebrown = new Purebrown();
 		GameHelperCoreModule.SEL_2 = new SelectionTool2();
 	}
 
