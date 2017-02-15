@@ -33,6 +33,8 @@ import net.wfoas.gh.blocks.AmethystOre;
 import net.wfoas.gh.blocks.GameHelperModBlock;
 import net.wfoas.gh.blocks.Pureblue;
 import net.wfoas.gh.blocks.Purebrown;
+import net.wfoas.gh.blocks.Purelightgray;
+import net.wfoas.gh.blocks.Purelightgreen;
 import net.wfoas.gh.blocks.RubyBlock;
 import net.wfoas.gh.blocks.RubyOre;
 import net.wfoas.gh.blocks.SapphireBlock;
@@ -247,6 +249,8 @@ public class CommonProxy {
 		GameHelperCoreModule.SEL_1 = new SelectionTool();
 		GameHelperCoreModule.Pureblue = new Pureblue();
 		GameHelperCoreModule.Purebrown = new Purebrown();
+		GameHelperCoreModule.Purelightgray = new Purelightgray();
+		GameHelperCoreModule.Purelightgreen = new Purelightgreen();
 		GameHelperCoreModule.SEL_2 = new SelectionTool2();
 	}
 
