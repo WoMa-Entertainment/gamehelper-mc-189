@@ -29,13 +29,10 @@ public class FileVillagerProfessionIdMap {
 
 	protected static void sortListAndAssignIds() {
 		if (load()) {
-			// copy from list
-			// copyFromList();
 			injectNewEntries();
-			copyFromList(); // TODO inject sth if new | check if new then inject
+			copyFromList();
 			save();
 		} else {
-			// sort by hand
 			injectNewEntries();
 			copyFromList();
 			save();

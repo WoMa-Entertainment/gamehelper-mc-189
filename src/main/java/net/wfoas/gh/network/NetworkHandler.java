@@ -1,12 +1,15 @@
 package net.wfoas.gh.network;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.handshake.NetworkDispatcher;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.wfoas.gh.network.packet.PacketPlayBackpackInventoryPrivacy;
+import net.wfoas.gh.network.packet.PacketPlayBacktraceOpenGuiClientSide;
 import net.wfoas.gh.network.packet.PacketPlayChangeWorldPermissionsRequest;
 import net.wfoas.gh.network.packet.PacketPlayCreateNewWorld;
 import net.wfoas.gh.network.packet.PacketPlayEnchantmentAltarApplyEnchantment;
@@ -114,6 +117,8 @@ public class NetworkHandler {
 				PacketPlayGHDynamicOpenGuiWithID.class, nextPacketId(), Side.SERVER);
 		SNW.registerMessage(PacketPlayGHDynamicOpenGuiClientSide.PacketPlayGHDynamicOpenGuiClientSideHandler.class,
 				PacketPlayGHDynamicOpenGuiClientSide.class, nextPacketId(), Side.CLIENT);
+		SNW.registerMessage(PacketPlayBacktraceOpenGuiClientSide.PacketPlayBacktraceOpenGuiClientSideHandler.class,
+				PacketPlayBacktraceOpenGuiClientSide.class, nextPacketId(), Side.SERVER);
 	}
 
 	public static byte nextPacketId() {
@@ -129,9 +134,14 @@ public class NetworkHandler {
 	public static void sendToAllInDimension(IMessage im, int dimID) {
 		SNW.sendToDimension(im, dimID);
 	}
-	
-	public static void sendToAllInDimensionButOnePlayer(IMessage im, int dimID, EntityPlayerMP one){
-		
+
+	public static void sendToAllInDimensionButOnePlayer(IMessage im, int dimID, EntityPlayerMP one) {
+		for (EntityPlayer p : DimensionManager.getWorld(dimID).playerEntities) {
+			if (!p.getUniqueID().equals(one.getUniqueID())) {
+				NetworkHandler.sendToSpecificPlayer(im, (EntityPlayerMP) p);
+			}
+		}
+		return;
 	}
 
 	public static void sendToSpecificPlayer(IMessage im, EntityPlayerMP ep) {

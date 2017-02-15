@@ -259,13 +259,7 @@ public class ProtectedChestTileEntityBlock extends BlockContainer implements IGH
 	}
 
 	@Override
-	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) { // TODO check
-																	// player of
-																	// nearby
-																	// chests to
-																	// deny
-																	// placing
-																	// chest
+	public boolean canPlaceBlockAt(World worldIn, BlockPos pos) {
 		int i = 0;
 		BlockPos blockpos = pos.west();
 		BlockPos blockpos1 = pos.east();
@@ -276,8 +270,6 @@ public class ProtectedChestTileEntityBlock extends BlockContainer implements IGH
 			if (this.isDoubleChest(worldIn, blockpos)) {
 				return false;
 			}
-			// ((ProtectedChestTileEntity)worldIn.getTileEntity(blockpos)).owner
-			// TODO
 			++i;
 		}
 
@@ -322,9 +314,6 @@ public class ProtectedChestTileEntityBlock extends BlockContainer implements IGH
 		}
 	}
 
-	/**
-	 * Called when a neighboring block changes.
-	 */
 	public void onNeighborBlockChange(World worldIn, BlockPos pos, IBlockState state, Block neighborBlock) {
 		super.onNeighborBlockChange(worldIn, pos, state, neighborBlock);
 		TileEntity tileentity = worldIn.getTileEntity(pos);
@@ -401,18 +390,10 @@ public class ProtectedChestTileEntityBlock extends BlockContainer implements IGH
 		}
 	}
 
-	/**
-	 * Returns a new instance of a block's tile entity class. Called on placing
-	 * the block.
-	 */
 	public TileEntity createNewTileEntity(World worldIn, int meta) {
 		return new ProtectedChestTileEntity();
 	}
 
-	/**
-	 * Can this block provide power. Only wire currently seems to have this
-	 * change based on its state.
-	 */
 	public boolean canProvidePower() {
 		return false;
 	}

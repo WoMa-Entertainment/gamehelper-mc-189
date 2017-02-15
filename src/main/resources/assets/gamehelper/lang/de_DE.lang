@@ -1,4 +1,4 @@
-﻿enchantment.soulbound=Soulbound
+enchantment.soulbound=Soulbound
 enchantment.smelting=Schmelzen
 enchantment.xp_boost=Erfahrungserhoehung
 enchantment.headloot=Koepfen
@@ -290,3 +290,6 @@ gamehelper.error.protected_furnace.destroy.warning=§cVorsicht! §c%s§c §cvers
 gamehelper.info.notificationsystem.enabled=§aDas §aBenachrichtigungssystem §awurde §afür §adich §aaktiviert.
 gamehelper.info.notificationsystem.disabled=§cDas §cBenachrichtigungssystem §cwurde §cfür §cdich §cdeaktiviert.
 gamehelper.gh_anvil.container.name=GH Amboss
+gamehelper.guichangepermprotblock.public=§aÖffentlich
+gamehelper.guichangepermprotblock.spefify_players=§eSpieler festlegen
+gamehelper.guichangepermprotblock.private=§cPrivat

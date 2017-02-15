@@ -24,7 +24,7 @@ public class WorldOwners {
 	private static volatile Map<String, List<UUID>> worldOwnerMap = new HashMap<String, List<UUID>>();
 	private static volatile Map<UUID, List<String>> playerOwnerMap = new HashMap<UUID, List<String>>();
 
-	public static void load() { // TODO wont load
+	public static void load() {
 		try {
 			System.out.println("--> Worlds");
 			load0Worlds();

@@ -4,11 +4,14 @@ import java.util.List;
 import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.Packet;
 
 public interface IProtectedBlock {
 	List<String> getWhitelistedPlayers();
 
 	void addWhiteListedPlayer(UUID uid);
+
+	void removeWhiteListedPlayer(UUID uid);
 
 	UUID getOwner();
 
@@ -21,4 +24,6 @@ public interface IProtectedBlock {
 	LockType getLockType();
 
 	void setLockType(LockType l);
+
+	Packet getCUDescrPacket();
 }

@@ -74,7 +74,7 @@ public class PacketPlaySyncDaggerRotationToClients implements IMessage {
 						dagger.saveItemStackToEntityData(message.thrownItem);
 						dagger.setPlayersYawPitch(message.yaw, message.pitch);
 					} else if (e instanceof StaticDagger) {
-						// static dagger code
+						// static dagger code //TODO implements static dagger or remove static dagger
 						StaticDagger dagger = (StaticDagger) e;
 						dagger.saveItemStackToEntityData(message.thrownItem);
 						dagger.setPlayersYawPitch(message.yaw, message.pitch);

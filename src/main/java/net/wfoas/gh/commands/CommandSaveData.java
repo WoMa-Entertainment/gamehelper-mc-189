@@ -33,9 +33,6 @@ public class CommandSaveData extends CommandBase {
 		WorldPermissions.save();
 		WorldOwners.save();
 		PlayerNameUUID.save();
-		// for (WorldServer ws : DimensionManager.getWorlds()) {
-		// ws.saveChunkData();CommandSaveAll
-		// } // TODO save-data crashes server CommandSaveAll
 		MinecraftServer minecraftserver = MinecraftServer.getServer();
 		sender.addChatMessage(new ChatComponentTranslation("commands.save.start", new Object[0]));
 

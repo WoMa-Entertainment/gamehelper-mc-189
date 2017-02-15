@@ -10,11 +10,14 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.AxisAlignedBB;
@@ -27,8 +30,10 @@ import net.minecraft.util.ITickable;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.wfoas.gh.GameHelper;
+import net.wfoas.gh.network.NetworkUtils;
 import net.wfoas.gh.protected_blocks.IProtectedBlock;
 import net.wfoas.gh.protected_blocks.LockType;
+import net.wfoas.gh.proxies.ClientProxy;
 
 public class ProtectedChestTileEntity extends TileEntityLockable implements ITickable, IInventory, IProtectedBlock {
 	private ItemStack[] chestContents = new ItemStack[27];
@@ -496,5 +501,47 @@ public class ProtectedChestTileEntity extends TileEntityLockable implements ITic
 	@Override
 	public void setLockType(LockType l) {
 		getTileData().setByte("ProtectedChestLockType", l.getId());
+	}
+
+	@Override
+	public Packet getDescriptionPacket() {
+		return super.getDescriptionPacket();
+	}
+
+	public Packet getCUDescrPacket() {
+		NBTTagCompound nbttagcompound = new NBTTagCompound();
+		this.writeToNBT(nbttagcompound);
+		NBTTagCompound cpy = (NBTTagCompound) nbttagcompound.copy();
+		cpy.setTag("player_list", NetworkUtils.writeStringList(
+				GameHelper.getUtils().convertPlayerListToStringList(GameHelper.getUtils().getOnlinePlayers())));
+		return new S35PacketUpdateTileEntity(this.pos, this.getBlockMetadata(), cpy);
+	}
+
+	@Override
+	public void onDataPacket(net.minecraft.network.NetworkManager net,
+			net.minecraft.network.play.server.S35PacketUpdateTileEntity pkt) {
+		NBTTagCompound nbttc = pkt.getNbtCompound();
+		this.getTileData().merge(nbttc.getCompoundTag("ForgeData"));
+		ClientProxy.onlinePlayers.clear();
+		ClientProxy.onlinePlayers.addAll(NetworkUtils.readStringList(nbttc.getTag("player_list")));
+	}
+
+	@Override
+	public void removeWhiteListedPlayer(UUID uid) {
+		if (!getTileData().hasKey("ProtectedChestWhitelistedPlayers")) {
+			getTileData().setTag("ProtectedChestWhitelistedPlayers", new NBTTagList());
+		}
+		NBTTagList list = (NBTTagList) getTileData().getTag("ProtectedChestWhitelistedPlayers");
+		int remove = -1;
+		for (int i = 0; i < list.tagCount(); i++) {
+			NBTTagString s = (NBTTagString) list.get(i);
+			if (s.getString().equalsIgnoreCase(uid.toString())) {
+				remove = i;
+				break;
+			}
+		}
+		if (remove != -1)
+			list.removeTag(remove);
+		getTileData().setTag("ProtectedChestWhitelistedPlayers", list);
 	}
 }

@@ -85,7 +85,6 @@ public class WorldUtils {
 			System.err.println("World = null!");
 			return;
 		}
-		// TODO: Handle teleportation of mounted entity
 		boolean isRiding = false;
 		Entity e = player.ridingEntity;
 		isRiding = e != null;
@@ -203,18 +202,20 @@ public class WorldUtils {
 			}
 			newWorld.spawnEntityInWorld(entity);
 			newWorld.updateEntityWithOptionalForce(entity, true);
-			if(entity instanceof EntityPlayerMP){
-				((EntityPlayerMP)entity).playerNetServerHandler.setPlayerLocation(entity.posX+500, entity.posY, entity.posZ, entity.rotationYaw, entity.rotationPitch);
+			if (entity instanceof EntityPlayerMP) {
+				((EntityPlayerMP) entity).playerNetServerHandler.setPlayerLocation(entity.posX + 500, entity.posY,
+						entity.posZ, entity.rotationYaw, entity.rotationPitch);
 				final Entity _e1 = entity;
-				GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable(){
+				GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
 					@Override
 					public void run() {
-						((EntityPlayerMP)_e1).playerNetServerHandler.setPlayerLocation(_e1.posX-500, _e1.posY+0.2, _e1.posZ, _e1.rotationYaw, _e1.rotationPitch);
+						((EntityPlayerMP) _e1).playerNetServerHandler.setPlayerLocation(_e1.posX - 500, _e1.posY + 0.2,
+								_e1.posZ, _e1.rotationYaw, _e1.rotationPitch);
 					}
-				}, 20*3l);
+				}, 20 * 3l);
 			}
-//			((EntityPlayerMP)entity).loadedChunks.clear();
-//			CommandTeleport CommandGameRule
+			// ((EntityPlayerMP)entity).loadedChunks.clear();
+			// CommandTeleport CommandGameRule
 		}
 		entity.setWorld(newWorld);
 	}

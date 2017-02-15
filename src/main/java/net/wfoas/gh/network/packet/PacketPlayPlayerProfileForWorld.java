@@ -52,7 +52,6 @@ public class PacketPlayPlayerProfileForWorld implements IMessage {
 						message.kill, message.collect_items_exp, message.interact);
 				System.out.println("V" + message.visit + "D" + message.destroy + "V" + message.build + "K"
 						+ message.kill + "C" + message.collect_items_exp + "I" + message.interact);
-				// SOLVED: TODO set viewpermscreen profile!
 				return null;
 			}
 			System.out.println("null" + "V" + message.visit + "D" + message.destroy + "V" + message.build + "K"

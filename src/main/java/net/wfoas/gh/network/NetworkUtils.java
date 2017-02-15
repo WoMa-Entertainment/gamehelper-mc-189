@@ -2,8 +2,12 @@ package net.wfoas.gh.network;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import io.netty.buffer.ByteBuf;
@@ -11,8 +15,11 @@ import io.netty.buffer.ByteBufInputStream;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.handler.codec.EncoderException;
 import net.minecraft.nbt.CompressedStreamTools;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTSizeTracker;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.BlockPos;
 import net.wfoas.gh.GameHelper;
 
@@ -35,6 +42,83 @@ public class NetworkUtils {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Deprecated
+	public static byte[] _depre_serializeListStringToBytes(List<String> list) {
+		try {
+			return serializeListStringToBytes0(list);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private static byte[] serializeListStringToBytes0(List<String> list) throws IOException {
+		ByteArrayOutputStream o = new ByteArrayOutputStream();
+		DataOutputStream dos = new DataOutputStream(o);
+		if (list.isEmpty()) {
+			System.out.println("empty");
+			dos.writeByte(-1);
+			return o.toByteArray();
+		}
+		dos.writeInt(list.size());
+		System.out.println("SList: " + list.size());
+		for (String s : list) {
+			System.out.println("SEntry: " + s);
+			byte[] ser = s.getBytes(GameHelper.UTF_8);
+			dos.writeInt(ser.length);
+			dos.write(ser);
+		}
+		dos.close();
+		return o.toByteArray();
+	}
+
+	public static NBTBase writeStringList(List<String> s) {
+		NBTTagList list = new NBTTagList();
+		for (String sl : s) {
+			list.appendTag(new NBTTagString(sl));
+		}
+		return list;
+	}
+
+	public static List<String> readStringList(NBTBase b) {
+		if (b instanceof NBTTagList) {
+			NBTTagList list = (NBTTagList) b;
+			List<String> s = new ArrayList<String>();
+			for (int i = 0; i < list.tagCount(); i++) {
+				s.add(list.getStringTagAt(i));
+			}
+			return s;
+		} else {
+			return null;
+		}
+	}
+
+	@Deprecated
+	public static List<String> _depre_deserializeBytesToStringList(byte[] a) {
+		try {
+			return deserializeBytesToString0(a);
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	private synchronized static List<String> deserializeBytesToString0(byte[] a) throws IOException {
+		ByteArrayInputStream i = new ByteArrayInputStream(a);
+		DataInputStream in = new DataInputStream(i);
+		int size = in.readInt();
+		if (size == -1)
+			return new ArrayList<String>();
+		List<String> sl = new ArrayList<String>();
+		for (int ai = 0; ai < size; ai++) {
+			byte[] ar = new byte[in.readInt()];
+			in.readFully(ar, 0, ar.length);
+			sl.add(new String(ar, GameHelper.UTF_8));
+		}
+		System.out.println(sl);
+		return sl;
 	}
 
 	public static byte[] serializeMapIntStringToBytes(Map<Integer, String> map) {
@@ -78,7 +162,7 @@ public class NetworkUtils {
 		}
 	}
 
-	public static NBTTagCompound readNBTTagCompoundFromBuffer0(ByteBuf buf) throws IOException {
+	private static NBTTagCompound readNBTTagCompoundFromBuffer0(ByteBuf buf) throws IOException {
 		int i = buf.readerIndex();
 		byte b0 = buf.readByte();
 

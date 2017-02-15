@@ -52,7 +52,5 @@ public class PacketPlayGHDynamicOpenGuiWithID implements IMessage {
 			});
 			return null;
 		}
-
 	}
-
 }

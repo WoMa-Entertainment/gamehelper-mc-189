@@ -25,6 +25,8 @@ import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.ChatComponentText;
@@ -36,8 +38,10 @@ import net.minecraft.util.MathHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.wfoas.gh.GameHelper;
+import net.wfoas.gh.network.NetworkUtils;
 import net.wfoas.gh.protected_blocks.IProtectedBlock;
 import net.wfoas.gh.protected_blocks.LockType;
+import net.wfoas.gh.proxies.ClientProxy;
 
 public class ProtectedFurnaceTileEntity extends TileEntityLockable
 		implements ITickable, ISidedInventory, IProtectedBlock {
@@ -509,5 +513,48 @@ public class ProtectedFurnaceTileEntity extends TileEntityLockable
 	@Override
 	public void setLockType(LockType l) {
 		getTileData().setByte("ProtectedFurnaceLockType", l.getId());
+	}
+
+	@Override
+	public void removeWhiteListedPlayer(UUID uid) {
+		if (!getTileData().hasKey("ProtectedFurnaceWhitelistedPlayers")) {
+			getTileData().setTag("ProtectedFurnaceWhitelistedPlayers", new NBTTagList());
+		}
+		NBTTagList list = (NBTTagList) getTileData().getTag("ProtectedFurnaceWhitelistedPlayers");
+		int remove = -1;
+		for (int i = 0; i < list.tagCount(); i++) {
+			NBTTagString s = (NBTTagString) list.get(i);
+			if (s.getString().equalsIgnoreCase(uid.toString())) {
+				remove = i;
+				break;
+			}
+		}
+		if (remove != -1)
+			list.removeTag(remove);
+		getTileData().setTag("ProtectedFurnaceWhitelistedPlayers", list);
+	}
+
+	@Override
+	public Packet getDescriptionPacket() {
+		return super.getDescriptionPacket();
+	}
+
+	@Override
+	public void onDataPacket(net.minecraft.network.NetworkManager net,
+			net.minecraft.network.play.server.S35PacketUpdateTileEntity pkt) {
+		NBTTagCompound nbttc = pkt.getNbtCompound();
+		this.getTileData().merge(nbttc.getCompoundTag("ForgeData"));
+		ClientProxy.onlinePlayers.clear();
+		ClientProxy.onlinePlayers.addAll(NetworkUtils.readStringList(nbttc.getTag("player_list")));
+	}
+
+	@Override
+	public Packet getCUDescrPacket() {
+		NBTTagCompound nbttagcompound = new NBTTagCompound();
+		this.writeToNBT(nbttagcompound);
+		NBTTagCompound cpy = (NBTTagCompound) nbttagcompound.copy();
+		cpy.setTag("player_list", NetworkUtils.writeStringList(
+				GameHelper.getUtils().convertPlayerListToStringList(GameHelper.getUtils().getOnlinePlayers())));
+		return new S35PacketUpdateTileEntity(this.pos, this.getBlockMetadata(), cpy);
 	}
 }

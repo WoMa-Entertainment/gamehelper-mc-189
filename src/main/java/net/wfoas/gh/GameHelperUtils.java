@@ -434,9 +434,7 @@ public class GameHelperUtils {
 	}
 
 	public boolean isHacker(EntityPlayerMP playerMP) {
-		return hackers_list.contains(playerMP); // Solved: Red TODO §m better
-												// solution or even better:
-												// working!
+		return hackers_list.contains(playerMP);
 	}
 
 	public void sendPluginMessage(Object mod, String channel, byte[] data, EntityPlayerMP ep) {

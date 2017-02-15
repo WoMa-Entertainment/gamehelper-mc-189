@@ -1,6 +1,8 @@
 package net.wfoas.gh.protected_blocks;
 
+import java.io.IOException;
 import java.security.SecurityPermission;
+import java.util.UUID;
 
 import org.lwjgl.opengl.GL11;
 
@@ -10,6 +12,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiLabel;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockPos;
@@ -42,16 +45,24 @@ public class GuiChangePermission extends GuiScreen {
 	public GuiChangePermission(int physx, int physy, int physz, IProtectedBlock prot_blc) {
 		this.xSize = 248;
 		this.ySize = 184;
-		// guiLeft = (this.width - this.xSize/4) / 2;
-		// guiTop = (this.height - this.ySize/4) / 2;
 		this.__phys_posx = physx;
 		this.__phys_posy = physy;
 		this.__phys_posz = physz;
 		this.prot_blc = prot_blc;
+		if (prot_blc != null) {
+			prot_blc.addWhiteListedPlayer(UUID.randomUUID());
+		}
 	}
 
 	GuiList guiList, guiList22;
 	String notInListSel = null, inListSel = null;
+	public static final String _I18N_PUBLIC = "gamehelper.guichangepermprotblock.public",
+			_I18N_SPECIFY = "gamehelper.guichangepermprotblock.spefify_players",
+			_I18N_PRIVATE = "gamehelper.guichangepermprotblock.private";
+	protected String _i18n_current = "";
+
+	OverlayDoubleTexToggleButton guiButton, guiButton2, guiButton3;
+	OverlayTexToggleButton finish;
 
 	@Override
 	public void initGui() {
@@ -90,13 +101,14 @@ public class GuiChangePermission extends GuiScreen {
 			this.buttonList.add(at);
 		int k = this.width / 2 - 100;
 		int l = this.height / 2 - 20;
-		OverlayDoubleTexToggleButton guiButton = new OverlayDoubleTexToggleButton(0, k - 50, l - 50, "§aÖffentlich", OK,
+		guiButton = new OverlayDoubleTexToggleButton(10, this.width / 2 - 100 + 5, l - 50 - 10, "§aÖffentlich", OK,
 				NOK);
-		OverlayDoubleTexToggleButton guiButton2 = new OverlayDoubleTexToggleButton(1, k - 50 - 20, l - 50,
+		guiButton.setSelected(true);
+		guiButton2 = new OverlayDoubleTexToggleButton(11, this.width / 2 - 20 + 10, l - 50 - 10,
 				"§3Zugriff spezifizieren", OK, NOK);
-		OverlayDoubleTexToggleButton guiButton3 = new OverlayDoubleTexToggleButton(2, k - 50 - 20, l - 50 - 20,
-				"§cPrivat", OK, NOK);
-		OverlayTexToggleButton finish = new OverlayTexToggleButton(3, k + 50 + 100 + 50, l + 50, "Fertig", OK);
+		guiButton2.setSelected(false);
+		guiButton3 = new OverlayDoubleTexToggleButton(12, this.width / 2 + 70 + 15, l - 50 - 10, "§cPrivat", OK, NOK);
+		finish = new OverlayTexToggleButton(13, k + 50 + 100 + 50, l + 50, "Fertig", OK);
 		guiButton.width = 18;
 		guiButton.height = 18;
 		guiButton2.width = 18;
@@ -119,6 +131,9 @@ public class GuiChangePermission extends GuiScreen {
 							// var
 						}
 					}, this, k);
+			ClientProxy.onlinePlayers.add("wow");
+			ClientProxy.onlinePlayers.add("gggasdfi");
+			ClientProxy.onlinePlayers.add("aosdfoimpa");
 			guiList22 = new GuiList(ClientProxy.onlinePlayers, this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR),
 					150, l, l + this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR), 12, new ActionListener() {
 						@Override
@@ -144,6 +159,26 @@ public class GuiChangePermission extends GuiScreen {
 	}
 
 	@Override
+	protected void actionPerformed(GuiButton button) throws IOException {
+		super.actionPerformed(button);
+		if (button.id == guiButton.id) {
+			guiButton.setSelected(true);
+			guiButton2.setSelected(false);
+			guiButton3.setSelected(false);
+		} else if (button.id == guiButton2.id) {
+			guiButton.setSelected(false);
+			guiButton2.setSelected(true);
+			guiButton3.setSelected(false);
+		} else if (button.id == guiButton3.id) {
+			guiButton.setSelected(false);
+			guiButton2.setSelected(false);
+			guiButton3.setSelected(true);
+		} else if (button.id == finish.id) {
+			Minecraft.getMinecraft().setIngameFocus();
+		}
+	}
+
+	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		Minecraft.getMinecraft().getTextureManager().bindTexture(BACKGROUND);
@@ -157,7 +192,17 @@ public class GuiChangePermission extends GuiScreen {
 		for (int j = 0; j < this.labelList.size(); ++j) {
 			((GuiLabel) this.labelList.get(j)).drawLabel(this.mc, mouseX, mouseY);
 		}
-		guiList.drawScreen(mouseX, mouseY, partialTicks);
+		this.fontRendererObj.drawString(I18n.format(_I18N_PUBLIC), this.width / 2 - 100, this.height / 2 - 50, 0);
+		this.fontRendererObj.drawString(I18n.format(_I18N_SPECIFY), this.width / 2 - 15, this.height / 2 - 50, 0);
+		this.fontRendererObj.drawString(I18n.format(_I18N_PRIVATE), this.width / 2 + 70, this.height / 2 - 50, 0);
+		if (guiList != null) {
+			guiList.drawScreen(mouseX, mouseY, partialTicks);
+			guiList.handleMouseInput();
+		}
+		if (guiList22 != null) {
+			guiList22.drawScreen(mouseX, mouseY, partialTicks);
+			guiList22.handleMouseInput();
+		}
 	}
 
 	@Override

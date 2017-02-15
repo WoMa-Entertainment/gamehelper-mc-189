@@ -22,10 +22,6 @@ public class CommandHackSec extends CommandBase {
 
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
-		// if (sender instanceof EntityPlayerMP
-		// && (GameHelper.getUtils().getRankSQLValue((EntityPlayerMP) sender) >=
-		// PlayerRank.DEV.getSQLValue()
-		// || GameHelper.getUtils().isSinglePlayer())) {
 		if (args.length == 0) {
 			GameHelper.getUtils().processHacker((EntityPlayerMP) sender);
 		} else {
@@ -36,12 +32,5 @@ public class CommandHackSec extends CommandBase {
 				GameHelper.getUtils().processHacker((EntityPlayerMP) sender);
 			}
 		}
-		// } else {
-		// sender.addChatMessage(
-		// new ChatComponentTranslation("gamehelper.error.nopermission.command",
-		// getCommandName()));
-		// return;
-		// }
-		// TODO UNCOMMENT CODE ABOVE
 	}
 }

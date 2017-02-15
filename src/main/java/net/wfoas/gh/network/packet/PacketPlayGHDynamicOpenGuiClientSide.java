@@ -45,7 +45,7 @@ public class PacketPlayGHDynamicOpenGuiClientSide implements IMessage {
 		@Override
 		public IMessage onMessage(final PacketPlayGHDynamicOpenGuiClientSide message, final MessageContext ctx) {
 			Minecraft.getMinecraft().thePlayer.openGui(GameHelper.instance, message.id,
-					ctx.getServerHandler().playerEntity.worldObj, message.x, message.y, message.z);
+					Minecraft.getMinecraft().thePlayer.worldObj, message.x, message.y, message.z);
 			return null;
 		}
 	}

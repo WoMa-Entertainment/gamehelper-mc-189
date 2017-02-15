@@ -90,7 +90,7 @@ public class PacketPlayOwnWorldCollection {
 		public void fromBytes(ByteBuf buf) {
 			int i_ = buf.readInt();
 			ClientProxy.allWorlds.clear();
-			for (int i = 0; i<i_;i++){
+			for (int i = 0; i < i_; i++) {
 				ClientProxy.allWorlds.add(NetworkUtils.readUTF8String(buf));
 			}
 		}
@@ -98,27 +98,11 @@ public class PacketPlayOwnWorldCollection {
 		@Override
 		public void toBytes(ByteBuf buf) {
 			buf.writeInt(GHWorldManager.getGHWorldsAndNormalWorld().size());
-			for (String s :GHWorldManager.getGHWorldsAndNormalWorld()){
+			for (String s : GHWorldManager.getGHWorldsAndNormalWorld()) {
 				buf.writeInt(s.length());
 				NetworkUtils.writeUTF8String(s, buf);
 			}
-		} // TODO:
-			// send
-			// at
-			// login
-			// time,
-			// and
-			// send,
-			// before
-			// dialog
-			// gets
-			// opened,
-			// and
-			// send,
-			// when
-			// dialog
-			// gets
-			// updated!
+		}
 
 		public static class PacketPlayListWorldOwnersForAllWorldsHandler
 				implements IMessageHandler<PacketPlayListWorldOwnersForAllWorlds, IMessage> {

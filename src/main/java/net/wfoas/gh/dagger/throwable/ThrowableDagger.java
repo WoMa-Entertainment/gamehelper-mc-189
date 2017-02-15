@@ -1,5 +1,7 @@
 package net.wfoas.gh.dagger.throwable;
 
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.EnumCreatureAttribute;
@@ -77,11 +79,24 @@ public class ThrowableDagger extends EntityThrowable {
 		}
 	}
 
+	public static final int THROWN_MODIFIER = 1;
+
 	@Override
 	protected void onImpact(MovingObjectPosition p_70184_1_) {
 		if (p_70184_1_.entityHit != null) {
-			p_70184_1_.entityHit.attackEntityFrom(new DamageSourceDagger(getThrower(), this),
-					ItemDagger.getDamageIron());
+			p_70184_1_.entityHit
+					.attackEntityFrom(
+							new DamageSourceDagger(getThrower(),
+									this),
+							ItemDagger.getDamageIron()
+									+ Enchantment.sharpness
+											.calcDamageByCreature(
+													EnchantmentHelper
+															.getEnchantmentLevel(Enchantment.sharpness.effectId,
+																	ItemStack.loadItemStackFromNBT(this.getEntityData()
+																			.getCompoundTag("itm_pl_stc"))),
+													EnumCreatureAttribute.UNDEFINED)
+									+ THROWN_MODIFIER);
 		}
 
 		for (int i = 0; i < 8; ++i) {

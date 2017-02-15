@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.Packet;
 import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 
@@ -27,7 +28,7 @@ public class ProtectedBlockWrapper implements IProtectedBlock {
 
 	@Override
 	public void addWhiteListedPlayer(UUID uid) {
-
+		System.out.println(nbt_prot_data);
 	}
 
 	@Override
@@ -58,6 +59,16 @@ public class ProtectedBlockWrapper implements IProtectedBlock {
 	@Override
 	public void setLockType(LockType l) {
 
+	}
+
+	@Override
+	public void removeWhiteListedPlayer(UUID uid) {
+
+	}
+
+	@Override
+	public Packet getCUDescrPacket() {
+		return null;
 	}
 
 }

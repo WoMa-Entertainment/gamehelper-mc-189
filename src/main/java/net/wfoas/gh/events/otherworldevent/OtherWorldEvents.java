@@ -27,7 +27,7 @@ import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.world.utils.WorldPermission;
 import net.wfoas.gh.world.utils.WorldPermissionsManager;
 
-public class OtherWorldEvents {// TODO braucht überarbeitung
+public class OtherWorldEvents {
 
 	@SubscribeEvent
 	public void blockDestroyed(BreakEvent event) {

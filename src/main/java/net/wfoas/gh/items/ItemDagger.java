@@ -31,10 +31,6 @@ public class ItemDagger extends Item {
 		this.attackDamage = 4.0F + material.getDamageVsEntity() - 0.5f;
 	}
 
-	// public float getDamageVsEntity() {
-	// return this.material.getDamageVsEntity() - 0.5f;
-	// }
-
 	public static float getDamageIron() {
 		return 4f + ToolMaterial.IRON.getDamageVsEntity() - 0.5f;
 	}
@@ -96,9 +92,6 @@ public class ItemDagger extends Item {
 
 		if (!worldIn.isRemote) {
 			ThrowableDagger d = new ThrowableDagger(worldIn, playerIn);
-			// d.setPositionAndRotation(d.posX, d.posY, d.posZ, d.rotationYaw +=
-			// 90, d.rotationPitch);
-			// GlStateManager.rotate(135, 0, 0, 1);// -45 + 180
 			System.out.println(playerIn.rotationYaw + "y:p" + playerIn.rotationPitch + "[]][");
 			d.setPlayersYawPitch(-playerIn.rotationYaw, -playerIn.rotationPitch);
 			d.saveItemStackToEntityData(ItemStack.copyItemStack(retis));
@@ -132,8 +125,8 @@ public class ItemDagger extends Item {
 	}
 
 	@Override
-	public Multimap getItemAttributeModifiers() {
-		Multimap multimap = super.getItemAttributeModifiers();
+	public Multimap<String, AttributeModifier> getAttributeModifiers(ItemStack stack) {
+		Multimap multimap = super.getAttributeModifiers(stack);
 		multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),
 				new AttributeModifier(itemModifierUUID, "Weapon modifier", this.attackDamage, 0));
 		return multimap;

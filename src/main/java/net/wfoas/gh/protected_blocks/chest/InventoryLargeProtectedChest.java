@@ -8,6 +8,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.Packet;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
@@ -159,43 +160,74 @@ public class InventoryLargeProtectedChest implements ILockableContainer, IProtec
 		this.lowerChest.clear();
 	}
 
+	private boolean invlpt(ILockableContainer i) {
+		return i instanceof InventoryLargeProtectedChest;
+	}
+
+	private boolean sprotch(ILockableContainer i) {
+		return i instanceof ProtectedChestTileEntity;
+	}
+
+	private boolean isIProtectedBlock(ILockableContainer i) {
+		return i instanceof IProtectedBlock;
+	}
+
+	private IProtectedBlock protB(ILockableContainer i) {
+		return (IProtectedBlock) i;
+	}
+
 	@Override
 	public UUID getOwner() {
-		return null;
+		return isIProtectedBlock(upperChest) ? protB(upperChest).getOwner() : null;
 	}
 
 	@Override
 	public void setOwner(UUID u) {
-
+		protB(upperChest).setOwner(u);
+		protB(lowerChest).setOwner(u);
 	}
 
 	@Override
 	public boolean isPlayerCapableOfOpeningBlock(EntityPlayer ep) {
-		return false;
+		return protB(lowerChest).isPlayerCapableOfOpeningBlock(ep)
+				|| protB(upperChest).isPlayerCapableOfOpeningBlock(ep);
 	}
 
 	@Override
 	public boolean isOwner(EntityPlayer ep) {
-		return false;
+		return protB(upperChest).isOwner(ep) && protB(lowerChest).isOwner(ep);
 	}
 
 	@Override
 	public LockType getLockType() {
-		return null;
+		return protB(upperChest).getLockType();
 	}
 
 	@Override
 	public List<String> getWhitelistedPlayers() {
-		return null;
+		return protB(upperChest).getWhitelistedPlayers();
 	}
 
 	@Override
 	public void addWhiteListedPlayer(UUID uid) {
-
+		protB(upperChest).addWhiteListedPlayer(uid);
+		protB(lowerChest).addWhiteListedPlayer(uid);
 	}
 
 	@Override
 	public void setLockType(LockType l) {
+		protB(upperChest).setLockType(l);
+		protB(lowerChest).setLockType(l);
+	}
 
+	@Override
+	public void removeWhiteListedPlayer(UUID uid) {
+		protB(upperChest).removeWhiteListedPlayer(uid);
+		protB(lowerChest).removeWhiteListedPlayer(uid);
+	}
+
+	@Override
+	public Packet getCUDescrPacket() {
+		return null;
 	}
 }
