@@ -35,6 +35,18 @@ import net.wfoas.gh.unchant.UnchantmentTable;
 import net.wfoas.gh.worlddimensionsutils.DimensionBlock;
 
 public class GameHelperCoreModule {
+	public static GameHelperModBlock Purewhite;
+	public static GameHelperModBlock Pureviolet;
+	public static GameHelperModBlock Pureturquoise;
+	public static GameHelperModBlock Pureblack;
+	public static GameHelperModBlock Purered;
+	public static GameHelperModBlock Purerose;
+	public static GameHelperModBlock Pureorange;
+	public static GameHelperModBlock Puremagenta;
+	public static GameHelperModBlock Puregreen;
+	public static GameHelperModBlock Puregray;
+	public static GameHelperModBlock Purelightblue;
+	public static GameHelperModBlock Pureyellow;
 	public static GameHelperModBlock Purelightgreen;
 	public static GameHelperModBlock Purelightgray;
 	public static GameHelperModBlock Purebrown;
@@ -179,6 +191,18 @@ public class GameHelperCoreModule {
 		Purebrown.updateInitEvent(TAB_GAMEHELPER);
 		Purelightgray.updateInitEvent(TAB_GAMEHELPER);
 		Purelightgreen.updateInitEvent(TAB_GAMEHELPER);
+		Pureyellow.updateInitEvent(TAB_GAMEHELPER);
+		Purelightblue.updateInitEvent(TAB_GAMEHELPER);
+		Puregray.updateInitEvent(TAB_GAMEHELPER);
+		Puregreen.updateInitEvent(TAB_GAMEHELPER);
+		Puremagenta.updateInitEvent(TAB_GAMEHELPER);
+		Pureorange.updateInitEvent(TAB_GAMEHELPER);
+		Purerose.updateInitEvent(TAB_GAMEHELPER);
+		Purered.updateInitEvent(TAB_GAMEHELPER);
+		Pureblack.updateInitEvent(TAB_GAMEHELPER);
+		Pureturquoise.updateInitEvent(TAB_GAMEHELPER);
+		Pureviolet.updateInitEvent(TAB_GAMEHELPER);
+		Purewhite.updateInitEvent(TAB_GAMEHELPER);
 		SEL_2.updateInitEvent(TAB_GAMEHELPER);
 	}
 
