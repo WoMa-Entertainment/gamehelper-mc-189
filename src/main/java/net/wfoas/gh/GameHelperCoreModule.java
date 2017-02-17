@@ -35,6 +35,7 @@ import net.wfoas.gh.unchant.UnchantmentTable;
 import net.wfoas.gh.worlddimensionsutils.DimensionBlock;
 
 public class GameHelperCoreModule {
+	public static GameHelperModBlock No_texture_block;
 	public static GameHelperModBlock Purewhite;
 	public static GameHelperModBlock Pureviolet;
 	public static GameHelperModBlock Pureturquoise;
@@ -203,6 +204,7 @@ public class GameHelperCoreModule {
 		Pureturquoise.updateInitEvent(TAB_GAMEHELPER);
 		Pureviolet.updateInitEvent(TAB_GAMEHELPER);
 		Purewhite.updateInitEvent(TAB_GAMEHELPER);
+		No_texture_block.updateInitEvent(TAB_GAMEHELPER);
 		SEL_2.updateInitEvent(TAB_GAMEHELPER);
 	}
 

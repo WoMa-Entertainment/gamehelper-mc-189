@@ -31,6 +31,7 @@ import net.wfoas.gh.bigsword.BigswordItem;
 import net.wfoas.gh.blocks.AmethystBlock;
 import net.wfoas.gh.blocks.AmethystOre;
 import net.wfoas.gh.blocks.GameHelperModBlock;
+import net.wfoas.gh.blocks.No_texture_block;
 import net.wfoas.gh.blocks.Pureblack;
 import net.wfoas.gh.blocks.Pureblue;
 import net.wfoas.gh.blocks.Purebrown;
@@ -275,6 +276,7 @@ public class CommonProxy {
 		GameHelperCoreModule.Pureturquoise = new Pureturquoise();
 		GameHelperCoreModule.Pureviolet = new Pureviolet();
 		GameHelperCoreModule.Purewhite = new Purewhite();
+		GameHelperCoreModule.No_texture_block = new No_texture_block();
 		GameHelperCoreModule.SEL_2 = new SelectionTool2();
 	}
 
