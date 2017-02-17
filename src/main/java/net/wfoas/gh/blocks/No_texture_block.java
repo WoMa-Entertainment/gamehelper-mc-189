@@ -9,4 +9,5 @@ public class No_texture_block extends GameHelperModBlock {
 		this.setHarvestLevel("pickaxe", 3);
 		this.setHardness(3f);
 		this.setStepSound(Block.soundTypeStone);
-}}
+	}
+}
