@@ -3,6 +3,7 @@ package net.wfoas.gh;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.winston.develop.debug.CommandDbgScreenshotFolder;
 import de.winston.network.playerranks.PlayerRanksCommand;
 import net.minecraft.command.CommandBase;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
@@ -64,6 +65,7 @@ public class GameHelperServer {
 		registerSingleCommand(new CommandExportStruct(), fmlsse);
 		registerSingleCommand(new CommandNoclip(), fmlsse);
 		registerSingleCommand(new CommandToggleNotify(), fmlsse);
+		registerSingleCommand(new CommandDbgScreenshotFolder(), fmlsse);
 	}
 
 	public static void registerSingleCommand(CommandBase cb, FMLServerStartingEvent fmlsse) {
