@@ -38,7 +38,7 @@ public class GameHelperCoreModule {
 	public static GameHelperModBlock No_texture_block;
 	public static GameHelperModBlock Purewhite;
 	public static GameHelperModBlock Purepurple;
-	public static GameHelperModBlock Pureturquoise;
+	public static GameHelperModBlock Purecyan;
 	public static GameHelperModBlock Pureblack;
 	public static GameHelperModBlock Purered;
 	public static GameHelperModBlock Purepink;
@@ -201,7 +201,7 @@ public class GameHelperCoreModule {
 		Purepink.updateInitEvent(TAB_GAMEHELPER);
 		Purered.updateInitEvent(TAB_GAMEHELPER);
 		Pureblack.updateInitEvent(TAB_GAMEHELPER);
-		Pureturquoise.updateInitEvent(TAB_GAMEHELPER);
+		Purecyan.updateInitEvent(TAB_GAMEHELPER);
 		Purepurple.updateInitEvent(TAB_GAMEHELPER);
 		Purewhite.updateInitEvent(TAB_GAMEHELPER);
 		No_texture_block.updateInitEvent(TAB_GAMEHELPER);
