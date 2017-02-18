@@ -23,6 +23,6 @@ public class CommandDbgScreenshotFolder extends CommandBase {
 	@Override
 	public void processCommand(ICommandSender sender, String[] args) throws CommandException {
 		sender.addChatMessage(
-				new ChatComponentText((new File(Minecraft.getMinecraft().mcDataDir, "screenshots")).toString()));
+				new ChatComponentText((new File(Minecraft.getMinecraft().mcDataDir, "screenshots")).getAbsolutePath()));
 	}
 }
