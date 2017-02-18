@@ -36,6 +36,7 @@ public class ProtectedBlockTabManipulateBlock extends AbstractHintedSurvivalTab 
 
 	@Override
 	public void onTabClicked() {
+		System.out.println("GUI:" + gui_prot_id + "X:" + phys_x + "Y:" + phys_y + "Z:" + phys_z);
 		NetworkHandler.sendToServer(new PacketPlayGHDynamicOpenGuiWithID(gui_prot_id, phys_x, phys_y, phys_z));
 	}
 

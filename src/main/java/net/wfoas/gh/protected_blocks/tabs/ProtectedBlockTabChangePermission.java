@@ -35,14 +35,8 @@ public class ProtectedBlockTabChangePermission extends AbstractHintedSurvivalTab
 
 	@Override
 	public void onTabClicked() {
-		// NetworkHandler.sendToServer(new
-		// PacketPlayGHDynamicOpenGuiWithID(GuiHandler.PROTECTED_GUI_CHANGE_PERMISSIONS,
-		// phys_x, phys_y, phys_z));
 		NetworkHandler.sendToServer(new PacketPlayBacktraceOpenGuiClientSide(
 				GuiHandler.PROTECTED_GUI_CHANGE_PERMISSIONS, phys_x, phys_y, phys_z));
-		// Minecraft.getMinecraft().thePlayer.openGui(GameHelper.instance,
-		// GuiHandler.PROTECTED_GUI_CHANGE_PERMISSIONS,
-		// Minecraft.getMinecraft().thePlayer.worldObj, phys_x, phys_y, phys_z);
 	}
 
 	@Override

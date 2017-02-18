@@ -27,6 +27,7 @@ public final class ProtectedBlocksRegistry {
 
 	public static int getID(Block b) {
 		for (Map.Entry<Integer, Block> val : protectedBlocksMap.entrySet()) {
+			System.out.println(val.getKey() + "" + val.getValue());
 			if (val.getValue().equals(b))
 				return val.getKey().intValue();
 		}

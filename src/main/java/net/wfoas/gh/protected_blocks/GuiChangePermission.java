@@ -69,7 +69,7 @@ public class GuiChangePermission extends GuiScreen {
 		super.initGui();
 		this.guiLeft = (this.width - this.xSize) / 2;
 		this.guiTop = (this.height - this.ySize) / 2;
-		AbstractTab ab;
+		AbstractTab ab; // TODO id-system for protected blocks and gui
 		try {
 			ab = new ProtectedBlockTabManipulateBlock(0, 0, 0, __phys_posx, __phys_posy, __phys_posz,
 					Item.getItemFromBlock(Minecraft.getMinecraft().theWorld
