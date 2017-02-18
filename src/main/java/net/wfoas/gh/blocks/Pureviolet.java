@@ -5,8 +5,9 @@ import net.minecraft.block.material.Material;
 
 public class Pureviolet extends GameHelperModBlock {
 	public Pureviolet() {
-		super(Material.rock, "Purviolet");
+		super(Material.rock, "Pureviolet");
 		this.setHarvestLevel("pickaxe", 3);
 		this.setHardness(2f);
 		this.setStepSound(Block.soundTypeStone);
-}}
+	}
+}
