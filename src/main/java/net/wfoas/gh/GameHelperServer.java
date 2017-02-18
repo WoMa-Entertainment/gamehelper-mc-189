@@ -65,7 +65,7 @@ public class GameHelperServer {
 		registerSingleCommand(new CommandExportStruct(), fmlsse);
 		registerSingleCommand(new CommandNoclip(), fmlsse);
 		registerSingleCommand(new CommandToggleNotify(), fmlsse);
-		registerSingleCommand(new CommandDbgScreenshotFolder(), fmlsse);
+		registerSingleCommand(new CommandDbgScreenshotFolder(), fmlsse); // DEBUG
 	}
 
 	public static void registerSingleCommand(CommandBase cb, FMLServerStartingEvent fmlsse) {

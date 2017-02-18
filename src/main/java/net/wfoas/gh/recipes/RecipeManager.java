@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.wfoas.gh.GameHelperCoreModule;
+import net.wfoas.gh.blocks.GameHelperModBlock;
 import net.wfoas.gh.flowers.Flowers;
 import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntityBlock;
 import net.wfoas.gh.GameHelperCoreModule;
@@ -113,5 +114,27 @@ public class RecipeManager {
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.dye, 1, EnumDyeColor.PINK.getDyeDamage()),
 				Flowers.Paeonia_suffruticosa);
 		GameRegistry.addShapelessRecipe(new ItemStack(Items.dye, 1, EnumDyeColor.RED.getDyeDamage()), Flowers.Rose);
+		addPureBlockRec(GameHelperCoreModule.Purewhite, 0);
+		addPureBlockRec(GameHelperCoreModule.Pureorange, 1);
+		addPureBlockRec(GameHelperCoreModule.Puremagenta, 2);
+		addPureBlockRec(GameHelperCoreModule.Purelightblue, 3);
+		addPureBlockRec(GameHelperCoreModule.Pureyellow, 4);
+		addPureBlockRec(GameHelperCoreModule.Purelime, 5);
+		addPureBlockRec(GameHelperCoreModule.Purepink, 6);
+		addPureBlockRec(GameHelperCoreModule.Puregray, 7);
+		addPureBlockRec(GameHelperCoreModule.Purelightgray, 8);
+		addPureBlockRec(GameHelperCoreModule.Purecyan, 9);
+		addPureBlockRec(GameHelperCoreModule.Purepurple, 10);
+		addPureBlockRec(GameHelperCoreModule.Pureblue, 11);
+		addPureBlockRec(GameHelperCoreModule.Purebrown, 12);
+		addPureBlockRec(GameHelperCoreModule.Puregreen, 13);
+		addPureBlockRec(GameHelperCoreModule.Purered, 14);
+		addPureBlockRec(GameHelperCoreModule.Pureblack, 15);
+	}
+
+	protected static void addPureBlockRec(GameHelperModBlock b, int meta) {
+		GameRegistry.addShapelessRecipe(new ItemStack(b), new ItemStack(Blocks.wool, 1, meta),
+				new ItemStack(Blocks.wool, 1, meta), new ItemStack(Blocks.stained_hardened_clay, 1, meta),
+				new ItemStack(Blocks.stained_hardened_clay, 1, meta));
 	}
 }
