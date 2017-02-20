@@ -11,6 +11,6 @@ public class ArrowSkullRecipes {
 		GameRegistry.addShapedRecipe(Mobhead.BONUS_ARROW_DOWN, "WWW", " W ", 'W', Blocks.planks);
 		GameRegistry.addShapedRecipe(Mobhead.BONUS_ARROW_UP, " W ", "WWW", 'W', Blocks.planks);
 		GameRegistry.addShapedRecipe(Mobhead.BONUS_QUESTION, "WW ", " W ", " WW", 'W', Blocks.planks);
-		GameRegistry.addShapedRecipe(Mobhead.BONUS_ARROW_UP, "WWW", "WWW", " W ", 'W', Blocks.planks);
+		GameRegistry.addShapedRecipe(Mobhead.BONUS_EXCLAMATION, "WWW", "WWW", " W ", 'W', Blocks.planks);
 	}
 }

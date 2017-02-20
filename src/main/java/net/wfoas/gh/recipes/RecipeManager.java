@@ -1,5 +1,6 @@
 package net.wfoas.gh.recipes;
 
+import net.minecraft.block.BlockSkull;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumDyeColor;
@@ -10,12 +11,13 @@ import net.wfoas.gh.GameHelperCoreModule;
 import net.wfoas.gh.blocks.GameHelperModBlock;
 import net.wfoas.gh.flowers.Flowers;
 import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntityBlock;
+import net.wfoas.gh.protected_blocks.furnace.ProtectedFurnaceBlock;
 import net.wfoas.gh.GameHelperCoreModule;
 
 public class RecipeManager {
 	public static void addAll() {
-		ArrowSkullRecipes.addAll();
 		// plugin start
+		ArrowSkullRecipes.addAll();
 		GameRegistry.addShapedRecipe(new ItemStack(Items.name_tag), "pp ", "ps ", "  f", 'p', Items.paper, 's',
 				Items.slime_ball, 'f', Items.string);
 		GameRegistry.addShapedRecipe(new ItemStack(Blocks.command_block), "igi", "drd", "igi", 'i', Blocks.iron_block,
@@ -33,7 +35,8 @@ public class RecipeManager {
 				Items.compass, Items.ender_eye);
 		GameRegistry.addShapedRecipe(new ItemStack((ProtectedChestTileEntityBlock) GameHelperCoreModule.SEC_CHEST),
 				" I ", "ICI", "III", 'I', Items.iron_ingot, 'C', Blocks.chest);
-		// saved furnace
+		GameRegistry.addShapedRecipe(new ItemStack((ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE), " I ",
+				"IFI", "III", 'I', Items.iron_ingot, 'F', Blocks.furnace);
 		// saved brewingstand
 		// saved hopper
 		// portable workbench | + item
