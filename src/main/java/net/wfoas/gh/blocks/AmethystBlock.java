@@ -11,5 +11,4 @@ public class AmethystBlock extends GameHelperModBlock {
 		this.setHardness(4.5f);
 		this.setStepSound(Block.soundTypeStone);
 	}
-
 }
