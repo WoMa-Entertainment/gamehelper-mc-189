@@ -35,6 +35,19 @@ import net.wfoas.gh.unchant.UnchantmentTable;
 import net.wfoas.gh.worlddimensionsutils.DimensionBlock;
 
 public class GameHelperCoreModule {
+	public static GameHelperModBlock Tilemagenta;
+	public static GameHelperModBlock Tilecyan;
+	public static GameHelperModBlock Tilepink;
+	public static GameHelperModBlock Tilepurple;
+	public static GameHelperModBlock Tilegreen;
+	public static GameHelperModBlock Tilegray;
+	public static GameHelperModBlock Tileorange;
+	public static GameHelperModBlock Tileyellow;
+	public static GameHelperModBlock Tilebrown;
+	public static GameHelperModBlock Tilered;
+	public static GameHelperModBlock Tileblack;
+	public static GameHelperModBlock Tilewhite;
+	public static GameHelperModBlock Tileblue;
 	public static GameHelperModBlock No_texture_block;
 	public static GameHelperModBlock Purewhite;
 	public static GameHelperModBlock Purepurple;
@@ -205,6 +218,19 @@ public class GameHelperCoreModule {
 		Purepurple.updateInitEvent(TAB_GAMEHELPER);
 		Purewhite.updateInitEvent(TAB_GAMEHELPER);
 		No_texture_block.updateInitEvent(TAB_GAMEHELPER);
+		Tileblue.updateInitEvent(TAB_GAMEHELPER);
+		Tilewhite.updateInitEvent(TAB_GAMEHELPER);
+		Tileblack.updateInitEvent(TAB_GAMEHELPER);
+		Tilered.updateInitEvent(TAB_GAMEHELPER);
+		Tilebrown.updateInitEvent(TAB_GAMEHELPER);
+		Tileyellow.updateInitEvent(TAB_GAMEHELPER);
+		Tileorange.updateInitEvent(TAB_GAMEHELPER);
+		Tilegray.updateInitEvent(TAB_GAMEHELPER);
+		Tilegreen.updateInitEvent(TAB_GAMEHELPER);
+		Tilepurple.updateInitEvent(TAB_GAMEHELPER);
+		Tilepink.updateInitEvent(TAB_GAMEHELPER);
+		Tilecyan.updateInitEvent(TAB_GAMEHELPER);
+		Tilemagenta.updateInitEvent(TAB_GAMEHELPER);
 		SEL_2.updateInitEvent(TAB_GAMEHELPER);
 	}
 
