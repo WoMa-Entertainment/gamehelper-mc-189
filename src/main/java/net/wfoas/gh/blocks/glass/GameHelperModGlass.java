@@ -52,15 +52,12 @@ public class GameHelperModGlass extends BlockBreakable implements GHModItemUpdat
 	public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side) {
 		IBlockState iblockstate = worldIn.getBlockState(pos);
 		Block block = iblockstate.getBlock();
-
 		if (worldIn.getBlockState(pos.offset(side.getOpposite())) != iblockstate) {
 			return true;
 		}
-
 		if (block == this) {
 			return false;
 		}
-
 		return super.shouldSideBeRendered(worldIn, pos, side);
 	}
 
@@ -70,7 +67,7 @@ public class GameHelperModGlass extends BlockBreakable implements GHModItemUpdat
 
 	@SideOnly(Side.CLIENT)
 	public EnumWorldBlockLayer getBlockLayer() {
-		return EnumWorldBlockLayer.CUTOUT;
+		return EnumWorldBlockLayer.TRANSLUCENT;
 	}
 
 	public boolean isFullCube() {

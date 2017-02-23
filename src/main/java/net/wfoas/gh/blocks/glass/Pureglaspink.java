@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.wfoas.gh.blocks.GameHelperModBlock;
 
-public class Pureglaspink extends GameHelperModBlock {
+public class Pureglaspink extends GameHelperModGlass {
 	public Pureglaspink() {
 		super(Material.glass, "Pureglaspink");
 		this.setHarvestLevel("pickaxe", 3);

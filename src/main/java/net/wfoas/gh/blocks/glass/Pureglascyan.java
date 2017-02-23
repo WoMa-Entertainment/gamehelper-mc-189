@@ -4,7 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.wfoas.gh.blocks.GameHelperModBlock;
 
-public class Pureglascyan extends GameHelperModBlock {
+public class Pureglascyan extends GameHelperModGlass {
 	public Pureglascyan() {
 		super(Material.glass, "Pureglascyan");
 		this.setHarvestLevel("pickaxe", 3);
