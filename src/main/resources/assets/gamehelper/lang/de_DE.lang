@@ -365,3 +365,5 @@ item.gamehelper.thermal_helmet.name=Thermalhelm
 item.gamehelper.thermal_chestplate.name=Thermalbrustplatte
 item.gamehelper.thermal_leggings.name=Thermalhose
 item.gamehelper.thermal_boots.name=Thermalschuhe
+tile.gamehelper.Neonglaslime.name=Hellgrünes Neonglas
+tile.gamehelper.Neonglaslightblue.name=Hellblaues Neonglas
