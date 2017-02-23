@@ -63,6 +63,8 @@ public class GameHelperCoreModule {
 	public static GameHelperModGlass Neonglascyan;
 	public static GameHelperModGlass Neonglasbrown;
 	public static GameHelperModGlass Neonglasblue;
+	public static GameHelperModGlass Neonglaslightblue;
+	public static GameHelperModGlass Neonglaslime;
 	public static GameHelperModGlass Neonglas;
 	public static GameHelperModBlock No_texture_block;
 	public static GameHelperModGlass Pureglas;
@@ -281,6 +283,8 @@ public class GameHelperCoreModule {
 		Neonglascyan.updateInitEvent(TAB_GAMEHELPER);
 		Neonglasbrown.updateInitEvent(TAB_GAMEHELPER);
 		Neonglasblue.updateInitEvent(TAB_GAMEHELPER);
+		Neonglaslightblue.updateInitEvent(TAB_GAMEHELPER);
+		Neonglaslime.updateInitEvent(TAB_GAMEHELPER);
 		Neonglas.updateInitEvent(TAB_GAMEHELPER);
 		No_texture_block.updateInitEvent(TAB_GAMEHELPER);
 		Tileblue.updateInitEvent(TAB_GAMEHELPER);

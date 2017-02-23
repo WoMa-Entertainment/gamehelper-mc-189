@@ -72,6 +72,8 @@ import net.wfoas.gh.blocks.glass.Neonglasbrown;
 import net.wfoas.gh.blocks.glass.Neonglascyan;
 import net.wfoas.gh.blocks.glass.Neonglasgray;
 import net.wfoas.gh.blocks.glass.Neonglasgreen;
+import net.wfoas.gh.blocks.glass.Neonglaslightblue;
+import net.wfoas.gh.blocks.glass.Neonglaslime;
 import net.wfoas.gh.blocks.glass.Neonglasmagenta;
 import net.wfoas.gh.blocks.glass.Neonglasorange;
 import net.wfoas.gh.blocks.glass.Neonglaspink;
@@ -354,6 +356,8 @@ public class CommonProxy {
 		GameHelperCoreModule.Neonglascyan = new Neonglascyan();
 		GameHelperCoreModule.Neonglasbrown = new Neonglasbrown();
 		GameHelperCoreModule.Neonglasblue = new Neonglasblue();
+		GameHelperCoreModule.Neonglaslightblue = new Neonglaslightblue();
+		GameHelperCoreModule.Neonglaslime = new Neonglaslime();
 		GameHelperCoreModule.Neonglas = new Neonglas();
 		GameHelperCoreModule.No_texture_block = new No_texture_block();
 		GameHelperCoreModule.Tileblue = new Tileblue();
