@@ -41,14 +41,8 @@ import net.wfoas.gh.world.permissions.WorldPermissions;
 public class GHWorldManager {
 	protected static Map<String, GHWorld> worlds = new HashMap<String, GHWorld>();
 	protected static Map<Integer, GHWorld> worldsByDim = new HashMap<Integer, GHWorld>();
-	// protected static Map<String, Integer> worldProviderClasses = new
-	// HashMap<String, Integer>();
 	protected static Map<String, WorldType> worldTypes = new HashMap<String, WorldType>();
 	protected static Map<String, GHWorld> loadedWorlds = new HashMap<String, GHWorld>();
-	// protected static ArrayList<WorldServer> worldsToDelete = new
-	// ArrayList<WorldServer>();
-	// protected static ArrayList<WorldServer> worldsToRemove = new
-	// ArrayList<WorldServer>();
 
 	public static List<String> appendices;
 
@@ -74,13 +68,9 @@ public class GHWorldManager {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("WP");
 		WorldPermissions.load();
-		System.out.println("Wo");
 		WorldOwners.load();
-		System.out.println("PNUUID");
 		PlayerNameUUID.load();
-		System.out.println("END");
 	}
 
 	public static List<String> getWorlds() {
@@ -99,7 +89,7 @@ public class GHWorldManager {
 	public static boolean existsAndIsNonGHWorld(String s) {
 		return DimensionManager.getWorld(0).getWorldInfo().getWorldName().equalsIgnoreCase(s);
 	}
-	
+
 	volatile static String WORLD_DEFAULT_NAME;
 
 	private static void serverStart0() throws IOException {
@@ -204,8 +194,8 @@ public class GHWorldManager {
 	}
 
 	public static boolean exists(GHWorld world) {
-		return worlds.containsKey(world.getName())
-				|| MinecraftServer.getServer().getEntityWorld().getWorldInfo().getWorldName().equalsIgnoreCase(world.name);
+		return worlds.containsKey(world.getName()) || MinecraftServer.getServer().getEntityWorld().getWorldInfo()
+				.getWorldName().equalsIgnoreCase(world.name);
 	}
 
 	public static boolean isWorldAlreadyCreated(GHWorld world) {

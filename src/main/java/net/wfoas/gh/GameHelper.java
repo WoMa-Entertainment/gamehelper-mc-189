@@ -125,7 +125,6 @@ public class GameHelper {
 	public void postInit(FMLPostInitializationEvent event) {
 		proxy.postInit(event, this);
 		GHWorldManager.loadWorldTypes();
-		//System.out.println("Thread: " + Thread.currentThread().getName());
 	}
 
 	public static GHScheduler getScheduler() {

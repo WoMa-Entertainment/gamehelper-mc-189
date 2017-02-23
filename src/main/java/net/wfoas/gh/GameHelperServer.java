@@ -23,6 +23,7 @@ import net.wfoas.gh.commands.CommandToggleNotify;
 import net.wfoas.gh.commands.CommandTpx;
 import net.wfoas.gh.commands.CommandTpxp;
 import net.wfoas.gh.commands.CommandViewPerm;
+import net.wfoas.gh.commands.CommandWKick;
 import net.wfoas.gh.multipleworlds.storage.GHWorldManager;
 import net.wfoas.gh.network.securedlogin.timeout.PlayerLoginTimeOut;
 import net.wfoas.gh.notifysettings.NotifyTable;
@@ -66,6 +67,7 @@ public class GameHelperServer {
 		registerSingleCommand(new CommandNoclip(), fmlsse);
 		registerSingleCommand(new CommandToggleNotify(), fmlsse);
 		registerSingleCommand(new CommandDbgScreenshotFolder(), fmlsse); // DEBUG
+		registerSingleCommand(new CommandWKick(), fmlsse);
 	}
 
 	public static void registerSingleCommand(CommandBase cb, FMLServerStartingEvent fmlsse) {

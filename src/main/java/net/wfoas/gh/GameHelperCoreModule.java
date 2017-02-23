@@ -129,6 +129,8 @@ public class GameHelperCoreModule {
 	public static GHModItemArmor SAPPHIRE_HELMET, SAPPHIRE_CHESTPLATE, SAPPHIRE_LEGGINGS, SAPPHIRE_BOOTS;
 	public static GHModItemArmor AMETHYST_HELMET, AMETHYST_CHESTPLATE, AMETHYST_LEGGINGS, AMETHYST_BOOTS;
 
+	public static GameHelperModItem THERMAL_ALLR_HELMET, THERMAL_ALLR_CHEST, THERMAL_ALLR_LEGGINGS, THERMAL_ALLR_BOOTS;
+
 	public static PotionBow POTION_BOW;
 	public static GameHelperModItem SEL_1, SEL_2;
 	public static MobileWorkbenchItem MOBILE_WORKDBENCH;
@@ -295,6 +297,10 @@ public class GameHelperCoreModule {
 		Tilecyan.updateInitEvent(TAB_GAMEHELPER);
 		Tilemagenta.updateInitEvent(TAB_GAMEHELPER);
 		SEL_2.updateInitEvent(TAB_GAMEHELPER);
+		THERMAL_ALLR_HELMET.updateInitEvent(TAB_GAMEHELPER);
+		THERMAL_ALLR_CHEST.updateInitEvent(TAB_GAMEHELPER);
+		THERMAL_ALLR_LEGGINGS.updateInitEvent(TAB_GAMEHELPER);
+		THERMAL_ALLR_BOOTS.updateInitEvent(TAB_GAMEHELPER);
 	}
 
 	public List<Item> helmetList = new ArrayList<Item>();

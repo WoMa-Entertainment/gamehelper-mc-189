@@ -46,7 +46,6 @@ public class CommandTpx extends CommandBase {
 	}
 
 	public void processCommand0(ICommandSender sender, String[] args) throws CommandException {
-		System.out.println(Thread.currentThread().getName());
 		if (args.length == 0) {
 			sender.addChatMessage(new ChatComponentTranslation("gamehelper.error.dimensionchange.notenoughargs"));
 			return;
@@ -62,9 +61,6 @@ public class CommandTpx extends CommandBase {
 			}
 			if (!GHWorldManager.isWorldAlreadyLoaded(new GHWorld(_args_world, null, null))) {
 				if (GHWorldManager.isWorldAlreadyCreated(new GHWorld(_args_world, null, null))) {
-					// GHWorldManager.loadWorld(new GHWorld(_args_world, null,
-					// null));
-					System.out.println("LoadDimensionEventCausedByPlayerRequest");
 					LoadDimensionEventCausedByPlayerRequest load = new LoadDimensionEventCausedByPlayerRequest(
 							new GHWorld(_args_world, null, null));
 					GHEventBus.fireEvent(load);
@@ -81,22 +77,9 @@ public class CommandTpx extends CommandBase {
 			}
 			System.out.println("ghw: " + ghw);
 			WorldServer ws = DimensionManager.getWorld(ghw.dimensionId);
-			// System.out.println("Spawn: " + ws.getSpawnPoint());
 			PlayerChangeDimensionEvent pcde = new PlayerChangeDimensionEvent((EntityPlayerMP) sender,
 					((WorldServer) ((EntityPlayer) sender).worldObj).provider.getDimensionId(), ghw);
 			GHEventBus.fireEvent(pcde);
-			//
-			//
-			// GameHelper.getUtils().forceAllClientToOpenClientProgressDialog();
-			// GameHelper.getUtils().streamPercentageToAllClientProgressDialog(0.2568484f);
-			// GameHelper.getUtils().streamUserMessageToAllClientProgressDialog("Nachricht",
-			// "Titel");
-			//
-			//
-			// int dimension = ghw.dimensionId;
-			// WorldUtils.transferPlayerToDimension((EntityPlayerMP) sender,
-			// dimension,
-			// new Teleporter(DimensionManager.getWorld(dimension)));
 		}
 	}
 
@@ -113,7 +96,7 @@ public class CommandTpx extends CommandBase {
 	@Override
 	public List addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
 		List<String> slist = new ArrayList<String>();
-		for(String s : GHWorldManager.getGHWorldsAndNormalWorld()){
+		for (String s : GHWorldManager.getGHWorldsAndNormalWorld()) {
 			slist.add(s.replaceAll(" ", "%20"));
 		}
 		return slist;
