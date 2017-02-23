@@ -361,3 +361,7 @@ tile.gamehelper.Neonglaspink.name=Pink Neonglass
 tile.gamehelper.Neonglasblack.name=Black Neonglass
 tile.gamehelper.Neonglaswhite.name=White Neonglass
 tile.gamehelper.Neonglassilver.name=Silver Neonglass
+item.gamehelper.thermal_helmet.name=Thermal Helmet
+item.gamehelper.thermal_chestplate.name=Thermal Chestplate
+item.gamehelper.thermal_leggings.name=Thermal Leggings
+item.gamehelper.thermal_boots.name=Thermal Boots

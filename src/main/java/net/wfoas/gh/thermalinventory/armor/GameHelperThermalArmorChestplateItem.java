@@ -7,6 +7,7 @@ public class GameHelperThermalArmorChestplateItem extends GameHelperModItem impl
 
 	public GameHelperThermalArmorChestplateItem() {
 		super("thermal_chestplate");
+		this.setMaxStackSize(1);
 	}
 
 	@Override

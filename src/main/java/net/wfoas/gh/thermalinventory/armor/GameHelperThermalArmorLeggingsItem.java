@@ -7,6 +7,7 @@ public class GameHelperThermalArmorLeggingsItem extends GameHelperModItem implem
 
 	public GameHelperThermalArmorLeggingsItem() {
 		super("thermal_leggings");
+		this.setMaxStackSize(1);
 	}
 
 	@Override

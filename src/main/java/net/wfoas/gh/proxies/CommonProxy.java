@@ -141,6 +141,10 @@ import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntityBlock;
 import net.wfoas.gh.protected_blocks.furnace.ProtectedFurnaceBlock;
 import net.wfoas.gh.protected_blocks.furnace.ProtectedFurnaceTileEntity;
 import net.wfoas.gh.recipes.RecipeManager;
+import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorBootsItem;
+import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorChestplateItem;
+import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorHelmetItem;
+import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorLeggingsItem;
 import net.wfoas.gh.unchant.TileEntityUnchantmentTable;
 import net.wfoas.gh.unchant.UnchantmentTable;
 import net.wfoas.gh.villager.VillagerRegistrar;
@@ -366,6 +370,10 @@ public class CommonProxy {
 		GameHelperCoreModule.Tilecyan = new Tilecyan();
 		GameHelperCoreModule.Tilemagenta = new Tilemagenta();
 		GameHelperCoreModule.SEL_2 = new SelectionTool2();
+		GameHelperCoreModule.THERMAL_ALLR_HELMET = new GameHelperThermalArmorHelmetItem();
+		GameHelperCoreModule.THERMAL_ALLR_CHEST = new GameHelperThermalArmorChestplateItem();
+		GameHelperCoreModule.THERMAL_ALLR_LEGGINGS = new GameHelperThermalArmorLeggingsItem();
+		GameHelperCoreModule.THERMAL_ALLR_BOOTS = new GameHelperThermalArmorBootsItem();
 	}
 
 	public void registerEntities() {

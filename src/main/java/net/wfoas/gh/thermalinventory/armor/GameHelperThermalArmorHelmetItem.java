@@ -7,6 +7,7 @@ public class GameHelperThermalArmorHelmetItem extends GameHelperModItem implemen
 
 	public GameHelperThermalArmorHelmetItem() {
 		super("thermal_helmet");
+		this.setMaxStackSize(1);
 	}
 
 	@Override

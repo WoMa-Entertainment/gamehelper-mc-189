@@ -7,6 +7,7 @@ public class GameHelperThermalArmorBootsItem extends GameHelperModItem implement
 
 	public GameHelperThermalArmorBootsItem() {
 		super("thermal_boots");
+		this.setMaxStackSize(1);
 	}
 
 	@Override
