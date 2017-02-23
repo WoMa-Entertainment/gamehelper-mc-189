@@ -80,4 +80,9 @@ public class GameHelperModGlass extends BlockBreakable implements GHModItemUpdat
 	protected boolean canSilkHarvest() {
 		return true;
 	}
+
+	@SideOnly(Side.CLIENT)
+	public boolean isTranslucent() {
+		return true;
+	}
 }
