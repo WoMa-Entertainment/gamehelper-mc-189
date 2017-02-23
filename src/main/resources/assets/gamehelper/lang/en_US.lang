@@ -345,3 +345,4 @@ tile.gamehelper.Pureglassilver.name=Pure silver Glass
 tile.gamehelper.Pureglasyellow.name=Pure yellow Glass
 tile.gamehelper.Pureglasgreen.name=Pure green Glass
 tile.gamehelper.Pureglaspink.name=Pure pink Glass
+tile.gamehelper.No_texture_block.name=Textureless Block

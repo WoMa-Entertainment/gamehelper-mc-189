@@ -135,8 +135,12 @@ public class RecipeManager {
 		addPureBlockRec(GameHelperCoreModule.Pureblack, 15);
 	}
 
+	protected static void addPureTileBlockRec(GameHelperModBlock b, int meta) {
+
+	}
+
 	protected static void addPureBlockRec(GameHelperModBlock b, int meta) {
-		GameRegistry.addShapelessRecipe(new ItemStack(b), new ItemStack(Blocks.wool, 1, meta),
+		GameRegistry.addShapelessRecipe(new ItemStack(b, 4), new ItemStack(Blocks.wool, 1, meta),
 				new ItemStack(Blocks.wool, 1, meta), new ItemStack(Blocks.stained_hardened_clay, 1, meta),
 				new ItemStack(Blocks.stained_hardened_clay, 1, meta));
 	}
