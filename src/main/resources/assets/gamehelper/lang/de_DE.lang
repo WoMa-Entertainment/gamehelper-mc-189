@@ -280,6 +280,7 @@ gamehelper.protected_block.changepermissions=Berechtigungen ändern...
 gamehelper.protected_block=Gesicherter Block
 gamehelper.container.protected_furnace=Gesicherter Ofen
 tile.gamehelper.protected_furnace.name=Gesicherter Ofen
+tile.gamehelper.protected_furnace_lit.name=Brennender gesicherter Ofen
 gamehelper.error.protected_chest.noperm=§cDu §ckannst §cdiese §cgesicherte §cTruhe §cnicht §cöffnen.
 gamehelper.error.protected_chest.noperm.destroy=§cDu §ckannst §cdiese §cgesicherte §cTruhe §cnicht §cabbauen.
 gamehelper.error.protected_chest.open.warning=§cVorsicht! §c%s§c §cversucht §cdeine §cgesicherte §cTruhe §cöffnen!

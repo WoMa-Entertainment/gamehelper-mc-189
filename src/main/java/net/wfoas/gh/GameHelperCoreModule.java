@@ -181,6 +181,7 @@ public class GameHelperCoreModule {
 		UNCH_TABL.updateInitEvent(TAB_GAMEHELPER);
 		SEC_CHEST.updateInitEvent(TAB_GAMEHELPER);
 		SEC_FURNACE.updateInitEvent(TAB_GAMEHELPER);
+		SEC_FURNACE_LIT.updateInitEvent(TAB_GAMEHELPER);
 		OP_ANVIL.updateInitEvent(TAB_GAMEHELPER);
 		EMERALD_HELMET.updateInitEvent(TAB_GAMEHELPER);
 		EMERALD_CHESTPLATE.updateInitEvent(TAB_GAMEHELPER);

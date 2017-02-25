@@ -279,6 +279,7 @@ gamehelper.command.accepted.rank=§aYour §anew §arank §ais §a'%1$s§a'§a.
 gamehelper.protected_block.changepermissions=Change permissions...
 gamehelper.protected_block=Protected Block
 gamehelper.container.protected_furnace=Protected Furnace
+tile.gamehelper.protected_furnace_lit.name=Lit Protected Furnace
 tile.gamehelper.protected_furnace.name=Protected Furnace
 gamehelper.error.protected_chest.noperm=§cYou §ccan't §copen §cthis §cprotected §cchest.
 gamehelper.error.protected_chest.noperm.destroy=§cYou §ccan't §cdestroy §cthis §cprotected §cchest.

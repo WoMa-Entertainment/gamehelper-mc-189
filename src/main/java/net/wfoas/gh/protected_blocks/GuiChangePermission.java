@@ -49,6 +49,7 @@ public class GuiChangePermission extends GuiScreen {
 		this.__phys_posy = physy;
 		this.__phys_posz = physz;
 		this.prot_blc = prot_blc;
+		System.out.println(prot_blc);
 		if (prot_blc != null) {
 			prot_blc.addWhiteListedPlayer(UUID.randomUUID());
 		}

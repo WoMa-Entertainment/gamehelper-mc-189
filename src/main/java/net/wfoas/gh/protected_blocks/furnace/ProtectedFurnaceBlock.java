@@ -244,8 +244,9 @@ public class ProtectedFurnaceBlock extends BlockContainer implements IGHModBlock
 
 	@Override
 	public void updateInitEvent(CreativeTabs tab) {
-		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(this), 0,
-				new ModelResourceLocation(GameHelper.MODID + ":" + getName(), "inventory"));
+		ModelResourceLocation l = new ModelResourceLocation(GameHelper.MODID + ":" + getName(), "inventory");
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(this), 0, l);
+		System.out.println(l);
 		updateCreativeTab(tab);
 	}
 
