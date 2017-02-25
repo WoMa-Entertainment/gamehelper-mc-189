@@ -134,7 +134,12 @@ public class RecipeManager {
 		addPureBlockRec(GameHelperCoreModule.Purered, 14);
 		addPureBlockRec(GameHelperCoreModule.Pureblack, 15);
 		GameRegistry.addShapedRecipe(new ItemStack(GameHelperCoreModule.DIMENSION_SHARD), "OE", "EY", 'O',
-				Blocks.obsidian, 'E', Items.ender_pearl, 'Y', Items.ender_pearl);
+				Blocks.obsidian, 'E', Items.ender_pearl, 'Y', Items.ender_eye);
+		GameRegistry.addShapedRecipe(new ItemStack(GameHelperCoreModule.MARBLE_BRICK), "MM", "MM", 'M',
+				GameHelperCoreModule.MARBLE);
+		GameRegistry.addShapedRecipe(new ItemStack(GameHelperCoreModule.BASALT_BRICK), "MM", "MM", 'M',
+				GameHelperCoreModule.BASALT);
+		GameRegistry.addSmelting(GameHelperCoreModule.BASALT_COBBLE, new ItemStack(GameHelperCoreModule.BASALT), 0.23f);
 	}
 
 	protected static void addPureTileBlockRec(GameHelperModBlock b, int meta) {
