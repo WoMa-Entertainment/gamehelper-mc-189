@@ -35,6 +35,7 @@ import net.wfoas.gh.items.tools.ItemGHShovelTool;
 import net.wfoas.gh.minersinventory.items.IronDagger;
 import net.wfoas.gh.op_anvil.OPAnvil;
 import net.wfoas.gh.unchant.UnchantmentTable;
+import net.wfoas.gh.uncraftingtable.UncraftingTable;
 import net.wfoas.gh.worlddimensionsutils.DimensionBlock;
 
 public class GameHelperCoreModule {
@@ -157,6 +158,8 @@ public class GameHelperCoreModule {
 	public static Quicksand quicksand;
 
 	public static GameHelperExplodingStone exp_netherrack, exp_endstone;
+
+	public static UncraftingTable UNCRAFTING_TABLE;
 
 	public void registerTab() {
 		TAB_GAMEHELPER = new GameHelperTab("ghTab");
@@ -317,6 +320,7 @@ public class GameHelperCoreModule {
 		quicksand.updateInitEvent(TAB_GAMEHELPER);
 		exp_endstone.updateInitEvent(TAB_GAMEHELPER);
 		exp_netherrack.updateInitEvent(TAB_GAMEHELPER);
+		UNCRAFTING_TABLE.updateInitEvent(TAB_GAMEHELPER);
 	}
 
 	public List<Item> helmetList = new ArrayList<Item>();

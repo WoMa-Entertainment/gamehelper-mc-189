@@ -154,6 +154,7 @@ import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorHelmetItem;
 import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorLeggingsItem;
 import net.wfoas.gh.unchant.TileEntityUnchantmentTable;
 import net.wfoas.gh.unchant.UnchantmentTable;
+import net.wfoas.gh.uncraftingtable.UncraftingTable;
 import net.wfoas.gh.villager.VillagerRegistrar;
 import net.wfoas.gh.villager.entity.GHVillager;
 import net.wfoas.gh.worlddimensionsutils.DimensionBlock;
@@ -391,6 +392,7 @@ public class CommonProxy {
 		GameHelperCoreModule.quicksand = new Quicksand();
 		GameHelperCoreModule.exp_endstone = new ExplodingEndstone();
 		GameHelperCoreModule.exp_netherrack = new ExplodingNetherrack();
+		GameHelperCoreModule.UNCRAFTING_TABLE = new UncraftingTable();
 	}
 
 	public void registerEntities() {
