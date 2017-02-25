@@ -1,5 +1,5 @@
 {
     "variants": {
-        "normal": { "model": "gamehelper:Notextureblock" }
+        "normal": { "model": "gamehelper:No_texture_block" }
     }
 }
