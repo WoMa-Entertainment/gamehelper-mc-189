@@ -48,6 +48,7 @@ import net.wfoas.gh.blocks.Purepurple;
 import net.wfoas.gh.blocks.Purered;
 import net.wfoas.gh.blocks.Purewhite;
 import net.wfoas.gh.blocks.Pureyellow;
+import net.wfoas.gh.blocks.Quicksand;
 import net.wfoas.gh.blocks.RubyBlock;
 import net.wfoas.gh.blocks.RubyOre;
 import net.wfoas.gh.blocks.SapphireBlock;
@@ -65,6 +66,8 @@ import net.wfoas.gh.blocks.Tilepurple;
 import net.wfoas.gh.blocks.Tilered;
 import net.wfoas.gh.blocks.Tilewhite;
 import net.wfoas.gh.blocks.Tileyellow;
+import net.wfoas.gh.blocks.exploding.ExplodingEndstone;
+import net.wfoas.gh.blocks.exploding.ExplodingNetherrack;
 import net.wfoas.gh.blocks.glass.Neonglas;
 import net.wfoas.gh.blocks.glass.Neonglasblack;
 import net.wfoas.gh.blocks.glass.Neonglasblue;
@@ -127,6 +130,7 @@ import net.wfoas.gh.items.SelectionTool2;
 import net.wfoas.gh.items.TradeItems;
 import net.wfoas.gh.items.UltraBackpackItem;
 import net.wfoas.gh.items.WorldTeleporterItem;
+import net.wfoas.gh.items.dimension.DimensionShard;
 import net.wfoas.gh.items.tools.ItemGHAxeTool;
 import net.wfoas.gh.items.tools.ItemGHHoeTool;
 import net.wfoas.gh.items.tools.ItemGHPickaxeTool;
@@ -143,6 +147,7 @@ import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntityBlock;
 import net.wfoas.gh.protected_blocks.furnace.ProtectedFurnaceBlock;
 import net.wfoas.gh.protected_blocks.furnace.ProtectedFurnaceTileEntity;
 import net.wfoas.gh.recipes.RecipeManager;
+import net.wfoas.gh.sound.SoundHandlerGH;
 import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorBootsItem;
 import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorChestplateItem;
 import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorHelmetItem;
@@ -157,6 +162,10 @@ import net.wfoas.gh.worldgenerator.GHWorldGenerator;
 public class CommonProxy {
 
 	public void preInit(FMLPreInitializationEvent event, GameHelper gh) {
+		SoundHandlerGH.init();
+		SoundHandlerGH.addSound("wow");
+		SoundHandlerGH.addSound("nice");
+		SoundHandlerGH.addSound("ohyeah");
 		gh.cfgDataFolder = new File(event.getModConfigurationDirectory(), "gamehelper");
 		gh.cfgDataFolder.mkdirs();
 		gh.defaultConfig = new DefaultConfig();
@@ -378,6 +387,10 @@ public class CommonProxy {
 		GameHelperCoreModule.THERMAL_ALLR_CHEST = new GameHelperThermalArmorChestplateItem();
 		GameHelperCoreModule.THERMAL_ALLR_LEGGINGS = new GameHelperThermalArmorLeggingsItem();
 		GameHelperCoreModule.THERMAL_ALLR_BOOTS = new GameHelperThermalArmorBootsItem();
+		GameHelperCoreModule.DIMENSION_SHARD = new DimensionShard();
+		GameHelperCoreModule.quicksand = new Quicksand();
+		GameHelperCoreModule.exp_endstone = new ExplodingEndstone();
+		GameHelperCoreModule.exp_netherrack = new ExplodingNetherrack();
 	}
 
 	public void registerEntities() {

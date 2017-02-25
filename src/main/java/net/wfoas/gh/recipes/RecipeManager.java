@@ -133,6 +133,8 @@ public class RecipeManager {
 		addPureBlockRec(GameHelperCoreModule.Puregreen, 13);
 		addPureBlockRec(GameHelperCoreModule.Purered, 14);
 		addPureBlockRec(GameHelperCoreModule.Pureblack, 15);
+		GameRegistry.addShapedRecipe(new ItemStack(GameHelperCoreModule.DIMENSION_SHARD), "OE", "EY", 'O',
+				Blocks.obsidian, 'E', Items.ender_pearl, 'Y', Items.ender_pearl);
 	}
 
 	protected static void addPureTileBlockRec(GameHelperModBlock b, int meta) {

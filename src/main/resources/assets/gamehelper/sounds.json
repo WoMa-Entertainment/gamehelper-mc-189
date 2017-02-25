@@ -1,0 +1,5 @@
+ {
+    "nice": { "category": "player", "sounds": [ "nice" ] },
+    "ohyeah":  { "category": "player", "sounds": [ "ohyeah" ] },
+    "wow":  { "category": "player", "sounds": [ "wow" ] } 
+}

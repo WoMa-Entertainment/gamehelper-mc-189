@@ -19,6 +19,7 @@ import net.wfoas.gh.commands.CommandOwnWorld;
 import net.wfoas.gh.commands.CommandPing;
 import net.wfoas.gh.commands.CommandSaveData;
 import net.wfoas.gh.commands.CommandSetPerm;
+import net.wfoas.gh.commands.CommandSound;
 import net.wfoas.gh.commands.CommandToggleNotify;
 import net.wfoas.gh.commands.CommandTpx;
 import net.wfoas.gh.commands.CommandTpxp;
@@ -68,6 +69,7 @@ public class GameHelperServer {
 		registerSingleCommand(new CommandToggleNotify(), fmlsse);
 		registerSingleCommand(new CommandDbgScreenshotFolder(), fmlsse); // DEBUG
 		registerSingleCommand(new CommandWKick(), fmlsse);
+		registerSingleCommand(new CommandSound(), fmlsse);
 	}
 
 	public static void registerSingleCommand(CommandBase cb, FMLServerStartingEvent fmlsse) {

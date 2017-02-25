@@ -14,6 +14,8 @@ import net.wfoas.gh.armor.GHModItemArmor;
 import net.wfoas.gh.bigsword.BigswordItem;
 import net.wfoas.gh.blocks.GameHelperModBlock;
 import net.wfoas.gh.blocks.IGHModBlock;
+import net.wfoas.gh.blocks.Quicksand;
+import net.wfoas.gh.blocks.exploding.GameHelperExplodingStone;
 import net.wfoas.gh.blocks.glass.GameHelperModGlass;
 import net.wfoas.gh.creativetab.GameHelperTab;
 import net.wfoas.gh.dropsapi.pdr.EnchantmentFinder;
@@ -118,6 +120,8 @@ public class GameHelperCoreModule {
 	public static ArmorMaterial SPIRAL;
 	public static ArmorMaterial AMETHYST;
 
+	public static GameHelperModItem DIMENSION_SHARD;
+
 	public static GameHelperModItem BACKPACK, ENDER_BACKPACK, WORLD_TELEPORTER, BIG_BACKPACK, ULTRA_BACKPACK;
 	public static OPAnvil OP_ANVIL;
 	public static BigswordItem GOLD_BS, DIAMOND_BS, STONE_BS, WOOD_BS, IRON_BS, EMERALD_BS, SAPPHIRE_BS, RUBY_BS;
@@ -149,6 +153,10 @@ public class GameHelperCoreModule {
 	public static CreativeTabs TAB_GAMEHELPER;
 	public static IGHModBlock SEC_CHEST, SEC_FURNACE, SEC_FURNACE_LIT;
 	public static GameHelperModBlock MARBLE, MARBLE_BRICK, BASALT, BASALT_BRICK, BASALT_COBBLE;
+
+	public static Quicksand quicksand;
+
+	public static GameHelperExplodingStone exp_netherrack, exp_endstone;
 
 	public void registerTab() {
 		TAB_GAMEHELPER = new GameHelperTab("ghTab");
@@ -305,6 +313,10 @@ public class GameHelperCoreModule {
 		THERMAL_ALLR_CHEST.updateInitEvent(TAB_GAMEHELPER);
 		THERMAL_ALLR_LEGGINGS.updateInitEvent(TAB_GAMEHELPER);
 		THERMAL_ALLR_BOOTS.updateInitEvent(TAB_GAMEHELPER);
+		DIMENSION_SHARD.updateInitEvent(TAB_GAMEHELPER);
+		quicksand.updateInitEvent(TAB_GAMEHELPER);
+		exp_endstone.updateInitEvent(TAB_GAMEHELPER);
+		exp_netherrack.updateInitEvent(TAB_GAMEHELPER);
 	}
 
 	public List<Item> helmetList = new ArrayList<Item>();
