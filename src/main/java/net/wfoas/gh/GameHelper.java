@@ -35,6 +35,7 @@ import net.wfoas.gh.multipleworlds.storage.GHWorldManager;
 import net.wfoas.gh.proxies.CommonProxy;
 import net.wfoas.gh.scheduler.GHScheduler;
 import net.wfoas.gh.titanmodule.TitanModule;
+import net.wfoas.gh.videoplayer.GHVideoPlayer;
 
 @Mod(modid = GameHelper.MODID, name = GameHelper.MODNAME, version = GameHelper.MODVER)
 public class GameHelper {
@@ -100,6 +101,7 @@ public class GameHelper {
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		GameHelperInitialisationSteps.preInit(event, proxy);
+		GHVideoPlayer.playVideo(new File("F:\\valve_1998.mp4"));
 	}
 
 	@EventHandler
