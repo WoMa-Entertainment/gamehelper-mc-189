@@ -12,6 +12,9 @@ import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.GameHelperCoreModule;
 import net.wfoas.gh.gui.GuiHandler;
 import net.wfoas.gh.network.NetworkHandler;
+import net.wfoas.gh.omapi.GHIntAPIHelper;
+import net.wfoas.gh.omapi.GameHelperAPI;
+import net.wfoas.gh.omapi.module.GameHelperModuleAbstract;
 import net.wfoas.gh.oredict.OredictEntries;
 import net.wfoas.gh.protected_blocks.ProtectedBlocksRegistry;
 import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntityBlock;
@@ -19,41 +22,50 @@ import net.wfoas.gh.protected_blocks.furnace.ProtectedFurnaceBlock;
 import net.wfoas.gh.proxies.CommonProxy;
 import net.wfoas.gh.scheduler.GHSchedulerClient;
 import net.wfoas.gh.scheduler.GHSchedulerServer;
+import net.wfoas.gh.survivaltabs.SurvivalTabsRegistry;
 
 public class GameHelperInitialisationSteps {
-	public static void preInit(FMLPreInitializationEvent pre, CommonProxy proxy) {
-		if (pre.getSide() == Side.CLIENT) {
-			GameHelper.instance.structuresDirCl = new File(Minecraft.getMinecraft().mcDataDir, "structures_gh");
-			GameHelper.instance.structuresDir = GameHelper.instance.structuresDirCl;
-		} else {
-			GameHelper.instance.structuresDirSv = new File(MinecraftServer.getServer().getDataDirectory(),
-					"structures_gh");
-			GameHelper.instance.structuresDir = GameHelper.instance.structuresDirSv;
-		}
-		GameHelper.instance.structuresDir.mkdirs();
+	public static void preInit(FMLPreInitializationEvent pre) {
 		GameHelper.logger = pre.getModLog();
 		GameHelper.EVENT_SIDE = pre.getSide();
 		NetworkHandler.preInit();
-		if (GameHelper.EVENT_SIDE == Side.CLIENT)
+		if (GameHelper.EVENT_SIDE == Side.CLIENT) {
 			GameHelper.instance.ghscheduler = new GHSchedulerClient();
-		else
+		} else {
 			GameHelper.instance.ghscheduler = new GHSchedulerServer();
-
-		proxy.preInit(pre, GameHelper.instance);
+		}
+		for (GameHelperModuleAbstract module : GHIntAPIHelper.modules()) {
+			module.preInitServer(pre);
+		}
+		if (GameHelper.EVENT_SIDE == Side.CLIENT) {
+			for (GameHelperModuleAbstract module : GHIntAPIHelper.modules()) {
+				module.preInitClient(pre);
+			}
+		}
 	}
 
-	public static void initLoad(FMLInitializationEvent init, CommonProxy proxy) {
-		proxy.load(init, GameHelper.instance);
-		GameHelperCoreModule.setupEnchLists();
+	public static void initLoad(FMLInitializationEvent init) {
+		for (GameHelperModuleAbstract module : GHIntAPIHelper.modules()) {
+			module.initServer(init);
+		}
+		if (GameHelper.EVENT_SIDE == Side.CLIENT) {
+			SurvivalTabsRegistry.registerSurvivalTabs();
+			for (GameHelperModuleAbstract module : GHIntAPIHelper.modules()) {
+				module.initClient(init);
+			}
+		}
+		GameHelperAPI.ghEnchantAPI().setupEnchLists();
 		OredictEntries.injectEntriesIntoOreDict();
-		ProtectedBlocksRegistry.addBlock(GuiHandler.PROTECTED_CHEST,
-				(ProtectedChestTileEntityBlock) GameHelperCoreModule.SEC_CHEST);
-		ProtectedBlocksRegistry.addBlock(GuiHandler.PROTECTED_FURNACE,
-				(ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE,
-				(ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE_LIT);
 	}
 
-	public static void postInit(FMLPostInitializationEvent post, CommonProxy proxy) {
-		proxy.postInit(post, GameHelper.instance);
+	public static void postInit(FMLPostInitializationEvent post) {
+		for (GameHelperModuleAbstract module : GHIntAPIHelper.modules()) {
+			module.postInitServer(post);
+		}
+		if (GameHelper.EVENT_SIDE == Side.CLIENT) {
+			for (GameHelperModuleAbstract module : GHIntAPIHelper.modules()) {
+				module.postInitClient(post);
+			}
+		}
 	}
 }

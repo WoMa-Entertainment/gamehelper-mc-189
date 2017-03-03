@@ -14,7 +14,7 @@ import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.dropsapi.pdr.ChatColor;
 import net.wfoas.gh.sound.SoundHandlerGH;
 
-public class CommandSound extends CommandBase {
+public class CommandSound extends GHCommand {
 
 	@Override
 	public String getCommandName() {

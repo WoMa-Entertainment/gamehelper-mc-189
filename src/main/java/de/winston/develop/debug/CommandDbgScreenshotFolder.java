@@ -7,8 +7,9 @@ import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
+import net.wfoas.gh.commands.GHCommand;
 
-public class CommandDbgScreenshotFolder extends CommandBase {
+public class CommandDbgScreenshotFolder extends GHCommand {
 
 	@Override
 	public String getCommandName() {

@@ -8,7 +8,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.WorldSettings.GameType;
 
-public class CommandNoclip extends CommandBase {
+public class CommandNoclip extends GHCommand {
 
 	@Override
 	public String getCommandName() {

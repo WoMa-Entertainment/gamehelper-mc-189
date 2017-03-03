@@ -19,7 +19,7 @@ import net.minecraft.util.ChatComponentTranslationFormatException;
 import net.minecraftforge.fml.relauncher.Side;
 import net.wfoas.gh.GameHelper;
 
-public class CommandBuildFly extends CommandBase {
+public class CommandBuildFly extends GHCommand {
 
 	@Override
 	public String getCommandName() {

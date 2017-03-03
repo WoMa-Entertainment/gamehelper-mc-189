@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.wfoas.gh.network.gui.RemoteGuiOpener;
 
-public class CommandSetPerm extends CommandBase {
+public class CommandSetPerm extends GHCommand {
 
 	@Override
 	public String getCommandName() {

@@ -15,7 +15,7 @@ import net.wfoas.gh.playernameuuid.PlayerNameUUID;
 import net.wfoas.gh.world.owner.WorldOwners;
 import net.wfoas.gh.world.permissions.WorldPermissions;
 
-public class CommandSaveData extends CommandBase {
+public class CommandSaveData extends GHCommand {
 
 	@Override
 	public String getCommandName() {

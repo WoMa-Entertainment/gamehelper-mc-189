@@ -15,7 +15,7 @@ import net.wfoas.gh.network.NetworkHandler;
 import net.wfoas.gh.network.gui.RemoteGuiOpener;
 import net.wfoas.gh.network.packet.PacketPlayOpenClientCreateWorldGui;
 
-public class CommandCreateWorld extends CommandBase {
+public class CommandCreateWorld extends GHCommand {
 
 	@Override
 	public String getCommandName() {

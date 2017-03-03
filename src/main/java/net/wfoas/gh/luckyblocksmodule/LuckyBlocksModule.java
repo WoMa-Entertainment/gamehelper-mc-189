@@ -28,34 +28,37 @@ import net.wfoas.gh.items.GameHelperModItem;
 import net.wfoas.gh.luckyblocksmodule.items.GoldCoinItem;
 import net.wfoas.gh.luckyblocksmodule.items.RainbowGemItem;
 import net.wfoas.gh.luckyblocksmodule.items.RainbowSwordItem;
+import net.wfoas.gh.omapi.module.GameHelperModuleAbstract;
 
-public class LuckyBlocksModule {
-	
+public class LuckyBlocksModule extends GameHelperModuleAbstract {
+
 	public static LuckyBlocksCreativeTab LUCKY_TAB;
-	
+
 	public static ToolMaterial RAINBOW_MATERIAL, BIG_RAINBOW;
-	
+
 	public static GameHelperModItem RAINBOW_GEM, GOLD_COIN;
 
 	public static RainbowSwordItem RAINBOW_SWORD;
-	
+
 	public static BigswordItem RAINBOW_BS;
-	
+
 	public static RainbowBlock RAINBOW_BLOCK;
-	
-	public static EffectOrb EMPTY_ORB, FIRE_ORB, FURIOUS_ORB, HASTE_ORB, HEALING_ORB, JUMPING_ORB, POISON_ORB, WATER_ORB, WIND_ORB, XRAY_ORB;
-	
-	public static final String PREFIX = ChatColor.GRAY + "[" + ChatColor.GOLD + "LuckyBlocks" + ChatColor.GRAY + "] " + ChatColor.AQUA;
-	
-	public static LuckyBlock DEFAULT_LUCKY_BLOCK, BRUNNEN_DEFAULT_LUCKY_BLOCK;//iniz
-	
-	public void preInitServer(FMLPreInitializationEvent event){
+
+	public static EffectOrb EMPTY_ORB, FIRE_ORB, FURIOUS_ORB, HASTE_ORB, HEALING_ORB, JUMPING_ORB, POISON_ORB,
+			WATER_ORB, WIND_ORB, XRAY_ORB;
+
+	public static final String PREFIX = ChatColor.GRAY + "[" + ChatColor.GOLD + "LuckyBlocks" + ChatColor.GRAY + "] "
+			+ ChatColor.AQUA;
+
+	public static LuckyBlock DEFAULT_LUCKY_BLOCK, BRUNNEN_DEFAULT_LUCKY_BLOCK;// iniz
+
+	public void preInitServer(FMLPreInitializationEvent event) {
 		BIG_RAINBOW = EnumHelper.addToolMaterial("BIG_RAINBOW", 2, -1, 6.0F, 16.0F, 14);
 		LuckyBlocksModule.RAINBOW_MATERIAL = EnumHelper.addToolMaterial("RAINBOW", 3, -1, 12.0f, 6.0f, 25);
 		RAINBOW_GEM = new RainbowGemItem();
 		GOLD_COIN = new GoldCoinItem();
 		RAINBOW_SWORD = new RainbowSwordItem();
-//		DropsCollector default_dc = Drop.searchDrops("DEFAULT");
+		// DropsCollector default_dc = Drop.searchDrops("DEFAULT");
 		DEFAULT_LUCKY_BLOCK = new LuckyBlock("gh_lucky_block", null);
 		BRUNNEN_DEFAULT_LUCKY_BLOCK = new LuckyBlock("gh_brunnen_lucky_block", null);
 		RAINBOW_BLOCK = new RainbowBlock("rainbow_block");
@@ -71,12 +74,12 @@ public class LuckyBlocksModule {
 		WIND_ORB = new WindOrb();
 		XRAY_ORB = new XRayOrb();
 	}
-	
-	public void preInitClient(FMLPreInitializationEvent event){
-		
+
+	public void preInitClient(FMLPreInitializationEvent event) {
+
 	}
-	
-	public void registerTab(){
+
+	public void registerTab() {
 		LUCKY_TAB = new LuckyBlocksCreativeTab();
 		RAINBOW_GEM.updateInitEvent(LUCKY_TAB);
 		GOLD_COIN.updateInitEvent(LUCKY_TAB);
@@ -95,38 +98,36 @@ public class LuckyBlocksModule {
 		WATER_ORB.updateInitEvent(LUCKY_TAB);
 		WIND_ORB.updateInitEvent(LUCKY_TAB);
 		XRAY_ORB.updateInitEvent(LUCKY_TAB);
-		
+
 	}
-	
-	public void registerRecipes(){
-		GameRegistry.addShapelessRecipe(new ItemStack(RAINBOW_GEM), Items.emerald, Items.diamond, Items.gold_ingot, Items.iron_ingot, new ItemStack(Items.dye, 1, 4), Items.quartz, Items.redstone, Items.coal, Item.getItemFromBlock(Blocks.obsidian));
-		GameRegistry.addShapedRecipe(new ItemStack(RAINBOW_SWORD), 
-				"R",
-				"R",
-				"S", 
-				'R', RAINBOW_GEM,
-				'S', Items.stick);
-		GameRegistry.addShapedRecipe(new ItemStack(DEFAULT_LUCKY_BLOCK), "GGG", "GSG", "GGG", 'G', Items.gold_ingot, 'S', Item.getItemFromBlock(Blocks.dropper));
+
+	public void registerRecipes() {
+		GameRegistry.addShapelessRecipe(new ItemStack(RAINBOW_GEM), Items.emerald, Items.diamond, Items.gold_ingot,
+				Items.iron_ingot, new ItemStack(Items.dye, 1, 4), Items.quartz, Items.redstone, Items.coal,
+				Item.getItemFromBlock(Blocks.obsidian));
+		GameRegistry.addShapedRecipe(new ItemStack(RAINBOW_SWORD), "R", "R", "S", 'R', RAINBOW_GEM, 'S', Items.stick);
+		GameRegistry.addShapedRecipe(new ItemStack(DEFAULT_LUCKY_BLOCK), "GGG", "GSG", "GGG", 'G', Items.gold_ingot,
+				'S', Item.getItemFromBlock(Blocks.dropper));
 		GameRegistry.addShapedRecipe(new ItemStack(RAINBOW_BLOCK), "RRR", "RRR", "RRR", 'R', RAINBOW_GEM);
 		GameRegistry.addShapedRecipe(new ItemStack(RAINBOW_BS), "R", "R", "S", 'R', RAINBOW_BLOCK, 'S', Items.stick);
 	}
-	
-	public void initServer(FMLInitializationEvent event){
+
+	public void initServer(FMLInitializationEvent event) {
 		registerRecipes();
 	}
-	
-	public void initClient(FMLInitializationEvent event){
-		if(event.getSide() == Side.CLIENT){
+
+	public void initClient(FMLInitializationEvent event) {
+		if (event.getSide() == Side.CLIENT) {
 			registerTab();
 		}
 	}
-	
-	public void postInitServer(FMLPostInitializationEvent event){
-		
+
+	public void postInitServer(FMLPostInitializationEvent event) {
+
 	}
-	
-	public void postInitClient(FMLPostInitializationEvent event){
-		
+
+	public void postInitClient(FMLPostInitializationEvent event) {
+
 	}
 
 }

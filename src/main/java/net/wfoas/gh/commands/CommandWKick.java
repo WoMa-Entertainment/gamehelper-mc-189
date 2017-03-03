@@ -22,7 +22,7 @@ import net.wfoas.gh.multipleworlds.GHWorld;
 import net.wfoas.gh.multipleworlds.WorldUtils;
 import net.wfoas.gh.multipleworlds.storage.GHWorldManager;
 
-public class CommandWKick extends CommandBase {
+public class CommandWKick extends GHCommand {
 
 	@Override
 	public String getCommandName() {

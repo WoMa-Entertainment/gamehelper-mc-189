@@ -25,9 +25,13 @@ import net.wfoas.gh.commands.CommandTpx;
 import net.wfoas.gh.commands.CommandTpxp;
 import net.wfoas.gh.commands.CommandViewPerm;
 import net.wfoas.gh.commands.CommandWKick;
+import net.wfoas.gh.commands.GHCommand;
 import net.wfoas.gh.multipleworlds.storage.GHWorldManager;
 import net.wfoas.gh.network.securedlogin.timeout.PlayerLoginTimeOut;
 import net.wfoas.gh.notifysettings.NotifyTable;
+import net.wfoas.gh.omapi.GHIntAPIHelper;
+import net.wfoas.gh.omapi.GameHelperAPI;
+import net.wfoas.gh.omapi.module.GameHelperModuleAbstract;
 import net.wfoas.gh.proxies.CommonProxy;
 import net.wfoas.gh.selectiontool.CommandExportStruct;
 import net.wfoas.gh.villager.VillagerRegistrar;
@@ -35,52 +39,32 @@ import net.wfoas.gh.villager.VillagerRegistrar;
 public class GameHelperServer {
 	static List<CommandBase> commands;
 
-	public static void serverStart(FMLServerStartingEvent event, CommonProxy proxy) {
+	public static void serverStart(FMLServerStartingEvent event) {
 		commands = new ArrayList<CommandBase>();
-		proxy.serverStart(event);
-		GHWorldManager.serverStart();
-		VillagerRegistrar.sortIntoListOnServerStart();
-		AdHandler.enableAdEcoSystem();
-		NotifyTable.serverStartUp();
-		System.out.println("start PlayerLoginTimeOut");
-		PlayerLoginTimeOut.startLoginTimeOutQueueTask();
+		for (GameHelperModuleAbstract module : GHIntAPIHelper.modules()) {
+			module.serverStart(event);
+		}
+		loadCommands(event);
 	}
 
 	public static List<CommandBase> getCommand() {
 		return commands;
 	}
 
-	public static void loadCommand(FMLServerStartingEvent fmlsse) {
-		registerSingleCommand(new CommandCreateWorld(), fmlsse);
-		registerSingleCommand(new CommandTpx(), fmlsse);
-		registerSingleCommand(new CommandBuildFly(), fmlsse);
-		registerSingleCommand(new CommandPing(), fmlsse);
-		registerSingleCommand(new CommandSaveData(), fmlsse);
-		registerSingleCommand(new CommandListWorld(), fmlsse);
-		registerSingleCommand(new CommandTpxp(), fmlsse);
-		registerSingleCommand(new CommandHackSec(), fmlsse);
-		registerSingleCommand(new CommandGameHelper(), fmlsse);
-		registerSingleCommand(new CommandOwnWorld(), fmlsse);
-		registerSingleCommand(new PlayerRanksCommand(), fmlsse);
-		registerSingleCommand(new CommandSetPerm(), fmlsse);
-		registerSingleCommand(new CommandViewPerm(), fmlsse);
-		registerSingleCommand(new CommandExportStruct(), fmlsse);
-		registerSingleCommand(new CommandNoclip(), fmlsse);
-		registerSingleCommand(new CommandToggleNotify(), fmlsse);
-		registerSingleCommand(new CommandDbgScreenshotFolder(), fmlsse); // DEBUG
-		registerSingleCommand(new CommandWKick(), fmlsse);
-		registerSingleCommand(new CommandSound(), fmlsse);
+	public static void loadCommands(FMLServerStartingEvent fmlsse) {
+		for (GHCommand gh : GHIntAPIHelper.commands()) {
+			registerSingleCommand(gh, fmlsse);
+		}
 	}
 
-	public static void registerSingleCommand(CommandBase cb, FMLServerStartingEvent fmlsse) {
+	public static void registerSingleCommand(GHCommand cb, FMLServerStartingEvent fmlsse) {
 		fmlsse.registerServerCommand(cb);
 		commands.add(cb);
 	}
 
-	public static void serverStop(FMLServerStoppingEvent event, CommonProxy proxy) {
-		NotifyTable.serverStop();
-		PlayerLoginTimeOut.stopServer();
-		GameHelper.getUtils().stopRankSystem();
-		GHWorldManager.serverStop();
+	public static void serverStop(FMLServerStoppingEvent event) {
+		for (GameHelperModuleAbstract module : GHIntAPIHelper.modules()) {
+			module.serverStop(event);
+		}
 	}
 }

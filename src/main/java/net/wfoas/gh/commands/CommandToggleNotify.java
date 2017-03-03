@@ -8,7 +8,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.wfoas.gh.notifysettings.NotifyTable;
 
-public class CommandToggleNotify extends CommandBase {
+public class CommandToggleNotify extends GHCommand {
 	@Override
 	public String getCommandName() {
 		return "togglenotify";

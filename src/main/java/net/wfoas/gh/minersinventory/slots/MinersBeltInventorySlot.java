@@ -10,6 +10,7 @@ import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.GameHelperCoreModule;
 import net.wfoas.gh.minersinventory.MinersInventory;
 import net.wfoas.gh.minersinventory.MinersInventorySlot;
+import net.wfoas.gh.omapi.GameHelperAPI;
 
 public class MinersBeltInventorySlot extends MinersInventorySlot {
 
@@ -30,7 +31,7 @@ public class MinersBeltInventorySlot extends MinersInventorySlot {
 
 		@Override
 		public boolean isItemValid(ItemStack itemstack) {
-			return GameHelperCoreModule.isPickaxe(itemstack.getItem()) && this.minersInventory.hasMinersBelt();
+			return GameHelperAPI.ghEnchantAPI().isPickaxe(itemstack.getItem()) && this.minersInventory.hasMinersBelt();
 		}
 
 		@SideOnly(value = Side.CLIENT)
@@ -48,7 +49,7 @@ public class MinersBeltInventorySlot extends MinersInventorySlot {
 
 		@Override
 		public boolean isItemValid(ItemStack itemstack) {
-			return GameHelperCoreModule.isAxe(itemstack.getItem()) && this.minersInventory.hasMinersBelt();
+			return GameHelperAPI.ghEnchantAPI().isAxe(itemstack.getItem()) && this.minersInventory.hasMinersBelt();
 		}
 
 		@SideOnly(value = Side.CLIENT)
@@ -66,7 +67,7 @@ public class MinersBeltInventorySlot extends MinersInventorySlot {
 
 		@Override
 		public boolean isItemValid(ItemStack itemstack) {
-			return GameHelperCoreModule.isShovel(itemstack.getItem()) && this.minersInventory.hasMinersBelt();
+			return GameHelperAPI.ghEnchantAPI().isShovel(itemstack.getItem()) && this.minersInventory.hasMinersBelt();
 		}
 
 		@SideOnly(value = Side.CLIENT)

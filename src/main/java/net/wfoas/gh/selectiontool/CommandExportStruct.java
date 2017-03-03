@@ -12,10 +12,11 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentText;
 import net.wfoas.gh.GameHelper;
+import net.wfoas.gh.commands.GHCommand;
 import net.wfoas.gh.dropsapi.pdr.ChatColor;
 import net.wfoas.gh.ghschematics.GHSchmematicsUtils;
 
-public class CommandExportStruct extends CommandBase {
+public class CommandExportStruct extends GHCommand {
 
 	@Override
 	public String getCommandName() {

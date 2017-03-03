@@ -13,7 +13,7 @@ import net.wfoas.gh.dropsapi.pdr.ChatColor;
 import net.wfoas.gh.multipleworlds.WorldUtils;
 import net.wfoas.gh.multipleworlds.storage.GHWorldManager;
 
-public class CommandListWorld extends CommandBase {
+public class CommandListWorld extends GHCommand {
 
 	@Override
 	public String getCommandName() {

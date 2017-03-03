@@ -24,6 +24,7 @@ import net.wfoas.gh.gui.button.OverlayTexToggleButton;
 import net.wfoas.gh.items.TradeItems;
 import net.wfoas.gh.network.NetworkHandler;
 import net.wfoas.gh.network.packet.PacketPlayEnchantmentAltarApplyEnchantment;
+import net.wfoas.gh.omapi.GameHelperAPI;
 
 public class EnchantmentAltarGui extends GuiContainer {
 	private static final ResourceLocation ENCHANTMENT_TABLE_GUI_TEXTURE = new ResourceLocation("gamehelper",
@@ -263,7 +264,7 @@ public class EnchantmentAltarGui extends GuiContainer {
 			} else {
 				iscopy = container.tableInventory.getStackInSlot(0);
 			}
-			setItemBoundEnchantments(GameHelperCoreModule.getItemBoundEnchantments(iscopy));
+			setItemBoundEnchantments(GameHelperAPI.ghEnchantAPI().getItemBoundEnchantments(iscopy));
 			if (level != 0)
 				LEVEL[level - 1].setSelected(true);
 			if (sel_ench != null) {
@@ -522,7 +523,7 @@ public class EnchantmentAltarGui extends GuiContainer {
 					alldisabled = false;
 					sel_ench = null;
 					level = 0;
-					setItemBoundEnchantments(GameHelperCoreModule.getItemBoundEnchantments(iscopy));
+					setItemBoundEnchantments(GameHelperAPI.ghEnchantAPI().getItemBoundEnchantments(iscopy));
 				}
 				return;
 			}
@@ -530,7 +531,7 @@ public class EnchantmentAltarGui extends GuiContainer {
 				return;
 			} else {
 				iscopy = container.tableInventory.getStackInSlot(0).copy();
-				setItemBoundEnchantments(GameHelperCoreModule.getItemBoundEnchantments(iscopy));
+				setItemBoundEnchantments(GameHelperAPI.ghEnchantAPI().getItemBoundEnchantments(iscopy));
 				sel_ench = null;
 				level = 0;
 				return;

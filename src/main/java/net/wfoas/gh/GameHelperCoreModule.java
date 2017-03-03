@@ -1,44 +1,218 @@
 package net.wfoas.gh;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.Level;
+
+import de.winston.develop.debug.CommandDbgScreenshotFolder;
+import de.winston.network.playerranks.PlayerRanksCommand;
+import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.Entity;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.util.EnumHelper;
+import net.minecraftforge.fml.common.FMLLog;
+import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.registry.EntityRegistry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.wfoas.gh.ads.AdHandler;
+import net.wfoas.gh.armor.GHAmethystArmor;
+import net.wfoas.gh.armor.GHEmeraldArmor;
 import net.wfoas.gh.armor.GHModItemArmor;
+import net.wfoas.gh.armor.GHRubyArmor;
+import net.wfoas.gh.armor.GHSaphirreArmor;
 import net.wfoas.gh.bigsword.BigswordItem;
+import net.wfoas.gh.blocks.AmethystBlock;
+import net.wfoas.gh.blocks.AmethystOre;
 import net.wfoas.gh.blocks.GameHelperModBlock;
 import net.wfoas.gh.blocks.IGHModBlock;
+import net.wfoas.gh.blocks.No_texture_block;
+import net.wfoas.gh.blocks.Pureblack;
+import net.wfoas.gh.blocks.Pureblue;
+import net.wfoas.gh.blocks.Purebrown;
+import net.wfoas.gh.blocks.Purecyan;
+import net.wfoas.gh.blocks.Puregray;
+import net.wfoas.gh.blocks.Puregreen;
+import net.wfoas.gh.blocks.Purelightblue;
+import net.wfoas.gh.blocks.Purelightgray;
+import net.wfoas.gh.blocks.Purelime;
+import net.wfoas.gh.blocks.Puremagenta;
+import net.wfoas.gh.blocks.Pureorange;
+import net.wfoas.gh.blocks.Purepink;
+import net.wfoas.gh.blocks.Purepurple;
+import net.wfoas.gh.blocks.Purered;
+import net.wfoas.gh.blocks.Purewhite;
+import net.wfoas.gh.blocks.Pureyellow;
 import net.wfoas.gh.blocks.Quicksand;
+import net.wfoas.gh.blocks.RubyBlock;
+import net.wfoas.gh.blocks.RubyOre;
+import net.wfoas.gh.blocks.SapphireBlock;
+import net.wfoas.gh.blocks.SapphireOre;
+import net.wfoas.gh.blocks.Tileblack;
+import net.wfoas.gh.blocks.Tileblue;
+import net.wfoas.gh.blocks.Tilebrown;
+import net.wfoas.gh.blocks.Tilecyan;
+import net.wfoas.gh.blocks.Tilegray;
+import net.wfoas.gh.blocks.Tilegreen;
+import net.wfoas.gh.blocks.Tilemagenta;
+import net.wfoas.gh.blocks.Tileorange;
+import net.wfoas.gh.blocks.Tilepink;
+import net.wfoas.gh.blocks.Tilepurple;
+import net.wfoas.gh.blocks.Tilered;
+import net.wfoas.gh.blocks.Tilewhite;
+import net.wfoas.gh.blocks.Tileyellow;
+import net.wfoas.gh.blocks.exploding.ExplodingEndstone;
+import net.wfoas.gh.blocks.exploding.ExplodingNetherrack;
 import net.wfoas.gh.blocks.exploding.GameHelperExplodingStone;
 import net.wfoas.gh.blocks.glass.GameHelperModGlass;
+import net.wfoas.gh.blocks.glass.Neonglas;
+import net.wfoas.gh.blocks.glass.Neonglasblack;
+import net.wfoas.gh.blocks.glass.Neonglasblue;
+import net.wfoas.gh.blocks.glass.Neonglasbrown;
+import net.wfoas.gh.blocks.glass.Neonglascyan;
+import net.wfoas.gh.blocks.glass.Neonglasgray;
+import net.wfoas.gh.blocks.glass.Neonglasgreen;
+import net.wfoas.gh.blocks.glass.Neonglaslightblue;
+import net.wfoas.gh.blocks.glass.Neonglaslime;
+import net.wfoas.gh.blocks.glass.Neonglasmagenta;
+import net.wfoas.gh.blocks.glass.Neonglasorange;
+import net.wfoas.gh.blocks.glass.Neonglaspink;
+import net.wfoas.gh.blocks.glass.Neonglaspurple;
+import net.wfoas.gh.blocks.glass.Neonglasred;
+import net.wfoas.gh.blocks.glass.Neonglassilver;
+import net.wfoas.gh.blocks.glass.Neonglaswhite;
+import net.wfoas.gh.blocks.glass.Neonglasyellow;
+import net.wfoas.gh.blocks.glass.Pureglas;
+import net.wfoas.gh.blocks.glass.Pureglasblack;
+import net.wfoas.gh.blocks.glass.Pureglasblue;
+import net.wfoas.gh.blocks.glass.Pureglasbrown;
+import net.wfoas.gh.blocks.glass.Pureglascyan;
+import net.wfoas.gh.blocks.glass.Pureglasgray;
+import net.wfoas.gh.blocks.glass.Pureglasgreen;
+import net.wfoas.gh.blocks.glass.Pureglaslightblue;
+import net.wfoas.gh.blocks.glass.Pureglaslime;
+import net.wfoas.gh.blocks.glass.Pureglasmagenta;
+import net.wfoas.gh.blocks.glass.Pureglasorange;
+import net.wfoas.gh.blocks.glass.Pureglaspink;
+import net.wfoas.gh.blocks.glass.Pureglaspurple;
+import net.wfoas.gh.blocks.glass.Pureglasred;
+import net.wfoas.gh.blocks.glass.Pureglassilver;
+import net.wfoas.gh.blocks.glass.Pureglasyellow;
+import net.wfoas.gh.commands.CommandBuildFly;
+import net.wfoas.gh.commands.CommandCreateWorld;
+import net.wfoas.gh.commands.CommandGameHelper;
+import net.wfoas.gh.commands.CommandHackSec;
+import net.wfoas.gh.commands.CommandListWorld;
+import net.wfoas.gh.commands.CommandNoclip;
+import net.wfoas.gh.commands.CommandOwnWorld;
+import net.wfoas.gh.commands.CommandPing;
+import net.wfoas.gh.commands.CommandSaveData;
+import net.wfoas.gh.commands.CommandSetPerm;
+import net.wfoas.gh.commands.CommandSound;
+import net.wfoas.gh.commands.CommandToggleNotify;
+import net.wfoas.gh.commands.CommandTpx;
+import net.wfoas.gh.commands.CommandTpxp;
+import net.wfoas.gh.commands.CommandViewPerm;
+import net.wfoas.gh.commands.CommandWKick;
+import net.wfoas.gh.commands.GHCommand;
+import net.wfoas.gh.config.DefaultConfig;
+import net.wfoas.gh.config.GHConfig;
+import net.wfoas.gh.craftingresearchfacilities.CraftingResearchTable;
 import net.wfoas.gh.creativetab.GameHelperTab;
+import net.wfoas.gh.dagger.throwable.ThrowableDagger;
 import net.wfoas.gh.dropsapi.pdr.EnchantmentFinder;
 import net.wfoas.gh.enchaltar.EnchantmentAltar;
+import net.wfoas.gh.enchaltar.TileEntityEnchantmentAltar;
+import net.wfoas.gh.enchantment.EnchantmentDestruction;
+import net.wfoas.gh.enchantment.EnchantmentHeadloot;
+import net.wfoas.gh.enchantment.EnchantmentSmelting;
+import net.wfoas.gh.enchantment.EnchantmentSoulbound;
+import net.wfoas.gh.enchantment.EnchantmentXPBoost;
+import net.wfoas.gh.enchantment.EnchantmentZoom;
+import net.wfoas.gh.events.EventRegistar;
 import net.wfoas.gh.flowers.Flowers;
+import net.wfoas.gh.gui.GuiHandler;
 import net.wfoas.gh.instench.InstantEnchantmentTable;
+import net.wfoas.gh.instench.TileEntityInstantEnchantmentTable;
+import net.wfoas.gh.items.BackpackItem;
+import net.wfoas.gh.items.BigBackpackItem;
+import net.wfoas.gh.items.EnderbackpackItem;
 import net.wfoas.gh.items.GameHelperModItem;
 import net.wfoas.gh.items.GameHelperModSword;
 import net.wfoas.gh.items.ItemTelescope;
 import net.wfoas.gh.items.MobileWorkbenchItem;
 import net.wfoas.gh.items.PotionBow;
+import net.wfoas.gh.items.SelectionTool;
+import net.wfoas.gh.items.SelectionTool2;
 import net.wfoas.gh.items.TradeItems;
+import net.wfoas.gh.items.UltraBackpackItem;
+import net.wfoas.gh.items.WorldTeleporterItem;
+import net.wfoas.gh.items.dimension.DimensionShard;
 import net.wfoas.gh.items.tools.ItemGHAxeTool;
 import net.wfoas.gh.items.tools.ItemGHHoeTool;
 import net.wfoas.gh.items.tools.ItemGHPickaxeTool;
 import net.wfoas.gh.items.tools.ItemGHShovelTool;
 import net.wfoas.gh.minersinventory.items.IronDagger;
+import net.wfoas.gh.minersinventory.items.MinersBackpack;
+import net.wfoas.gh.minersinventory.items.MinersDagger;
+import net.wfoas.gh.minersinventory.items.MinersHelmetLight;
+import net.wfoas.gh.minersinventory.items.MinersToolsBelt;
+import net.wfoas.gh.multipleworlds.storage.GHWorldManager;
+import net.wfoas.gh.network.securedlogin.timeout.PlayerLoginTimeOut;
+import net.wfoas.gh.notifysettings.NotifyTable;
+import net.wfoas.gh.omapi.GameHelperAPI;
+import net.wfoas.gh.omapi.module.GameHelperModuleAbstract;
 import net.wfoas.gh.op_anvil.OPAnvil;
+import net.wfoas.gh.potionbow.EntityShotPotion;
+import net.wfoas.gh.protected_blocks.ProtectedBlocksRegistry;
+import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntity;
+import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntityBlock;
+import net.wfoas.gh.protected_blocks.furnace.ProtectedFurnaceBlock;
+import net.wfoas.gh.protected_blocks.furnace.ProtectedFurnaceTileEntity;
+import net.wfoas.gh.proxies.ClientProxy;
+import net.wfoas.gh.proxies.CommonProxy;
+import net.wfoas.gh.proxies.LogicalClientEnvironment;
+import net.wfoas.gh.recipes.RecipeManager;
+import net.wfoas.gh.selectiontool.CommandExportStruct;
+import net.wfoas.gh.sound.SoundHandlerGH;
+import net.wfoas.gh.survivaltabs.GHTabMinersInv;
+import net.wfoas.gh.survivaltabs.GHThermalTab;
+import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorBootsItem;
+import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorChestplateItem;
+import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorHelmetItem;
+import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorLeggingsItem;
+import net.wfoas.gh.unchant.TileEntityUnchantmentTable;
 import net.wfoas.gh.unchant.UnchantmentTable;
 import net.wfoas.gh.uncraftingtable.UncraftingTable;
+import net.wfoas.gh.villager.VillagerRegistrar;
+import net.wfoas.gh.villager.entity.GHVillager;
 import net.wfoas.gh.worlddimensionsutils.DimensionBlock;
+import net.wfoas.gh.worldgenerator.GHWorldGenerator;
+import tconstruct.client.tabs.InventoryTabVanilla;
+import tconstruct.client.tabs.TabRegistry;
 
-public class GameHelperCoreModule {
+public class GameHelperCoreModule extends GameHelperModuleAbstract {
+	@SidedProxy(clientSide = "net.wfoas.gh.proxies.ClientProxy", serverSide = "net.wfoas.gh.proxies.CommonProxy", modId = GameHelper.MODID)
+	public static CommonProxy proxy;
+
 	public static GameHelperModBlock Tilemagenta;
 	public static GameHelperModBlock Tilecyan;
 	public static GameHelperModBlock Tilepink;
@@ -155,12 +329,15 @@ public class GameHelperCoreModule {
 	public static IGHModBlock SEC_CHEST, SEC_FURNACE, SEC_FURNACE_LIT;
 	public static GameHelperModBlock MARBLE, MARBLE_BRICK, BASALT, BASALT_BRICK, BASALT_COBBLE;
 
+	public static CraftingResearchTable CRAFTING_RESEARCH_TABLE;
+
 	public static Quicksand quicksand;
 
 	public static GameHelperExplodingStone exp_netherrack, exp_endstone;
 
 	public static UncraftingTable UNCRAFTING_TABLE;
 
+	@Override
 	public void registerTab() {
 		TAB_GAMEHELPER = new GameHelperTab("ghTab");
 		BACKPACK.updateInitEvent(TAB_GAMEHELPER);
@@ -322,285 +499,367 @@ public class GameHelperCoreModule {
 		exp_endstone.updateInitEvent(TAB_GAMEHELPER);
 		exp_netherrack.updateInitEvent(TAB_GAMEHELPER);
 		UNCRAFTING_TABLE.updateInitEvent(TAB_GAMEHELPER);
+		CRAFTING_RESEARCH_TABLE.updateInitEvent(TAB_GAMEHELPER);
 	}
 
-	public List<Item> helmetList = new ArrayList<Item>();
-	public List<Item> chestplateList = new ArrayList<Item>();
-	public List<Item> leggingsList = new ArrayList<Item>();
-	public List<Item> bootsList = new ArrayList<Item>();
-	public Enchantment[] chestplateEnchants, leggingsEnchants, helmetEnchants, bootsEnchants, swordEnchants,
-			otherMaterialEnchants, shovelEnchants, fnsEnchants, axeEnchants, bowEnchants, pickaxeSilk,
-			pickaxeFortuneSmelting, pickaxeElse, rodEnchants, hoeEnchants, shearsEnchants;
-
-	public List<Item> shovelList = new ArrayList<Item>();
-	public List<Item> swordList = new ArrayList<Item>();
-	public List<Item> pickaxeList = new ArrayList<Item>();
-	public List<Item> axeList = new ArrayList<Item>();
-	public List<Item> hoeList = new ArrayList<Item>();
-	public List<Item> fnsList = new ArrayList<Item>();
-	public List<Item> rodList = new ArrayList<Item>();
-	public List<Item> bowList = new ArrayList<Item>();
-	public List<Item> shearsList = new ArrayList<Item>();
-
-	public static void setupEnchLists() {
-		// helmet
-		GameHelper.GH_MODULE.helmetList.add(Items.leather_helmet);
-		GameHelper.GH_MODULE.helmetList.add(Items.chainmail_helmet);
-		GameHelper.GH_MODULE.helmetList.add(Items.diamond_helmet);
-		GameHelper.GH_MODULE.helmetList.add(Items.golden_helmet);
-		GameHelper.GH_MODULE.helmetList.add(Items.iron_helmet);
-		GameHelper.GH_MODULE.helmetList.add(GameHelperCoreModule.EMERALD_HELMET);
-		GameHelper.GH_MODULE.helmetList.add(GameHelperCoreModule.RUBY_HELMET);
-		GameHelper.GH_MODULE.helmetList.add(GameHelperCoreModule.SAPPHIRE_HELMET);
-		GameHelper.GH_MODULE.helmetList.add(GameHelperCoreModule.AMETHYST_HELMET);
-		// chestplates
-		GameHelper.GH_MODULE.chestplateList.add(Items.leather_chestplate);
-		GameHelper.GH_MODULE.chestplateList.add(Items.chainmail_chestplate);
-		GameHelper.GH_MODULE.chestplateList.add(Items.diamond_chestplate);
-		GameHelper.GH_MODULE.chestplateList.add(Items.golden_chestplate);
-		GameHelper.GH_MODULE.chestplateList.add(Items.iron_chestplate);
-		GameHelper.GH_MODULE.chestplateList.add(GameHelperCoreModule.EMERALD_CHESTPLATE);
-		GameHelper.GH_MODULE.chestplateList.add(GameHelperCoreModule.RUBY_CHESTPLATE);
-		GameHelper.GH_MODULE.chestplateList.add(GameHelperCoreModule.SAPPHIRE_CHESTPLATE);
-		GameHelper.GH_MODULE.chestplateList.add(GameHelperCoreModule.AMETHYST_CHESTPLATE);
-		// leggings
-		GameHelper.GH_MODULE.leggingsList.add(Items.leather_leggings);
-		GameHelper.GH_MODULE.leggingsList.add(Items.chainmail_leggings);
-		GameHelper.GH_MODULE.leggingsList.add(Items.diamond_leggings);
-		GameHelper.GH_MODULE.leggingsList.add(Items.golden_leggings);
-		GameHelper.GH_MODULE.leggingsList.add(Items.iron_leggings);
-		GameHelper.GH_MODULE.leggingsList.add(GameHelperCoreModule.EMERALD_LEGGINGS);
-		GameHelper.GH_MODULE.leggingsList.add(GameHelperCoreModule.RUBY_LEGGINGS);
-		GameHelper.GH_MODULE.leggingsList.add(GameHelperCoreModule.SAPPHIRE_LEGGINGS);
-		GameHelper.GH_MODULE.leggingsList.add(GameHelperCoreModule.AMETHYST_LEGGINGS);
-		// boots
-		GameHelper.GH_MODULE.bootsList.add(Items.leather_boots);
-		GameHelper.GH_MODULE.bootsList.add(Items.chainmail_boots);
-		GameHelper.GH_MODULE.bootsList.add(Items.diamond_boots);
-		GameHelper.GH_MODULE.bootsList.add(Items.golden_boots);
-		GameHelper.GH_MODULE.bootsList.add(Items.iron_boots);
-		GameHelper.GH_MODULE.bootsList.add(GameHelperCoreModule.EMERALD_BOOTS);
-		GameHelper.GH_MODULE.bootsList.add(GameHelperCoreModule.RUBY_BOOTS);
-		GameHelper.GH_MODULE.bootsList.add(GameHelperCoreModule.SAPPHIRE_BOOTS);
-		GameHelper.GH_MODULE.bootsList.add(GameHelperCoreModule.AMETHYST_BOOTS);
-		// sword
-		GameHelper.GH_MODULE.swordList.add(Items.wooden_sword);
-		GameHelper.GH_MODULE.swordList.add(Items.stone_sword);
-		GameHelper.GH_MODULE.swordList.add(Items.diamond_sword);
-		GameHelper.GH_MODULE.swordList.add(Items.golden_sword);
-		GameHelper.GH_MODULE.swordList.add(Items.iron_sword);
-		GameHelper.GH_MODULE.swordList.add(GameHelperCoreModule.EMERALD_SWORD);
-		GameHelper.GH_MODULE.swordList.add(GameHelperCoreModule.RUBY_SWORD);
-		GameHelper.GH_MODULE.swordList.add(GameHelperCoreModule.SAPPHIRE_SWORD);
-		GameHelper.GH_MODULE.swordList.add(GameHelperCoreModule.AMETHYST_SWORD);
-		// pickaxe
-		GameHelper.GH_MODULE.pickaxeList.add(Items.wooden_pickaxe);
-		GameHelper.GH_MODULE.pickaxeList.add(Items.stone_pickaxe);
-		GameHelper.GH_MODULE.pickaxeList.add(Items.diamond_pickaxe);
-		GameHelper.GH_MODULE.pickaxeList.add(Items.golden_pickaxe);
-		GameHelper.GH_MODULE.pickaxeList.add(Items.iron_pickaxe);
-		GameHelper.GH_MODULE.pickaxeList.add(GameHelperCoreModule.EMERALD_PICKAXE);
-		GameHelper.GH_MODULE.pickaxeList.add(GameHelperCoreModule.RUBY_PICKAXE);
-		GameHelper.GH_MODULE.pickaxeList.add(GameHelperCoreModule.SAPPHIRE_PICKAXE);
-		GameHelper.GH_MODULE.pickaxeList.add(GameHelperCoreModule.AMETHYST_PICKAXE);
-		// GameHelper.GH_MODULE.pickaxeList.add(GameHelper.EMERALD_pickaxe);
-		// GameHelper.GH_MODULE.pickaxeList.add(GameHelper.RUBY_pickaxe);
-		// GameHelper.GH_MODULE.pickaxeList.add(GameHelper.SAPPHIRE_pickaxe);
-		// axe
-		GameHelper.GH_MODULE.axeList.add(Items.wooden_axe);
-		GameHelper.GH_MODULE.axeList.add(Items.stone_axe);
-		GameHelper.GH_MODULE.axeList.add(Items.diamond_axe);
-		GameHelper.GH_MODULE.axeList.add(Items.golden_axe);
-		GameHelper.GH_MODULE.axeList.add(Items.iron_axe);
-		GameHelper.GH_MODULE.axeList.add(GameHelperCoreModule.EMERALD_AXE);
-		GameHelper.GH_MODULE.axeList.add(GameHelperCoreModule.RUBY_AXE);
-		GameHelper.GH_MODULE.axeList.add(GameHelperCoreModule.SAPPHIRE_AXE);
-		GameHelper.GH_MODULE.axeList.add(GameHelperCoreModule.AMETHYST_AXE);
-		// GameHelper.GH_MODULE.axeList.add(GameHelper.EMERALD_axe);
-		// GameHelper.GH_MODULE.axeList.add(GameHelper.RUBY_axe);
-		// GameHelper.GH_MODULE.axeList.add(GameHelper.SAPPHIRE_axe);
-		// hoe
-		GameHelper.GH_MODULE.hoeList.add(Items.wooden_hoe);
-		GameHelper.GH_MODULE.hoeList.add(Items.stone_hoe);
-		GameHelper.GH_MODULE.hoeList.add(Items.diamond_hoe);
-		GameHelper.GH_MODULE.hoeList.add(Items.golden_hoe);
-		GameHelper.GH_MODULE.hoeList.add(Items.iron_hoe);
-		GameHelper.GH_MODULE.hoeList.add(GameHelperCoreModule.EMERALD_AXE);
-		GameHelper.GH_MODULE.hoeList.add(GameHelperCoreModule.RUBY_AXE);
-		GameHelper.GH_MODULE.hoeList.add(GameHelperCoreModule.SAPPHIRE_AXE);
-		GameHelper.GH_MODULE.hoeList.add(GameHelperCoreModule.AMETHYST_AXE);
-		// GameHelper.GH_MODULE.hoeList.add(GameHelper.EMERALD_hoe);
-		// GameHelper.GH_MODULE.hoeList.add(GameHelper.RUBY_hoe);
-		// GameHelper.GH_MODULE.hoeList.add(GameHelper.SAPPHIRE_hoe);
-		// shovel
-		GameHelper.GH_MODULE.shovelList.add(Items.wooden_shovel);
-		GameHelper.GH_MODULE.shovelList.add(Items.stone_shovel);
-		GameHelper.GH_MODULE.shovelList.add(Items.diamond_shovel);
-		GameHelper.GH_MODULE.shovelList.add(Items.golden_shovel);
-		GameHelper.GH_MODULE.shovelList.add(Items.iron_shovel);
-		GameHelper.GH_MODULE.shovelList.add(GameHelperCoreModule.EMERALD_SHOVEL);
-		GameHelper.GH_MODULE.shovelList.add(GameHelperCoreModule.RUBY_SHOVEL);
-		GameHelper.GH_MODULE.shovelList.add(GameHelperCoreModule.SAPPHIRE_SHOVEL);
-		GameHelper.GH_MODULE.shovelList.add(GameHelperCoreModule.AMETHYST_SHOVEL);
-		// GameHelper.GH_MODULE.shovelList.add(GameHelper.EMERALD_shovel);
-		// GameHelper.GH_MODULE.shovelList.add(GameHelper.RUBY_shovel);
-		// GameHelper.GH_MODULE.shovelList.add(GameHelper.SAPPHIRE_shovel);
-		// fns
-		GameHelper.GH_MODULE.fnsList.add(Items.flint_and_steel);
-		// rod
-		GameHelper.GH_MODULE.rodList.add(Items.fishing_rod);
-		// bow
-		GameHelper.GH_MODULE.bowList.add(Items.bow);
-		// shears
-		GameHelper.GH_MODULE.shearsList.add(Items.shears);
-
-		GameHelper.GH_MODULE.chestplateEnchants = new Enchantment[] { EnchantmentFinder.PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.PROJECTILE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.FIRE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.BLAST_PROTECTION.toFMLEnchantment(), EnchantmentFinder.THORNS.toFMLEnchantment(),
-				EnchantmentFinder.UNBREAKING.toFMLEnchantment(), EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-		GameHelper.GH_MODULE.helmetEnchants = new Enchantment[] { EnchantmentFinder.PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.PROJECTILE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.FIRE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.BLAST_PROTECTION.toFMLEnchantment(), EnchantmentFinder.THORNS.toFMLEnchantment(),
-				EnchantmentFinder.UNBREAKING.toFMLEnchantment(), EnchantmentFinder.SOULBOUND.toFMLEnchantment(),
-				EnchantmentFinder.AQUA_AFFINITY.toFMLEnchantment(), EnchantmentFinder.RESPIRATION.toFMLEnchantment() };
-		GameHelper.GH_MODULE.leggingsEnchants = new Enchantment[] { EnchantmentFinder.PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.PROJECTILE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.FIRE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.BLAST_PROTECTION.toFMLEnchantment(), EnchantmentFinder.THORNS.toFMLEnchantment(),
-				EnchantmentFinder.UNBREAKING.toFMLEnchantment(), EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-		GameHelper.GH_MODULE.bootsEnchants = new Enchantment[] { EnchantmentFinder.PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.PROJECTILE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.FIRE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.BLAST_PROTECTION.toFMLEnchantment(), EnchantmentFinder.THORNS.toFMLEnchantment(),
-				EnchantmentFinder.UNBREAKING.toFMLEnchantment(), EnchantmentFinder.SOULBOUND.toFMLEnchantment(),
-				EnchantmentFinder.FEATHER_FALLING.toFMLEnchantment(),
-				EnchantmentFinder.DEPTH_STRIDER.toFMLEnchantment() };
-		GameHelper.GH_MODULE.pickaxeSilk = new Enchantment[] { EnchantmentFinder.EFFICIENCY.toFMLEnchantment(),
-				EnchantmentFinder.SILK_TOUCH.toFMLEnchantment(), EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment(), EnchantmentFinder.XPBOOST.toFMLEnchantment() };
-		GameHelper.GH_MODULE.pickaxeFortuneSmelting = new Enchantment[] { EnchantmentFinder.FORTUNE.toFMLEnchantment(),
-				EnchantmentFinder.EFFICIENCY.toFMLEnchantment(), EnchantmentFinder.SMELTING.toFMLEnchantment(),
-				EnchantmentFinder.UNBREAKING.toFMLEnchantment(), EnchantmentFinder.SOULBOUND.toFMLEnchantment(),
-				EnchantmentFinder.XPBOOST.toFMLEnchantment(), EnchantmentFinder.DESTRUCTION.toFMLEnchantment() };
-		GameHelper.GH_MODULE.pickaxeElse = new Enchantment[] { EnchantmentFinder.FORTUNE.toFMLEnchantment(),
-				EnchantmentFinder.EFFICIENCY.toFMLEnchantment(), EnchantmentFinder.SILK_TOUCH.toFMLEnchantment(),
-				EnchantmentFinder.SMELTING.toFMLEnchantment(), EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment(), EnchantmentFinder.XPBOOST.toFMLEnchantment(),
-				EnchantmentFinder.DESTRUCTION.toFMLEnchantment() };
-		GameHelper.GH_MODULE.swordEnchants = new Enchantment[] { EnchantmentFinder.SHARPNESS.toFMLEnchantment(),
-				EnchantmentFinder.BANE_OF_ARTHROPODS.toFMLEnchantment(), EnchantmentFinder.KNOCKBACK.toFMLEnchantment(),
-				EnchantmentFinder.LOOTING.toFMLEnchantment(), EnchantmentFinder.FIRE_ASPECT.toFMLEnchantment(),
-				EnchantmentFinder.SMITE.toFMLEnchantment(), EnchantmentFinder.SOULBOUND.toFMLEnchantment(),
-				EnchantmentFinder.XPBOOST.toFMLEnchantment(), EnchantmentFinder.HEAD_LOOT.toFMLEnchantment(),
-				EnchantmentFinder.UNBREAKING.toFMLEnchantment() };
-		GameHelper.GH_MODULE.bowEnchants = new Enchantment[] { EnchantmentFinder.POWER.toFMLEnchantment(),
-				EnchantmentFinder.FLAME.toFMLEnchantment(), EnchantmentFinder.PUNCH.toFMLEnchantment(),
-				EnchantmentFinder.INFINITY.toFMLEnchantment(), EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment(), EnchantmentFinder.XPBOOST.toFMLEnchantment() };
-		GameHelper.GH_MODULE.rodEnchants = new Enchantment[] { EnchantmentFinder.LURE.toFMLEnchantment(),
-				EnchantmentFinder.LUCK_OF_THE_SEA.toFMLEnchantment(), EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-		GameHelper.GH_MODULE.hoeEnchants = new Enchantment[] { EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-		GameHelper.GH_MODULE.axeEnchants = new Enchantment[] { EnchantmentFinder.EFFICIENCY.toFMLEnchantment(),
-				EnchantmentFinder.UNBREAKING.toFMLEnchantment(), EnchantmentFinder.SMELTING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment(), EnchantmentFinder.HEAD_LOOT.toFMLEnchantment() };
-		GameHelper.GH_MODULE.shovelEnchants = new Enchantment[] { EnchantmentFinder.EFFICIENCY.toFMLEnchantment(),
-				EnchantmentFinder.SMELTING.toFMLEnchantment(), EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-		GameHelper.GH_MODULE.fnsEnchants = new Enchantment[] { EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-		GameHelper.GH_MODULE.shearsEnchants = new Enchantment[] { EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-		GameHelper.GH_MODULE.otherMaterialEnchants = new Enchantment[] {
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-	}
-
-	public static boolean isArmorChestLeggings(Item m) {
-		return GameHelper.GH_MODULE.chestplateList.contains(m) || GameHelper.GH_MODULE.leggingsList.contains(m);
-	}
-
-	static public boolean isArmorBoots(Item m) {
-		return GameHelper.GH_MODULE.bootsList.contains(m);
-	}
-
-	static public boolean isArmorHelmet(Item m) {
-		return GameHelper.GH_MODULE.helmetList.contains(m);
-	}
-
-	static public boolean isShovel(Item m) {
-		return GameHelper.GH_MODULE.shovelList.contains(m);
-	}
-
-	static public boolean isPickaxe(Item m) {
-		return GameHelper.GH_MODULE.pickaxeList.contains(m);
-	}
-
-	static public boolean isAxe(Item m) {
-		return GameHelper.GH_MODULE.axeList.contains(m);
-	}
-
-	static public boolean isHoe(Item m) {
-		return GameHelper.GH_MODULE.hoeList.contains(m);
-	}
-
-	static public boolean isBow(Item m) {
-		return GameHelper.GH_MODULE.bowList.contains(m);
-	}
-
-	static public boolean isFishingRod(Item m) {
-		return GameHelper.GH_MODULE.rodList.contains(m);
-	}
-
-	static public boolean isFNS(Item m) {
-		return GameHelper.GH_MODULE.fnsList.contains(m);
-	}
-
-	static public boolean isShear(Item m) {
-		return GameHelper.GH_MODULE.shearsList.contains(m);
-	}
-
-	static public boolean isSword(Item m) {
-		return GameHelper.GH_MODULE.swordList.contains(m);
-	}
-
-	public static Enchantment[] getItemBoundEnchantments(ItemStack is) {
-		Item m = is.getItem();
-		if (isArmorChestLeggings(m)) {
-			return GameHelper.GH_MODULE.chestplateEnchants;
-		} else if (isArmorBoots(m)) {
-			return GameHelper.GH_MODULE.bootsEnchants;
-		} else if (isArmorHelmet(m)) {
-			return GameHelper.GH_MODULE.helmetEnchants;
-		} else if (isAxe(m)) {
-			return GameHelper.GH_MODULE.axeEnchants;
-		} else if (isBow(m)) {
-			return GameHelper.GH_MODULE.bowEnchants;
-		} else if (isFishingRod(m)) {
-			return GameHelper.GH_MODULE.rodEnchants;
-		} else if (isFNS(m)) {
-			return GameHelper.GH_MODULE.fnsEnchants;
-		} else if (isHoe(m)) {
-			return GameHelper.GH_MODULE.hoeEnchants;
-		} else if (isPickaxe(m)) {
-			if (GameHelper.getUtils().hasEnchantment(is, EnchantmentFinder.SILK_TOUCH.toFMLEnchantment())) {
-				return GameHelper.GH_MODULE.pickaxeSilk;
-			} else if (GameHelper.getUtils().hasEnchantment(is, EnchantmentFinder.FORTUNE.toFMLEnchantment())
-					|| GameHelper.getUtils().hasEnchantment(is, EnchantmentFinder.SMELTING.toFMLEnchantment())) {
-				return GameHelper.GH_MODULE.pickaxeFortuneSmelting;
-			} else {
-				return GameHelper.GH_MODULE.pickaxeElse;
-			}
-		} else if (isShear(m)) {
-			return GameHelper.GH_MODULE.shearsEnchants;
-		} else if (isShovel(m)) {
-			return GameHelper.GH_MODULE.shovelEnchants;
-		} else if (isSword(m)) {
-			return GameHelper.GH_MODULE.swordEnchants;
+	@Override
+	public void preInitServer(FMLPreInitializationEvent event) {
+		SoundHandlerGH.init();
+		SoundHandlerGH.addSound("wow");
+		SoundHandlerGH.addSound("nice");
+		SoundHandlerGH.addSound("ohyeah");
+		if (event.getSide() == Side.CLIENT) {
+			GameHelper.instance.structuresDirCl = new File(Minecraft.getMinecraft().mcDataDir, "structures_gh");
+			GameHelper.instance.structuresDir = GameHelper.instance.structuresDirCl;
 		} else {
-			return GameHelper.GH_MODULE.otherMaterialEnchants;
+			GameHelper.instance.structuresDirSv = new File(MinecraftServer.getServer().getDataDirectory(),
+					"structures_gh");
+			GameHelper.instance.structuresDir = GameHelper.instance.structuresDirSv;
 		}
+		GameHelper.instance.structuresDir.mkdirs();
+		GameHelper.instance.cfgDataFolder = new File(event.getModConfigurationDirectory(), "gamehelper");
+		GameHelper.instance.cfgDataFolder.mkdirs();
+		GameHelper.instance.defaultConfig = new DefaultConfig();
+		GameHelper.instance.CONFIG = new GHConfig(new File(GameHelper.instance.cfgDataFolder, "config.properties"));
+		GameHelperCoreModule.T_RUBY = EnumHelper.addToolMaterial("T_RUBY", 3, 4500, 14.0F, 5.0F, 27);
+		GameHelperCoreModule.BIG_RUBY = EnumHelper.addToolMaterial("BIG_RUBY", 0, 4500, 14.0F, 14.0F, 27);
+		GameHelperCoreModule.T_SAPPHIRE = EnumHelper.addToolMaterial("T_SAPPHIRE", 3, 4000, 13.0F, 4.5F, 26);
+		GameHelperCoreModule.BIG_SAPPHIRE = EnumHelper.addToolMaterial("BIG_SAPPHIRE", 0, 4000, 13.0F, 13.0F, 26);
+		GameHelperCoreModule.T_EMERALD = EnumHelper.addToolMaterial("T_EMERALD", 3, 3000, 12.0F, 4.0F, 25);
+		GameHelperCoreModule.T_AMETHYST = EnumHelper.addToolMaterial("T_AMETHYST", 4, 6000, 15F, 3.5F, 45);
+		GameHelperCoreModule.BIG_EMERALD = EnumHelper.addToolMaterial("BIG_EMERALD", 0, 3000, 12.0F, 12.0F, 25);
+		GameHelperCoreModule.BIG_GOLD = EnumHelper.addToolMaterial("BIG_GOLD", 0, 32, 12.0F, 4.0F, 22);
+		GameHelperCoreModule.BIG_DIAMOND = EnumHelper.addToolMaterial("BIG_DIAMOND", 3, 1561, 8.0F, 10.0F, 10);
+		GameHelperCoreModule.BIG_STONE = EnumHelper.addToolMaterial("BIG_STONE", 1, 131, 4.0F, 6.0F, 5);
+		GameHelperCoreModule.BIG_WOOD = EnumHelper.addToolMaterial("BIG_WOOD", 0, 59, 2.0F, 4.0F, 15);
+		GameHelperCoreModule.BIG_IRON = EnumHelper.addToolMaterial("BIG_IRON", 2, 250, 6.0F, 8.0F, 14);
+		GameHelperCoreModule.TROLLING_MATERIAL = EnumHelper.addToolMaterial("TROLLING_MATERIAL", 0, -1, 2.0F, -3.0F,
+				15);
+		GameHelperCoreModule.EMERALD = EnumHelper.addArmorMaterial("emerald", "gamehelper:emerald", 35,
+				new int[] { 3, 8, 6, 3 }, 25);
+		GameHelperCoreModule.AMETHYST = EnumHelper.addArmorMaterial("amethyst", "gamehelper:amethyst", 40,
+				new int[] { 3, 8, 6, 3 }, 45);
+		GameHelperCoreModule.SAPPHIRE = EnumHelper.addArmorMaterial("saphirre", "gamehelper:sapphire", 36,
+				new int[] { 3, 8, 6, 3 }, 26);
+		GameHelperCoreModule.RUBY = EnumHelper.addArmorMaterial("ruby", "gamehelper:ruby", 37, new int[] { 3, 8, 6, 3 },
+				27);
+		GameHelperCoreModule.RAINBOW = EnumHelper.addArmorMaterial("rainbow", "gamehelper:rainbow", 38,
+				new int[] { 3, 8, 6, 3 }, 30);
+		GameHelperCoreModule.SPIRAL = EnumHelper.addArmorMaterial("spiral", "gamehelper:spiral", -1,
+				new int[] { 3, 8, 6, 3 }, 1);
+		GameHelperCoreModule.ENCH_SOULBOUND = new EnchantmentSoulbound(70,
+				new ResourceLocation(GameHelper.MODID, "soulbound"), 10);
+		GameHelperCoreModule.ENCH_SMELTING = new EnchantmentSmelting(71,
+				new ResourceLocation(GameHelper.MODID, "smelting"), 15);
+		GameHelperCoreModule.ENCH_XPBOOST = new EnchantmentXPBoost(72,
+				new ResourceLocation(GameHelper.MODID, "xp_boost"), 13);
+		GameHelperCoreModule.ENCH_HEADLOOT = new EnchantmentHeadloot(73,
+				new ResourceLocation(GameHelper.MODID, "headloot"), 18);
+		GameHelperCoreModule.ENCH_ZOOM = new EnchantmentZoom(74, new ResourceLocation(GameHelper.MODID, "zoom"), 13);
+		GameHelperCoreModule.ENCH_DESTRUCTION = new EnchantmentDestruction(75,
+				new ResourceLocation(GameHelper.MODID, "destruction"), 15);
+		GameHelperCoreModule.ENCH_ALTAR = new EnchantmentAltar();
+		GameHelperCoreModule.INST_ENCH = new InstantEnchantmentTable();
+		GameHelperCoreModule.UNCH_TABL = new UnchantmentTable();
+		EventRegistar.registerEventClass();
+		GameHelperCoreModule.SAPPHIRE_ITEM = new GameHelperModItem("sapphire");
+		GameHelperCoreModule.RUBY_ITEM = new GameHelperModItem("ruby");
+		GameHelperCoreModule.AMETHYST_ITEM = new GameHelperModItem("amethyst");
+		GameHelperCoreModule.OP_ANVIL = new OPAnvil();
+		GameHelperCoreModule.BACKPACK = new BackpackItem();
+		GameHelperCoreModule.BIG_BACKPACK = new BigBackpackItem();
+		GameHelperCoreModule.ULTRA_BACKPACK = new UltraBackpackItem();
+		GameHelperCoreModule.ENDER_BACKPACK = new EnderbackpackItem();
+		GameHelperCoreModule.WORLD_TELEPORTER = new WorldTeleporterItem();
+		GameHelperCoreModule.OBSIDIAN_STICKS = new GameHelperModItem("obsidian_stick");
+		GameHelperCoreModule.OBSIDIAN_SHARD = new GameHelperModItem("obsidian_shard");
+		GameHelperCoreModule.GOLD_BS = new BigswordItem("gold_Bigsword", GameHelperCoreModule.BIG_GOLD);
+		GameHelperCoreModule.DIAMOND_BS = new BigswordItem("diamond_Bigsword", GameHelperCoreModule.BIG_DIAMOND);
+		GameHelperCoreModule.STONE_BS = new BigswordItem("stone_Bigsword", GameHelperCoreModule.BIG_STONE);
+		GameHelperCoreModule.WOOD_BS = new BigswordItem("wood_Bigsword", GameHelperCoreModule.BIG_WOOD);
+		GameHelperCoreModule.IRON_BS = new BigswordItem("iron_Bigsword", GameHelperCoreModule.BIG_IRON);
+		GameHelperCoreModule.EMERALD_BS = new BigswordItem("emerald_Bigsword", GameHelperCoreModule.BIG_EMERALD);
+		GameHelperCoreModule.SAPPHIRE_BS = new BigswordItem("sapphire_Bigsword", GameHelperCoreModule.BIG_SAPPHIRE);
+		GameHelperCoreModule.RUBY_BS = new BigswordItem("ruby_Bigsword", GameHelperCoreModule.BIG_RUBY);
+		GameHelperCoreModule.EMERALD_HELMET = new GHEmeraldArmor("emerald_helmet", 1, 0);
+		GameHelperCoreModule.EMERALD_CHESTPLATE = new GHEmeraldArmor("emerald_chestplate", 1, 1);
+		GameHelperCoreModule.EMERALD_LEGGINGS = new GHEmeraldArmor("emerald_leggings", 2, 2);
+		GameHelperCoreModule.EMERALD_BOOTS = new GHEmeraldArmor("emerald_boots", 1, 3);
+		GameHelperCoreModule.RUBY_HELMET = new GHRubyArmor("ruby_helmet", 1, 0);
+		GameHelperCoreModule.RUBY_CHESTPLATE = new GHRubyArmor("ruby_chestplate", 1, 1);
+		GameHelperCoreModule.RUBY_LEGGINGS = new GHRubyArmor("ruby_leggings", 2, 2);
+		GameHelperCoreModule.RUBY_BOOTS = new GHRubyArmor("ruby_boots", 1, 3);
+		GameHelperCoreModule.AMETHYST_HELMET = new GHAmethystArmor("amethyst_helmet", 1, 0);
+		GameHelperCoreModule.AMETHYST_CHESTPLATE = new GHAmethystArmor("amethyst_chestplate", 1, 1);
+		GameHelperCoreModule.AMETHYST_LEGGINGS = new GHAmethystArmor("amethyst_leggings", 2, 2);
+		GameHelperCoreModule.AMETHYST_BOOTS = new GHAmethystArmor("amethyst_boots", 1, 3);
+		GameHelperCoreModule.SAPPHIRE_HELMET = new GHSaphirreArmor("sapphire_helmet", 1, 0);
+		GameHelperCoreModule.SAPPHIRE_CHESTPLATE = new GHSaphirreArmor("sapphire_chestplate", 1, 1);
+		GameHelperCoreModule.SAPPHIRE_LEGGINGS = new GHSaphirreArmor("sapphire_leggings", 2, 2);
+		GameHelperCoreModule.SAPPHIRE_BOOTS = new GHSaphirreArmor("sapphire_boots", 1, 3);
+		GameHelperCoreModule.SAPPHIRE.customCraftingMaterial = GameHelperCoreModule.SAPPHIRE_ITEM;
+		GameHelperCoreModule.AMETHYST_SWORD = new GameHelperModSword("amethyst_sword", GameHelperCoreModule.T_AMETHYST);
+		GameHelperCoreModule.EMERALD_SWORD = new GameHelperModSword("emerald_sword", GameHelperCoreModule.T_EMERALD);
+		GameHelperCoreModule.SAPPHIRE_SWORD = new GameHelperModSword("sapphire_sword", GameHelperCoreModule.T_SAPPHIRE);
+		GameHelperCoreModule.RUBY_SWORD = new GameHelperModSword("ruby_sword", GameHelperCoreModule.T_RUBY);
+		GameHelperCoreModule.EMERALD_PICKAXE = new ItemGHPickaxeTool("emerald_pickaxe", GameHelperCoreModule.T_EMERALD);
+		GameHelperCoreModule.SAPPHIRE_PICKAXE = new ItemGHPickaxeTool("sapphire_pickaxe",
+				GameHelperCoreModule.T_SAPPHIRE);
+		GameHelperCoreModule.RUBY_PICKAXE = new ItemGHPickaxeTool("ruby_pickaxe", GameHelperCoreModule.T_RUBY);
+		GameHelperCoreModule.AMETHYST_PICKAXE = new ItemGHPickaxeTool("amethyst_pickaxe",
+				GameHelperCoreModule.T_AMETHYST);
+		//
+		GameHelperCoreModule.EMERALD_AXE = new ItemGHAxeTool("emerald_axe", GameHelperCoreModule.T_EMERALD);
+		GameHelperCoreModule.SAPPHIRE_AXE = new ItemGHAxeTool("sapphire_axe", GameHelperCoreModule.T_SAPPHIRE);
+		GameHelperCoreModule.RUBY_AXE = new ItemGHAxeTool("ruby_axe", GameHelperCoreModule.T_RUBY);
+		GameHelperCoreModule.AMETHYST_AXE = new ItemGHAxeTool("amethyst_axe", GameHelperCoreModule.T_AMETHYST);
+		//
+		GameHelperCoreModule.EMERALD_SHOVEL = new ItemGHShovelTool("emerald_shovel", GameHelperCoreModule.T_EMERALD);
+		GameHelperCoreModule.SAPPHIRE_SHOVEL = new ItemGHShovelTool("sapphire_shovel", GameHelperCoreModule.T_SAPPHIRE);
+		GameHelperCoreModule.RUBY_SHOVEL = new ItemGHShovelTool("ruby_shovel", GameHelperCoreModule.T_RUBY);
+		GameHelperCoreModule.AMETHYST_SHOVEL = new ItemGHShovelTool("amethyst_shovel", GameHelperCoreModule.T_AMETHYST);
+		//
+		GameHelperCoreModule.EMERALD_HOE = new ItemGHHoeTool("emerald_hoe", GameHelperCoreModule.T_EMERALD);
+		GameHelperCoreModule.SAPPHIRE_HOE = new ItemGHHoeTool("sapphire_hoe", GameHelperCoreModule.T_SAPPHIRE);
+		GameHelperCoreModule.RUBY_HOE = new ItemGHHoeTool("ruby_hoe", GameHelperCoreModule.T_RUBY);
+		GameHelperCoreModule.AMETHYST_HOE = new ItemGHHoeTool("amethyst_hoe", GameHelperCoreModule.T_AMETHYST);
+
+		GameHelperCoreModule.RUBY.customCraftingMaterial = GameHelperCoreModule.RUBY_ITEM;
+		GameHelperCoreModule.EMERALD.customCraftingMaterial = Items.emerald;
+		GameHelperCoreModule.T_SAPPHIRE.setRepairItem(new ItemStack(GameHelperCoreModule.SAPPHIRE_ITEM));
+		GameHelperCoreModule.T_EMERALD.setRepairItem(new ItemStack(Items.emerald));
+		GameHelperCoreModule.T_RUBY.setRepairItem(new ItemStack(GameHelperCoreModule.RUBY_ITEM));
+		GameHelperCoreModule.T_AMETHYST.setRepairItem(new ItemStack(GameHelperCoreModule.AMETHYST_ITEM));
+		GameHelperCoreModule.BIG_SAPPHIRE.setRepairItem(new ItemStack(GameHelperCoreModule.SAPPHIRE_BLOCK));
+		GameHelperCoreModule.BIG_EMERALD.setRepairItem(new ItemStack(Blocks.emerald_block));
+		GameHelperCoreModule.BIG_RUBY
+				.setRepairItem(new ItemStack(Item.getItemFromBlock(GameHelperCoreModule.RUBY_BLOCK)));
+		GameHelperCoreModule.BIG_WOOD.setRepairItem(new ItemStack(Item.getItemFromBlock(Blocks.crafting_table)));
+		GameHelperCoreModule.BIG_GOLD.setRepairItem(new ItemStack(Item.getItemFromBlock(Blocks.gold_block)));
+		GameHelperCoreModule.BIG_STONE.setRepairItem(new ItemStack(Item.getItemFromBlock(Blocks.furnace)));
+		GameHelperCoreModule.BIG_IRON.setRepairItem(new ItemStack(Item.getItemFromBlock(Blocks.iron_block)));
+		GameHelperCoreModule.BIG_DIAMOND.setRepairItem(new ItemStack(Item.getItemFromBlock(Blocks.diamond_block)));
+		GameHelperCoreModule.SAPPHIRE_ORE = new SapphireOre();
+		GameHelperCoreModule.RUBY_ORE = new RubyOre();
+		GameHelperCoreModule.SAPPHIRE_BLOCK = new SapphireBlock();
+		GameHelperCoreModule.RUBY_BLOCK = new RubyBlock();
+		GameHelperCoreModule.AMETHYST_BLOCK = new AmethystBlock();
+		GameHelperCoreModule.AMETHYST_ORE = new AmethystOre();
+		GameHelperCoreModule.TELESCOPE = new ItemTelescope();
+		GameHelperCoreModule.TRADE_ITEM = new GameHelperModItem("trade_item");
+		TradeItems.instanciateAll();
+		GameHelperCoreModule.SEC_CHEST = new ProtectedChestTileEntityBlock();
+		GameHelperCoreModule.SEC_FURNACE = new ProtectedFurnaceBlock(false);
+		GameHelperCoreModule.SEC_FURNACE_LIT = new ProtectedFurnaceBlock(true);
+		GameHelperCoreModule.DIMENSION_BLOCK = new DimensionBlock();
+		GameHelperCoreModule.IRON_DAGGER = new IronDagger();
+		GameHelperCoreModule.MINERS_LAMP = new MinersHelmetLight();
+		GameHelperCoreModule.MINERS_BACKPACK = new MinersBackpack();
+		GameHelperCoreModule.MINERS_TOOLS_BELT = new MinersToolsBelt();
+		GameHelperCoreModule.MINERS_DAGGER = new MinersDagger();
+		GameHelperCoreModule.MARBLE = new GameHelperModBlock(Material.rock, "marble");
+		GameHelperCoreModule.MARBLE_BRICK = new GameHelperModBlock(Material.rock, "marble_brick");
+		GameHelperCoreModule.BASALT = new GameHelperModBlock(Material.rock, "basalt");
+		GameHelperCoreModule.BASALT_BRICK = new GameHelperModBlock(Material.rock, "basalt_brick");
+		GameHelperCoreModule.BASALT_COBBLE = new GameHelperModBlock(Material.rock, "basalt_cobblestone");
+		GameHelperCoreModule.CRAFTING_RESEARCH_TABLE = new CraftingResearchTable();
+		GameRegistry.registerWorldGenerator(new GHWorldGenerator(), 0);
+		// VillagerRegistrar.registerVillagerProfessions();
+		Flowers.addFlowers();
+		GameHelperCoreModule.MOBILE_WORKDBENCH = new MobileWorkbenchItem();
+		GameHelperCoreModule.POTION_BOW = new PotionBow();
+		GameHelperCoreModule.SEL_1 = new SelectionTool();
+		GameHelperCoreModule.Pureblue = new Pureblue();
+		GameHelperCoreModule.Purebrown = new Purebrown();
+		GameHelperCoreModule.Purelightgray = new Purelightgray();
+		GameHelperCoreModule.Purelime = new Purelime();
+		GameHelperCoreModule.Pureyellow = new Pureyellow();
+		GameHelperCoreModule.Purelightblue = new Purelightblue();
+		GameHelperCoreModule.Puregray = new Puregray();
+		GameHelperCoreModule.Puregreen = new Puregreen();
+		GameHelperCoreModule.Puremagenta = new Puremagenta();
+		GameHelperCoreModule.Pureorange = new Pureorange();
+		GameHelperCoreModule.Purepink = new Purepink();
+		GameHelperCoreModule.Purered = new Purered();
+		GameHelperCoreModule.Pureblack = new Pureblack();
+		GameHelperCoreModule.Purecyan = new Purecyan();
+		GameHelperCoreModule.Purepurple = new Purepurple();
+		GameHelperCoreModule.Purewhite = new Purewhite();
+		GameHelperCoreModule.Pureglasblack = new Pureglasblack();
+		GameHelperCoreModule.Pureglasblue = new Pureglasblue();
+		GameHelperCoreModule.Pureglasbrown = new Pureglasbrown();
+		GameHelperCoreModule.Pureglascyan = new Pureglascyan();
+		GameHelperCoreModule.Pureglasgray = new Pureglasgray();
+		GameHelperCoreModule.Pureglasgreen = new Pureglasgreen();
+		GameHelperCoreModule.Pureglaslightblue = new Pureglaslightblue();
+		GameHelperCoreModule.Pureglaslime = new Pureglaslime();
+		GameHelperCoreModule.Pureglasmagenta = new Pureglasmagenta();
+		GameHelperCoreModule.Pureglasorange = new Pureglasorange();
+		GameHelperCoreModule.Pureglaspink = new Pureglaspink();
+		GameHelperCoreModule.Pureglaspurple = new Pureglaspurple();
+		GameHelperCoreModule.Pureglasred = new Pureglasred();
+		GameHelperCoreModule.Pureglassilver = new Pureglassilver();
+		GameHelperCoreModule.Pureglasyellow = new Pureglasyellow();
+		GameHelperCoreModule.Pureglas = new Pureglas();
+		GameHelperCoreModule.Neonglassilver = new Neonglassilver();
+		GameHelperCoreModule.Neonglaswhite = new Neonglaswhite();
+		GameHelperCoreModule.Neonglasblack = new Neonglasblack();
+		GameHelperCoreModule.Neonglaspink = new Neonglaspink();
+		GameHelperCoreModule.Neonglasorange = new Neonglasorange();
+		GameHelperCoreModule.Neonglasmagenta = new Neonglasmagenta();
+		GameHelperCoreModule.Neonglaspurple = new Neonglaspurple();
+		GameHelperCoreModule.Neonglasred = new Neonglasred();
+		GameHelperCoreModule.Neonglasgreen = new Neonglasgreen();
+		GameHelperCoreModule.Neonglasgray = new Neonglasgray();
+		GameHelperCoreModule.Neonglasyellow = new Neonglasyellow();
+		GameHelperCoreModule.Neonglascyan = new Neonglascyan();
+		GameHelperCoreModule.Neonglasbrown = new Neonglasbrown();
+		GameHelperCoreModule.Neonglasblue = new Neonglasblue();
+		GameHelperCoreModule.Neonglaslightblue = new Neonglaslightblue();
+		GameHelperCoreModule.Neonglaslime = new Neonglaslime();
+		GameHelperCoreModule.Neonglas = new Neonglas();
+		GameHelperCoreModule.No_texture_block = new No_texture_block();
+		GameHelperCoreModule.Tileblue = new Tileblue();
+		GameHelperCoreModule.Tilewhite = new Tilewhite();
+		GameHelperCoreModule.Tileblack = new Tileblack();
+		GameHelperCoreModule.Tilered = new Tilered();
+		GameHelperCoreModule.Tilebrown = new Tilebrown();
+		GameHelperCoreModule.Tileyellow = new Tileyellow();
+		GameHelperCoreModule.Tileorange = new Tileorange();
+		GameHelperCoreModule.Tilegray = new Tilegray();
+		GameHelperCoreModule.Tilegreen = new Tilegreen();
+		GameHelperCoreModule.Tilepurple = new Tilepurple();
+		GameHelperCoreModule.Tilepink = new Tilepink();
+		GameHelperCoreModule.Tilecyan = new Tilecyan();
+		GameHelperCoreModule.Tilemagenta = new Tilemagenta();
+		GameHelperCoreModule.SEL_2 = new SelectionTool2();
+		GameHelperCoreModule.THERMAL_ALLR_HELMET = new GameHelperThermalArmorHelmetItem();
+		GameHelperCoreModule.THERMAL_ALLR_CHEST = new GameHelperThermalArmorChestplateItem();
+		GameHelperCoreModule.THERMAL_ALLR_LEGGINGS = new GameHelperThermalArmorLeggingsItem();
+		GameHelperCoreModule.THERMAL_ALLR_BOOTS = new GameHelperThermalArmorBootsItem();
+		GameHelperCoreModule.DIMENSION_SHARD = new DimensionShard();
+		GameHelperCoreModule.quicksand = new Quicksand();
+		GameHelperCoreModule.exp_endstone = new ExplodingEndstone();
+		GameHelperCoreModule.exp_netherrack = new ExplodingNetherrack();
+		GameHelperCoreModule.UNCRAFTING_TABLE = new UncraftingTable();
+		registerCommands();
+		if (!(proxy instanceof LogicalClientEnvironment))
+			proxy.preInit(event, GameHelper.instance);
+	}
+
+	public void registerEntities() {
+		registerEntity(ThrowableDagger.class, "throwable_dagger", 0);
+		registerEntity(GHVillager.class, "gh_villager", 1);
+		registerEntity(EntityShotPotion.class, "gh_shot_potion", 2);
+	}
+
+	private static void registerEntity(Class<? extends Entity> entityClass, String name, int id) {
+		// int entityID = EntityRegistry.findGlobalUniqueEntityId();
+		// EntityRegistry.registerGlobalEntityID(entityClass, name, entityID);
+		EntityRegistry.registerModEntity(entityClass, name, id, GameHelper.instance, 64, 1, true);
+	}
+
+	public void addTE() {
+		GameRegistry.registerTileEntity(ProtectedChestTileEntity.class, "protected_chest");
+		GameRegistry.registerTileEntity(TileEntityEnchantmentAltar.class, "enchantment_altar");
+		GameRegistry.registerTileEntity(TileEntityInstantEnchantmentTable.class, "instant_enchantment_table");
+		GameRegistry.registerTileEntity(TileEntityUnchantmentTable.class, "unchantment_table");
+		GameRegistry.registerTileEntity(ProtectedFurnaceTileEntity.class, "protected_furnace");
+	}
+
+	@Override
+	public void preInitClient(FMLPreInitializationEvent event) {
+		GameHelperAPI.ghAPI().injectGHSurvivalTab(new InventoryTabVanilla());
+		GameHelperAPI.ghAPI().injectGHSurvivalTab(new GHTabMinersInv());
+		GameHelperAPI.ghAPI().injectGHSurvivalTab(new GHThermalTab());
+		if (proxy instanceof LogicalClientEnvironment)
+			proxy.preInit(event, GameHelper.instance);
+	}
+
+	@Override
+	public void initServer(FMLInitializationEvent event) {
+		FMLLog.log(Level.INFO, "[GameHelper] Loading GameHelper-Mod!");
+		VillagerRegistrar.loadBuiltInVillagerProfessions();
+		registerEntities();
+		RecipeManager.addAll();
+		addTE();
+		if (!(proxy instanceof LogicalClientEnvironment))
+			proxy.load(event, GameHelper.instance);
+		// GameRegistry.registerTileEntity(SecChestTileEntity.class,
+		// "secChest");
+		ProtectedBlocksRegistry.addBlock(GuiHandler.PROTECTED_CHEST,
+				(ProtectedChestTileEntityBlock) GameHelperCoreModule.SEC_CHEST);
+		ProtectedBlocksRegistry.addBlock(GuiHandler.PROTECTED_FURNACE,
+				(ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE,
+				(ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE_LIT);
+		NetworkRegistry.INSTANCE.registerGuiHandler(GameHelper.instance, new GuiHandler());
+	}
+
+	public void registerCommands() {
+		registerSingleCommand(new CommandCreateWorld());
+		registerSingleCommand(new CommandTpx());
+		registerSingleCommand(new CommandBuildFly());
+		registerSingleCommand(new CommandPing());
+		registerSingleCommand(new CommandSaveData());
+		registerSingleCommand(new CommandListWorld());
+		registerSingleCommand(new CommandTpxp());
+		registerSingleCommand(new CommandHackSec());
+		registerSingleCommand(new CommandGameHelper());
+		registerSingleCommand(new CommandOwnWorld());
+		registerSingleCommand(new PlayerRanksCommand());
+		registerSingleCommand(new CommandSetPerm());
+		registerSingleCommand(new CommandViewPerm());
+		registerSingleCommand(new CommandExportStruct());
+		registerSingleCommand(new CommandNoclip());
+		registerSingleCommand(new CommandToggleNotify());
+		registerSingleCommand(new CommandDbgScreenshotFolder()); // DEBUG
+		registerSingleCommand(new CommandWKick());
+		registerSingleCommand(new CommandSound());
+	}
+
+	private void registerSingleCommand(GHCommand gh) {
+		GameHelperAPI.ghAPI().ghRegisterCommand(gh);
+	}
+
+	@Override
+	public void initClient(FMLInitializationEvent event) {
+		registerTab();
+		if (proxy instanceof LogicalClientEnvironment)
+			proxy.load(event, GameHelper.instance);
+	}
+
+	@Override
+	public void postInitServer(FMLPostInitializationEvent event) {
+		GHWorldManager.loadWorldTypes();
+		if (!(proxy instanceof LogicalClientEnvironment))
+			proxy.postInit(event, GameHelper.instance);
+	}
+
+	@Override
+	public void postInitClient(FMLPostInitializationEvent event) {
+		if (proxy instanceof LogicalClientEnvironment)
+			proxy.postInit(event, GameHelper.instance);
+	}
+
+	@Override
+	public void serverStart(FMLServerStartingEvent fmlsse) {
+		super.serverStart(fmlsse);
+		System.out.println("The server is now starting and just fired the FMLServerStartingEvent");
+		GameHelper.getUtils().startRankSystem();
+		GHWorldManager.serverStart();
+		VillagerRegistrar.sortIntoListOnServerStart();
+		AdHandler.enableAdEcoSystem();
+		NotifyTable.serverStartUp();
+		System.out.println("start PlayerLoginTimeOut");
+		PlayerLoginTimeOut.startLoginTimeOutQueueTask();
+	}
+
+	@Override
+	public void serverStop(FMLServerStoppingEvent event) {
+		super.serverStop(event);
+		NotifyTable.serverStop();
+		PlayerLoginTimeOut.stopServer();
+		GameHelper.getUtils().stopRankSystem();
+		GHWorldManager.serverStop();
 	}
 }

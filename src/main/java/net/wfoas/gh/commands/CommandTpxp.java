@@ -17,7 +17,7 @@ import net.wfoas.gh.event.PlayerChangeDimensionEvent;
 import net.wfoas.gh.multipleworlds.GHWorld;
 import net.wfoas.gh.multipleworlds.storage.GHWorldManager;
 
-public class CommandTpxp extends CommandBase {
+public class CommandTpxp extends GHCommand {
 
 	@Override
 	public String getCommandName() {

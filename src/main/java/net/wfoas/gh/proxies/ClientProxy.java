@@ -38,13 +38,10 @@ import net.wfoas.gh.villager.entity.GHVillager;
 import net.wfoas.gh.villager.entity.GHVillagerRendererFactory;
 import tconstruct.client.tabs.TabRegistry;
 
-public class ClientProxy extends CommonProxy {
+public class ClientProxy extends CommonProxy implements LogicalServerEnvironment, LogicalClientEnvironment {
 	public static String minercrafttitle;
-
 	static public File mcDir;
-
 	static public GHConfig client_options_gh;
-
 	volatile static public List<String> ownedWorlds = new ArrayList<String>(), onlinePlayers = new ArrayList<String>(),
 			allWorlds = new ArrayList<String>();
 
@@ -59,7 +56,6 @@ public class ClientProxy extends CommonProxy {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
-		System.out.println(optionsgh);
 		client_options_gh = new GHConfig(optionsgh);
 		if (client_options_gh.getBoolean("enable_steamoverlay")) {
 			client_options_gh.save();
@@ -76,8 +72,6 @@ public class ClientProxy extends CommonProxy {
 			ClientRegistry.bindTileEntitySpecialRenderer(TileEntityInstantEnchantmentTable.class,
 					new net.wfoas.gh.instench.TileEntityInstantEnchantmentTableRenderer());
 		}
-		GameHelper.TITAN_MODULE.preInitClient(event);
-		GameHelper.LUCKY_MODULE.preInitClient(event);
 		MinecraftForge.EVENT_BUS.register(new TabRegistry());
 		try {
 			GHBranding.addGHBranding(minercrafttitle);
@@ -98,16 +92,11 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void load(FMLInitializationEvent event, GameHelper gh) {
 		super.load(event, gh);
-		GameHelper.GH_MODULE.registerTab();
-		SurvivalTabsRegistry.registerSurvivalTabs();
-		GameHelper.TITAN_MODULE.loadClient(event);
-		GameHelper.LUCKY_MODULE.initClient(event);
 		ModelBakery.registerItemVariants(GameHelperCoreModule.POTION_BOW,
 				new ResourceLocation[] { new ResourceLocation(GameHelper.MODID + ":potion_bow"),
 						new ResourceLocation(GameHelper.MODID + ":potion_bow_pull_0"),
 						new ResourceLocation(GameHelper.MODID + ":potion_bow_pull_1"),
 						new ResourceLocation(GameHelper.MODID + ":potion_bow_pull_2") });
-
 		registerItem(GameHelperCoreModule.POTION_BOW, 0, GameHelper.MODID + ":potion_bow");
 		registerItem(GameHelperCoreModule.POTION_BOW, 1, GameHelper.MODID + ":potion_bow_pull_0");
 		registerItem(GameHelperCoreModule.POTION_BOW, 2, GameHelper.MODID + ":potion_bow_pull_1");
@@ -116,14 +105,12 @@ public class ClientProxy extends CommonProxy {
 
 	@SideOnly(Side.CLIENT)
 	public static void registerItem(Item item, int metadata, String itemName) {
-		ItemModelMesher mesher = Minecraft.getMinecraft().getRenderItem().getItemModelMesher();
-		mesher.register(item, metadata, new ModelResourceLocation(itemName, "inventory"));
+		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(item, metadata,
+				new ModelResourceLocation(itemName, "inventory"));
 	}
 
 	@Override
 	public void postInit(FMLPostInitializationEvent event, GameHelper gh) {
 		super.postInit(event, gh);
-		GameHelper.TITAN_MODULE.postInitClient(event);
-		GameHelper.LUCKY_MODULE.postInitClient(event);
 	}
 }

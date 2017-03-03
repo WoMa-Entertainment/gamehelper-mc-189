@@ -19,7 +19,7 @@ import net.wfoas.gh.multipleworlds.storage.GHWorldManager;
 import net.wfoas.gh.world.owner.WorldOwners;
 import net.wfoas.gh.world.utils.WorldPermissionsManager;
 
-public class CommandOwnWorld extends CommandBase {
+public class CommandOwnWorld extends GHCommand {
 
 	@Override
 	public String getCommandName() {

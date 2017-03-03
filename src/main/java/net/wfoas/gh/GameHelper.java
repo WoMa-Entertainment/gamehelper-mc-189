@@ -1,20 +1,11 @@
 package net.wfoas.gh;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
-
 import org.apache.logging.log4j.Logger;
-import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GL11;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.util.ChatComponentText;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -28,14 +19,13 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.wfoas.gh.config.GHConfig;
 import net.wfoas.gh.config.IGHConfigDefault;
 import net.wfoas.gh.dropsapi.pdr.ChatColor;
-import net.wfoas.gh.glstatemanagerutils.GLStateManagerUtils;
 import net.wfoas.gh.init.GameHelperInitialisationSteps;
 import net.wfoas.gh.luckyblocksmodule.LuckyBlocksModule;
-import net.wfoas.gh.multipleworlds.storage.GHWorldManager;
+import net.wfoas.gh.omapi.GHIntAPIHelper;
+import net.wfoas.gh.omapi.GameHelperAPI;
 import net.wfoas.gh.proxies.CommonProxy;
 import net.wfoas.gh.scheduler.GHScheduler;
 import net.wfoas.gh.titanmodule.TitanModule;
-import net.wfoas.gh.videoplayer.GHVideoPlayer;
 
 @Mod(modid = GameHelper.MODID, name = GameHelper.MODNAME, version = GameHelper.MODVER)
 public class GameHelper {
@@ -54,8 +44,6 @@ public class GameHelper {
 
 	public static Side EVENT_SIDE;
 
-	@SidedProxy(clientSide = "net.wfoas.gh.proxies.ClientProxy", serverSide = "net.wfoas.gh.proxies.CommonProxy")
-	public static CommonProxy proxy;
 	public static final String MODID = "gamehelper";
 	public static final String MODNAME = "GameHelper-Mod";
 	public static final String MODVER = "1.2";
@@ -68,10 +56,6 @@ public class GameHelper {
 
 	public static final Random MOD_RANDOM = new Random();
 
-	public static TitanModule TITAN_MODULE;
-	public static LuckyBlocksModule LUCKY_MODULE;
-	public static GameHelperCoreModule GH_MODULE;
-
 	public static Logger logger;
 
 	public File cfgDataFolder;
@@ -80,9 +64,11 @@ public class GameHelper {
 	public IGHConfigDefault defaultConfig;
 
 	public GameHelper() {
-		GH_MODULE = new GameHelperCoreModule();
-		TITAN_MODULE = new TitanModule();
-		LUCKY_MODULE = new LuckyBlocksModule();
+		api = new GameHelperAPI(this);
+		GHIntAPIHelper.setInitGHAPI(api);
+		GameHelperAPI.ghAPI().injectModule(new GameHelperCoreModule());
+		GameHelperAPI.ghAPI().injectModule(new TitanModule());
+		GameHelperAPI.ghAPI().injectModule(new LuckyBlocksModule());
 	}
 
 	public static String getBuild() {
@@ -91,6 +77,7 @@ public class GameHelper {
 
 	@Instance(value = GameHelper.MODID)
 	public static GameHelper instance;
+	public GameHelperAPI api;
 
 	public static void println(Object o) {
 		System.out.println(o);
@@ -100,23 +87,22 @@ public class GameHelper {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		GameHelperInitialisationSteps.preInit(event, proxy);
-		GHVideoPlayer.playVideo(new File("F:\\valve_1998.mp4"));
+		GameHelperInitialisationSteps.preInit(event);
 	}
 
 	@EventHandler
 	public void serverStop(FMLServerStoppingEvent event) {
-		GameHelperServer.serverStop(event, proxy);
+		GameHelperServer.serverStop(event);
 	}
 
 	@EventHandler
 	public void serverLoad(FMLServerStartingEvent event) {
-		GameHelperServer.serverStart(event, proxy);
+		GameHelperServer.serverStart(event);
 	}
 
 	@EventHandler
 	public void load(FMLInitializationEvent event) {
-		GameHelperInitialisationSteps.initLoad(event, proxy);
+		GameHelperInitialisationSteps.initLoad(event);
 	}
 
 	public static File getDataConfigFolder() {
@@ -125,8 +111,7 @@ public class GameHelper {
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		proxy.postInit(event, this);
-		GHWorldManager.loadWorldTypes();
+		GameHelperInitialisationSteps.postInit(event);
 	}
 
 	public static GHScheduler getScheduler() {
@@ -139,5 +124,9 @@ public class GameHelper {
 
 	public static Logger getLogger() {
 		return logger;
+	}
+
+	public static GameHelperAPI getAPI() {
+		return instance.api;
 	}
 }

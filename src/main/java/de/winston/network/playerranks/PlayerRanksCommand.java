@@ -14,8 +14,9 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentTranslation;
 import net.wfoas.gh.GameHelper;
+import net.wfoas.gh.commands.GHCommand;
 
-public class PlayerRanksCommand extends CommandBase {
+public class PlayerRanksCommand extends GHCommand {
 	// public boolean onCommand(CommandSender sender, Command command, String
 	// label, String[] args) {
 	// if (!(sender.isOp())) {

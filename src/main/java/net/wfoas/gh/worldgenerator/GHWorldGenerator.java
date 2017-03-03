@@ -12,13 +12,11 @@ import net.wfoas.gh.GameHelperCoreModule;
 import net.wfoas.gh.titanmodule.TitanModule;
 
 public class GHWorldGenerator implements IWorldGenerator {
-	WorldGenMinable gen_saphirre, gen_ruby, gen_titan, gen_citrin, gen_amethyst;
+	WorldGenMinable gen_saphirre, gen_ruby, gen_amethyst;
 
 	public GHWorldGenerator() {
 		this.gen_saphirre = new WorldGenMinable(GameHelperCoreModule.SAPPHIRE_ORE.getDefaultState(), 4);
 		this.gen_ruby = new WorldGenMinable(GameHelperCoreModule.RUBY_ORE.getDefaultState(), 5);
-		this.gen_titan = new WorldGenMinable(TitanModule.TITAN_ORE.getDefaultState(), 4);
-		this.gen_citrin = new WorldGenMinable(TitanModule.CITRIN_ORE.getDefaultState(), 5);
 		this.gen_amethyst = new WorldGenMinable(GameHelperCoreModule.AMETHYST_ORE.getDefaultState(), 7);
 	}
 
@@ -43,8 +41,6 @@ public class GHWorldGenerator implements IWorldGenerator {
 		case 0: // Overworld
 			runGenerator(gen_saphirre, world, random, chunkX, chunkZ, 4, 10, 25);
 			runGenerator(gen_ruby, world, random, chunkX, chunkZ, 4, 3, 17);
-			runGenerator(gen_titan, world, random, chunkX, chunkZ, 4, 4, 17);
-			runGenerator(gen_citrin, world, random, chunkX, chunkZ, 4, 5, 40);
 			runGenerator(gen_amethyst, world, random, chunkX, chunkZ, 4, 3, 20);
 			break;
 		case -1: // Nether

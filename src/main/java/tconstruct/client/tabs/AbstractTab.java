@@ -27,10 +27,10 @@ public abstract class AbstractTab extends GuiButton {
 	public void drawButton(Minecraft mc, int mouseX, int mouseY) {
 		if (this.visible) {
 			if (renderStack == null) {
-//				System.out.println("RenderStack == null" + this.getClass());
+				// System.out.println("RenderStack == null" + this.getClass());
 				return;
 			}
-//			System.out.println(this.getClass().toString());
+			// System.out.println(this.getClass().toString());
 			// RenderHelper.disableStandardItemLighting();
 			// GlStateManager.disableLighting();
 			// // glstatemanager
@@ -69,6 +69,10 @@ public abstract class AbstractTab extends GuiButton {
 			// GlStateManager.disableDepth();
 			// GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 			// GlStateManager.color(1, 1, 1, 1);
+			if (this.itemRenderer == null) {
+				this.itemRenderer = Minecraft.getMinecraft().getRenderItem();
+				return;
+			}
 			RenderHelper.disableStandardItemLighting();
 			int yTexPos = this.enabled ? 3 : 32;
 			int ySize = this.enabled ? 25 : 32;

@@ -8,7 +8,7 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentTranslation;
 import net.wfoas.gh.GameHelper;
 
-public class CommandHackSec extends CommandBase {
+public class CommandHackSec extends GHCommand {
 
 	@Override
 	public String getCommandName() {

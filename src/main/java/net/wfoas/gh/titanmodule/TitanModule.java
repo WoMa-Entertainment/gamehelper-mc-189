@@ -15,6 +15,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.wfoas.gh.blocks.GameHelperModBlock;
 import net.wfoas.gh.items.GameHelperModItem;
 import net.wfoas.gh.items.GameHelperModSword;
+import net.wfoas.gh.omapi.module.GameHelperModuleAbstract;
 import net.wfoas.gh.titanmodule.blocks.CitrinOre;
 import net.wfoas.gh.titanmodule.blocks.TitanOre;
 import net.wfoas.gh.titanmodule.items.CitrinDust;
@@ -26,19 +27,16 @@ import net.wfoas.gh.titanmodule.items.TitanDust;
 import net.wfoas.gh.titanmodule.items.TitanIngot;
 import net.wfoas.gh.titanmodule.items.TitanSword;
 
-//@Mod(modid = TitanMod.MODID, name = TitanMod.MODNAME, version = TitanMod.MODVER)
-public class TitanModule {
-	// public static final String MODID = "titanmod";
-	// public static final String MODNAME = "Titan-Mod";
-	// public static final String MODVER = "1.0.0.1";
+public class TitanModule extends GameHelperModuleAbstract {
 
 	public static GameHelperModItem TITAN_CRYSTAL, TITAN_INGOT, TITAN_DUST, SWORD_HANDLE, CITRIN_DUST, CITRIN_INGOT;
-	
+
 	public static GameHelperModSword TITAN_SWORD, CITRIN_SWORD;
 	public static GameHelperModBlock TITAN_ORE, CITRIN_ORE;
 	public static CreativeTabs TITAN_TAB;
 	public static ToolMaterial TITAN_MATERIAL, CITRIN_MATERIAL, NETHER_MATERIAL;
 
+	@Override
 	public void registerTab() {
 		TITAN_TAB = new TitanCreativeTab();
 		TITAN_CRYSTAL.updateInitEvent(TITAN_TAB);
@@ -51,11 +49,7 @@ public class TitanModule {
 		CITRIN_INGOT.updateInitEvent(TITAN_TAB);
 		CITRIN_SWORD.updateInitEvent(TITAN_TAB);
 		CITRIN_ORE.updateInitEvent(TITAN_TAB);
-		;
 	}
-
-	// @Instance(value = TitanMod.MODID)
-	// public static TitanMod instance;
 
 	public void registerItemsAndBlocks() {
 		TitanModule.TITAN_MATERIAL = EnumHelper.addToolMaterial("TITAN", 3, -1, 9.0f, 4.0f, 18);
@@ -73,52 +67,45 @@ public class TitanModule {
 	}
 
 	// @EventHandler
+	@Override
 	public void preInitServer(FMLPreInitializationEvent event) {
 		registerItemsAndBlocks();
 	}
-	
-	public void preInitClient(FMLPreInitializationEvent event){
-		
+
+	@Override
+	public void preInitClient(FMLPreInitializationEvent event) {
+
 	}
 
 	public void registerRecipes() {
-//		TITAN_INGOT_NBT.setStackDisplayName("�cTitanbarren");
+		// TITAN_INGOT_NBT.setStackDisplayName("�cTitanbarren");
 		GameRegistry.addShapedRecipe(new ItemStack(SWORD_HANDLE), "I", "I", 'I', Items.iron_ingot);
 		GameRegistry.addShapedRecipe(new ItemStack(TITAN_SWORD), "T", "T", "I", 'T', TITAN_INGOT, 'I', SWORD_HANDLE);
 		GameRegistry.addShapedRecipe(new ItemStack(CITRIN_SWORD), "T", "T", "I", 'T', CITRIN_INGOT, 'I', SWORD_HANDLE);
-		GameRegistry.addShapelessRecipe(new ItemStack(TitanModule.TITAN_DUST), Items.diamond, Item.getItemFromBlock(Blocks.obsidian), TitanModule.TITAN_CRYSTAL);
+		GameRegistry.addShapelessRecipe(new ItemStack(TitanModule.TITAN_DUST), Items.diamond,
+				Item.getItemFromBlock(Blocks.obsidian), TitanModule.TITAN_CRYSTAL);
 		GameRegistry.addSmelting(TITAN_DUST, new ItemStack(TITAN_INGOT), 0.25f);
 		GameRegistry.addSmelting(Item.getItemFromBlock(CITRIN_ORE), new ItemStack(CITRIN_INGOT), 0.25f);
 	}
 
-	// @EventHandler
-	public void loadServer(FMLInitializationEvent event) {
-		// Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(TITAN_CRYSTAL,
-		// 0,
-		// new ModelResourceLocation(MODID + ":" + TITAN_CRYSTAL.getName(),
-		// "inventory"));
-		// Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(TITAN_INGOT,
-		// 0,
-		// new ModelResourceLocation(MODID + ":" + TITAN_INGOT.getName(),
-		// "inventory"));
-		// Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(TITAN_DUST,
-		// 0,
-		// new ModelResourceLocation(MODID + ":" + TITAN_DUST.getName(),
-		// "inventory"));
+	@Override
+	public void initServer(FMLInitializationEvent event) {
 		registerRecipes();
 
 	}
-	
-	public void loadClient(FMLInitializationEvent event){
+
+	@Override
+	public void initClient(FMLInitializationEvent event) {
 		if (event.getSide() == Side.CLIENT)
 			registerTab();
 	}
 
-	// @EventHandler
+	@Override
 	public void postInitServer(FMLPostInitializationEvent event) {
 	}
-	
-	public void postInitClient(FMLPostInitializationEvent event){
-		
+
+	@Override
+	public void postInitClient(FMLPostInitializationEvent event) {
+
 	}
 }

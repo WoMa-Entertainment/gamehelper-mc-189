@@ -7,7 +7,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.wfoas.gh.GameHelperServer;
 
-public class CommandGameHelper extends CommandBase {
+public class CommandGameHelper extends GHCommand {
 
 	@Override
 	public String getCommandName() {

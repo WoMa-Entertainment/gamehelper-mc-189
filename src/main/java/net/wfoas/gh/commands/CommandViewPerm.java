@@ -11,7 +11,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
 import net.wfoas.gh.network.gui.RemoteGuiOpener;
 
-public class CommandViewPerm extends CommandBase {
+public class CommandViewPerm extends GHCommand {
 
 	@Override
 	public String getCommandName() {

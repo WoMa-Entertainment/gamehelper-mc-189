@@ -12,7 +12,7 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentTranslation;
 import net.wfoas.gh.GameHelper;
 
-public class CommandPing extends CommandBase {
+public class CommandPing extends GHCommand {
 
 	@Override
 	public String getCommandName() {

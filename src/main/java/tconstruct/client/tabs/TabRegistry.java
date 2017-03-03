@@ -79,33 +79,6 @@ public class TabRegistry {
 		}
 	}
 
-	//
-	// @SideOnly(Side.CLIENT)
-	// @SubscribeEvent
-	// public void preGui(GuiScreenEvent.DrawScreenEvent.Pre event) {
-	// if ((event.gui instanceof GuiInventory)) {
-	// // GlStateManager.disableLighting();
-	// // GlStateManager.disableDepth();
-	// // GlStateManager.colorMask(true, true, true, false);
-	// // GlStateManager.colorMask(true, true, true, true);
-	// // GlStateManager.enableLighting();
-	// // GlStateManager.enableDepth();
-	// // RenderHelper.enableGUIStandardItemLighting();
-	// // GlStateManager.disableLighting();
-	// // GlStateManager.disableDepth();
-	// // GlStateManager.colorMask(true, true, true, false);
-	// // GlStateManager.colorMask(true, true, true, true);
-	// // GlStateManager.enableLighting();
-	// // GlStateManager.enableDepth();
-	// // GlStateManager.enableBlend();
-	// // GlStateManager.enableAlpha();
-	// // GlStateManager.enableLighting();
-	// // GlStateManager.enableDepth();
-	// // RenderHelper.disableStandardItemLighting();
-	// // RenderHelper.enableGUIStandardItemLighting();
-	// }
-	// }
-
 	private static Minecraft mc = FMLClientHandler.instance().getClient();
 
 	public static void openInventoryGui() {
