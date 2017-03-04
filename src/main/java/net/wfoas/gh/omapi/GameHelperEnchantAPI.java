@@ -13,269 +13,213 @@ import net.wfoas.gh.dropsapi.pdr.EnchantmentFinder;
 
 public class GameHelperEnchantAPI {
 	protected GameHelperEnchantAPI() {
-
+		chestplateEnchantsList = new ArrayList<Enchantment>();
+		leggingsEnchantsList = new ArrayList<Enchantment>();
+		helmetEnchantsList = new ArrayList<Enchantment>();
+		bootsEnchantsList = new ArrayList<Enchantment>();
+		swordEnchantsList = new ArrayList<Enchantment>();
+		otherMaterialEnchantsList = new ArrayList<Enchantment>();
+		shovelEnchantsList = new ArrayList<Enchantment>();
+		fnsEnchantsList = new ArrayList<Enchantment>();
+		axeEnchantsList = new ArrayList<Enchantment>();
+		bowEnchantsList = new ArrayList<Enchantment>();
+		pickaxeSilkList = new ArrayList<Enchantment>();
+		pickaxeFortuneSmeltingList = new ArrayList<Enchantment>();
+		pickaxeElseList = new ArrayList<Enchantment>();
+		rodEnchantsList = new ArrayList<Enchantment>();
+		hoeEnchantsList = new ArrayList<Enchantment>();
+		shearsEnchantsList = new ArrayList<Enchantment>();
 	}
 
-	public List<Item> helmetList = new ArrayList<Item>();
-	public List<Item> chestplateList = new ArrayList<Item>();
-	public List<Item> leggingsList = new ArrayList<Item>();
-	public List<Item> bootsList = new ArrayList<Item>();
-	public Enchantment[] chestplateEnchants, leggingsEnchants, helmetEnchants, bootsEnchants, swordEnchants,
+	protected static final Enchantment[] ENCH_ARRAY = new Enchantment[0];
+
+	protected List<Enchantment> chestplateEnchantsList, leggingsEnchantsList, helmetEnchantsList, bootsEnchantsList,
+			swordEnchantsList, otherMaterialEnchantsList, shovelEnchantsList, fnsEnchantsList, axeEnchantsList,
+			bowEnchantsList, pickaxeSilkList, pickaxeFortuneSmeltingList, pickaxeElseList, rodEnchantsList,
+			hoeEnchantsList, shearsEnchantsList;
+
+	protected Enchantment[] chestplateEnchants, leggingsEnchants, helmetEnchants, bootsEnchants, swordEnchants,
 			otherMaterialEnchants, shovelEnchants, fnsEnchants, axeEnchants, bowEnchants, pickaxeSilk,
 			pickaxeFortuneSmelting, pickaxeElse, rodEnchants, hoeEnchants, shearsEnchants;
 
-	public List<Item> shovelList = new ArrayList<Item>();
-	public List<Item> swordList = new ArrayList<Item>();
-	public List<Item> pickaxeList = new ArrayList<Item>();
-	public List<Item> axeList = new ArrayList<Item>();
-	public List<Item> hoeList = new ArrayList<Item>();
-	public List<Item> fnsList = new ArrayList<Item>();
-	public List<Item> rodList = new ArrayList<Item>();
-	public List<Item> bowList = new ArrayList<Item>();
-	public List<Item> shearsList = new ArrayList<Item>();
-
-	public void setupEnchLists() {
-		// helmet
-		helmetList.add(Items.leather_helmet);
-		helmetList.add(Items.chainmail_helmet);
-		helmetList.add(Items.diamond_helmet);
-		helmetList.add(Items.golden_helmet);
-		helmetList.add(Items.iron_helmet);
-		helmetList.add(GameHelperCoreModule.EMERALD_HELMET);
-		helmetList.add(GameHelperCoreModule.RUBY_HELMET);
-		helmetList.add(GameHelperCoreModule.SAPPHIRE_HELMET);
-		helmetList.add(GameHelperCoreModule.AMETHYST_HELMET);
-		// chestplates
-		chestplateList.add(Items.leather_chestplate);
-		chestplateList.add(Items.chainmail_chestplate);
-		chestplateList.add(Items.diamond_chestplate);
-		chestplateList.add(Items.golden_chestplate);
-		chestplateList.add(Items.iron_chestplate);
-		chestplateList.add(GameHelperCoreModule.EMERALD_CHESTPLATE);
-		chestplateList.add(GameHelperCoreModule.RUBY_CHESTPLATE);
-		chestplateList.add(GameHelperCoreModule.SAPPHIRE_CHESTPLATE);
-		chestplateList.add(GameHelperCoreModule.AMETHYST_CHESTPLATE);
-		// leggings
-		leggingsList.add(Items.leather_leggings);
-		leggingsList.add(Items.chainmail_leggings);
-		leggingsList.add(Items.diamond_leggings);
-		leggingsList.add(Items.golden_leggings);
-		leggingsList.add(Items.iron_leggings);
-		leggingsList.add(GameHelperCoreModule.EMERALD_LEGGINGS);
-		leggingsList.add(GameHelperCoreModule.RUBY_LEGGINGS);
-		leggingsList.add(GameHelperCoreModule.SAPPHIRE_LEGGINGS);
-		leggingsList.add(GameHelperCoreModule.AMETHYST_LEGGINGS);
-		// boots
-		bootsList.add(Items.leather_boots);
-		bootsList.add(Items.chainmail_boots);
-		bootsList.add(Items.diamond_boots);
-		bootsList.add(Items.golden_boots);
-		bootsList.add(Items.iron_boots);
-		bootsList.add(GameHelperCoreModule.EMERALD_BOOTS);
-		bootsList.add(GameHelperCoreModule.RUBY_BOOTS);
-		bootsList.add(GameHelperCoreModule.SAPPHIRE_BOOTS);
-		bootsList.add(GameHelperCoreModule.AMETHYST_BOOTS);
-		// sword
-		swordList.add(Items.wooden_sword);
-		swordList.add(Items.stone_sword);
-		swordList.add(Items.diamond_sword);
-		swordList.add(Items.golden_sword);
-		swordList.add(Items.iron_sword);
-		swordList.add(GameHelperCoreModule.EMERALD_SWORD);
-		swordList.add(GameHelperCoreModule.RUBY_SWORD);
-		swordList.add(GameHelperCoreModule.SAPPHIRE_SWORD);
-		swordList.add(GameHelperCoreModule.AMETHYST_SWORD);
-		// pickaxe
-		pickaxeList.add(Items.wooden_pickaxe);
-		pickaxeList.add(Items.stone_pickaxe);
-		pickaxeList.add(Items.diamond_pickaxe);
-		pickaxeList.add(Items.golden_pickaxe);
-		pickaxeList.add(Items.iron_pickaxe);
-		pickaxeList.add(GameHelperCoreModule.EMERALD_PICKAXE);
-		pickaxeList.add(GameHelperCoreModule.RUBY_PICKAXE);
-		pickaxeList.add(GameHelperCoreModule.SAPPHIRE_PICKAXE);
-		pickaxeList.add(GameHelperCoreModule.AMETHYST_PICKAXE);
-		// pickaxeList.add(GameHelper.EMERALD_pickaxe);
-		// pickaxeList.add(GameHelper.RUBY_pickaxe);
-		// pickaxeList.add(GameHelper.SAPPHIRE_pickaxe);
-		// axe
-		axeList.add(Items.wooden_axe);
-		axeList.add(Items.stone_axe);
-		axeList.add(Items.diamond_axe);
-		axeList.add(Items.golden_axe);
-		axeList.add(Items.iron_axe);
-		axeList.add(GameHelperCoreModule.EMERALD_AXE);
-		axeList.add(GameHelperCoreModule.RUBY_AXE);
-		axeList.add(GameHelperCoreModule.SAPPHIRE_AXE);
-		axeList.add(GameHelperCoreModule.AMETHYST_AXE);
-		// axeList.add(GameHelper.EMERALD_axe);
-		// axeList.add(GameHelper.RUBY_axe);
-		// axeList.add(GameHelper.SAPPHIRE_axe);
-		// hoe
-		hoeList.add(Items.wooden_hoe);
-		hoeList.add(Items.stone_hoe);
-		hoeList.add(Items.diamond_hoe);
-		hoeList.add(Items.golden_hoe);
-		hoeList.add(Items.iron_hoe);
-		hoeList.add(GameHelperCoreModule.EMERALD_AXE);
-		hoeList.add(GameHelperCoreModule.RUBY_AXE);
-		hoeList.add(GameHelperCoreModule.SAPPHIRE_AXE);
-		hoeList.add(GameHelperCoreModule.AMETHYST_AXE);
-		// GameHelper.GH_MODULE.hoeList.add(GameHelper.EMERALD_hoe);
-		// GameHelper.GH_MODULE.hoeList.add(GameHelper.RUBY_hoe);
-		// GameHelper.GH_MODULE.hoeList.add(GameHelper.SAPPHIRE_hoe);
-		// shovel
-		shovelList.add(Items.wooden_shovel);
-		shovelList.add(Items.stone_shovel);
-		shovelList.add(Items.diamond_shovel);
-		shovelList.add(Items.golden_shovel);
-		shovelList.add(Items.iron_shovel);
-		shovelList.add(GameHelperCoreModule.EMERALD_SHOVEL);
-		shovelList.add(GameHelperCoreModule.RUBY_SHOVEL);
-		shovelList.add(GameHelperCoreModule.SAPPHIRE_SHOVEL);
-		shovelList.add(GameHelperCoreModule.AMETHYST_SHOVEL);
-		// shovelList.add(GameHelper.EMERALD_shovel);
-		// shovelList.add(GameHelper.RUBY_shovel);
-		// shovelList.add(GameHelper.SAPPHIRE_shovel);
-		// fns
-		fnsList.add(Items.flint_and_steel);
-		// rod
-		rodList.add(Items.fishing_rod);
-		// bow
-		bowList.add(Items.bow);
-		// shears
-		shearsList.add(Items.shears);
-
-		chestplateEnchants = new Enchantment[] { EnchantmentFinder.PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.PROJECTILE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.FIRE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.BLAST_PROTECTION.toFMLEnchantment(), EnchantmentFinder.THORNS.toFMLEnchantment(),
-				EnchantmentFinder.UNBREAKING.toFMLEnchantment(), EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-		helmetEnchants = new Enchantment[] { EnchantmentFinder.PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.PROJECTILE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.FIRE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.BLAST_PROTECTION.toFMLEnchantment(), EnchantmentFinder.THORNS.toFMLEnchantment(),
-				EnchantmentFinder.UNBREAKING.toFMLEnchantment(), EnchantmentFinder.SOULBOUND.toFMLEnchantment(),
-				EnchantmentFinder.AQUA_AFFINITY.toFMLEnchantment(), EnchantmentFinder.RESPIRATION.toFMLEnchantment() };
-		leggingsEnchants = new Enchantment[] { EnchantmentFinder.PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.PROJECTILE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.FIRE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.BLAST_PROTECTION.toFMLEnchantment(), EnchantmentFinder.THORNS.toFMLEnchantment(),
-				EnchantmentFinder.UNBREAKING.toFMLEnchantment(), EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-		bootsEnchants = new Enchantment[] { EnchantmentFinder.PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.PROJECTILE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.FIRE_PROTECTION.toFMLEnchantment(),
-				EnchantmentFinder.BLAST_PROTECTION.toFMLEnchantment(), EnchantmentFinder.THORNS.toFMLEnchantment(),
-				EnchantmentFinder.UNBREAKING.toFMLEnchantment(), EnchantmentFinder.SOULBOUND.toFMLEnchantment(),
-				EnchantmentFinder.FEATHER_FALLING.toFMLEnchantment(),
-				EnchantmentFinder.DEPTH_STRIDER.toFMLEnchantment() };
-		pickaxeSilk = new Enchantment[] { EnchantmentFinder.EFFICIENCY.toFMLEnchantment(),
-				EnchantmentFinder.SILK_TOUCH.toFMLEnchantment(), EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment(), EnchantmentFinder.XPBOOST.toFMLEnchantment() };
-		pickaxeFortuneSmelting = new Enchantment[] { EnchantmentFinder.FORTUNE.toFMLEnchantment(),
-				EnchantmentFinder.EFFICIENCY.toFMLEnchantment(), EnchantmentFinder.SMELTING.toFMLEnchantment(),
-				EnchantmentFinder.UNBREAKING.toFMLEnchantment(), EnchantmentFinder.SOULBOUND.toFMLEnchantment(),
-				EnchantmentFinder.XPBOOST.toFMLEnchantment(), EnchantmentFinder.DESTRUCTION.toFMLEnchantment() };
-		pickaxeElse = new Enchantment[] { EnchantmentFinder.FORTUNE.toFMLEnchantment(),
-				EnchantmentFinder.EFFICIENCY.toFMLEnchantment(), EnchantmentFinder.SILK_TOUCH.toFMLEnchantment(),
-				EnchantmentFinder.SMELTING.toFMLEnchantment(), EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment(), EnchantmentFinder.XPBOOST.toFMLEnchantment(),
-				EnchantmentFinder.DESTRUCTION.toFMLEnchantment() };
-		swordEnchants = new Enchantment[] { EnchantmentFinder.SHARPNESS.toFMLEnchantment(),
-				EnchantmentFinder.BANE_OF_ARTHROPODS.toFMLEnchantment(), EnchantmentFinder.KNOCKBACK.toFMLEnchantment(),
-				EnchantmentFinder.LOOTING.toFMLEnchantment(), EnchantmentFinder.FIRE_ASPECT.toFMLEnchantment(),
-				EnchantmentFinder.SMITE.toFMLEnchantment(), EnchantmentFinder.SOULBOUND.toFMLEnchantment(),
-				EnchantmentFinder.XPBOOST.toFMLEnchantment(), EnchantmentFinder.HEAD_LOOT.toFMLEnchantment(),
-				EnchantmentFinder.UNBREAKING.toFMLEnchantment() };
-		bowEnchants = new Enchantment[] { EnchantmentFinder.POWER.toFMLEnchantment(),
-				EnchantmentFinder.FLAME.toFMLEnchantment(), EnchantmentFinder.PUNCH.toFMLEnchantment(),
-				EnchantmentFinder.INFINITY.toFMLEnchantment(), EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment(), EnchantmentFinder.XPBOOST.toFMLEnchantment() };
-		rodEnchants = new Enchantment[] { EnchantmentFinder.LURE.toFMLEnchantment(),
-				EnchantmentFinder.LUCK_OF_THE_SEA.toFMLEnchantment(), EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-		hoeEnchants = new Enchantment[] { EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-		axeEnchants = new Enchantment[] { EnchantmentFinder.EFFICIENCY.toFMLEnchantment(),
-				EnchantmentFinder.UNBREAKING.toFMLEnchantment(), EnchantmentFinder.SMELTING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment(), EnchantmentFinder.HEAD_LOOT.toFMLEnchantment() };
-		shovelEnchants = new Enchantment[] { EnchantmentFinder.EFFICIENCY.toFMLEnchantment(),
-				EnchantmentFinder.SMELTING.toFMLEnchantment(), EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-		fnsEnchants = new Enchantment[] { EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-		shearsEnchants = new Enchantment[] { EnchantmentFinder.UNBREAKING.toFMLEnchantment(),
-				EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
-		otherMaterialEnchants = new Enchantment[] { EnchantmentFinder.SOULBOUND.toFMLEnchantment() };
+	public void defaultSetup() {
+		chestplateEnchantsList.clear();
+		leggingsEnchantsList.clear();
+		helmetEnchantsList.clear();
+		bootsEnchantsList.clear();
+		swordEnchantsList.clear();
+		otherMaterialEnchantsList.clear();
+		shovelEnchantsList.clear();
+		fnsEnchantsList.clear();
+		axeEnchantsList.clear();
+		bowEnchantsList.clear();
+		pickaxeSilkList.clear();
+		pickaxeFortuneSmeltingList.clear();
+		pickaxeElseList.clear();
+		rodEnchantsList.clear();
+		hoeEnchantsList.clear();
+		shearsEnchantsList.clear();
+		//
+		chestplateEnchantsList.add(EnchantmentFinder.PROTECTION.toFMLEnchantment());
+		chestplateEnchantsList.add(EnchantmentFinder.PROJECTILE_PROTECTION.toFMLEnchantment());
+		chestplateEnchantsList.add(EnchantmentFinder.FIRE_PROTECTION.toFMLEnchantment());
+		chestplateEnchantsList.add(EnchantmentFinder.BLAST_PROTECTION.toFMLEnchantment());
+		chestplateEnchantsList.add(EnchantmentFinder.THORNS.toFMLEnchantment());
+		chestplateEnchantsList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		chestplateEnchantsList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		//
+		helmetEnchantsList.add(EnchantmentFinder.PROTECTION.toFMLEnchantment());
+		helmetEnchantsList.add(EnchantmentFinder.PROJECTILE_PROTECTION.toFMLEnchantment());
+		helmetEnchantsList.add(EnchantmentFinder.FIRE_PROTECTION.toFMLEnchantment());
+		helmetEnchantsList.add(EnchantmentFinder.BLAST_PROTECTION.toFMLEnchantment());
+		helmetEnchantsList.add(EnchantmentFinder.THORNS.toFMLEnchantment());
+		helmetEnchantsList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		helmetEnchantsList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		helmetEnchantsList.add(EnchantmentFinder.AQUA_AFFINITY.toFMLEnchantment());
+		helmetEnchantsList.add(EnchantmentFinder.RESPIRATION.toFMLEnchantment());
+		//
+		leggingsEnchantsList.add(EnchantmentFinder.PROTECTION.toFMLEnchantment());
+		leggingsEnchantsList.add(EnchantmentFinder.PROJECTILE_PROTECTION.toFMLEnchantment());
+		leggingsEnchantsList.add(EnchantmentFinder.FIRE_PROTECTION.toFMLEnchantment());
+		leggingsEnchantsList.add(EnchantmentFinder.BLAST_PROTECTION.toFMLEnchantment());
+		leggingsEnchantsList.add(EnchantmentFinder.THORNS.toFMLEnchantment());
+		leggingsEnchantsList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		leggingsEnchantsList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		//
+		bootsEnchantsList.add(EnchantmentFinder.PROTECTION.toFMLEnchantment());
+		bootsEnchantsList.add(EnchantmentFinder.PROJECTILE_PROTECTION.toFMLEnchantment());
+		bootsEnchantsList.add(EnchantmentFinder.FIRE_PROTECTION.toFMLEnchantment());
+		bootsEnchantsList.add(EnchantmentFinder.BLAST_PROTECTION.toFMLEnchantment());
+		bootsEnchantsList.add(EnchantmentFinder.THORNS.toFMLEnchantment());
+		bootsEnchantsList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		bootsEnchantsList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		bootsEnchantsList.add(EnchantmentFinder.FEATHER_FALLING.toFMLEnchantment());
+		bootsEnchantsList.add(EnchantmentFinder.DEPTH_STRIDER.toFMLEnchantment());
+		//
+		pickaxeSilkList.add(EnchantmentFinder.EFFICIENCY.toFMLEnchantment());
+		pickaxeSilkList.add(EnchantmentFinder.SILK_TOUCH.toFMLEnchantment());
+		pickaxeSilkList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		pickaxeSilkList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		pickaxeSilkList.add(EnchantmentFinder.XPBOOST.toFMLEnchantment());
+		//
+		pickaxeFortuneSmeltingList.add(EnchantmentFinder.FORTUNE.toFMLEnchantment());
+		pickaxeFortuneSmeltingList.add(EnchantmentFinder.EFFICIENCY.toFMLEnchantment());
+		pickaxeFortuneSmeltingList.add(EnchantmentFinder.SMELTING.toFMLEnchantment());
+		pickaxeFortuneSmeltingList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		pickaxeFortuneSmeltingList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		pickaxeFortuneSmeltingList.add(EnchantmentFinder.XPBOOST.toFMLEnchantment());
+		pickaxeFortuneSmeltingList.add(EnchantmentFinder.DESTRUCTION.toFMLEnchantment());
+		//
+		pickaxeElseList.add(EnchantmentFinder.FORTUNE.toFMLEnchantment());
+		pickaxeElseList.add(EnchantmentFinder.EFFICIENCY.toFMLEnchantment());
+		pickaxeElseList.add(EnchantmentFinder.SILK_TOUCH.toFMLEnchantment());
+		pickaxeElseList.add(EnchantmentFinder.SMELTING.toFMLEnchantment());
+		pickaxeElseList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		pickaxeElseList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		pickaxeElseList.add(EnchantmentFinder.XPBOOST.toFMLEnchantment());
+		pickaxeElseList.add(EnchantmentFinder.DESTRUCTION.toFMLEnchantment());
+		//
+		swordEnchantsList.add(EnchantmentFinder.SHARPNESS.toFMLEnchantment());
+		swordEnchantsList.add(EnchantmentFinder.BANE_OF_ARTHROPODS.toFMLEnchantment());
+		swordEnchantsList.add(EnchantmentFinder.KNOCKBACK.toFMLEnchantment());
+		swordEnchantsList.add(EnchantmentFinder.LOOTING.toFMLEnchantment());
+		swordEnchantsList.add(EnchantmentFinder.FIRE_ASPECT.toFMLEnchantment());
+		swordEnchantsList.add(EnchantmentFinder.SMITE.toFMLEnchantment());
+		swordEnchantsList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		swordEnchantsList.add(EnchantmentFinder.XPBOOST.toFMLEnchantment());
+		swordEnchantsList.add(EnchantmentFinder.HEAD_LOOT.toFMLEnchantment());
+		swordEnchantsList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		//
+		bowEnchantsList.add(EnchantmentFinder.POWER.toFMLEnchantment());
+		bowEnchantsList.add(EnchantmentFinder.FLAME.toFMLEnchantment());
+		bowEnchantsList.add(EnchantmentFinder.PUNCH.toFMLEnchantment());
+		bowEnchantsList.add(EnchantmentFinder.INFINITY.toFMLEnchantment());
+		bowEnchantsList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		bowEnchantsList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		bowEnchantsList.add(EnchantmentFinder.XPBOOST.toFMLEnchantment());
+		//
+		rodEnchantsList.add(EnchantmentFinder.LURE.toFMLEnchantment());
+		rodEnchantsList.add(EnchantmentFinder.LUCK_OF_THE_SEA.toFMLEnchantment());
+		rodEnchantsList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		rodEnchantsList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		//
+		hoeEnchantsList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		hoeEnchantsList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		//
+		axeEnchantsList.add(EnchantmentFinder.EFFICIENCY.toFMLEnchantment());
+		axeEnchantsList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		axeEnchantsList.add(EnchantmentFinder.SMELTING.toFMLEnchantment());
+		axeEnchantsList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		axeEnchantsList.add(EnchantmentFinder.HEAD_LOOT.toFMLEnchantment());
+		//
+		shovelEnchantsList.add(EnchantmentFinder.EFFICIENCY.toFMLEnchantment());
+		shovelEnchantsList.add(EnchantmentFinder.SMELTING.toFMLEnchantment());
+		shovelEnchantsList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		shovelEnchantsList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		//
+		fnsEnchantsList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		fnsEnchantsList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		//
+		shearsEnchantsList.add(EnchantmentFinder.UNBREAKING.toFMLEnchantment());
+		shearsEnchantsList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
+		//
+		otherMaterialEnchantsList.add(EnchantmentFinder.SOULBOUND.toFMLEnchantment());
 	}
 
-	public boolean isArmorChestLeggings(Item m) {
-		return chestplateList.contains(m) || leggingsList.contains(m);
-	}
-
-	public boolean isArmorBoots(Item m) {
-		return bootsList.contains(m);
-	}
-
-	public boolean isArmorHelmet(Item m) {
-		return helmetList.contains(m);
-	}
-
-	public boolean isShovel(Item m) {
-		return shovelList.contains(m);
-	}
-
-	public boolean isPickaxe(Item m) {
-		return pickaxeList.contains(m);
-	}
-
-	public boolean isAxe(Item m) {
-		return axeList.contains(m);
-	}
-
-	public boolean isHoe(Item m) {
-		return hoeList.contains(m);
-	}
-
-	public boolean isBow(Item m) {
-		return bowList.contains(m);
-	}
-
-	public boolean isFishingRod(Item m) {
-		return rodList.contains(m);
-	}
-
-	public boolean isFNS(Item m) {
-		return fnsList.contains(m);
-	}
-
-	public boolean isShear(Item m) {
-		return shearsList.contains(m);
-	}
-
-	public boolean isSword(Item m) {
-		return swordList.contains(m);
+	public void rebuildEnchantmentLists() {
+		chestplateEnchants = new Enchantment[0];
+		chestplateEnchants = chestplateEnchantsList.toArray(chestplateEnchants);
+		helmetEnchants = new Enchantment[0];
+		helmetEnchants = helmetEnchantsList.toArray(helmetEnchants);
+		leggingsEnchants = new Enchantment[0];
+		leggingsEnchants = leggingsEnchantsList.toArray(leggingsEnchants);
+		bootsEnchants = new Enchantment[0];
+		bootsEnchants = bootsEnchantsList.toArray(bootsEnchants);
+		pickaxeSilk = new Enchantment[0];
+		pickaxeSilk = pickaxeSilkList.toArray(pickaxeSilk);
+		pickaxeFortuneSmelting = new Enchantment[0];
+		pickaxeFortuneSmelting = pickaxeFortuneSmeltingList.toArray(pickaxeFortuneSmelting);
+		pickaxeElse = new Enchantment[0];
+		pickaxeElse = pickaxeElseList.toArray(pickaxeElse);
+		swordEnchants = new Enchantment[0];
+		swordEnchants = swordEnchantsList.toArray(swordEnchants);
+		bowEnchants = new Enchantment[0];
+		bowEnchants = bowEnchantsList.toArray(bowEnchants);
+		rodEnchants = new Enchantment[0];
+		rodEnchants = rodEnchantsList.toArray(rodEnchants);
+		hoeEnchants = new Enchantment[0];
+		hoeEnchants = hoeEnchantsList.toArray(hoeEnchants);
+		axeEnchants = new Enchantment[0];
+		axeEnchants = axeEnchantsList.toArray(axeEnchants);
+		shovelEnchants = new Enchantment[0];
+		shovelEnchants = shovelEnchantsList.toArray(shovelEnchants);
+		fnsEnchants = new Enchantment[0];
+		fnsEnchants = fnsEnchantsList.toArray(fnsEnchants);
+		shearsEnchants = new Enchantment[0];
+		shearsEnchants = shearsEnchantsList.toArray(shearsEnchants);
+		otherMaterialEnchants = new Enchantment[0];
+		otherMaterialEnchants = otherMaterialEnchantsList.toArray(otherMaterialEnchants);
 	}
 
 	public Enchantment[] getItemBoundEnchantments(ItemStack is) {
 		Item m = is.getItem();
-		if (isArmorChestLeggings(m)) {
+		if (GameHelperAPI.ghAPI().ghItemAPI().isArmorChestLeggings(m)) {
 			return chestplateEnchants;
-		} else if (isArmorBoots(m)) {
+		} else if (GameHelperAPI.ghAPI().ghItemAPI().isArmorBoots(m)) {
 			return bootsEnchants;
-		} else if (isArmorHelmet(m)) {
+		} else if (GameHelperAPI.ghAPI().ghItemAPI().isArmorHelmet(m)) {
 			return helmetEnchants;
-		} else if (isAxe(m)) {
+		} else if (GameHelperAPI.ghAPI().ghItemAPI().isAxe(m)) {
 			return axeEnchants;
-		} else if (isBow(m)) {
+		} else if (GameHelperAPI.ghAPI().ghItemAPI().isBow(m)) {
 			return bowEnchants;
-		} else if (isFishingRod(m)) {
+		} else if (GameHelperAPI.ghAPI().ghItemAPI().isFishingRod(m)) {
 			return rodEnchants;
-		} else if (isFNS(m)) {
+		} else if (GameHelperAPI.ghAPI().ghItemAPI().isFlintAndSteel(m)) {
 			return fnsEnchants;
-		} else if (isHoe(m)) {
+		} else if (GameHelperAPI.ghAPI().ghItemAPI().isHoe(m)) {
 			return hoeEnchants;
-		} else if (isPickaxe(m)) {
+		} else if (GameHelperAPI.ghAPI().ghItemAPI().isPickaxe(m)) {
 			if (GameHelper.getUtils().hasEnchantment(is, EnchantmentFinder.SILK_TOUCH.toFMLEnchantment())) {
 				return pickaxeSilk;
 			} else if (GameHelper.getUtils().hasEnchantment(is, EnchantmentFinder.FORTUNE.toFMLEnchantment())
@@ -284,11 +228,11 @@ public class GameHelperEnchantAPI {
 			} else {
 				return pickaxeElse;
 			}
-		} else if (isShear(m)) {
+		} else if (GameHelperAPI.ghAPI().ghItemAPI().isShear(m)) {
 			return shearsEnchants;
-		} else if (isShovel(m)) {
+		} else if (GameHelperAPI.ghAPI().ghItemAPI().isShovel(m)) {
 			return shovelEnchants;
-		} else if (isSword(m)) {
+		} else if (GameHelperAPI.ghAPI().ghItemAPI().isSword(m)) {
 			return swordEnchants;
 		} else {
 			return otherMaterialEnchants;

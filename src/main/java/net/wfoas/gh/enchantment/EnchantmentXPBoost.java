@@ -32,11 +32,11 @@ public class EnchantmentXPBoost extends Enchantment {
 
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack) {
-		if ((stack.getItem() instanceof ItemSword) || GameHelperAPI.ghEnchantAPI().isSword(stack.getItem()))
+		if ((stack.getItem() instanceof ItemSword) || GameHelperAPI.ghAPI().ghItemAPI().isSword(stack.getItem()))
 			return true;
-		if (stack.getItem() instanceof ItemTool || GameHelperAPI.ghEnchantAPI().isPickaxe(stack.getItem())
-				|| GameHelperAPI.ghEnchantAPI().isAxe(stack.getItem())
-				|| GameHelperAPI.ghEnchantAPI().isShovel(stack.getItem()))
+		if (stack.getItem() instanceof ItemTool || GameHelperAPI.ghAPI().ghItemAPI().isPickaxe(stack.getItem())
+				|| GameHelperAPI.ghAPI().ghItemAPI().isAxe(stack.getItem())
+				|| GameHelperAPI.ghAPI().ghItemAPI().isShovel(stack.getItem()))
 			return true;
 		else
 			return false;

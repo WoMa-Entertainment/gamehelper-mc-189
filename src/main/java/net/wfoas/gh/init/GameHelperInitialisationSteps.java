@@ -54,7 +54,10 @@ public class GameHelperInitialisationSteps {
 				module.initClient(init);
 			}
 		}
-		GameHelperAPI.ghEnchantAPI().setupEnchLists();
+		GameHelperAPI.ghAPI().ghEnchantAPI().defaultSetup();
+		GameHelperAPI.ghAPI().ghEnchantAPI().rebuildEnchantmentLists();
+		GameHelperAPI.ghAPI().ghItemAPI().defaultSetupItemLists();
+		GameHelperAPI.ghAPI().ghMinersInventoryAPI().defaultSetup();
 		OredictEntries.injectEntriesIntoOreDict();
 	}
 

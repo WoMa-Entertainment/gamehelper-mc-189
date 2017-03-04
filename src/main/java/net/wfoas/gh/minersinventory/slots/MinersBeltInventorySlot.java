@@ -31,7 +31,8 @@ public class MinersBeltInventorySlot extends MinersInventorySlot {
 
 		@Override
 		public boolean isItemValid(ItemStack itemstack) {
-			return GameHelperAPI.ghEnchantAPI().isPickaxe(itemstack.getItem()) && this.minersInventory.hasMinersBelt();
+			return GameHelperAPI.ghAPI().ghItemAPI().isPickaxe(itemstack.getItem())
+					&& this.minersInventory.hasMinersBelt();
 		}
 
 		@SideOnly(value = Side.CLIENT)
@@ -49,7 +50,7 @@ public class MinersBeltInventorySlot extends MinersInventorySlot {
 
 		@Override
 		public boolean isItemValid(ItemStack itemstack) {
-			return GameHelperAPI.ghEnchantAPI().isAxe(itemstack.getItem()) && this.minersInventory.hasMinersBelt();
+			return GameHelperAPI.ghAPI().ghItemAPI().isAxe(itemstack.getItem()) && this.minersInventory.hasMinersBelt();
 		}
 
 		@SideOnly(value = Side.CLIENT)
@@ -67,7 +68,8 @@ public class MinersBeltInventorySlot extends MinersInventorySlot {
 
 		@Override
 		public boolean isItemValid(ItemStack itemstack) {
-			return GameHelperAPI.ghEnchantAPI().isShovel(itemstack.getItem()) && this.minersInventory.hasMinersBelt();
+			return GameHelperAPI.ghAPI().ghItemAPI().isShovel(itemstack.getItem())
+					&& this.minersInventory.hasMinersBelt();
 		}
 
 		@SideOnly(value = Side.CLIENT)
@@ -86,11 +88,8 @@ public class MinersBeltInventorySlot extends MinersInventorySlot {
 		@Override
 		public boolean isItemValid(ItemStack itemstack) {
 			return itemstack.getItem() instanceof ItemBlock && ((ItemBlock) itemstack.getItem()).getBlock() != null
-					&& (((ItemBlock) itemstack.getItem()).getBlock() == Blocks.ladder
-							|| ((ItemBlock) itemstack.getItem()).getBlock() == Blocks.rail
-							|| ((ItemBlock) itemstack.getItem()).getBlock() == Blocks.activator_rail
-							|| ((ItemBlock) itemstack.getItem()).getBlock() == Blocks.golden_rail
-							|| ((ItemBlock) itemstack.getItem()).getBlock() == Blocks.detector_rail)
+					&& GameHelperAPI.ghAPI().ghMinersInventoryAPI()
+							.isMinersBeltLadderInvSlotItemValid(itemstack.getItem())
 					&& this.minersInventory.hasMinersBelt();
 		}
 

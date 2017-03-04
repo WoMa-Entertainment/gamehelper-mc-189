@@ -264,7 +264,7 @@ public class EnchantmentAltarGui extends GuiContainer {
 			} else {
 				iscopy = container.tableInventory.getStackInSlot(0);
 			}
-			setItemBoundEnchantments(GameHelperAPI.ghEnchantAPI().getItemBoundEnchantments(iscopy));
+			setItemBoundEnchantments(GameHelperAPI.ghAPI().ghEnchantAPI().getItemBoundEnchantments(iscopy));
 			if (level != 0)
 				LEVEL[level - 1].setSelected(true);
 			if (sel_ench != null) {
@@ -523,7 +523,7 @@ public class EnchantmentAltarGui extends GuiContainer {
 					alldisabled = false;
 					sel_ench = null;
 					level = 0;
-					setItemBoundEnchantments(GameHelperAPI.ghEnchantAPI().getItemBoundEnchantments(iscopy));
+					setItemBoundEnchantments(GameHelperAPI.ghAPI().ghEnchantAPI().getItemBoundEnchantments(iscopy));
 				}
 				return;
 			}
@@ -531,7 +531,7 @@ public class EnchantmentAltarGui extends GuiContainer {
 				return;
 			} else {
 				iscopy = container.tableInventory.getStackInSlot(0).copy();
-				setItemBoundEnchantments(GameHelperAPI.ghEnchantAPI().getItemBoundEnchantments(iscopy));
+				setItemBoundEnchantments(GameHelperAPI.ghAPI().ghEnchantAPI().getItemBoundEnchantments(iscopy));
 				sel_ench = null;
 				level = 0;
 				return;

@@ -22,6 +22,9 @@ import net.wfoas.gh.survivaltabs.AbstractHintedSurvivalTab;
 public class GameHelperAPI {
 	GameHelper gh;
 	GameHelperEnchantAPI enchant_api;
+	GHItemAPI item_api;
+	MinersInventoryAPI minersinv_api;
+
 	List<GameHelperRunnableRegisterTab> registerReqs;
 	List<GHCommand> gh_commands;
 	List<GameHelperModuleAbstract> modules;
@@ -30,6 +33,8 @@ public class GameHelperAPI {
 	public GameHelperAPI(GameHelper gh) {
 		this.gh = gh;
 		this.enchant_api = new GameHelperEnchantAPI();
+		this.item_api = new GHItemAPI();
+		this.minersinv_api = new MinersInventoryAPI();
 		registerReqs = new ArrayList<GameHelperRunnableRegisterTab>();
 		gh_commands = new ArrayList<GHCommand>();
 		modules = new ArrayList<GameHelperModuleAbstract>();
@@ -45,8 +50,16 @@ public class GameHelperAPI {
 	 * 
 	 * @return
 	 */
-	public static GameHelperEnchantAPI ghEnchantAPI() {
-		return ghAPI().enchant_api;
+	public GameHelperEnchantAPI ghEnchantAPI() {
+		return enchant_api;
+	}
+
+	public GHItemAPI ghItemAPI() {
+		return item_api;
+	}
+
+	public MinersInventoryAPI ghMinersInventoryAPI() {
+		return minersinv_api;
 	}
 
 	public static GameHelperAPI getGameHelperAPI() {
