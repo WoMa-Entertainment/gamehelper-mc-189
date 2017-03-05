@@ -61,7 +61,7 @@ public class ProtectedChestTileEntity extends TileEntityLockable implements ITic
 	}
 
 	public ProtectedChestTileEntity owner(EntityPlayer epmp) {
-		getTileData().setString("ProtectedChestOwner", epmp.getUniqueID().toString());
+		getTileData().setString("ProtectedBlockOwner", epmp.getUniqueID().toString());
 		return this;
 	}
 
@@ -441,27 +441,27 @@ public class ProtectedChestTileEntity extends TileEntityLockable implements ITic
 	}
 
 	@Override
-	public List<String> getWhitelistedPlayers() {
-		List<String> stringList = new ArrayList<String>();
-		if (!getTileData().hasKey("ProtectedChestWhitelistedPlayers")) {
-			getTileData().setTag("ProtectedChestWhitelistedPlayers", new NBTTagList());
+	public List<UUID> getWhitelistedPlayers() {
+		List<UUID> stringList = new ArrayList<UUID>();
+		if (!getTileData().hasKey("ProtectedBlockWhitelistedPlayers")) {
+			getTileData().setTag("ProtectedBlockWhitelistedPlayers", new NBTTagList());
 			return stringList;
 		}
-		NBTTagList list = (NBTTagList) getTileData().getTag("ProtectedChestWhitelistedPlayers");
+		NBTTagList list = (NBTTagList) getTileData().getTag("ProtectedBlockWhitelistedPlayers");
 		for (int i = 0; i < list.tagCount(); i++) {
-			stringList.add(list.getStringTagAt(i));
+			stringList.add(UUID.fromString(list.getStringTagAt(i)));
 		}
 		return stringList;
 	}
 
 	@Override
 	public UUID getOwner() {
-		return UUID.fromString(this.getTileData().getString("ProtectedChestOwner"));
+		return UUID.fromString(this.getTileData().getString("ProtectedBlockOwner"));
 	}
 
 	@Override
 	public void setOwner(UUID u) {
-		this.getTileData().setString("ProtectedChestOwner", u.toString());
+		this.getTileData().setString("ProtectedBlockOwner", u.toString());
 	}
 
 	@Override
@@ -486,21 +486,21 @@ public class ProtectedChestTileEntity extends TileEntityLockable implements ITic
 
 	@Override
 	public void addWhiteListedPlayer(UUID uid) {
-		if (!getTileData().hasKey("ProtectedChestWhitelistedPlayers")) {
-			getTileData().setTag("ProtectedChestWhitelistedPlayers", new NBTTagList());
+		if (!getTileData().hasKey("ProtectedBlockWhitelistedPlayers")) {
+			getTileData().setTag("ProtectedBlockWhitelistedPlayers", new NBTTagList());
 		}
-		NBTTagList list = (NBTTagList) getTileData().getTag("ProtectedChestWhitelistedPlayers");
+		NBTTagList list = (NBTTagList) getTileData().getTag("ProtectedBlockWhitelistedPlayers");
 		list.appendTag(new NBTTagString(uid.toString()));
 	}
 
 	@Override
 	public LockType getLockType() {
-		return LockType.getFromId(getTileData().getByte("ProtectedChestLockType"));
+		return LockType.getFromId(getTileData().getByte("ProtectedBlockLockType"));
 	}
 
 	@Override
 	public void setLockType(LockType l) {
-		getTileData().setByte("ProtectedChestLockType", l.getId());
+		getTileData().setByte("ProtectedBlockLockType", l.getId());
 	}
 
 	@Override
@@ -528,10 +528,10 @@ public class ProtectedChestTileEntity extends TileEntityLockable implements ITic
 
 	@Override
 	public void removeWhiteListedPlayer(UUID uid) {
-		if (!getTileData().hasKey("ProtectedChestWhitelistedPlayers")) {
-			getTileData().setTag("ProtectedChestWhitelistedPlayers", new NBTTagList());
+		if (!getTileData().hasKey("ProtectedBlockWhitelistedPlayers")) {
+			getTileData().setTag("ProtectedBlockWhitelistedPlayers", new NBTTagList());
 		}
-		NBTTagList list = (NBTTagList) getTileData().getTag("ProtectedChestWhitelistedPlayers");
+		NBTTagList list = (NBTTagList) getTileData().getTag("ProtectedBlockWhitelistedPlayers");
 		int remove = -1;
 		for (int i = 0; i < list.tagCount(); i++) {
 			NBTTagString s = (NBTTagString) list.get(i);
@@ -542,6 +542,6 @@ public class ProtectedChestTileEntity extends TileEntityLockable implements ITic
 		}
 		if (remove != -1)
 			list.removeTag(remove);
-		getTileData().setTag("ProtectedChestWhitelistedPlayers", list);
+		getTileData().setTag("ProtectedBlockWhitelistedPlayers", list);
 	}
 }

@@ -372,3 +372,6 @@ tile.gamehelper.exploding_end_stone.name=Exploding Endstone
 tile.gamehelper.exploding_netherrack.name=Exploding Netherrack
 tile.gamehelper.quicksand.name=Quicksand
 gamehelper.error.notafloat=§cThe §cparameter §c'%s§c' §cis §cnot §ca §cfloat §cvalue.
+gamehelper.prot_block.add=►
+gamehelper.prot_block.remove=◄
+gamehelper.error.notowner.noteditable=§cYou §caren't §cthe §cowner §cof §cthis §cblock, §cso §cyou §ccan't §cedit §cthe §cpermissions.

@@ -15,6 +15,7 @@ import net.wfoas.gh.network.packet.PacketPlayCreateNewWorld;
 import net.wfoas.gh.network.packet.PacketPlayEnchantmentAltarApplyEnchantment;
 import net.wfoas.gh.network.packet.PacketPlayGHDynamicOpenGuiClientSide;
 import net.wfoas.gh.network.packet.PacketPlayGHDynamicOpenGuiWithID;
+import net.wfoas.gh.network.packet.PacketPlayInformServerAboutNewPermissions;
 import net.wfoas.gh.network.packet.PacketPlayListOnlinePlayers;
 import net.wfoas.gh.network.packet.PacketPlayListOwnedWorlds;
 import net.wfoas.gh.network.packet.PacketPlayOpenClientCreateWorldGui;
@@ -31,6 +32,7 @@ import net.wfoas.gh.network.packet.PacketPlayRequestProfileForPlayerInWorld;
 import net.wfoas.gh.network.packet.PacketPlaySendNewProfileToServer;
 import net.wfoas.gh.network.packet.PacketPlaySyncDaggerRotationToClients;
 import net.wfoas.gh.network.packet.PacketPlaySyncDaggerRotationToServer;
+import net.wfoas.gh.network.packet.PacketPlaySyncPlayerNameUUID;
 import net.wfoas.gh.network.packet.PacketPlaySyncVillagerProfessionIds;
 import net.wfoas.gh.network.packet.PacketProgressDialogSyncCollection;
 import net.wfoas.gh.network.securedlogin.PacketPlayPasswordAuthRequest;
@@ -119,6 +121,11 @@ public class NetworkHandler {
 				PacketPlayGHDynamicOpenGuiClientSide.class, nextPacketId(), Side.CLIENT);
 		SNW.registerMessage(PacketPlayBacktraceOpenGuiClientSide.PacketPlayBacktraceOpenGuiClientSideHandler.class,
 				PacketPlayBacktraceOpenGuiClientSide.class, nextPacketId(), Side.SERVER);
+		SNW.registerMessage(PacketPlaySyncPlayerNameUUID.PlayerPlaySyncPlayerNameUUIDHandler.class,
+				PacketPlaySyncPlayerNameUUID.class, nextPacketId(), Side.CLIENT);
+		SNW.registerMessage(
+				PacketPlayInformServerAboutNewPermissions.PacketPlayInformServerAboutNewPermissionsHandler.class,
+				PacketPlayInformServerAboutNewPermissions.class, nextPacketId(), Side.SERVER);
 	}
 
 	public static byte nextPacketId() {

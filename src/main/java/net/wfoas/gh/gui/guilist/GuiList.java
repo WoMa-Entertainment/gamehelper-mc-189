@@ -60,8 +60,7 @@ public class GuiList extends GuiSlot {
 	}
 
 	/**
-	 * The element in the slot that was clicked, boolean for whether it was
-	 * double clicked or not
+	 * The element in the slot that was clicked
 	 */
 
 	String selectedString;

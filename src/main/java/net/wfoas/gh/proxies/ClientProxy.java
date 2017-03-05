@@ -29,6 +29,7 @@ import net.wfoas.gh.dagger.throwable.ThrowableDaggerRendererFactory;
 import net.wfoas.gh.enchaltar.TileEntityEnchantmentAltar;
 import net.wfoas.gh.ghbrading.GHBranding;
 import net.wfoas.gh.instench.TileEntityInstantEnchantmentTable;
+import net.wfoas.gh.playernameuuid.ClientSidePlayerNameUUIDDataBase;
 import net.wfoas.gh.potionbow.EntityShotPotion;
 import net.wfoas.gh.potionbow.ShotPotionRenderFactory;
 import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntity;
@@ -44,6 +45,7 @@ public class ClientProxy extends CommonProxy implements LogicalServerEnvironment
 	static public GHConfig client_options_gh;
 	volatile static public List<String> ownedWorlds = new ArrayList<String>(), onlinePlayers = new ArrayList<String>(),
 			allWorlds = new ArrayList<String>();
+	volatile static public ClientSidePlayerNameUUIDDataBase playerNameUUIDdb = null;
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event, GameHelper gh) {

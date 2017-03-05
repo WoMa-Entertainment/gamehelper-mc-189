@@ -204,7 +204,7 @@ public class InventoryLargeProtectedChest implements ILockableContainer, IProtec
 	}
 
 	@Override
-	public List<String> getWhitelistedPlayers() {
+	public List<UUID> getWhitelistedPlayers() {
 		return protB(upperChest).getWhitelistedPlayers();
 	}
 

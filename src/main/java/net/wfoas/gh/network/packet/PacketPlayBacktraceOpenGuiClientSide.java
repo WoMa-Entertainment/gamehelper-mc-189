@@ -1,13 +1,18 @@
 package net.wfoas.gh.network.packet;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.network.NetworkHandler;
 import net.wfoas.gh.network.gui.RemoteGuiOpener;
+import net.wfoas.gh.notifysettings.NotifyTable;
+import net.wfoas.gh.protected_blocks.IProtectedBlock;
 import net.wfoas.gh.protected_blocks.ProtectedBlocksRegistry;
 
 public class PacketPlayBacktraceOpenGuiClientSide implements IMessage {
@@ -56,6 +61,18 @@ public class PacketPlayBacktraceOpenGuiClientSide implements IMessage {
 					// ctx.getServerHandler().sendPacket(ctx.getServerHandler().playerEntity.worldObj
 					// .getTileEntity(new BlockPos(message.x, message.y,
 					// message.z)).getDescriptionPacket());
+					TileEntity te = ctx.getServerHandler().playerEntity.worldObj
+							.getTileEntity(new BlockPos(message.x, message.y, message.z));
+					if (te == null)
+						return;
+					if (te instanceof IProtectedBlock) {
+						IProtectedBlock ip = (IProtectedBlock) te;
+						if (!ip.isOwner(ctx.getServerHandler().playerEntity)) {
+							NotifyTable.notifyPlayer((EntityPlayerMP) ctx.getServerHandler().playerEntity,
+									new ChatComponentTranslation("gamehelper.error.notowner.noteditable"));
+							return;
+						}
+					}
 					RemoteGuiOpener.openRemoteClientGUI(ctx.getServerHandler().playerEntity, message.id, message.x,
 							message.y, message.z);
 				}

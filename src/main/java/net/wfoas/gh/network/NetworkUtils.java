@@ -58,14 +58,11 @@ public class NetworkUtils {
 		ByteArrayOutputStream o = new ByteArrayOutputStream();
 		DataOutputStream dos = new DataOutputStream(o);
 		if (list.isEmpty()) {
-			System.out.println("empty");
 			dos.writeByte(-1);
 			return o.toByteArray();
 		}
 		dos.writeInt(list.size());
-		System.out.println("SList: " + list.size());
 		for (String s : list) {
-			System.out.println("SEntry: " + s);
 			byte[] ser = s.getBytes(GameHelper.UTF_8);
 			dos.writeInt(ser.length);
 			dos.write(ser);
@@ -178,7 +175,7 @@ public class NetworkUtils {
 		try {
 			return readNBTTagCompoundFromBuffer0(buf);
 		} catch (IOException ioe) {
-			return null;// glsl: discard;
+			return null;
 		}
 	}
 

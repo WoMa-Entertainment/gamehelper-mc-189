@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.Packet;
 
 public interface IProtectedBlock {
-	List<String> getWhitelistedPlayers();
+	List<UUID> getWhitelistedPlayers();
 
 	void addWhiteListedPlayer(UUID uid);
 

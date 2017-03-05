@@ -10,10 +10,14 @@ import java.util.Map.Entry;
 import java.util.UUID;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.DimensionManager;
+import net.wfoas.gh.network.NetworkHandler;
+import net.wfoas.gh.network.NetworkUtils;
+import net.wfoas.gh.network.packet.PacketPlaySyncPlayerNameUUID;
 
 public class PlayerNameUUID {
 
@@ -72,6 +76,8 @@ public class PlayerNameUUID {
 	}
 
 	public static void addPlayer(EntityPlayer player) {
+		if (playerNameUUIDMap.containsKey(player.getUniqueID()))
+			playerNameUUIDMap.remove(player.getUniqueID());
 		playerNameUUIDMap.put(player.getUniqueID(), player.getName());
 	}
 
@@ -92,4 +98,11 @@ public class PlayerNameUUID {
 		return playerNameUUIDMap.get(playersUUID);
 	}
 
+	public static void syncWithClient(EntityPlayerMP playerMP) {
+		NetworkHandler.sendToSpecificPlayer(new PacketPlaySyncPlayerNameUUID(), playerMP);
+	}
+
+	public static void syncWithEveryClient() {
+		NetworkHandler.sendToAllPlayers(new PacketPlaySyncPlayerNameUUID());
+	}
 }

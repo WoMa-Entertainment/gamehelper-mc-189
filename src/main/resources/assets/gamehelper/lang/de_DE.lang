@@ -372,3 +372,6 @@ tile.gamehelper.exploding_end_stone.name=Explodierender Endstein
 tile.gamehelper.exploding_netherrack.name=Explodierender Netherstein
 tile.gamehelper.quicksand.name=Treibsand
 gamehelper.error.notafloat=§cDer §cWert §c'%s§c' §cist §ckeine §cZahl.
+gamehelper.prot_block.add=►
+gamehelper.prot_block.remove=◄
+gamehelper.error.notowner.noteditable=§cDu §cbist §cnicht §cder §cBesitzer §cdieses §cBlocks, §calso §ckannst §cdu §cauch §cnicht §cdie §cRechte §cfestlegen.
