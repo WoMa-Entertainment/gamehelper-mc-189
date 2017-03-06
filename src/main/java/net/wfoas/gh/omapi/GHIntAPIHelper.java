@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.wfoas.gh.commands.GHCommand;
 import net.wfoas.gh.omapi.module.GameHelperModuleAbstract;
-import net.wfoas.gh.survivaltabs.AbstractHintedSurvivalTab;
 
 public class GHIntAPIHelper {
 	static GameHelperAPI api;
@@ -22,10 +21,6 @@ public class GHIntAPIHelper {
 
 	public static List<GameHelperRunnableRegisterTab> tabrequests() {
 		return Collections.unmodifiableList(GameHelperAPI.ghAPI().registerReqs);
-	}
-
-	public static List<AbstractHintedSurvivalTab> tabs() {
-		return Collections.unmodifiableList(GameHelperAPI.ghAPI().tabs);
 	}
 
 	public static List<GHCommand> commands() {

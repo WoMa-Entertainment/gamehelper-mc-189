@@ -17,7 +17,6 @@ import net.wfoas.gh.omapi.module.GameHelperModuleAbstract;
 import net.wfoas.gh.protected_blocks.IProtectedBlock;
 import net.wfoas.gh.protected_blocks.ProtectedBlocksRegistry;
 import net.wfoas.gh.scheduler.GHScheduler;
-import net.wfoas.gh.survivaltabs.AbstractHintedSurvivalTab;
 
 public class GameHelperAPI {
 	GameHelper gh;
@@ -28,7 +27,6 @@ public class GameHelperAPI {
 	List<GameHelperRunnableRegisterTab> registerReqs;
 	List<GHCommand> gh_commands;
 	List<GameHelperModuleAbstract> modules;
-	List<AbstractHintedSurvivalTab> tabs;
 
 	public GameHelperAPI(GameHelper gh) {
 		this.gh = gh;
@@ -38,7 +36,6 @@ public class GameHelperAPI {
 		registerReqs = new ArrayList<GameHelperRunnableRegisterTab>();
 		gh_commands = new ArrayList<GHCommand>();
 		modules = new ArrayList<GameHelperModuleAbstract>();
-		tabs = new ArrayList<AbstractHintedSurvivalTab>();
 	}
 
 	public static GameHelperAPI ghAPI() {
@@ -100,10 +97,6 @@ public class GameHelperAPI {
 		modules.add(module);
 	}
 
-	public void injectGHSurvivalTab(AbstractHintedSurvivalTab tab) {
-		tabs.add(tab);
-	}
-
 	public void addProtectedBlock(int gui_id, IGHModBlock... block) {
 		ProtectedBlocksRegistry.addBlock(gui_id, block);
 	}
@@ -132,5 +125,9 @@ public class GameHelperAPI {
 
 	public final String name() {
 		return NAME;
+	}
+
+	protected List tabs() {
+		return null;
 	}
 }

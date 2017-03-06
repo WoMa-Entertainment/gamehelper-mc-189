@@ -10,6 +10,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
+import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -21,8 +22,10 @@ import net.wfoas.gh.config.IGHConfigDefault;
 import net.wfoas.gh.dropsapi.pdr.ChatColor;
 import net.wfoas.gh.init.GameHelperInitialisationSteps;
 import net.wfoas.gh.luckyblocksmodule.LuckyBlocksModule;
+import net.wfoas.gh.omapi.GHConstructAPIResolver;
 import net.wfoas.gh.omapi.GHIntAPIHelper;
 import net.wfoas.gh.omapi.GameHelperAPI;
+import net.wfoas.gh.omapi.GameHelperAPIClientSide;
 import net.wfoas.gh.proxies.CommonProxy;
 import net.wfoas.gh.scheduler.GHScheduler;
 import net.wfoas.gh.titanmodule.TitanModule;
@@ -64,11 +67,6 @@ public class GameHelper {
 	public IGHConfigDefault defaultConfig;
 
 	public GameHelper() {
-		api = new GameHelperAPI(this);
-		GHIntAPIHelper.setInitGHAPI(api);
-		GameHelperAPI.ghAPI().injectModule(new GameHelperCoreModule());
-		GameHelperAPI.ghAPI().injectModule(new TitanModule());
-		GameHelperAPI.ghAPI().injectModule(new LuckyBlocksModule());
 	}
 
 	public static String getBuild() {
@@ -83,7 +81,27 @@ public class GameHelper {
 		System.out.println(o);
 	}
 
+	@SidedProxy(serverSide = "net.wfoas.gh.omapi.GHConstructAPIResolver", clientSide = "net.wfoas.gh.omapi.GHConstructAPIResolverCl")
+	GHConstructAPIResolver apiResolver;
+
 	public GHScheduler ghscheduler;
+
+	@EventHandler
+	public void construct(FMLConstructionEvent event) {
+		if (event.getSide() == Side.CLIENT) {
+			api = apiResolver.construct(this);
+			GHIntAPIHelper.setInitGHAPI(api);
+			GameHelperAPI.ghAPI().injectModule(new GameHelperCoreModule());
+			GameHelperAPI.ghAPI().injectModule(new TitanModule());
+			GameHelperAPI.ghAPI().injectModule(new LuckyBlocksModule());
+		} else {
+			api = apiResolver.construct(this);
+			GHIntAPIHelper.setInitGHAPI(api);
+			GameHelperAPI.ghAPI().injectModule(new GameHelperCoreModule());
+			GameHelperAPI.ghAPI().injectModule(new TitanModule());
+			GameHelperAPI.ghAPI().injectModule(new LuckyBlocksModule());
+		}
+	}
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
