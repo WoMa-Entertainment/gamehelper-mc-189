@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "gamehelper:No_texture_block" }
+    }
+}

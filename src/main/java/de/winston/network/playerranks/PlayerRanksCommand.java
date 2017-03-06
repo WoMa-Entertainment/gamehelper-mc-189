@@ -165,7 +165,7 @@ public class PlayerRanksCommand extends CommandBase {
 	protected final List<String> playerRanks = fromArray(PlayerRank.values());
 
 	public List<String> addTabCompletionOptions(ICommandSender sender, String[] args, BlockPos pos) {
-		return args.length != 1 ? playerRanks
+		return args.length != 1 ? getListOfStringsMatchingLastWord(args, playerRanks)
 				: getListOfStringsMatchingLastWord(args, MinecraftServer.getServer().getAllUsernames());
 	}
 }

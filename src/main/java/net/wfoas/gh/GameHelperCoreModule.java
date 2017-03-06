@@ -14,6 +14,8 @@ import net.wfoas.gh.armor.GHModItemArmor;
 import net.wfoas.gh.bigsword.BigswordItem;
 import net.wfoas.gh.blocks.GameHelperModBlock;
 import net.wfoas.gh.blocks.IGHModBlock;
+import net.wfoas.gh.blocks.Quicksand;
+import net.wfoas.gh.blocks.exploding.GameHelperExplodingStone;
 import net.wfoas.gh.blocks.glass.GameHelperModGlass;
 import net.wfoas.gh.creativetab.GameHelperTab;
 import net.wfoas.gh.dropsapi.pdr.EnchantmentFinder;
@@ -33,9 +35,27 @@ import net.wfoas.gh.items.tools.ItemGHShovelTool;
 import net.wfoas.gh.minersinventory.items.IronDagger;
 import net.wfoas.gh.op_anvil.OPAnvil;
 import net.wfoas.gh.unchant.UnchantmentTable;
+import net.wfoas.gh.uncraftingtable.UncraftingTable;
 import net.wfoas.gh.worlddimensionsutils.DimensionBlock;
 
 public class GameHelperCoreModule {
+	public static GameHelperModGlass Darkglas;
+	public static GameHelperModGlass Darkglasblack;
+	public static GameHelperModGlass Darkglasblue;
+	public static GameHelperModGlass Darkglasbrown;
+	public static GameHelperModGlass Darkglascyan;
+	public static GameHelperModGlass Darkglasgray;
+	public static GameHelperModGlass Darkglasgreen;
+	public static GameHelperModGlass Darkglaslightblue;
+	public static GameHelperModGlass Darkglaslime;
+	public static GameHelperModGlass Darkglasmagenta;
+	public static GameHelperModGlass Darkglasorange;
+	public static GameHelperModGlass Darkglaspink;
+	public static GameHelperModGlass Darkglaspurple;
+	public static GameHelperModGlass Darkglassilver;
+	public static GameHelperModGlass Darkglasyellow;
+	public static GameHelperModGlass Darkglaswhite;
+	public static GameHelperModGlass Darkglasred;
 	public static GameHelperModBlock Tilemagenta;
 	public static GameHelperModBlock Tilecyan;
 	public static GameHelperModBlock Tilepink;
@@ -118,6 +138,8 @@ public class GameHelperCoreModule {
 	public static ArmorMaterial SPIRAL;
 	public static ArmorMaterial AMETHYST;
 
+	public static GameHelperModItem DIMENSION_SHARD;
+
 	public static GameHelperModItem BACKPACK, ENDER_BACKPACK, WORLD_TELEPORTER, BIG_BACKPACK, ULTRA_BACKPACK;
 	public static OPAnvil OP_ANVIL;
 	public static BigswordItem GOLD_BS, DIAMOND_BS, STONE_BS, WOOD_BS, IRON_BS, EMERALD_BS, SAPPHIRE_BS, RUBY_BS;
@@ -150,6 +172,12 @@ public class GameHelperCoreModule {
 	public static IGHModBlock SEC_CHEST, SEC_FURNACE, SEC_FURNACE_LIT;
 	public static GameHelperModBlock MARBLE, MARBLE_BRICK, BASALT, BASALT_BRICK, BASALT_COBBLE;
 
+	public static Quicksand quicksand;
+
+	public static GameHelperExplodingStone exp_netherrack, exp_endstone;
+
+	public static UncraftingTable UNCRAFTING_TABLE;
+
 	public void registerTab() {
 		TAB_GAMEHELPER = new GameHelperTab("ghTab");
 		BACKPACK.updateInitEvent(TAB_GAMEHELPER);
@@ -170,6 +198,7 @@ public class GameHelperCoreModule {
 		UNCH_TABL.updateInitEvent(TAB_GAMEHELPER);
 		SEC_CHEST.updateInitEvent(TAB_GAMEHELPER);
 		SEC_FURNACE.updateInitEvent(TAB_GAMEHELPER);
+		SEC_FURNACE_LIT.updateInitEvent(TAB_GAMEHELPER);
 		OP_ANVIL.updateInitEvent(TAB_GAMEHELPER);
 		EMERALD_HELMET.updateInitEvent(TAB_GAMEHELPER);
 		EMERALD_CHESTPLATE.updateInitEvent(TAB_GAMEHELPER);
@@ -305,6 +334,28 @@ public class GameHelperCoreModule {
 		THERMAL_ALLR_CHEST.updateInitEvent(TAB_GAMEHELPER);
 		THERMAL_ALLR_LEGGINGS.updateInitEvent(TAB_GAMEHELPER);
 		THERMAL_ALLR_BOOTS.updateInitEvent(TAB_GAMEHELPER);
+		DIMENSION_SHARD.updateInitEvent(TAB_GAMEHELPER);
+		quicksand.updateInitEvent(TAB_GAMEHELPER);
+		exp_endstone.updateInitEvent(TAB_GAMEHELPER);
+		exp_netherrack.updateInitEvent(TAB_GAMEHELPER);
+		Darkglas.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasblack.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasblue.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasbrown.updateInitEvent(TAB_GAMEHELPER);
+		Darkglascyan.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasgray.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasgreen.updateInitEvent(TAB_GAMEHELPER);
+		Darkglaslightblue.updateInitEvent(TAB_GAMEHELPER);
+		Darkglaslime.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasmagenta.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasorange.updateInitEvent(TAB_GAMEHELPER);
+		Darkglaspink.updateInitEvent(TAB_GAMEHELPER);
+		Darkglaspurple.updateInitEvent(TAB_GAMEHELPER);
+		Darkglassilver.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasyellow.updateInitEvent(TAB_GAMEHELPER);
+		Darkglaswhite.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasred.updateInitEvent(TAB_GAMEHELPER);
+		UNCRAFTING_TABLE.updateInitEvent(TAB_GAMEHELPER);
 	}
 
 	public List<Item> helmetList = new ArrayList<Item>();

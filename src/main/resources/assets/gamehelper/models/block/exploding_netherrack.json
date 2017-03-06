@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "gamehelper:blocks/Notextureblock"
+        "all": "gamehelper:blocks/exploding_netherrack"
     }
 }

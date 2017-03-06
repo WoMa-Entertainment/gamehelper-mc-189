@@ -46,12 +46,11 @@ public class GameHelperInitialisationSteps {
 		proxy.load(init, GameHelper.instance);
 		GameHelperCoreModule.setupEnchLists();
 		OredictEntries.injectEntriesIntoOreDict();
-		ProtectedBlocksRegistry.addBlock((ProtectedChestTileEntityBlock) GameHelperCoreModule.SEC_CHEST,
-				GuiHandler.PROTECTED_CHEST);
-		ProtectedBlocksRegistry.addBlock((ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE_LIT,
-				GuiHandler.PROTECTED_FURNACE);
-		ProtectedBlocksRegistry.addBlock((ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE,
-				GuiHandler.PROTECTED_FURNACE);
+		ProtectedBlocksRegistry.addBlock(GuiHandler.PROTECTED_CHEST,
+				(ProtectedChestTileEntityBlock) GameHelperCoreModule.SEC_CHEST);
+		ProtectedBlocksRegistry.addBlock(GuiHandler.PROTECTED_FURNACE,
+				(ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE,
+				(ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE_LIT);
 	}
 
 	public static void postInit(FMLPostInitializationEvent post, CommonProxy proxy) {

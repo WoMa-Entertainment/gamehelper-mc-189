@@ -11,30 +11,49 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.wfoas.gh.blocks.IGHModBlock;
 
 public final class ProtectedBlocksRegistry {
 	protected static List<Block> protectedBlocks = new ArrayList<Block>();
-	protected static Map<Integer, Block> protectedBlocksMap = new HashMap<Integer, Block>();
+	protected static Map<Integer, List<Block>> protectedBlocksMap = new HashMap<Integer, List<Block>>();
+	protected static Map<Block, Integer> protectedBlockReverseMap = new HashMap<Block, Integer>();
 
-	public static void addBlock(Block b, int gui_id) {
-		if (!(b instanceof IProtectedBlock))
+	public static List<Block> toList(IGHModBlock... ws) {
+		ArrayList<Block> list = new ArrayList<Block>();
+		for (IGHModBlock b : ws) {
+			if (b instanceof Block)
+				list.add((Block) b);
+		}
+		return list;
+	}
+
+	public static void addBlock(int gui_id, IGHModBlock... b) {
+		for (IGHModBlock b1 : b) {
+			if (!protectedBlocks.contains(b1)) {
+				if (b1 instanceof Block) {
+					protectedBlocks.add((Block) b1);
+					protectedBlockReverseMap.put((Block) b1, Integer.valueOf(gui_id));
+				}
+			}
+		}
+		if (!protectedBlocksMap.containsKey(gui_id)) {
+			protectedBlocksMap.put(Integer.valueOf(gui_id), toList(b));
 			return;
-		if (!protectedBlocks.contains(b))
-			protectedBlocks.add(b);
-		if (!protectedBlocksMap.containsKey(gui_id))
-			protectedBlocksMap.put(Integer.valueOf(gui_id), b);
+		} else {
+			List<Block> l = protectedBlocksMap.remove(Integer.valueOf(gui_id));
+			l.addAll(toList(b));
+			protectedBlocksMap.put(Integer.valueOf(gui_id), l);
+			return;
+		}
 	}
 
 	public static int getID(Block b) {
-		for (Map.Entry<Integer, Block> val : protectedBlocksMap.entrySet()) {
-			System.out.println(val.getKey() + "" + val.getValue());
-			if (val.getValue().equals(b))
-				return val.getKey().intValue();
-		}
-		return 0;
+		if (!protectedBlockReverseMap.containsKey(b))
+			return 0;
+		return protectedBlockReverseMap.get(b);
 	}
 
-	public static Block getBlock(int id) {
+	public static List<Block> getBlock(int id) {
 		return protectedBlocksMap.get(Integer.valueOf(id));
 	}
 
