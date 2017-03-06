@@ -226,10 +226,67 @@ public class GuiChangePermission extends GuiScreen {
 			if (sel1_entry == null)
 				return;
 			prot_blc.addWhiteListedPlayer(ClientProxy.playerNameUUIDdb.getUUID(sel1_entry));
+			try {
+				int k = this.width / 2 - 100;
+				int l = this.height / 2 - 20;
+				guiList = new GuiList(
+						removeEntries(ClientProxy.playerNameUUIDdb.playerEverOnlineOnServerUsingGH(),
+								ClientProxy.playerNameUUIDdb.playerNameStringList(prot_blc.getWhitelistedPlayers())),
+						this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR), 150, l,
+						l + this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR), 12, new ActionListener() {
+							@Override
+							public void actionPerformed(GuiList guiList, int slotIndex, boolean isDoubleClick, int mouseX,
+									int mouseY) {
+								sel1_entry = guiList.getSelectedString();
+							}
+						}, this, k);
+				sel1_entry = guiList.getSelectedString();
+				guiList22 = new GuiList(ClientProxy.playerNameUUIDdb.playerNameStringList(prot_blc.getWhitelistedPlayers()),
+						this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR), 150, l,
+						l + this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR), 12, new ActionListener() {
+							@Override
+							public void actionPerformed(GuiList guiList, int slotIndex, boolean isDoubleClick, int mouseX,
+									int mouseY) {
+								sel2_entry = guiList.getSelectedString();
+							}
+						}, this, k + 20 + (int) (this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR)));
+				sel2_entry = guiList22.getSelectedString();
+			} catch (Throwable t) {
+				t.printStackTrace();
+			}
 		} else if (button.id == remove.id) {
 			if (sel2_entry == null)
 				return;
 			prot_blc.removeWhiteListedPlayer(ClientProxy.playerNameUUIDdb.getUUID(sel2_entry));
+			try {
+				int k = this.width / 2 - 100;
+				int l = this.height / 2 - 20;
+				GameHelper.getLogger().info("OnlinePlayers:" + ClientProxy.onlinePlayers.size());
+				guiList = new GuiList(
+						removeEntries(ClientProxy.playerNameUUIDdb.playerEverOnlineOnServerUsingGH(),
+								ClientProxy.playerNameUUIDdb.playerNameStringList(prot_blc.getWhitelistedPlayers())),
+						this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR), 150, l,
+						l + this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR), 12, new ActionListener() {
+							@Override
+							public void actionPerformed(GuiList guiList, int slotIndex, boolean isDoubleClick, int mouseX,
+									int mouseY) {
+								sel1_entry = guiList.getSelectedString();
+							}
+						}, this, k);
+				sel1_entry = guiList.getSelectedString();
+				guiList22 = new GuiList(ClientProxy.playerNameUUIDdb.playerNameStringList(prot_blc.getWhitelistedPlayers()),
+						this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR), 150, l,
+						l + this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR), 12, new ActionListener() {
+							@Override
+							public void actionPerformed(GuiList guiList, int slotIndex, boolean isDoubleClick, int mouseX,
+									int mouseY) {
+								sel2_entry = guiList.getSelectedString();
+							}
+						}, this, k + 20 + (int) (this.fontRendererObj.getStringWidth(PLAYER_WITH_16_CHAR)));
+				sel2_entry = guiList22.getSelectedString();
+			} catch (Throwable t) {
+				t.printStackTrace();
+			}
 		}
 		if (prot_blc instanceof ProtectedBlockWrapper) {
 			((ProtectedBlockWrapper) prot_blc).writeBackToServer();
