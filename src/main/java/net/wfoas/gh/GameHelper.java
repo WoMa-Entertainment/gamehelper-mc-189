@@ -25,7 +25,6 @@ import net.wfoas.gh.luckyblocksmodule.LuckyBlocksModule;
 import net.wfoas.gh.omapi.GHConstructAPIResolver;
 import net.wfoas.gh.omapi.GHIntAPIHelper;
 import net.wfoas.gh.omapi.GameHelperAPI;
-import net.wfoas.gh.omapi.GameHelperAPIClientSide;
 import net.wfoas.gh.proxies.CommonProxy;
 import net.wfoas.gh.scheduler.GHScheduler;
 import net.wfoas.gh.titanmodule.TitanModule;
@@ -82,7 +81,7 @@ public class GameHelper {
 	}
 
 	@SidedProxy(serverSide = "net.wfoas.gh.omapi.GHConstructAPIResolver", clientSide = "net.wfoas.gh.omapi.GHConstructAPIResolverCl")
-	GHConstructAPIResolver apiResolver;
+	static GHConstructAPIResolver apiResolver;
 
 	public GHScheduler ghscheduler;
 

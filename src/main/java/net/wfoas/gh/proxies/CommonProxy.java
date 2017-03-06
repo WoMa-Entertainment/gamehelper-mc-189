@@ -9,7 +9,6 @@ import net.wfoas.gh.GameHelper;
 public class CommonProxy implements LogicalServerEnvironment {
 
 	public void preInit(FMLPreInitializationEvent event, GameHelper gh) {
-
 	}
 
 	public void serverStart(FMLServerStartingEvent fmlsse) {

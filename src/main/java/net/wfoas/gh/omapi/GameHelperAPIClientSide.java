@@ -18,4 +18,9 @@ public class GameHelperAPIClientSide extends GameHelperAPI {
 	public void injectGHSurvivalTab(AbstractHintedSurvivalTab tab) {
 		tabs.add(tab);
 	}
+
+	@Override
+	protected List tabs() {
+		return tabs;
+	}
 }

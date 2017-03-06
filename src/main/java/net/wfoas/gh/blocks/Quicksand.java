@@ -6,6 +6,7 @@ public class Quicksand extends GameHelperModBlock {
 
 	public Quicksand() {
 		super(Material.sand, "quicksand");
+		this.setStepSound(soundTypeSand);
 	}
 
 }

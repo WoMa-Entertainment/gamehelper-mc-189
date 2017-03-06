@@ -1,8 +1,6 @@
 package net.wfoas.gh;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.logging.log4j.Level;
 
@@ -18,9 +16,9 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.Item.ToolMaterial;
 import net.minecraft.item.ItemArmor.ArmorMaterial;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.FMLLog;
 import net.minecraftforge.fml.common.SidedProxy;
@@ -82,6 +80,22 @@ import net.wfoas.gh.blocks.Tileyellow;
 import net.wfoas.gh.blocks.exploding.ExplodingEndstone;
 import net.wfoas.gh.blocks.exploding.ExplodingNetherrack;
 import net.wfoas.gh.blocks.exploding.GameHelperExplodingStone;
+import net.wfoas.gh.blocks.glass.Darkglas;
+import net.wfoas.gh.blocks.glass.Darkglasblack;
+import net.wfoas.gh.blocks.glass.Darkglasblue;
+import net.wfoas.gh.blocks.glass.Darkglasbrown;
+import net.wfoas.gh.blocks.glass.Darkglascyan;
+import net.wfoas.gh.blocks.glass.Darkglasgray;
+import net.wfoas.gh.blocks.glass.Darkglasgreen;
+import net.wfoas.gh.blocks.glass.Darkglaslightblue;
+import net.wfoas.gh.blocks.glass.Darkglaslime;
+import net.wfoas.gh.blocks.glass.Darkglasmagenta;
+import net.wfoas.gh.blocks.glass.Darkglasorange;
+import net.wfoas.gh.blocks.glass.Darkglaspink;
+import net.wfoas.gh.blocks.glass.Darkglaspurple;
+import net.wfoas.gh.blocks.glass.Darkglasred;
+import net.wfoas.gh.blocks.glass.Darkglassilver;
+import net.wfoas.gh.blocks.glass.Darkglasyellow;
 import net.wfoas.gh.blocks.glass.GameHelperModGlass;
 import net.wfoas.gh.blocks.glass.Neonglas;
 import net.wfoas.gh.blocks.glass.Neonglasblack;
@@ -138,7 +152,6 @@ import net.wfoas.gh.config.GHConfig;
 import net.wfoas.gh.craftingresearchfacilities.CraftingResearchTable;
 import net.wfoas.gh.creativetab.GameHelperTab;
 import net.wfoas.gh.dagger.throwable.ThrowableDagger;
-import net.wfoas.gh.dropsapi.pdr.EnchantmentFinder;
 import net.wfoas.gh.enchaltar.EnchantmentAltar;
 import net.wfoas.gh.enchaltar.TileEntityEnchantmentAltar;
 import net.wfoas.gh.enchantment.EnchantmentDestruction;
@@ -188,7 +201,6 @@ import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntity;
 import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntityBlock;
 import net.wfoas.gh.protected_blocks.furnace.ProtectedFurnaceBlock;
 import net.wfoas.gh.protected_blocks.furnace.ProtectedFurnaceTileEntity;
-import net.wfoas.gh.proxies.ClientProxy;
 import net.wfoas.gh.proxies.CommonProxy;
 import net.wfoas.gh.proxies.LogicalClientEnvironment;
 import net.wfoas.gh.recipes.RecipeManager;
@@ -208,12 +220,27 @@ import net.wfoas.gh.villager.entity.GHVillager;
 import net.wfoas.gh.worlddimensionsutils.DimensionBlock;
 import net.wfoas.gh.worldgenerator.GHWorldGenerator;
 import tconstruct.client.tabs.InventoryTabVanilla;
-import tconstruct.client.tabs.TabRegistry;
 
 public class GameHelperCoreModule extends GameHelperModuleAbstract {
 	@SidedProxy(clientSide = "net.wfoas.gh.proxies.ClientProxy", serverSide = "net.wfoas.gh.proxies.CommonProxy", modId = GameHelper.MODID)
 	public static CommonProxy proxy;
 
+	public static GameHelperModGlass Darkglas;
+	public static GameHelperModGlass Darkglasblack;
+	public static GameHelperModGlass Darkglasblue;
+	public static GameHelperModGlass Darkglasbrown;
+	public static GameHelperModGlass Darkglascyan;
+	public static GameHelperModGlass Darkglasgray;
+	public static GameHelperModGlass Darkglasgreen;
+	public static GameHelperModGlass Darkglaslightblue;
+	public static GameHelperModGlass Darkglaslime;
+	public static GameHelperModGlass Darkglasmagenta;
+	public static GameHelperModGlass Darkglasorange;
+	public static GameHelperModGlass Darkglaspink;
+	public static GameHelperModGlass Darkglaspurple;
+	public static GameHelperModGlass Darkglassilver;
+	public static GameHelperModGlass Darkglasyellow;
+	public static GameHelperModGlass Darkglasred;
 	public static GameHelperModBlock Tilemagenta;
 	public static GameHelperModBlock Tilecyan;
 	public static GameHelperModBlock Tilepink;
@@ -499,6 +526,22 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		quicksand.updateInitEvent(TAB_GAMEHELPER);
 		exp_endstone.updateInitEvent(TAB_GAMEHELPER);
 		exp_netherrack.updateInitEvent(TAB_GAMEHELPER);
+		Darkglas.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasblack.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasblue.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasbrown.updateInitEvent(TAB_GAMEHELPER);
+		Darkglascyan.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasgray.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasgreen.updateInitEvent(TAB_GAMEHELPER);
+		Darkglaslightblue.updateInitEvent(TAB_GAMEHELPER);
+		Darkglaslime.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasmagenta.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasorange.updateInitEvent(TAB_GAMEHELPER);
+		Darkglaspink.updateInitEvent(TAB_GAMEHELPER);
+		Darkglaspurple.updateInitEvent(TAB_GAMEHELPER);
+		Darkglassilver.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasyellow.updateInitEvent(TAB_GAMEHELPER);
+		Darkglasred.updateInitEvent(TAB_GAMEHELPER);
 		UNCRAFTING_TABLE.updateInitEvent(TAB_GAMEHELPER);
 		CRAFTING_RESEARCH_TABLE.updateInitEvent(TAB_GAMEHELPER);
 	}
@@ -743,6 +786,23 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		GameHelperCoreModule.exp_endstone = new ExplodingEndstone();
 		GameHelperCoreModule.exp_netherrack = new ExplodingNetherrack();
 		GameHelperCoreModule.UNCRAFTING_TABLE = new UncraftingTable();
+		GameHelperCoreModule.Darkglas = new Darkglas();
+		GameHelperCoreModule.Darkglasblack = new Darkglasblack();
+		GameHelperCoreModule.Darkglasblue = new Darkglasblue();
+		GameHelperCoreModule.Darkglasbrown = new Darkglasbrown();
+		GameHelperCoreModule.Darkglascyan = new Darkglascyan();
+		GameHelperCoreModule.Darkglasgray = new Darkglasgray();
+		GameHelperCoreModule.Darkglasgreen = new Darkglasgreen();
+		GameHelperCoreModule.Darkglaslightblue = new Darkglaslightblue();
+		GameHelperCoreModule.Darkglaslime = new Darkglaslime();
+		GameHelperCoreModule.Darkglasmagenta = new Darkglasmagenta();
+		GameHelperCoreModule.Darkglasorange = new Darkglasorange();
+		GameHelperCoreModule.Darkglaspink = new Darkglaspink();
+		GameHelperCoreModule.Darkglaspurple = new Darkglaspurple();
+		GameHelperCoreModule.Darkglassilver = new Darkglassilver();
+		GameHelperCoreModule.Darkglasyellow = new Darkglasyellow();
+		GameHelperCoreModule.Darkglasred = new Darkglasred();
+
 		registerCommands();
 		if (!(proxy instanceof LogicalClientEnvironment))
 			proxy.preInit(event, GameHelper.instance);
