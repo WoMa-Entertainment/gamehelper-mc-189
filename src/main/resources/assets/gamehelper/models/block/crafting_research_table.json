@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "gamehelper:blocks/crafting_research_table_front",
+        "down": "gamehelper:blocks/crafting_research_table_bottom",
+        "up": "gamehelper:blocks/crafting_research_table_top",
+        "north": "gamehelper:blocks/crafting_research_table_front",
+        "east": "gamehelper:blocks/crafting_research_table_side",
+        "south": "gamehelper:blocks/crafting_research_table_side",
+        "west": "gamehelper:blocks/crafting_research_table_front"
+    }
+}

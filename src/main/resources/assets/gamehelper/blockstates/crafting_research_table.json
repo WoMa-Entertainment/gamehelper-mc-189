@@ -1,0 +1,5 @@
+{
+    "variants": {
+        "normal": { "model": "gamehelper:crafting_research_table" }
+    }
+}
