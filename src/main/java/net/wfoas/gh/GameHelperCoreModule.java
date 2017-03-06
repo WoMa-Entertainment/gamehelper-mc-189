@@ -179,6 +179,7 @@ import net.wfoas.gh.multipleworlds.storage.GHWorldManager;
 import net.wfoas.gh.network.securedlogin.timeout.PlayerLoginTimeOut;
 import net.wfoas.gh.notifysettings.NotifyTable;
 import net.wfoas.gh.omapi.GameHelperAPI;
+import net.wfoas.gh.omapi.GameHelperAPIClientSide;
 import net.wfoas.gh.omapi.module.GameHelperModuleAbstract;
 import net.wfoas.gh.op_anvil.OPAnvil;
 import net.wfoas.gh.potionbow.EntityShotPotion;
@@ -769,9 +770,10 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 
 	@Override
 	public void preInitClient(FMLPreInitializationEvent event) {
-		GameHelperAPI.ghAPI().injectGHSurvivalTab(new InventoryTabVanilla());
-		GameHelperAPI.ghAPI().injectGHSurvivalTab(new GHTabMinersInv());
-		GameHelperAPI.ghAPI().injectGHSurvivalTab(new GHThermalTab());
+		GameHelperAPIClientSide clApi = (GameHelperAPIClientSide) GameHelperAPI.ghAPI();
+		clApi.injectGHSurvivalTab(new InventoryTabVanilla());
+		clApi.injectGHSurvivalTab(new GHTabMinersInv());
+		clApi.injectGHSurvivalTab(new GHThermalTab());
 		if (proxy instanceof LogicalClientEnvironment)
 			proxy.preInit(event, GameHelper.instance);
 	}
