@@ -17,6 +17,12 @@ public class UncraftingTable extends GameHelperModBlock {
 
 	public UncraftingTable() {
 		super(Material.wood, "uncrafting_table");
+		this.setHardness(2.6f);
+	}
+
+	@Override
+	public boolean isToolEffective(String type, IBlockState state) {
+		return "axe".equals(type);
 	}
 
 	@Override
