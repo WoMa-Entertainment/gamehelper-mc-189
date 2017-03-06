@@ -46,7 +46,6 @@ public class ClientSidePlayerNameUUIDDataBase {
 
 	public List<String> playerNameStringList(List<UUID> uidList) {
 		List<String> names = new ArrayList<String>();
-		names.add("AS");
 		if (uidList == null)
 			return names;
 		for (UUID uid : uidList) {
