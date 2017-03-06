@@ -83,7 +83,6 @@ import net.wfoas.gh.blocks.glass.Darkglaspink;
 import net.wfoas.gh.blocks.glass.Darkglaspurple;
 import net.wfoas.gh.blocks.glass.Darkglasred;
 import net.wfoas.gh.blocks.glass.Darkglassilver;
-import net.wfoas.gh.blocks.glass.Darkglaswhite;
 import net.wfoas.gh.blocks.glass.Darkglasyellow;
 import net.wfoas.gh.blocks.glass.Neonglas;
 import net.wfoas.gh.blocks.glass.Neonglasblack;
@@ -424,7 +423,6 @@ public class CommonProxy {
 		GameHelperCoreModule.Darkglaspurple = new Darkglaspurple();
 		GameHelperCoreModule.Darkglassilver = new Darkglassilver();
 		GameHelperCoreModule.Darkglasyellow = new Darkglasyellow();
-		GameHelperCoreModule.Darkglaswhite = new Darkglaswhite();
 		GameHelperCoreModule.Darkglasred = new Darkglasred();
 		GameHelperCoreModule.UNCRAFTING_TABLE = new UncraftingTable();
 	}

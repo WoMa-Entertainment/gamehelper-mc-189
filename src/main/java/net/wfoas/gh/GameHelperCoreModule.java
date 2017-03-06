@@ -54,7 +54,6 @@ public class GameHelperCoreModule {
 	public static GameHelperModGlass Darkglaspurple;
 	public static GameHelperModGlass Darkglassilver;
 	public static GameHelperModGlass Darkglasyellow;
-	public static GameHelperModGlass Darkglaswhite;
 	public static GameHelperModGlass Darkglasred;
 	public static GameHelperModBlock Tilemagenta;
 	public static GameHelperModBlock Tilecyan;
@@ -353,7 +352,6 @@ public class GameHelperCoreModule {
 		Darkglaspurple.updateInitEvent(TAB_GAMEHELPER);
 		Darkglassilver.updateInitEvent(TAB_GAMEHELPER);
 		Darkglasyellow.updateInitEvent(TAB_GAMEHELPER);
-		Darkglaswhite.updateInitEvent(TAB_GAMEHELPER);
 		Darkglasred.updateInitEvent(TAB_GAMEHELPER);
 		UNCRAFTING_TABLE.updateInitEvent(TAB_GAMEHELPER);
 	}
