@@ -40,6 +40,7 @@ import net.wfoas.gh.armor.GHSaphirreArmor;
 import net.wfoas.gh.bigsword.BigswordItem;
 import net.wfoas.gh.blocks.AmethystBlock;
 import net.wfoas.gh.blocks.AmethystOre;
+import net.wfoas.gh.blocks.Fassade;
 import net.wfoas.gh.blocks.GameHelperModBlock;
 import net.wfoas.gh.blocks.IGHModBlock;
 import net.wfoas.gh.blocks.No_texture_block;
@@ -64,6 +65,7 @@ import net.wfoas.gh.blocks.RubyBlock;
 import net.wfoas.gh.blocks.RubyOre;
 import net.wfoas.gh.blocks.SapphireBlock;
 import net.wfoas.gh.blocks.SapphireOre;
+import net.wfoas.gh.blocks.Steinsand1;
 import net.wfoas.gh.blocks.Tileblack;
 import net.wfoas.gh.blocks.Tileblue;
 import net.wfoas.gh.blocks.Tilebrown;
@@ -77,6 +79,7 @@ import net.wfoas.gh.blocks.Tilepurple;
 import net.wfoas.gh.blocks.Tilered;
 import net.wfoas.gh.blocks.Tilewhite;
 import net.wfoas.gh.blocks.Tileyellow;
+import net.wfoas.gh.blocks.Weg;
 import net.wfoas.gh.blocks.exploding.ExplodingEndstone;
 import net.wfoas.gh.blocks.exploding.ExplodingNetherrack;
 import net.wfoas.gh.blocks.exploding.GameHelperExplodingStone;
@@ -225,6 +228,10 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 	@SidedProxy(clientSide = "net.wfoas.gh.proxies.ClientProxy", serverSide = "net.wfoas.gh.proxies.CommonProxy", modId = GameHelper.MODID)
 	public static CommonProxy proxy;
 
+	public static GameHelperModBlock Steelblock;
+	public static GameHelperModBlock Weg;
+	public static GameHelperModBlock Steinsand1;
+	public static GameHelperModBlock Fassade;
 	public static GameHelperModGlass Darkglas;
 	public static GameHelperModGlass Darkglasblack;
 	public static GameHelperModGlass Darkglasblue;
@@ -543,6 +550,10 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		Darkglasyellow.updateInitEvent(TAB_GAMEHELPER);
 		Darkglasred.updateInitEvent(TAB_GAMEHELPER);
 		UNCRAFTING_TABLE.updateInitEvent(TAB_GAMEHELPER);
+		Steelblock.updateInitEvent(TAB_GAMEHELPER);
+		Weg.updateInitEvent(TAB_GAMEHELPER);
+		Fassade.updateInitEvent(TAB_GAMEHELPER);
+		Steinsand1.updateInitEvent(TAB_GAMEHELPER);
 		CRAFTING_RESEARCH_TABLE.updateInitEvent(TAB_GAMEHELPER);
 	}
 
@@ -802,6 +813,10 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		GameHelperCoreModule.Darkglassilver = new Darkglassilver();
 		GameHelperCoreModule.Darkglasyellow = new Darkglasyellow();
 		GameHelperCoreModule.Darkglasred = new Darkglasred();
+		GameHelperCoreModule.Steelblock = new Weg();
+		GameHelperCoreModule.Weg = new Weg();
+		GameHelperCoreModule.Steinsand1 = new Steinsand1();
+		GameHelperCoreModule.Fassade = new Fassade();
 
 		registerCommands();
 		if (!(proxy instanceof LogicalClientEnvironment))
