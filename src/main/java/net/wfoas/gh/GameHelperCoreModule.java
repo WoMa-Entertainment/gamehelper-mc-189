@@ -42,6 +42,7 @@ import net.wfoas.gh.blocks.AmethystBlock;
 import net.wfoas.gh.blocks.AmethystOre;
 import net.wfoas.gh.blocks.Fassade;
 import net.wfoas.gh.blocks.GameHelperModBlock;
+import net.wfoas.gh.blocks.GameHelperOrientedModBlock;
 import net.wfoas.gh.blocks.IGHModBlock;
 import net.wfoas.gh.blocks.No_texture_block;
 import net.wfoas.gh.blocks.Pureblack;
@@ -65,6 +66,7 @@ import net.wfoas.gh.blocks.RubyBlock;
 import net.wfoas.gh.blocks.RubyOre;
 import net.wfoas.gh.blocks.SapphireBlock;
 import net.wfoas.gh.blocks.SapphireOre;
+import net.wfoas.gh.blocks.Steelblock;
 import net.wfoas.gh.blocks.Steinsand1;
 import net.wfoas.gh.blocks.Tileblack;
 import net.wfoas.gh.blocks.Tileblue;
@@ -229,7 +231,7 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 	public static CommonProxy proxy;
 
 	public static GameHelperModBlock Steelblock;
-	public static GameHelperModBlock Weg;
+	public static GameHelperOrientedModBlock Weg;
 	public static GameHelperModBlock Steinsand1;
 	public static GameHelperModBlock Fassade;
 	public static GameHelperModGlass Darkglas;
@@ -813,7 +815,7 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		GameHelperCoreModule.Darkglassilver = new Darkglassilver();
 		GameHelperCoreModule.Darkglasyellow = new Darkglasyellow();
 		GameHelperCoreModule.Darkglasred = new Darkglasred();
-		GameHelperCoreModule.Steelblock = new Weg();
+		GameHelperCoreModule.Steelblock = new Steelblock();
 		GameHelperCoreModule.Weg = new Weg();
 		GameHelperCoreModule.Steinsand1 = new Steinsand1();
 		GameHelperCoreModule.Fassade = new Fassade();
