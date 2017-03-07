@@ -3,7 +3,7 @@ package net.wfoas.gh.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
-public class Weg extends GameHelperModBlock {
+public class Weg extends GameHelperOrientedModBlock {
 
 	public Weg() {
 		super(Material.rock, "Weg");
