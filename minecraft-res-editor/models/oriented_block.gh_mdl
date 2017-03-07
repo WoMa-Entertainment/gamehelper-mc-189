@@ -1,0 +1,7 @@
+//block.json
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "%%modid%%:blocks/%%blockid%%"
+    }
+}

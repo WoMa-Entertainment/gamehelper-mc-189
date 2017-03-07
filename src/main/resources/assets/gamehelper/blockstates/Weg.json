@@ -1,5 +1,9 @@
 {
     "variants": {
-        "normal": { "model": "gamehelper:Weg" }
+        "normal": { "model": "gamehelper:Weg" },
+        "facing=north": { "model": "gamehelper:Weg" },
+        "facing=south": { "model": "gamehelper:Weg", "y": 180 },
+        "facing=west":  { "model": "gamehelper:Weg", "y": 270 },
+        "facing=east":  { "model": "gamehelper:Weg", "y": 90 }
     }
 }

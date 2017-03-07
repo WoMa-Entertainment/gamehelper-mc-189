@@ -1,0 +1,10 @@
+//.json
+{
+    "variants": {
+        "normal": { "model": "%%modid%%:%%blockid%%" },
+        "facing=north": { "model": "%%modid%%:%%blockid%%" },
+        "facing=south": { "model": "%%modid%%:%%blockid%%", "y": 180 },
+        "facing=west":  { "model": "%%modid%%:%%blockid%%", "y": 270 },
+        "facing=east":  { "model": "%%modid%%:%%blockid%%", "y": 90 }
+    }
+}

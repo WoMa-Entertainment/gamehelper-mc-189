@@ -1,6 +1,7 @@
 package net.wfoas.gh.blocks;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDirectional;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyDirection;
@@ -20,7 +21,7 @@ import net.wfoas.gh.GameHelper;
 
 public abstract class GameHelperOrientedModBlock extends Block implements GHModItemUpdater, IGHModBlock {
 
-	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	public static final PropertyDirection FACING = BlockDirectional.FACING;
 
 	public GameHelperOrientedModBlock(Material materialIn, String name) {
 		super(materialIn);
