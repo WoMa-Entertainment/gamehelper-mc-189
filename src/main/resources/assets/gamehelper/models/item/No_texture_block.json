@@ -1,5 +1,5 @@
 {
-    "parent": "gamehelper:block/Notextureblock",
+    "parent": "gamehelper:block/No_texture_block",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

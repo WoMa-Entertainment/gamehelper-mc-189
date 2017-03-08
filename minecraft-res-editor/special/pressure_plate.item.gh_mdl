@@ -1,5 +1,5 @@
 {
-    "parent": "%%modid%%:blocks/%%blockid%%_inventory",
+    "parent": "%%modid%%:block/%%blockid%%_inventory",
     "display": {
         "thirdperson": {
             "rotation": [ 10, -45, 170 ],

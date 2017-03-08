@@ -399,3 +399,4 @@ tile.gamehelper.Fassade.name=Fassade
 tile.gamehelper.Steinsand1.name=Sand mit Stein
 tile.gamehelper.Weg.name=Weg
 tile.gamehelper.Steelblock.name=Stahlblock
+tile.gamehelper.No_texture_block.name=Texturloser Block
