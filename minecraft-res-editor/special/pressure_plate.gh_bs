@@ -1,0 +1,6 @@
+{
+    "variants": {
+        "powered=false": { "model": "%%modid%%:%%blockid%%_up" },
+        "powered=true": { "model": "%%modid%%:%%blockid%%_down" }
+    }
+}

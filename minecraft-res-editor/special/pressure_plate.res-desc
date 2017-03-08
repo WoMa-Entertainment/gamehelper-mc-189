@@ -1,0 +1,10 @@
+#//ResEditor descriptor file
+#tex_modes: all | sides | single
+BlockState=pressure_plate.gh_bs
+BlockMdlCount=3
+BlockMdl0=pressure_plate_down.block.gh_mdl
+BlockMdl1=pressure_plate_inventory.block.gh_mdl
+BlockMdl2=pressure_plate_up.block.gh_mdl
+ItemMdl=pressure_plate.item.gh_mdl
+TextureMode=all
+Texture_all=%%blockid%%

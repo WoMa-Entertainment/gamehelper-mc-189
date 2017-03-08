@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "%%modid%%:blocks/%%blockid%%_front",
+        "down": "%%modid%%:blocks/uncrafting_table_bottom",
+        "up": "%%modid%%:blocks/uncrafting_table_top",
+        "north": "%%modid%%:blocks/uncrafting_table_front",
+        "east": "%%modid%%:blocks/uncrafting_table_side",
+        "south": "%%modid%%:blocks/uncrafting_table_side",
+        "west": "%%modid%%:blocks/uncrafting_table_front"
+    }
+}
