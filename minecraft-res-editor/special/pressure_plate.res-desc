@@ -3,8 +3,11 @@
 BlockState=pressure_plate.gh_bs
 BlockMdlCount=3
 BlockMdl0=pressure_plate_down.block.gh_mdl
+BlockMdlOutName0=%%blockid%%_down
 BlockMdl1=pressure_plate_inventory.block.gh_mdl
+BlockMdlOutName1=%%blockid%%_inventory
 BlockMdl2=pressure_plate_up.block.gh_mdl
+BlockMdlOutName2=%%blockid%%_up
 ItemMdl=pressure_plate.item.gh_mdl
 TextureMode=all
 Texture_all=%%blockid%%
