@@ -1,6 +1,7 @@
-package net.wfoas.gh.blocks;
+package net.wfoas.gh.blocks.pressureplates;
 
-import net.minecraft.block.Block;
+import net.minecraft.block.BlockPressurePlate;
+import net.minecraft.block.BlockPressurePlate.Sensitivity;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.model.ModelResourceLocation;
@@ -9,22 +10,19 @@ import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.wfoas.gh.GHModItemUpdater;
 import net.wfoas.gh.GameHelper;
+import net.wfoas.gh.blocks.IGHModBlock;
 
-public class GameHelperModBlock extends Block implements GHModItemUpdater, IGHModBlock {
-
+public class GameHelperModPressurePlate extends BlockPressurePlate implements IGHModBlock, GHModItemUpdater {
 	String name;
 
-	public GameHelperModBlock(Material materialIn, String name) {
-		super(materialIn);
+	public GameHelperModPressurePlate(Material materialIn, String name, Sensitivity sensitivityIn) {
+		super(materialIn, sensitivityIn);
 		this.name = name;
 		this.setUnlocalizedName(GameHelper.MODID + "." + name);
 		GameRegistry.registerBlock(this, name);
 	}
 
-	public void updateCreativeTab(CreativeTabs tab) {
-		this.setCreativeTab(tab);
-	}
-
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -34,6 +32,11 @@ public class GameHelperModBlock extends Block implements GHModItemUpdater, IGHMo
 		Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(Item.getItemFromBlock(this), 0,
 				new ModelResourceLocation(GameHelper.MODID + ":" + getName(), "inventory"));
 		updateCreativeTab(tab);
+	}
+
+	@Override
+	public void updateCreativeTab(CreativeTabs tab) {
+		this.setCreativeTab(tab);
 	}
 
 }

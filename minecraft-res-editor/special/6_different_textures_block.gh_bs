@@ -1,0 +1,6 @@
+//.json
+{
+    "variants": {
+        "normal": { "model": "%%modid%%:%%blockid%%" }
+    }
+}
