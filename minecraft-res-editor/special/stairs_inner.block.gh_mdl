@@ -1,0 +1,8 @@
+{
+    "parent": "block/inner_stairs",
+    "textures": {
+        "bottom": "%%modid%%:blocks/%%blockid%%",
+        "top": "%%modid%%:blocks/%%blockid%%",
+        "side": "%%modid%%:blocks/%%blockid%%"
+    }
+}

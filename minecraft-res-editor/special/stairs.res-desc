@@ -1,0 +1,13 @@
+#//ResEditor descriptor file
+#tex_modes: all | sides | single
+BlockState=stairs.gh_bs
+BlockMdlCount=3
+BlockMdl0=stairs.block.gh_mdl
+BlockMdlOutName0=%%blockid%%
+BlockMdl1=stairs_outer.block.gh_mdl
+BlockMdlOutName1=%%blockid%%_outer
+BlockMdl2=stairs_inner.block.gh_mdl
+BlockMdlOutName2=%%blockid%%_inner
+ItemMdl=stairs.item.gh_mdl
+TextureMode=all
+Texture_all=%%blockid%%
