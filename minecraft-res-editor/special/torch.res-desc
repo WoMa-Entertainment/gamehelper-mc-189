@@ -1,0 +1,11 @@
+#//ResEditor descriptor file
+#tex_modes: all | sides | single
+BlockState=torch.gh_bs
+BlockMdlCount=2
+BlockMdl0=torch.block.gh_mdl
+BlockMdlOutName0=%%blockid%%
+BlockMdl1=torch_wall.block.gh_mdl
+BlockMdlOutName1=%%blockid%%_wall
+ItemMdl=torch.item.gh_mdl
+TextureMode=all
+Texture_all=%%blockid%%
