@@ -3,7 +3,7 @@ package net.wfoas.gh.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
-public class Siegel extends GameHelperModBlock {
+public class Siegel extends GameHelperOrientedModBlock {
 
 	public Siegel() {
 		super(Material.rock, "Siegel");
