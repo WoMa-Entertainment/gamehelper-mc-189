@@ -1,0 +1,13 @@
+#//ResEditor descriptor file
+#tex_modes: all | sides | single
+BlockState=trapdoor.gh_bs
+BlockMdlCount=3
+BlockMdl0=trapdoor_bottom.block.gh_mdl
+BlockMdlOutName0=%%blockid%%_bottom
+BlockMdl1=trapdoor_open.block.gh_mdl
+BlockMdlOutName1=%%blockid%%_open
+BlockMdl2=trapdoor_top.block.gh_mdl
+BlockMdlOutName2=%%blockid%%_top
+ItemMdl=trapdoor.item.gh_mdl
+TextureMode=all
+Texture_all=%%blockid%%

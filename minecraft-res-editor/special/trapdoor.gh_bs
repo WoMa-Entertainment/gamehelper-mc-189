@@ -1,0 +1,20 @@
+{
+    "variants": {
+        "facing=north,half=bottom,open=false": { "model": "%%modid%%:%%blockid%%_bottom" },
+        "facing=south,half=bottom,open=false": { "model": "%%modid%%:%%blockid%%_bottom" },
+        "facing=east,half=bottom,open=false": { "model": "%%modid%%:%%blockid%%_bottom" },
+        "facing=west,half=bottom,open=false": { "model": "%%modid%%:%%blockid%%_bottom" },
+        "facing=north,half=top,open=false": { "model": "%%modid%%:%%blockid%%_top" },
+        "facing=south,half=top,open=false": { "model": "%%modid%%:%%blockid%%_top" },
+        "facing=east,half=top,open=false": { "model": "%%modid%%:%%blockid%%_top" },
+        "facing=west,half=top,open=false": { "model": "%%modid%%:%%blockid%%_top" },
+        "facing=north,half=bottom,open=true": { "model": "%%modid%%:%%blockid%%_open" },
+        "facing=south,half=bottom,open=true": { "model": "%%modid%%:%%blockid%%_open", "y": 180 },
+        "facing=east,half=bottom,open=true": { "model": "%%modid%%:%%blockid%%_open", "y": 90 },
+        "facing=west,half=bottom,open=true": { "model": "%%modid%%:%%blockid%%_open", "y": 270 },
+        "facing=north,half=top,open=true": { "model": "%%modid%%:%%blockid%%_open" },
+        "facing=south,half=top,open=true": { "model": "%%modid%%:%%blockid%%_open", "y": 180 },
+        "facing=east,half=top,open=true": { "model": "%%modid%%:%%blockid%%_open", "y": 90 },
+        "facing=west,half=top,open=true": { "model": "%%modid%%:%%blockid%%_open", "y": 270 }
+    }
+}
