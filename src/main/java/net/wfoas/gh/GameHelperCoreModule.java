@@ -257,7 +257,7 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 	public static GameHelperModBlock DieleEBA2;
 	public static GameHelperOrientedModBlock DieleEBA;
 	public static GameHelperModBlock Platzhalter;
-	public static GameHelperModBlock Siegel;
+	public static GameHelperOrientedModBlock Siegel;
 	public static GameHelperModBlock Steelblock;
 	public static GameHelperOrientedModBlock Weg;
 	public static GameHelperModBlock Steinsand1;
