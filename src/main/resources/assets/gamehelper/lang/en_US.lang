@@ -400,3 +400,5 @@ tile.gamehelper.Steinsand1.name=Sand with stone
 tile.gamehelper.Weg.name=Way
 tile.gamehelper.Steelblock.name=Steelblock
 tile.gamehelper.No_texture_block.name=Textureless Block
+tile.gamehelper.Siegel.name=Seal
+tile.gamehelper.Platzhalter.name=Placeholder

@@ -45,6 +45,7 @@ import net.wfoas.gh.blocks.GameHelperModBlock;
 import net.wfoas.gh.blocks.GameHelperOrientedModBlock;
 import net.wfoas.gh.blocks.IGHModBlock;
 import net.wfoas.gh.blocks.No_texture_block;
+import net.wfoas.gh.blocks.Platzhalter;
 import net.wfoas.gh.blocks.Pureblack;
 import net.wfoas.gh.blocks.Pureblue;
 import net.wfoas.gh.blocks.Purebrown;
@@ -66,6 +67,7 @@ import net.wfoas.gh.blocks.RubyBlock;
 import net.wfoas.gh.blocks.RubyOre;
 import net.wfoas.gh.blocks.SapphireBlock;
 import net.wfoas.gh.blocks.SapphireOre;
+import net.wfoas.gh.blocks.Siegel;
 import net.wfoas.gh.blocks.Steelblock;
 import net.wfoas.gh.blocks.Steinsand1;
 import net.wfoas.gh.blocks.Tileblack;
@@ -232,6 +234,8 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 	@SidedProxy(clientSide = "net.wfoas.gh.proxies.ClientProxy", serverSide = "net.wfoas.gh.proxies.CommonProxy", modId = GameHelper.MODID)
 	public static CommonProxy proxy;
 
+	public static GameHelperModBlock Platzhalter;
+	public static GameHelperModBlock Siegel;
 	public static GameHelperModBlock Steelblock;
 	public static GameHelperOrientedModBlock Weg;
 	public static GameHelperModBlock Steinsand1;
@@ -554,6 +558,8 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		Darkglasyellow.updateInitEvent(TAB_GAMEHELPER);
 		Darkglasred.updateInitEvent(TAB_GAMEHELPER);
 		UNCRAFTING_TABLE.updateInitEvent(TAB_GAMEHELPER);
+		Platzhalter.updateInitEvent(TAB_GAMEHELPER);
+		Siegel.updateInitEvent(TAB_GAMEHELPER);
 		Steelblock.updateInitEvent(TAB_GAMEHELPER);
 		Weg.updateInitEvent(TAB_GAMEHELPER);
 		Fassade.updateInitEvent(TAB_GAMEHELPER);
@@ -817,6 +823,8 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		GameHelperCoreModule.Darkglassilver = new Darkglassilver();
 		GameHelperCoreModule.Darkglasyellow = new Darkglasyellow();
 		GameHelperCoreModule.Darkglasred = new Darkglasred();
+		GameHelperCoreModule.Platzhalter = new Platzhalter();
+		GameHelperCoreModule.Siegel = new Siegel();
 		GameHelperCoreModule.Steelblock = new Steelblock();
 		GameHelperCoreModule.Weg = new Weg();
 		GameHelperCoreModule.Steinsand1 = new Steinsand1();
