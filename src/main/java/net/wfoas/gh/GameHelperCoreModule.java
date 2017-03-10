@@ -152,6 +152,7 @@ import net.wfoas.gh.blocks.glass.Pureglaspurple;
 import net.wfoas.gh.blocks.glass.Pureglasred;
 import net.wfoas.gh.blocks.glass.Pureglassilver;
 import net.wfoas.gh.blocks.glass.Pureglasyellow;
+import net.wfoas.gh.blocks.stairs.GameHelperModStairs;
 import net.wfoas.gh.commands.CommandBuildFly;
 import net.wfoas.gh.commands.CommandCreateWorld;
 import net.wfoas.gh.commands.CommandGameHelper;
@@ -242,7 +243,6 @@ import net.wfoas.gh.worldgenerator.GHWorldGenerator;
 public class GameHelperCoreModule extends GameHelperModuleAbstract {
 	@SidedProxy(clientSide = "net.wfoas.gh.proxies.ClientProxy", serverSide = "net.wfoas.gh.proxies.CommonProxy", modId = GameHelper.MODID)
 	public static CommonProxy proxy;
-
 	public static GameHelperModBlock ParkschildEBA;
 	public static GameHelperModBlock WandEBA;
 	public static GameHelperOrientedModBlock GarageEBA3;
@@ -880,7 +880,6 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		GameHelperCoreModule.Weg = new Weg();
 		GameHelperCoreModule.Steinsand1 = new Steinsand1();
 		GameHelperCoreModule.Fassade = new Fassade();
-
 		registerCommands();
 		if (!(proxy instanceof LogicalClientEnvironment))
 			proxy.preInit(event, GameHelper.instance);
