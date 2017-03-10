@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "normal": { "model": "gamehelper:GarageEBA3" },
+        "facing=north": { "model": "gamehelper:GarageEBA3" },
+        "facing=south": { "model": "gamehelper:GarageEBA3", "y": 180 },
+        "facing=west":  { "model": "gamehelper:GarageEBA3", "y": 270 },
+        "facing=east":  { "model": "gamehelper:GarageEBA3", "y": 90 }
+    }
+}

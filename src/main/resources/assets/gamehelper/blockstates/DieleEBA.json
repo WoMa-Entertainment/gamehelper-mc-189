@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "normal": { "model": "gamehelper:DieleEBA" },
+        "facing=north": { "model": "gamehelper:DieleEBA" },
+        "facing=south": { "model": "gamehelper:DieleEBA", "y": 180 },
+        "facing=west":  { "model": "gamehelper:DieleEBA", "y": 270 },
+        "facing=east":  { "model": "gamehelper:DieleEBA", "y": 90 }
+    }
+}

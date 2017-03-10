@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "gamehelper:blocks/GarageEBA3_up",
+        "down": "gamehelper:blocks/GarageEBA3_down",
+        "up": "gamehelper:blocks/GarageEBA3_up",
+        "north": "gamehelper:blocks/GarageEBA3_north",
+        "east": "gamehelper:blocks/GarageEBA3_east",
+        "south": "gamehelper:blocks/GarageEBA3_south",
+        "west": "gamehelper:blocks/GarageEBA3_west"
+    }
+}
