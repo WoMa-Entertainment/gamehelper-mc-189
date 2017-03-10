@@ -3,7 +3,7 @@ package net.wfoas.gh.blocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
-public class ParkschildEBA extends GameHelperModBlock {
+public class ParkschildEBA extends GameHelperOrientedModBlock {
 
 	public ParkschildEBA() {
 		super(Material.rock, "ParkschildEBA");

@@ -242,7 +242,7 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 	@SidedProxy(clientSide = "net.wfoas.gh.proxies.ClientProxy", serverSide = "net.wfoas.gh.proxies.CommonProxy", modId = GameHelper.MODID)
 	public static CommonProxy proxy;
 
-	public static GameHelperModBlock ParkschildEBA;
+	public static GameHelperOrientedModBlock ParkschildEBA;
 	public static GameHelperModBlock WandEBA;
 	public static GameHelperOrientedModBlock GarageEBA3;
 	public static GameHelperOrientedModBlock GarageEBA2;
