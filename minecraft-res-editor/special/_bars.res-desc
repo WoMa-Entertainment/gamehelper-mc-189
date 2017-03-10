@@ -1,0 +1,17 @@
+#//ResEditor descriptor file
+#tex_modes: all | sides | single
+BlockState=_bars.gh_bs
+BlockMdlCount=5
+BlockMdl0=_bars_n.block.gh_mdl
+BlockMdlOutName0=%%blockid%%_n
+BlockMdl1=_bars_ne.block.gh_mdl
+BlockMdlOutName1=%%blockid%%_ne
+BlockMdl2=_bars_ns.block.gh_mdl
+BlockMdlOutName2=%%blockid%%_ns
+BlockMdl3=_bars_nse.block.gh_mdl
+BlockMdlOutName3=%%blockid%%_nse
+BlockMdl4=_bars_nsew.block.gh_mdl
+BlockMdlOutName4=%%blockid%%_nsew
+ItemMdl=_bars.item.gh_mdl
+TextureMode=all
+Texture_all=%%blockid%%
