@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "%%modid%%:blocks/%%blockid%%_up",
+        "down": "%%modid%%:blocks/%%blockid%%_down",
+        "up": "%%modid%%:blocks/%%blockid%%_up",
+        "north": "%%modid%%:blocks/%%blockid%%_north",
+        "east": "%%modid%%:blocks/%%blockid%%_east",
+        "south": "%%modid%%:blocks/%%blockid%%_south",
+        "west": "%%modid%%:blocks/%%blockid%%_west"
+    }
+}

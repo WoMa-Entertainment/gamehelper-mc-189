@@ -1,0 +1,14 @@
+#//ResEditor descriptor file
+#tex_modes: all | sides | single
+BlockState=6_different_textures_block_oriented.gh_bs
+BlockMdlCount=1
+BlockMdl0=6_different_textures_block_oriented.block.gh_mdl
+BlockMdlOutName0=%%blockid%%
+ItemMdl=6_different_textures_block_oriented.item.gh_mdl
+TextureMode=single
+Texture_up=%%blockid%%_up
+Texture_west=%%blockid%%_west
+Texture_east=%%blockid%%_east
+Texture_north=%%blockid%%_north
+Texture_south=%%blockid%%_south
+Texture_down=%%blockid%%_down
