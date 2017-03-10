@@ -1,6 +1,0 @@
-{
-    "variants": {
-        "powered=false": { "model": "gamehelper:Siegel_up" },
-        "powered=true": { "model": "gamehelper:Siegel_down" }
-    }
-}
