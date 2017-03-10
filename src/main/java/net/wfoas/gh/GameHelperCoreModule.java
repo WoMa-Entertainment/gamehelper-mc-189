@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Level;
 
 import de.winston.develop.debug.CommandDbgScreenshotFolder;
 import de.winston.network.playerranks.PlayerRanksCommand;
+import net.minecraft.block.BlockStairs;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
