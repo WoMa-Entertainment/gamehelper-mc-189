@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "normal": { "model": "gamehelper:ParkschildEBA" },
+        "facing=north": { "model": "gamehelper:ParkschildEBA" },
+        "facing=south": { "model": "gamehelper:ParkschildEBA", "y": 180 },
+        "facing=west":  { "model": "gamehelper:ParkschildEBA", "y": 270 },
+        "facing=east":  { "model": "gamehelper:ParkschildEBA", "y": 90 }
+    }
+}

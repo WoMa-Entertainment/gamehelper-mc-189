@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "gamehelper:blocks/ParkschildEBA_up",
+        "down": "gamehelper:blocks/ParkschildEBA_down",
+        "up": "gamehelper:blocks/ParkschildEBA_up",
+        "north": "gamehelper:blocks/ParkschildEBA_north",
+        "east": "gamehelper:blocks/ParkschildEBA_east",
+        "south": "gamehelper:blocks/ParkschildEBA_south",
+        "west": "gamehelper:blocks/ParkschildEBA_west"
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "variants": {
+        "normal": { "model": "gamehelper:Siegel" },
+        "facing=north": { "model": "gamehelper:Siegel" },
+        "facing=south": { "model": "gamehelper:Siegel", "y": 180 },
+        "facing=west":  { "model": "gamehelper:Siegel", "y": 270 },
+        "facing=east":  { "model": "gamehelper:Siegel", "y": 90 }
+    }
+}
