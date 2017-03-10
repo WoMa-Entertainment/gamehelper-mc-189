@@ -8,7 +8,6 @@ import java.util.List;
 import org.lwjgl.opengl.Display;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.ItemModelMesher;
 import net.minecraft.client.resources.model.ModelBakery;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -29,14 +28,18 @@ import net.wfoas.gh.dagger.throwable.ThrowableDaggerRendererFactory;
 import net.wfoas.gh.enchaltar.TileEntityEnchantmentAltar;
 import net.wfoas.gh.ghbrading.GHBranding;
 import net.wfoas.gh.instench.TileEntityInstantEnchantmentTable;
+import net.wfoas.gh.omapi.GameHelperAPI;
+import net.wfoas.gh.omapi.GameHelperAPIClientSide;
 import net.wfoas.gh.playernameuuid.ClientSidePlayerNameUUIDDataBase;
 import net.wfoas.gh.potionbow.EntityShotPotion;
 import net.wfoas.gh.potionbow.ShotPotionRenderFactory;
 import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntity;
 import net.wfoas.gh.steamconnection.SteamConnection;
-import net.wfoas.gh.survivaltabs.SurvivalTabsRegistry;
+import net.wfoas.gh.survivaltabs.GHTabMinersInv;
+import net.wfoas.gh.survivaltabs.GHThermalTab;
 import net.wfoas.gh.villager.entity.GHVillager;
 import net.wfoas.gh.villager.entity.GHVillagerRendererFactory;
+import tconstruct.client.tabs.InventoryTabVanilla;
 import tconstruct.client.tabs.TabRegistry;
 
 public class ClientProxy extends CommonProxy implements LogicalServerEnvironment, LogicalClientEnvironment {
@@ -83,6 +86,10 @@ public class ClientProxy extends CommonProxy implements LogicalServerEnvironment
 			e.printStackTrace();
 		}
 		bindRenderer();
+		GameHelperAPIClientSide clApi = (GameHelperAPIClientSide) GameHelperAPI.ghAPI();
+		clApi.injectGHSurvivalTab(new InventoryTabVanilla());
+		clApi.injectGHSurvivalTab(new GHTabMinersInv());
+		clApi.injectGHSurvivalTab(new GHThermalTab());
 	}
 
 	public void bindRenderer() {

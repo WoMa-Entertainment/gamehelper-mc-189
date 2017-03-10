@@ -137,7 +137,6 @@ import net.wfoas.gh.blocks.glass.Pureglaspurple;
 import net.wfoas.gh.blocks.glass.Pureglasred;
 import net.wfoas.gh.blocks.glass.Pureglassilver;
 import net.wfoas.gh.blocks.glass.Pureglasyellow;
-import net.wfoas.gh.blocks.pressureplates.GameHelperModPressurePlate;
 import net.wfoas.gh.commands.CommandBuildFly;
 import net.wfoas.gh.commands.CommandCreateWorld;
 import net.wfoas.gh.commands.CommandGameHelper;
@@ -177,7 +176,6 @@ import net.wfoas.gh.items.BackpackItem;
 import net.wfoas.gh.items.BigBackpackItem;
 import net.wfoas.gh.items.EnderbackpackItem;
 import net.wfoas.gh.items.GameHelperModItem;
-import net.wfoas.gh.items.GameHelperModPotionBow;
 import net.wfoas.gh.items.GameHelperModSword;
 import net.wfoas.gh.items.ItemTelescope;
 import net.wfoas.gh.items.MobileWorkbenchItem;
@@ -201,7 +199,6 @@ import net.wfoas.gh.multipleworlds.storage.GHWorldManager;
 import net.wfoas.gh.network.securedlogin.timeout.PlayerLoginTimeOut;
 import net.wfoas.gh.notifysettings.NotifyTable;
 import net.wfoas.gh.omapi.GameHelperAPI;
-import net.wfoas.gh.omapi.GameHelperAPIClientSide;
 import net.wfoas.gh.omapi.module.GameHelperModuleAbstract;
 import net.wfoas.gh.op_anvil.OPAnvil;
 import net.wfoas.gh.potionbow.EntityShotPotion;
@@ -215,8 +212,6 @@ import net.wfoas.gh.proxies.LogicalClientEnvironment;
 import net.wfoas.gh.recipes.RecipeManager;
 import net.wfoas.gh.selectiontool.CommandExportStruct;
 import net.wfoas.gh.sound.SoundHandlerGH;
-import net.wfoas.gh.survivaltabs.GHTabMinersInv;
-import net.wfoas.gh.survivaltabs.GHThermalTab;
 import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorBootsItem;
 import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorChestplateItem;
 import net.wfoas.gh.thermalinventory.armor.GameHelperThermalArmorHelmetItem;
@@ -228,7 +223,6 @@ import net.wfoas.gh.villager.VillagerRegistrar;
 import net.wfoas.gh.villager.entity.GHVillager;
 import net.wfoas.gh.worlddimensionsutils.DimensionBlock;
 import net.wfoas.gh.worldgenerator.GHWorldGenerator;
-import tconstruct.client.tabs.InventoryTabVanilla;
 
 public class GameHelperCoreModule extends GameHelperModuleAbstract {
 	@SidedProxy(clientSide = "net.wfoas.gh.proxies.ClientProxy", serverSide = "net.wfoas.gh.proxies.CommonProxy", modId = GameHelper.MODID)
@@ -857,10 +851,6 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 
 	@Override
 	public void preInitClient(FMLPreInitializationEvent event) {
-		GameHelperAPIClientSide clApi = (GameHelperAPIClientSide) GameHelperAPI.ghAPI();
-		clApi.injectGHSurvivalTab(new InventoryTabVanilla());
-		clApi.injectGHSurvivalTab(new GHTabMinersInv());
-		clApi.injectGHSurvivalTab(new GHThermalTab());
 		if (proxy instanceof LogicalClientEnvironment)
 			proxy.preInit(event, GameHelper.instance);
 	}
