@@ -1,0 +1,11 @@
+#//ResEditor descriptor file
+#tex_modes: all | sides | single
+BlockState=lever.gh_bs
+BlockMdlCount=2
+BlockMdl0=lever.block.gh_mdl
+BlockMdlOutName0=%%blockid%%
+BlockMdl1=lever_off.block.gh_mdl
+BlockMdlOutName1=%%blockid%%_off
+ItemMdl=lever.item.gh_mdl
+TextureMode=all
+Texture_all=%%blockid%%

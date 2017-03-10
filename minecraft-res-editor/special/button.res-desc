@@ -1,0 +1,13 @@
+#//ResEditor descriptor file
+#tex_modes: all | sides | single
+BlockState=button.gh_bs
+BlockMdlCount=3
+BlockMdl0=button.block.gh_mdl
+BlockMdlOutName0=%%blockid%%
+BlockMdl1=button_inventory.block.gh_mdl
+BlockMdlOutName1=%%blockid%%_inventory
+BlockMdl2=button_pressed.block.gh_mdl
+BlockMdlOutName2=%%blockid%%_pressed
+ItemMdl=button.item.gh_mdl
+TextureMode=all
+Texture_all=%%blockid%%
