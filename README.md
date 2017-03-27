@@ -1,6 +1,5 @@
 # gamehelper-mc-189
 The repository for the minecraft mod GameHelper using Minecraft Forge 1.8.9.
-<<<<<<< HEAD
 
 The gamehelper mod adds multiple new features:
 
@@ -23,6 +22,3 @@ The gamehelper mod adds multiple new features:
 - some other crazy stuff
 
 It's for minecraft 1.8.9 but it will get updated to 1.11 soon
-
-=======
->>>>>>> random-data
