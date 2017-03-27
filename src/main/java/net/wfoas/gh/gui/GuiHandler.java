@@ -3,9 +3,12 @@ package net.wfoas.gh.gui;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.BlockPos;
+import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.GameHelperCoreModule;
 import net.wfoas.gh.backpack.big.BigContainerItem;
 import net.wfoas.gh.backpack.big.BigGuiItemInventory;
@@ -33,9 +36,11 @@ import net.wfoas.gh.instench.TileEntityInstantEnchantmentTable;
 import net.wfoas.gh.minersinventory.MinersInventoryContainer;
 import net.wfoas.gh.minersinventory.MinersInventoryGui;
 import net.wfoas.gh.minersinventory.layer.MinersInventoryHelper;
+import net.wfoas.gh.notifysettings.NotifyTable;
 import net.wfoas.gh.op_anvil.ContainerOPAnvil;
 import net.wfoas.gh.op_anvil.GuiContainerOPAnvil;
 import net.wfoas.gh.protected_blocks.GuiChangePermission;
+import net.wfoas.gh.protected_blocks.IProtectedBlock;
 import net.wfoas.gh.protected_blocks.ProtectedBlockWrapper;
 import net.wfoas.gh.protected_blocks.chest.ContainerProtectedChest;
 import net.wfoas.gh.protected_blocks.chest.GuiContainerProtectedChest;
@@ -101,11 +106,52 @@ public class GuiHandler implements IGuiHandler {
 			// TODO implement
 		} else if (ID == PROTECTED_CHEST) {
 			ProtectedChestTileEntityBlock chest = (ProtectedChestTileEntityBlock) GameHelperCoreModule.SEC_CHEST;
-			return new ContainerProtectedChest(player.inventory,
+			ContainerProtectedChest cpc = new ContainerProtectedChest(player.inventory,
 					chest.getLockableContainer(world, new BlockPos(x, y, z)), player);
+			if (cpc.getLowerChestInventory() instanceof IProtectedBlock) {
+				if (((IProtectedBlock) cpc.getLowerChestInventory()).isPlayerCapableOfOpeningBlock(player))
+					return cpc;
+				else {
+					NotifyTable.notifyPlayer((EntityPlayerMP) (player),
+							new ChatComponentTranslation("gamehelper.error.protected_chest.noperm"));
+					NotifyTable.notifyPlayer(
+							GameHelper.getUtils()
+									.getEntityPlayerByUUID(((IProtectedBlock) cpc.getLowerChestInventory()).getOwner()),
+							new ChatComponentTranslation("gamehelper.error.protected_chest.open.warning",
+									player.getName()));
+					return null;
+				}
+			} else if (cpc.getLowerChestInventory() instanceof InventoryLargeProtectedChest) {
+				if (((InventoryLargeProtectedChest) cpc.getLowerChestInventory()).isPlayerCapableOfOpeningBlock(player))
+					return cpc;
+				else {
+					NotifyTable.notifyPlayer((EntityPlayerMP) (player),
+							new ChatComponentTranslation("gamehelper.error.protected_chest.noperm"));
+					NotifyTable.notifyPlayer(
+							GameHelper.getUtils().getEntityPlayerByUUID(
+									((InventoryLargeProtectedChest) cpc.getLowerChestInventory()).getOwner()),
+							new ChatComponentTranslation("gamehelper.error.protected_chest.open.warning",
+									player.getName()));
+					return null;
+				}
+			}
 		} else if (ID == PROTECTED_FURNACE) {
-			return new ContainerProtectedFurnace(player.inventory,
+			ContainerProtectedFurnace ret = new ContainerProtectedFurnace(player.inventory,
 					(ProtectedFurnaceTileEntity) world.getTileEntity(new BlockPos(x, y, z)));
+			if (ret.getFurnace() instanceof IProtectedBlock) {
+				IProtectedBlock b = (IProtectedBlock) ret.getFurnace();
+				if (b.isPlayerCapableOfOpeningBlock(player)) {
+					return ret;
+				} else {
+					NotifyTable.notifyPlayer((EntityPlayerMP) (player),
+							new ChatComponentTranslation("gamehelper.error.protected_furnace.noperm"));
+					NotifyTable.notifyPlayer(GameHelper.getUtils().getEntityPlayerByUUID(b.getOwner()),
+							new ChatComponentTranslation("gamehelper.error.protected_furnace.open.warning",
+									player.getName()));
+					return null;
+				}
+			}
+			return ret;
 		} else if (ID == PROTECTED_BREWING_STAND) {
 
 		} else if (ID == PROTECTED_HOPPER) {

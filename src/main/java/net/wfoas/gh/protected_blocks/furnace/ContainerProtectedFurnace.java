@@ -40,6 +40,10 @@ public class ContainerProtectedFurnace extends Container {
 		listener.sendAllWindowProperties(this, this.tileFurnace);
 	}
 
+	public IInventory getFurnace() {
+		return tileFurnace;
+	}
+
 	/**
 	 * Looks for changes made in the container, sends them to every listener.
 	 */

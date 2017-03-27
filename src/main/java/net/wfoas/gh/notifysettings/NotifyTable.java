@@ -91,6 +91,8 @@ public final class NotifyTable {
 	}
 
 	public static void notifyPlayer(EntityPlayerMP playerMP, ChatComponentTranslation chat) {
+		if (playerMP == null)
+			return;
 		if (playerWantsNotification(playerMP)) {
 			playerMP.addChatComponentMessage(chat);
 		}
