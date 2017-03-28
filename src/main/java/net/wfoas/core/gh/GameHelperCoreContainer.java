@@ -21,9 +21,9 @@ public class GameHelperCoreContainer extends DummyModContainer {
 		meta.name = GameHelperCore.GH_COREMOD_NAME;
 		meta.version = GameHelperCore.GH_COREMOD_VERSION;
 		meta.credits = "-";
-		meta.authorList = Arrays.asList("Winston");
+		meta.authorList = Arrays.asList("WinPlay02");
 		meta.description = "";
-		meta.url = "wfoas.net/mc/gh/mod/core";
+		meta.url = "https://github.com/wfoasm-woma-net/gamehelper-mc-189";
 		meta.screenshots = new String[0];
 		meta.logoFile = "/assets/gamehelper/gh_core_mod.png";
 	}
