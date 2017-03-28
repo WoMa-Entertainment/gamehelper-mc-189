@@ -22,7 +22,7 @@ public class GameHelperCoreContainer extends DummyModContainer {
 		meta.version = GameHelperCore.GH_COREMOD_VERSION;
 		meta.credits = "-";
 		meta.authorList = Arrays.asList("WinPlay02");
-		meta.description = "";
+		meta.description = "The coremod of GameHelper/GameHelper-API, currently not in use, but the coremod will most likely be used in the future.";
 		meta.url = "https://github.com/wfoasm-woma-net/gamehelper-mc-189";
 		meta.screenshots = new String[0];
 		meta.logoFile = "/assets/gamehelper/gh_core_mod.png";
