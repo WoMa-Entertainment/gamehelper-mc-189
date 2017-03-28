@@ -7,7 +7,7 @@ import net.wfoas.gh.commands.GHCommand;
 import net.wfoas.gh.omapi.module.GameHelperModuleAbstract;
 
 public class GHIntAPIHelper {
-	static GameHelperAPI api;
+	volatile static GameHelperAPI api;
 
 	public static void setInitGHAPI(GameHelperAPI gh_api) {
 		if (gh_api != null) {

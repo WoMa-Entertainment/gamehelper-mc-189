@@ -12,6 +12,7 @@ import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.GameHelperCoreModule;
 import net.wfoas.gh.gui.GuiHandler;
 import net.wfoas.gh.network.NetworkHandler;
+import net.wfoas.gh.omapi.GHAPIModContainer;
 import net.wfoas.gh.omapi.GHIntAPIHelper;
 import net.wfoas.gh.omapi.GameHelperAPI;
 import net.wfoas.gh.omapi.module.GameHelperModuleAbstract;
@@ -30,9 +31,9 @@ public class GameHelperInitialisationSteps {
 		GameHelper.EVENT_SIDE = pre.getSide();
 		NetworkHandler.preInit();
 		if (GameHelper.EVENT_SIDE == Side.CLIENT) {
-			GameHelper.instance.ghscheduler = new GHSchedulerClient();
+			GHAPIModContainer.instance.ghscheduler = new GHSchedulerClient();
 		} else {
-			GameHelper.instance.ghscheduler = new GHSchedulerServer();
+			GHAPIModContainer.instance.ghscheduler = new GHSchedulerServer();
 		}
 		for (GameHelperModuleAbstract module : GHIntAPIHelper.modules()) {
 			module.preInitServer(pre);

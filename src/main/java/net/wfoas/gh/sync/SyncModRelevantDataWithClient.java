@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.network.NetworkHandler;
 import net.wfoas.gh.network.packet.PacketPlaySyncVillagerProfessionIds;
+import net.wfoas.gh.omapi.GameHelperAPI;
 import net.wfoas.gh.tabheaderfooter.TabHeaderFooterPacketManipulator;
 import net.wfoas.gh.villager.VillagerRegistrar;
 
@@ -14,7 +15,7 @@ public class SyncModRelevantDataWithClient {
 	@SubscribeEvent(priority = EventPriority.HIGH)
 	public void onPlayerJoin(final PlayerLoggedInEvent event) {
 		if (!event.player.worldObj.isRemote) {
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				@Override
 				public void run() {
 					// owned worlds + online players

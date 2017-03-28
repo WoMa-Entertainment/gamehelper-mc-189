@@ -12,6 +12,7 @@ import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.network.NetworkHandler;
 import net.wfoas.gh.network.gui.RemoteGuiOpener;
 import net.wfoas.gh.notifysettings.NotifyTable;
+import net.wfoas.gh.omapi.GameHelperAPI;
 import net.wfoas.gh.protected_blocks.IProtectedBlock;
 import net.wfoas.gh.protected_blocks.ProtectedBlocksRegistry;
 
@@ -52,7 +53,7 @@ public class PacketPlayBacktraceOpenGuiClientSide implements IMessage {
 		public IMessage onMessage(final PacketPlayBacktraceOpenGuiClientSide message, final MessageContext ctx) {
 			ProtectedBlocksRegistry.checkDataAndUpdateData(message.id, message.x, message.y, message.z,
 					ctx.getServerHandler().playerEntity.worldObj, ctx);
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				@Override
 				public void run() {
 					// ctx.getServerHandler().playerEntity.worldObj

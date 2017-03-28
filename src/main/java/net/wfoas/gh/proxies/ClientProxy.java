@@ -79,7 +79,7 @@ public class ClientProxy extends CommonProxy implements LogicalServerEnvironment
 		}
 		MinecraftForge.EVENT_BUS.register(new TabRegistry());
 		try {
-			GHBranding.addGHBranding(minercrafttitle);
+			GHBranding.brandWithGH(minercrafttitle);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {

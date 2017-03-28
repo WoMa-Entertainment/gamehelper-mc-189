@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.gui.GuiHandler;
+import net.wfoas.gh.omapi.GameHelperAPI;
 
 public class PacketPlayOpenOwnWorldDialog implements IMessage {
 
@@ -23,7 +24,7 @@ public class PacketPlayOpenOwnWorldDialog implements IMessage {
 
 		@Override
 		public IMessage onMessage(final PacketPlayOpenOwnWorldDialog message, final MessageContext ctx) {
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				@Override
 				public void run() {
 					Minecraft.getMinecraft().thePlayer.openGui(GameHelper.instance, GuiHandler.OWNWORLD_DIALOG,

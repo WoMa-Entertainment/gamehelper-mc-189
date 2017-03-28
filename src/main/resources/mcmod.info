@@ -1,5 +1,19 @@
 [
 {
+  "modid": "gamehelper-api",
+  "name": "GameHelper-API",
+  "description": "Die API von der GameHelper Mod.",
+  "version": "0.1.2-b",
+  "mcversion": "1.8.9",
+  "url": "https://github.com/wfoasm-woma-net/gamehelper-mc-189",
+  "updateUrl": "wfoas.net/mc/gh/mod/update.php",
+  "authorList": ["WinPlay02"],
+  "credits": "",
+  "logoFile": "assets/gamehelper/gh_mod_api.png",
+  "screenshots": [],
+  "dependants": [ "gamehelper" ]
+}, 
+{
   "modid": "gamehelper",
   "name": "GameHelper-Mod",
   "description": "Das GameHelper-Plugin als Mod.",
@@ -13,17 +27,5 @@
   "screenshots": [],
   "dependencies": ["gamehelper-core", "gamehelper-api"],
   "requiredMods": ["Forge", "gamehelper-api"]
-}, {
-  "modid": "gamehelper-api",
-  "name": "GameHelper-API",
-  "description": "Die API von der GameHelper Mod.",
-  "version": "0.1.2-b",
-  "mcversion": "1.8.9",
-  "url": "https://github.com/wfoasm-woma-net/gamehelper-mc-189",
-  "updateUrl": "wfoas.net/mc/gh/mod/update.php",
-  "authorList": ["WinPlay02"],
-  "credits": "",
-  "logoFile": "assets/gamehelper/gh_mod_api.png",
-  "screenshots": []
-}
+} 
 ]

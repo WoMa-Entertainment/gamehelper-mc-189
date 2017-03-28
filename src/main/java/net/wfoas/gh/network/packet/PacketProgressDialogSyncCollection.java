@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.wfoas.gh.GameHelper;
+import net.wfoas.gh.omapi.GameHelperAPI;
 
 public class PacketProgressDialogSyncCollection {
 
@@ -27,7 +28,7 @@ public class PacketProgressDialogSyncCollection {
 
 			@Override
 			public IMessage onMessage(final ForceClientToOpenClientProgressDialog message, MessageContext ctx) {
-				GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+				GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 					@Override
 					public void run() {
 						GameHelper.getUtils().openClientProgressDialog();
@@ -55,7 +56,7 @@ public class PacketProgressDialogSyncCollection {
 
 			@Override
 			public IMessage onMessage(final ForceClientToExitClientProgressDialog message, MessageContext ctx) {
-				GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+				GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 					@Override
 					public void run() {
 						GameHelper.getUtils().exitClientProgressDialog();
@@ -105,7 +106,7 @@ public class PacketProgressDialogSyncCollection {
 
 			@Override
 			public IMessage onMessage(final ClientSetProgressDialogMessageTitle message, MessageContext ctx) {
-				GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+				GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 					@Override
 					public void run() {
 						GameHelper.getUtils().setClientProgressDialogTitle(message.title);
@@ -142,7 +143,7 @@ public class PacketProgressDialogSyncCollection {
 
 			@Override
 			public IMessage onMessage(final ClientSetProgressDialogPercentage message, MessageContext ctx) {
-				GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+				GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 					@Override
 					public void run() {
 						GameHelper.getUtils().setClientProgressDialogProgress(message.percentage);
@@ -178,7 +179,7 @@ public class PacketProgressDialogSyncCollection {
 
 			@Override
 			public IMessage onMessage(final ClientSetProgressDialogCloseOption message, MessageContext ctx) {
-				GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+				GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 					@Override
 					public void run() {
 						GameHelper.getUtils().setClientProgressDialogCloseOption(message.closeoption);

@@ -6,6 +6,8 @@ import java.util.Random;
 
 import org.apache.logging.log4j.Logger;
 
+import net.minecraftforge.common.ForgeVersion;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -17,11 +19,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.event.FMLServerStoppingEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import net.wfoas.core.gh.GameHelperCore;
 import net.wfoas.gh.config.GHConfig;
 import net.wfoas.gh.config.IGHConfigDefault;
 import net.wfoas.gh.dropsapi.pdr.ChatColor;
 import net.wfoas.gh.init.GameHelperInitialisationSteps;
 import net.wfoas.gh.luckyblocksmodule.LuckyBlocksModule;
+import net.wfoas.gh.omapi.GHAPIModContainer;
 import net.wfoas.gh.omapi.GHConstructAPIResolver;
 import net.wfoas.gh.omapi.GHIntAPIHelper;
 import net.wfoas.gh.omapi.GameHelperAPI;
@@ -29,7 +33,7 @@ import net.wfoas.gh.proxies.CommonProxy;
 import net.wfoas.gh.scheduler.GHScheduler;
 import net.wfoas.gh.titanmodule.TitanModule;
 
-@Mod(modid = GameHelper.MODID, name = GameHelper.MODNAME, version = GameHelper.MODVER)
+@Mod(modid = GameHelper.MODID, name = GameHelper.MODNAME, version = GameHelper.MODVER, dependencies = "after:gamehelper-api")
 public class GameHelper {
 	public static final Charset UTF_8;
 
@@ -80,27 +84,19 @@ public class GameHelper {
 		System.out.println(o);
 	}
 
-	@SidedProxy(serverSide = "net.wfoas.gh.omapi.GHConstructAPIResolver", clientSide = "net.wfoas.gh.omapi.GHConstructAPIResolverCl")
-	static GHConstructAPIResolver apiResolver;
-
-	public GHScheduler ghscheduler;
-
 	@EventHandler
 	public void construct(FMLConstructionEvent event) {
-		if (event.getSide() == Side.CLIENT) {
-			api = apiResolver.construct(this);
-			GHIntAPIHelper.setInitGHAPI(api);
-			GameHelperAPI.ghAPI().injectModule(new GameHelperCoreModule());
-			GameHelperAPI.ghAPI().injectModule(new TitanModule());
-			GameHelperAPI.ghAPI().injectModule(new LuckyBlocksModule());
-		} else {
-			api = apiResolver.construct(this);
-			GHIntAPIHelper.setInitGHAPI(api);
-			GameHelperAPI.ghAPI().injectModule(new GameHelperCoreModule());
-			GameHelperAPI.ghAPI().injectModule(new TitanModule());
-			GameHelperAPI.ghAPI().injectModule(new LuckyBlocksModule());
-		}
+		api = GHAPIModContainer.api;
+		api.addBranding(
+				ChatColor.AQUA + GameHelper.MOD_USE_NAME + " " + ChatColor.GREEN + GameHelper.MODVER + " "
+						+ ChatColor.GRAY + "[" + GameHelper.getBuild() + ChatColor.GRAY + "]",
+				GameHelper.MOD_USE_NAME + " " + GameHelper.MODVER);
+		GameHelperAPI.ghAPI().injectModule(new GameHelperCoreModule());
+		GameHelperAPI.ghAPI().injectModule(new TitanModule());
+		GameHelperAPI.ghAPI().injectModule(new LuckyBlocksModule());
 	}
+
+	// }
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -129,10 +125,6 @@ public class GameHelper {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		GameHelperInitialisationSteps.postInit(event);
-	}
-
-	public static GHScheduler getScheduler() {
-		return instance.ghscheduler;
 	}
 
 	public static GameHelperUtils getUtils() {

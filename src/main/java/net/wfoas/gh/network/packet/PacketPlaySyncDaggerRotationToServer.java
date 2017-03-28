@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.dagger.throwable.ThrowableDagger;
+import net.wfoas.gh.omapi.GameHelperAPI;
 
 public class PacketPlaySyncDaggerRotationToServer implements IMessage {
 
@@ -47,7 +48,7 @@ public class PacketPlaySyncDaggerRotationToServer implements IMessage {
 
 		@Override
 		public IMessage onMessage(final PacketPlaySyncDaggerRotationToServer message, final MessageContext ctx) {
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				@Override
 				public void run() {
 					World w = DimensionManager.getWorld(message.worldID);

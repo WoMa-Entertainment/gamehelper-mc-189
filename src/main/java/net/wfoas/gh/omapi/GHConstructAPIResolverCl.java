@@ -4,7 +4,7 @@ import net.wfoas.gh.GameHelper;
 
 public class GHConstructAPIResolverCl extends GHConstructAPIResolver {
 	@Override
-	public GameHelperAPI construct(GameHelper gh) {
+	public GameHelperAPI construct(GHAPIModContainer gh) {
 		return new GameHelperAPIClientSide(gh);
 	}
 }

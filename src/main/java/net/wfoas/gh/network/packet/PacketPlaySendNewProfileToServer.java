@@ -12,6 +12,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.multipleworlds.GHWorld;
 import net.wfoas.gh.multipleworlds.storage.GHWorldManager;
+import net.wfoas.gh.omapi.GameHelperAPI;
 import net.wfoas.gh.world.owner.WorldOwners;
 import net.wfoas.gh.world.permissions.WorldPermissions;
 import net.wfoas.gh.world.utils.WorldPermission;
@@ -81,7 +82,7 @@ public class PacketPlaySendNewProfileToServer implements IMessage {
 
 		@Override
 		public IMessage onMessage(final PacketPlaySendNewProfileToServer message, final MessageContext ctx) {
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				@Override
 				public void run() {
 					EntityPlayerMP ep = GameHelper.getUtils().getEntityPlayerByName(message.player);

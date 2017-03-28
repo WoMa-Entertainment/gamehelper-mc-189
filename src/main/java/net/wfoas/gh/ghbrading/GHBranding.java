@@ -16,6 +16,7 @@ import net.wfoas.gh.omapi.GameHelperAPI;
 
 public class GHBranding {
 	static Field brandingMc, branding;
+	static List<String> brandsMc, brands;
 
 	static {
 		for (Field f : FMLCommonHandler.class.getDeclaredFields()) {
@@ -33,23 +34,28 @@ public class GHBranding {
 		}
 		brandingMc.setAccessible(true);
 		branding.setAccessible(true);
+		brandsMc = new ArrayList<String>();
+		brands = new ArrayList<String>();
 	}
 
-	public static void addGHBranding(String mc) throws IllegalArgumentException, IllegalAccessException {
+	public static void addBrand(String colored, String plain) {
+		brandsMc.add(colored);
+		brands.add(plain);
+	}
+
+	public static void brandWithGH(String mc) throws IllegalArgumentException, IllegalAccessException {
 		MinecraftForge.EVENT_BUS.register(new GHBrandingEventPlayerName());
 		brandingMc.set(FMLCommonHandler.instance(), new ArrayList<String>());
 		branding.set(FMLCommonHandler.instance(), new ArrayList<String>());
 		List<String> brandList = (List) brandingMc.get(FMLCommonHandler.instance());
 		List<String> brandNoMCList = (List) branding.get(FMLCommonHandler.instance());
-		brandList.add(ChatColor.AQUA + GameHelperCore.GH_COREMOD_NAME + " " + ChatColor.GREEN
-				+ GameHelperCore.GH_COREMOD_VERSION);
-		brandList.add(ChatColor.AQUA + GameHelperAPI.NAME + " " + ChatColor.GREEN + GameHelperAPI.VERSION);
-		brandList.add(ChatColor.AQUA + GameHelper.MOD_USE_NAME + " " + ChatColor.GREEN + GameHelper.MODVER + " "
-				+ ChatColor.GRAY + "[" + GameHelper.getBuild() + ChatColor.GRAY + "]");
+		for (String br : brandsMc) {
+			brandList.add(br);
+		}
+		for (String g : brands) {
+			brandNoMCList.add(g);
+		}
 		brandList.add(ChatColor.RED + mc);
 		brandList.add(ChatColor.YELLOW + MinecraftForge.MC_VERSION + " | " + ForgeVersion.getVersion());// MinecraftForge-Version
-		brandNoMCList.add(GameHelperCore.GH_COREMOD_NAME + " " + GameHelperCore.GH_COREMOD_VERSION);
-		brandNoMCList.add(GameHelperAPI.NAME + " " + GameHelperAPI.VERSION);
-		brandNoMCList.add(GameHelper.MOD_USE_NAME + " " + GameHelper.MODVER);
 	}
 }

@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.GameHelperCoreModule;
 import net.wfoas.gh.network.NetworkUtils;
+import net.wfoas.gh.omapi.GameHelperAPI;
 import net.wfoas.gh.protected_blocks.ProtectedBlockWrapper;
 import net.wfoas.gh.protected_blocks.chest.GuiContainerProtectedChest;
 import net.wfoas.gh.protected_blocks.chest.InventoryLargeProtectedChest;
@@ -50,7 +51,7 @@ public class PacketPlayInformServerAboutNewPermissions implements IMessage {
 
 		@Override
 		public IMessage onMessage(final PacketPlayInformServerAboutNewPermissions message, final MessageContext ctx) {
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				@Override
 				public void run() {
 					if (ctx.getServerHandler().playerEntity.worldObj.getTileEntity(new BlockPos(message.pos)) != null) {

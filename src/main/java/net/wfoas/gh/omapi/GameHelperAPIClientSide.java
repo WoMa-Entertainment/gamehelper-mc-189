@@ -8,7 +8,7 @@ import net.wfoas.gh.survivaltabs.AbstractHintedSurvivalTab;
 
 public class GameHelperAPIClientSide extends GameHelperAPI {
 
-	public GameHelperAPIClientSide(GameHelper gh) {
+	public GameHelperAPIClientSide(GHAPIModContainer gh) {
 		super(gh);
 		tabs = new ArrayList<AbstractHintedSurvivalTab>();
 	}

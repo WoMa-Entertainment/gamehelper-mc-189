@@ -11,6 +11,7 @@ import de.winston.utils.ListEntry;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentTranslation;
 import net.wfoas.gh.GameHelper;
+import net.wfoas.gh.omapi.GameHelperAPI;
 
 public class PlayerLoginTimeOut {
 	static List<Map.Entry<EntityPlayerMP, Long>> playerMpTimeOut = new ArrayList<Map.Entry<EntityPlayerMP, Long>>();
@@ -28,7 +29,7 @@ public class PlayerLoginTimeOut {
 	}
 
 	public static void startLoginTimeOutQueueTask() {
-		taskId = GameHelper.getScheduler().scheduleSyncTickingTask(new Runnable() {
+		taskId = GameHelperAPI.ghAPI().ghScheduler().scheduleSyncTickingTask(new Runnable() {
 			@Override
 			public void run() {
 				// System.out.println("update");
@@ -38,7 +39,7 @@ public class PlayerLoginTimeOut {
 	}
 
 	public static void stopServer() {
-		GameHelper.getScheduler().cancelGHTask(taskId);
+		GameHelperAPI.ghAPI().ghScheduler().cancelGHTask(taskId);
 
 	}
 

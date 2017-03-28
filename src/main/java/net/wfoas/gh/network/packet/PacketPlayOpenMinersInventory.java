@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.gui.GuiHandler;
+import net.wfoas.gh.omapi.GameHelperAPI;
 
 public class PacketPlayOpenMinersInventory implements IMessage {
 
@@ -21,7 +22,7 @@ public class PacketPlayOpenMinersInventory implements IMessage {
 			implements IMessageHandler<PacketPlayOpenMinersInventory, IMessage> {
 		@Override
 		public IMessage onMessage(final PacketPlayOpenMinersInventory message, final MessageContext ctx) {
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				@Override
 				public void run() {
 					if (!ctx.getServerHandler().playerEntity.worldObj.isRemote) {

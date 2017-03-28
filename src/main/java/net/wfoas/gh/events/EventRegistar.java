@@ -15,6 +15,7 @@ import net.wfoas.gh.minersinventory.helmetlight.ClientSideLightHandler;
 import net.wfoas.gh.multipleworlds.GHDimensionsWorldSave;
 import net.wfoas.gh.network.securedlogin.CanceledEvents;
 import net.wfoas.gh.network.securedlogin.PlayerConnectedSecuredLogin;
+import net.wfoas.gh.omapi.GameHelperAPI;
 import net.wfoas.gh.optionshook.OptionsHook;
 import net.wfoas.gh.protected_blocks.CallbackPlaceDestroyProtectedBlocks;
 import net.wfoas.gh.sync.SyncModRelevantDataWithClient;
@@ -30,7 +31,7 @@ public class EventRegistar {
 		MinecraftForge.EVENT_BUS.register(new DestructionEvent());
 		MinecraftForge.EVENT_BUS.register(new XPBoostEvent());
 		MinecraftForge.EVENT_BUS.register(new PlayerJoin());
-		MinecraftForge.EVENT_BUS.register(GameHelper.getScheduler());
+		MinecraftForge.EVENT_BUS.register(GameHelperAPI.ghAPI().ghScheduler());
 		MinecraftForge.EVENT_BUS.register(new PlayerDeathEventMinersInvDrop());
 		MinecraftForge.EVENT_BUS.register(new PlayerChatModificator());
 		if (GameHelper.EVENT_SIDE == Side.CLIENT) {

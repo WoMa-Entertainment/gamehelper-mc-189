@@ -5,6 +5,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.wfoas.gh.GameHelper;
+import net.wfoas.gh.omapi.GameHelperAPI;
 
 public class PacketPlayOpenPlayersInventory implements IMessage {
 
@@ -20,7 +21,7 @@ public class PacketPlayOpenPlayersInventory implements IMessage {
 			implements IMessageHandler<PacketPlayOpenPlayersInventory, IMessage> {
 		@Override
 		public IMessage onMessage(final PacketPlayOpenPlayersInventory message, final MessageContext ctx) {
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				@Override
 				public void run() {
 					if (!ctx.getServerHandler().playerEntity.worldObj.isRemote) {

@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.network.NetworkUtils;
+import net.wfoas.gh.omapi.GameHelperAPI;
 import net.wfoas.gh.villager.VillagerRegistrar;
 
 public class PacketPlaySyncVillagerProfessionIds implements IMessage {
@@ -42,7 +43,7 @@ public class PacketPlaySyncVillagerProfessionIds implements IMessage {
 			implements IMessageHandler<PacketPlaySyncVillagerProfessionIds, IMessage> {
 		@Override
 		public IMessage onMessage(final PacketPlaySyncVillagerProfessionIds message, MessageContext ctx) {
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				@Override
 				public void run() {
 					GameHelper.getLogger().log(Level.INFO, "Syncing villager professions with server");

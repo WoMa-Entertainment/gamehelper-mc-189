@@ -15,6 +15,7 @@ import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.GameHelperCoreModule;
 import net.wfoas.gh.dagger.staticdaggers.StaticDagger;
 import net.wfoas.gh.dagger.throwable.ThrowableDagger;
+import net.wfoas.gh.omapi.GameHelperAPI;
 
 public class PacketPlaySyncDaggerRotationToClients implements IMessage {
 
@@ -62,7 +63,7 @@ public class PacketPlaySyncDaggerRotationToClients implements IMessage {
 		public IMessage onMessage(final PacketPlaySyncDaggerRotationToClients message, MessageContext ctx) {
 			if (Minecraft.getMinecraft().theWorld.provider.getDimensionId() != message.worldID)
 				return null;
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				@Override
 				public void run() {
 					Entity e = Minecraft.getMinecraft().theWorld.getEntityByID(message.entityID);
@@ -74,7 +75,8 @@ public class PacketPlaySyncDaggerRotationToClients implements IMessage {
 						dagger.saveItemStackToEntityData(message.thrownItem);
 						dagger.setPlayersYawPitch(message.yaw, message.pitch);
 					} else if (e instanceof StaticDagger) {
-						// static dagger code //TODO implements static dagger or remove static dagger
+						// static dagger code //TODO implements static dagger or
+						// remove static dagger
 						StaticDagger dagger = (StaticDagger) e;
 						dagger.saveItemStackToEntityData(message.thrownItem);
 						dagger.setPlayersYawPitch(message.yaw, message.pitch);

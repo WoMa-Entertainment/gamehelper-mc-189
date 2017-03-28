@@ -24,6 +24,7 @@ import net.wfoas.gh.multipleworlds.GHSimpleTeleporter;
 import net.wfoas.gh.multipleworlds.GHWorld;
 import net.wfoas.gh.multipleworlds.WorldUtils;
 import net.wfoas.gh.multipleworlds.storage.GHWorldManager;
+import net.wfoas.gh.omapi.GameHelperAPI;
 
 public class PacketPlayCreateNewWorld implements IMessage {
 
@@ -146,7 +147,7 @@ public class PacketPlayCreateNewWorld implements IMessage {
 					}
 				}
 			};
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				public void run() {
 					mainThread.addScheduledTask(r);
 				}

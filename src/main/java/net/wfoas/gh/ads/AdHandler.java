@@ -3,12 +3,13 @@ package net.wfoas.gh.ads;
 import net.minecraft.util.ChatComponentText;
 import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.dropsapi.pdr.ChatColor;
+import net.wfoas.gh.omapi.GameHelperAPI;
 import net.wfoas.gh.scheduler.GHScheduler;
 import net.wfoas.gh.scheduler.GHSchedulerServer;
 
 public class AdHandler {
 	public static void enableAdEcoSystem() {
-		GameHelper.getScheduler().scheduleSyncRepeatingDelayedTask(new Runnable() {
+		GameHelperAPI.ghAPI().ghScheduler().scheduleSyncRepeatingDelayedTask(new Runnable() {
 			@Override
 			public void run() {
 				GameHelper.getUtils()

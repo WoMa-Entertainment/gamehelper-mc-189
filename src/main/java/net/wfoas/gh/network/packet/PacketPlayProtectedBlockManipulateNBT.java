@@ -16,6 +16,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.network.NetworkUtils;
+import net.wfoas.gh.omapi.GameHelperAPI;
 
 public class PacketPlayProtectedBlockManipulateNBT implements IMessage {// unsafe: not accepted by nethandler & silently discarded
 
@@ -47,7 +48,7 @@ public class PacketPlayProtectedBlockManipulateNBT implements IMessage {// unsaf
 
 		@Override
 		public IMessage onMessage(final PacketPlayProtectedBlockManipulateNBT message, final MessageContext ctx) {
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				@Override
 				public void run() {
 					ctx.getServerHandler().playerEntity.worldObj.getTileEntity(new BlockPos(message.pos)).getTileData()

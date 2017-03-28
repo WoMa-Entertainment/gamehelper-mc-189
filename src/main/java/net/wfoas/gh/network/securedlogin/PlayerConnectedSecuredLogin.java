@@ -6,25 +6,26 @@ import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedOutEvent;
 import net.wfoas.gh.GameHelper;
 import net.wfoas.gh.network.NetworkHandler;
+import net.wfoas.gh.omapi.GameHelperAPI;
 
 public class PlayerConnectedSecuredLogin {
 	@SubscribeEvent
 	public void login(final PlayerLoggedInEvent event) {
 		if (!event.player.worldObj.isRemote) {
 			LoginDataHolder.add((EntityPlayerMP) event.player);
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				public void run() {
 					NetworkHandler.sendToSpecificPlayer(new PacketPlayPasswordAuthRequest(),
 							(EntityPlayerMP) event.player);
 				}
 			}, 1l);
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				public void run() {
 					NetworkHandler.sendToSpecificPlayer(new PacketPlayPasswordAuthRequest(),
 							(EntityPlayerMP) event.player);
 				}
 			}, 10l);
-			GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+			GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 				public void run() {
 					NetworkHandler.sendToSpecificPlayer(new PacketPlayPasswordAuthRequest(),
 							(EntityPlayerMP) event.player);

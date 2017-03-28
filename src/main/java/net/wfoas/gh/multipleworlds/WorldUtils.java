@@ -25,6 +25,7 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.wfoas.gh.GameHelper;
+import net.wfoas.gh.omapi.GameHelperAPI;
 
 public class WorldUtils {
 	public static List<EntityPlayerMP> getPlayerList() {
@@ -206,7 +207,7 @@ public class WorldUtils {
 				((EntityPlayerMP) entity).playerNetServerHandler.setPlayerLocation(entity.posX + 500, entity.posY,
 						entity.posZ, entity.rotationYaw, entity.rotationPitch);
 				final Entity _e1 = entity;
-				GameHelper.getScheduler().scheduleSyncDelayedTask(new Runnable() {
+				GameHelperAPI.ghAPI().ghScheduler().scheduleSyncDelayedTask(new Runnable() {
 					@Override
 					public void run() {
 						((EntityPlayerMP) _e1).playerNetServerHandler.setPlayerLocation(_e1.posX - 500, _e1.posY + 0.2,

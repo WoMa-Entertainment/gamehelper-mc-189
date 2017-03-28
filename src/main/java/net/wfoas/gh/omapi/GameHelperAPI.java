@@ -12,6 +12,7 @@ import net.wfoas.gh.GameHelperUtils;
 import net.wfoas.gh.blocks.IGHModBlock;
 import net.wfoas.gh.commands.CommandToggleNotify;
 import net.wfoas.gh.commands.GHCommand;
+import net.wfoas.gh.ghbrading.GHBranding;
 import net.wfoas.gh.notifysettings.NotifyTable;
 import net.wfoas.gh.omapi.module.GameHelperModuleAbstract;
 import net.wfoas.gh.protected_blocks.IProtectedBlock;
@@ -19,7 +20,7 @@ import net.wfoas.gh.protected_blocks.ProtectedBlocksRegistry;
 import net.wfoas.gh.scheduler.GHScheduler;
 
 public class GameHelperAPI {
-	GameHelper gh;
+	GHAPIModContainer gh;
 	GameHelperEnchantAPI enchant_api;
 	GHItemAPI item_api;
 	MinersInventoryAPI minersinv_api;
@@ -28,7 +29,7 @@ public class GameHelperAPI {
 	List<GHCommand> gh_commands;
 	List<GameHelperModuleAbstract> modules;
 
-	public GameHelperAPI(GameHelper gh) {
+	public GameHelperAPI(GHAPIModContainer gh) {
 		this.gh = gh;
 		this.enchant_api = new GameHelperEnchantAPI();
 		this.item_api = new GHItemAPI();
@@ -129,5 +130,9 @@ public class GameHelperAPI {
 
 	protected List tabs() {
 		return null;
+	}
+
+	public void addBranding(String colored, String plain) {
+		GHBranding.addBrand(colored, plain);
 	}
 }
