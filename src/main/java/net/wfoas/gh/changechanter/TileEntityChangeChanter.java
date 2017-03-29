@@ -132,7 +132,7 @@ public class TileEntityChangeChanter extends TileEntity implements ITickable, II
 
 	@Override
 	public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
-		return new TileEntityChangeChanter(playerInventory, getPos());
+		return new ChangeChanterContainer(playerInventory, getPos());
 	}
 
 	@Override
