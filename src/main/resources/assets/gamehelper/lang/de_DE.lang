@@ -433,3 +433,6 @@ tile.gamehelper.Siegel.name=Siegel
 tile.gamehelper.Siegel.name=Siegel
 tile.gamehelper.ParkschildEBA.name=Parkschild
 tile.gamehelper.change_chanter.name=Wechselzaubertisch
+item.gamehelper.banana.name=Banane
+item.gamehelper.cut_bread.name=Geschnittenes Brot
+item.gamehelper.cut_egg.name=Aufgeschnittenes Ei

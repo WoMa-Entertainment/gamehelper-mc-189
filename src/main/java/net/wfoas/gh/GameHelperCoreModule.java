@@ -186,6 +186,10 @@ import net.wfoas.gh.enchantment.EnchantmentXPBoost;
 import net.wfoas.gh.enchantment.EnchantmentZoom;
 import net.wfoas.gh.events.EventRegistar;
 import net.wfoas.gh.flowers.Flowers;
+import net.wfoas.gh.food.CutBread;
+import net.wfoas.gh.food.CutEgg;
+import net.wfoas.gh.food.GHBanana;
+import net.wfoas.gh.food.GameHelperModFood;
 import net.wfoas.gh.gui.GuiHandler;
 import net.wfoas.gh.instench.InstantEnchantmentTable;
 import net.wfoas.gh.instench.TileEntityInstantEnchantmentTable;
@@ -407,6 +411,8 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 
 	public static ChangeChanter CHANGE_CHANTER;
 
+	public static GameHelperModFood banana, cut_bread, cut_egg;
+
 	@Override
 	public void registerTab() {
 		TAB_GAMEHELPER = new GameHelperTab("ghTab");
@@ -607,6 +613,9 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		Steinsand1.updateInitEvent(TAB_GAMEHELPER);
 		CRAFTING_RESEARCH_TABLE.updateInitEvent(TAB_GAMEHELPER);
 		CHANGE_CHANTER.updateInitEvent(TAB_GAMEHELPER);
+		banana.updateInitEvent(TAB_GAMEHELPER);
+		cut_bread.updateInitEvent(TAB_GAMEHELPER);
+		cut_egg.updateInitEvent(TAB_GAMEHELPER);
 	}
 
 	@Override
@@ -886,6 +895,9 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		GameHelperCoreModule.Steinsand1 = new Steinsand1();
 		GameHelperCoreModule.Fassade = new Fassade();
 		CHANGE_CHANTER = new ChangeChanter();
+		banana = new GHBanana();
+		cut_bread = new CutBread();
+		cut_egg = new CutEgg();
 		registerCommands();
 		if (!(proxy instanceof LogicalClientEnvironment))
 			proxy.preInit(event, GameHelper.instance);

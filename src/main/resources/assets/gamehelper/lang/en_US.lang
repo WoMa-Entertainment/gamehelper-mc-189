@@ -433,3 +433,6 @@ tile.gamehelper.Siegel.name=Seal
 tile.gamehelper.Siegel.name=Seal
 tile.gamehelper.ParkschildEBA.name=Parkingsign
 tile.gamehelper.change_chanter.name=Change' Chanter
+item.gamehelper.banana.name=Banana
+item.gamehelper.cut_bread.name=Cut Bread
+item.gamehelper.cut_egg.name=Cut Egg
