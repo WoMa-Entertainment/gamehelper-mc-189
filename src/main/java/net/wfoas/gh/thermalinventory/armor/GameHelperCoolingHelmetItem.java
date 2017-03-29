@@ -6,7 +6,7 @@ import net.wfoas.gh.items.GameHelperModItem;
 public class GameHelperCoolingHelmetItem extends GameHelperModItem implements ThermalArmorItem {
 
 	public GameHelperCoolingHelmetItem() {
-		super("thermal_chestplate_cooling");
+		super("thermal_helmet_cooling");
 		this.setMaxStackSize(1);
 	}
 
