@@ -383,6 +383,8 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 	public static GHModItemArmor AMETHYST_HELMET, AMETHYST_CHESTPLATE, AMETHYST_LEGGINGS, AMETHYST_BOOTS;
 
 	public static GameHelperModItem THERMAL_ALLR_HELMET, THERMAL_ALLR_CHEST, THERMAL_ALLR_LEGGINGS, THERMAL_ALLR_BOOTS;
+	public static GameHelperModItem WARMING_ALLR_HELMET, WARMING_ALLR_CHEST, WARMING_ALLR_LEGGINGS, WARMING_ALLR_BOOTS;
+	public static GameHelperModItem COOLING_ALLR_HELMET, COOLING_ALLR_CHEST, COOLING_ALLR_LEGGINGS, COOLING_ALLR_BOOTS;
 
 	public static PotionBow POTION_BOW;
 	public static GameHelperModItem SEL_1, SEL_2;
@@ -566,10 +568,18 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		Tilecyan.updateInitEvent(TAB_GAMEHELPER);
 		Tilemagenta.updateInitEvent(TAB_GAMEHELPER);
 		SEL_2.updateInitEvent(TAB_GAMEHELPER);
+		WARMING_ALLR_HELMET.updateInitEvent(TAB_GAMEHELPER);
+		WARMING_ALLR_CHEST.updateInitEvent(TAB_GAMEHELPER);
+		WARMING_ALLR_LEGGINGS.updateInitEvent(TAB_GAMEHELPER);
+		WARMING_ALLR_BOOTS.updateInitEvent(TAB_GAMEHELPER);
 		THERMAL_ALLR_HELMET.updateInitEvent(TAB_GAMEHELPER);
 		THERMAL_ALLR_CHEST.updateInitEvent(TAB_GAMEHELPER);
 		THERMAL_ALLR_LEGGINGS.updateInitEvent(TAB_GAMEHELPER);
 		THERMAL_ALLR_BOOTS.updateInitEvent(TAB_GAMEHELPER);
+		COOLING_ALLR_HELMET.updateInitEvent(TAB_GAMEHELPER);
+		COOLING_ALLR_CHEST.updateInitEvent(TAB_GAMEHELPER);
+		COOLING_ALLR_LEGGINGS.updateInitEvent(TAB_GAMEHELPER);
+		COOLING_ALLR_BOOTS.updateInitEvent(TAB_GAMEHELPER);
 		DIMENSION_SHARD.updateInitEvent(TAB_GAMEHELPER);
 		quicksand.updateInitEvent(TAB_GAMEHELPER);
 		exp_endstone.updateInitEvent(TAB_GAMEHELPER);
