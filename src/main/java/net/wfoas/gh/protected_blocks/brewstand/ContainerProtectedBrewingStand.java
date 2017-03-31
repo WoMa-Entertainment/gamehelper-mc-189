@@ -1,0 +1,13 @@
+package net.wfoas.gh.protected_blocks.brewstand;
+
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+
+public class ContainerProtectedBrewingStand extends Container {
+
+	@Override
+	public boolean canInteractWith(EntityPlayer playerIn) {
+		return true;
+	}
+
+}

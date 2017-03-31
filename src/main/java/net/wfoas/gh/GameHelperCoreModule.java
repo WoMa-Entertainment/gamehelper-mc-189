@@ -31,6 +31,7 @@ import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.EntityRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
+import net.wfoas.core.gh.GameHelperCore;
 import net.wfoas.gh.ads.AdHandler;
 import net.wfoas.gh.armor.GHAmethystArmor;
 import net.wfoas.gh.armor.GHEmeraldArmor;
@@ -224,6 +225,8 @@ import net.wfoas.gh.omapi.module.GameHelperModuleAbstract;
 import net.wfoas.gh.op_anvil.OPAnvil;
 import net.wfoas.gh.potionbow.EntityShotPotion;
 import net.wfoas.gh.protected_blocks.ProtectedBlocksRegistry;
+import net.wfoas.gh.protected_blocks.brewstand.ProtectedBrewstand;
+import net.wfoas.gh.protected_blocks.brewstand.ProtectedBrewstandTileEntity;
 import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntity;
 import net.wfoas.gh.protected_blocks.chest.ProtectedChestTileEntityBlock;
 import net.wfoas.gh.protected_blocks.furnace.ProtectedFurnaceBlock;
@@ -408,7 +411,7 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 	public static ItemTelescope TELESCOPE;
 	public static GameHelperModItem TRADE_ITEM;
 	public static CreativeTabs TAB_GAMEHELPER;
-	public static IGHModBlock SEC_CHEST, SEC_FURNACE, SEC_FURNACE_LIT;
+	public static IGHModBlock SEC_CHEST, SEC_FURNACE, SEC_FURNACE_LIT, SEC_PROTECTED_BREWING_STAND;
 	public static GameHelperModBlock MARBLE, MARBLE_BRICK, BASALT, BASALT_BRICK, BASALT_COBBLE;
 
 	public static CraftingResearchTable CRAFTING_RESEARCH_TABLE;
@@ -445,6 +448,7 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		SEC_CHEST.updateInitEvent(TAB_GAMEHELPER);
 		SEC_FURNACE.updateInitEvent(TAB_GAMEHELPER);
 		SEC_FURNACE_LIT.updateInitEvent(TAB_GAMEHELPER);
+		SEC_PROTECTED_BREWING_STAND.updateInitEvent(TAB_GAMEHELPER);
 		OP_ANVIL.updateInitEvent(TAB_GAMEHELPER);
 		EMERALD_HELMET.updateInitEvent(TAB_GAMEHELPER);
 		EMERALD_CHESTPLATE.updateInitEvent(TAB_GAMEHELPER);
@@ -785,6 +789,7 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		GameHelperCoreModule.SEC_CHEST = new ProtectedChestTileEntityBlock();
 		GameHelperCoreModule.SEC_FURNACE = new ProtectedFurnaceBlock(false);
 		GameHelperCoreModule.SEC_FURNACE_LIT = new ProtectedFurnaceBlock(true);
+		GameHelperCoreModule.SEC_PROTECTED_BREWING_STAND = new ProtectedBrewstand();
 		GameHelperCoreModule.DIMENSION_BLOCK = new DimensionBlock();
 		GameHelperCoreModule.IRON_DAGGER = new IronDagger();
 		GameHelperCoreModule.MINERS_LAMP = new MinersHelmetLight();
@@ -943,6 +948,7 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 
 	public void addTE() {
 		GameRegistry.registerTileEntity(ProtectedChestTileEntity.class, "protected_chest");
+		GameRegistry.registerTileEntity(ProtectedBrewstandTileEntity.class, "protected_brewing_stand");
 		GameRegistry.registerTileEntity(TileEntityEnchantmentAltar.class, "enchantment_altar");
 		GameRegistry.registerTileEntity(TileEntityInstantEnchantmentTable.class, "instant_enchantment_table");
 		GameRegistry.registerTileEntity(TileEntityUnchantmentTable.class, "unchantment_table");
@@ -972,6 +978,8 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		ProtectedBlocksRegistry.addBlock(GuiHandler.PROTECTED_FURNACE,
 				(ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE,
 				(ProtectedFurnaceBlock) GameHelperCoreModule.SEC_FURNACE_LIT);
+		ProtectedBlocksRegistry.addBlock(GuiHandler.PROTECTED_BREWING_STAND,
+				(ProtectedBrewstand) GameHelperCoreModule.SEC_PROTECTED_BREWING_STAND);
 		NetworkRegistry.INSTANCE.registerGuiHandler(GameHelper.instance, new GuiHandler());
 	}
 
