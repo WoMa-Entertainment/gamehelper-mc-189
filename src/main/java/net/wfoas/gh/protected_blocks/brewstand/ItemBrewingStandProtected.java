@@ -19,7 +19,6 @@ public class ItemBrewingStandProtected extends ItemBlock implements GHModItemUpd
 		super(bl);
 		s = "protected_brewing_stand";
 		this.setUnlocalizedName(GameHelper.MODID + "." + s);
-//		GameRegistry.registerItem(this, s);
 	}
 
 	@Override
