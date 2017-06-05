@@ -189,6 +189,7 @@ import net.wfoas.gh.events.EventRegistar;
 import net.wfoas.gh.flowers.Flowers;
 import net.wfoas.gh.food.CutBread;
 import net.wfoas.gh.food.CutEgg;
+import net.wfoas.gh.food.EggSunnySideUp;
 import net.wfoas.gh.food.GHBanana;
 import net.wfoas.gh.food.GameHelperModFood;
 import net.wfoas.gh.frame.IronFrame;
@@ -428,7 +429,7 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 
 	public static ChangeChanter CHANGE_CHANTER;
 
-	public static GameHelperModFood banana, cut_bread, cut_egg;
+	public static GameHelperModFood banana, cut_bread, cut_egg, egg_sunny_side_up;
 
 	@Override
 	public void registerTab() {
@@ -642,6 +643,7 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		banana.updateInitEvent(TAB_GAMEHELPER);
 		cut_bread.updateInitEvent(TAB_GAMEHELPER);
 		cut_egg.updateInitEvent(TAB_GAMEHELPER);
+		egg_sunny_side_up.updateInitEvent(TAB_GAMEHELPER);
 		frame_slim_iron.updateInitEvent(TAB_GAMEHELPER);
 		frame_iron.updateInitEvent(TAB_GAMEHELPER);
 	}
@@ -937,6 +939,7 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		banana = new GHBanana();
 		cut_bread = new CutBread();
 		cut_egg = new CutEgg();
+		egg_sunny_side_up = new EggSunnySideUp();
 		registerCommands();
 		if (!(proxy instanceof LogicalClientEnvironment))
 			proxy.preInit(event, GameHelper.instance);
