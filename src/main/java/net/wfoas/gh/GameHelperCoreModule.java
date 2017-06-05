@@ -191,6 +191,8 @@ import net.wfoas.gh.food.CutBread;
 import net.wfoas.gh.food.CutEgg;
 import net.wfoas.gh.food.GHBanana;
 import net.wfoas.gh.food.GameHelperModFood;
+import net.wfoas.gh.frame.IronFrame;
+import net.wfoas.gh.frame.SlimIronFrame;
 import net.wfoas.gh.gui.GuiHandler;
 import net.wfoas.gh.instench.InstantEnchantmentTable;
 import net.wfoas.gh.instench.TileEntityInstantEnchantmentTable;
@@ -413,6 +415,8 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 	public static CreativeTabs TAB_GAMEHELPER;
 	public static IGHModBlock SEC_CHEST, SEC_FURNACE, SEC_FURNACE_LIT, SEC_PROTECTED_BREWING_STAND;
 	public static GameHelperModBlock MARBLE, MARBLE_BRICK, BASALT, BASALT_BRICK, BASALT_COBBLE;
+
+	public static GameHelperModItem frame_slim_iron, frame_iron;
 
 	public static CraftingResearchTable CRAFTING_RESEARCH_TABLE;
 
@@ -638,6 +642,8 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		banana.updateInitEvent(TAB_GAMEHELPER);
 		cut_bread.updateInitEvent(TAB_GAMEHELPER);
 		cut_egg.updateInitEvent(TAB_GAMEHELPER);
+		frame_slim_iron.updateInitEvent(TAB_GAMEHELPER);
+		frame_iron.updateInitEvent(TAB_GAMEHELPER);
 	}
 
 	@Override
@@ -925,6 +931,8 @@ public class GameHelperCoreModule extends GameHelperModuleAbstract {
 		GameHelperCoreModule.Weg = new Weg();
 		GameHelperCoreModule.Steinsand1 = new Steinsand1();
 		GameHelperCoreModule.Fassade = new Fassade();
+		GameHelperCoreModule.frame_iron = new IronFrame();
+		GameHelperCoreModule.frame_slim_iron = new SlimIronFrame();
 		CHANGE_CHANTER = new ChangeChanter();
 		banana = new GHBanana();
 		cut_bread = new CutBread();

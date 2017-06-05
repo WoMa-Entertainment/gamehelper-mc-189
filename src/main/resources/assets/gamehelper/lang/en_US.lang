@@ -444,3 +444,5 @@ item.gamehelper.thermal_helmet_cooling.name=Cooling Helmet
 item.gamehelper.thermal_chestplate_cooling.name=Cooling Chestplate
 item.gamehelper.thermal_leggings_cooling.name=Cooling Leggins
 item.gamehelper.thermal_boots_cooling.name=Cooling Boots
+item.gamehelper.slim_iron_frame.name=Slim Iron Frame
+item.gamehelper.iron_frame.name=Thick Iron Frame
