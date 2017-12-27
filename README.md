@@ -22,3 +22,5 @@ The gamehelper mod adds multiple new features:
 - some other crazy stuff
 
 It's for minecraft 1.8.9 but it will get updated to 1.11 soon
+
+# This project has moved; This repository might not get any further updates.
